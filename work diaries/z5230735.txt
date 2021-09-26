@@ -1,0 +1,23 @@
+Week 1
+
+Group created on course website. Group name decided and members added to Jira project. Drafted problem statement for Custom/Own Project Request Form (which can be transferred to the project proposal if our request is successful). Created epic and user stories as a group. I personally developed user stories for the functionality to chat and send messages, and the ability to search for messages in a group chat. I also created the project proposal document which I will continue to update with the other group members following the results of the Custom/Own Project Request Form.
+
+- what was planned for the period since the last work diary entry
+
+No previous work diary entry. Plans for the period included: form and name group, submit Custom/Own Project Request Form and develop user stories. Our group was formed in the T2 break where we held a few meetings to discuss possible custom project ideas and stack (although nothing was finalised).
+
+- what was finished
+
+Group admin (i.e. group creation and naming) finished. Custom/Own Project Request Form finalised and submitted to tutor for processing. User stories completed (although may be subject to change before project proposal submission)
+
+- what were the main technical and non-technical obstacles and how they were overcome (or what was tried and did not work)
+
+Developing objectives for our custom project proved difficult at times, since we had to consider the overall complexity in comparison to the given projects. Response from course staff will give us a better understanding.
+
+- what was not finished, why this happened, how this affects the overall project progress and what adjustments (if any) are needed so the success of the project is not endangered
+
+N/A
+
+- what is planned for the next period (e.g., next week)
+
+Our next steps are heavily dependant on the results from the Custom/Own Project Request Form but in general they would be: draft background section of project proposal, create acceptance criteria for user stories, and draft storyboards and sprint start/end dates.
