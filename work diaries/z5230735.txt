@@ -21,3 +21,28 @@ N/A
 - what is planned for the next period (e.g., next week)
 
 Our next steps are heavily dependant on the results from the Custom/Own Project Request Form but in general they would be: draft background section of project proposal, create acceptance criteria for user stories, and draft storyboards and sprint start/end dates.
+
+
+Week 2
+
+Received email from mentor that our Custom/Own Project Request Form was not able to be accepted in its current state, as it was too similar to a project from 21T1. Discussed ways to differentiate project objectives in tutorial and finalised an amended form which was accepted. Met with group on Sunday to discuss project proposal, edit user stories (as  they were created based on old project spec) and draft storyboards. I created new user stories for the platform's timetable functionality, drafted the background section of the project proposal (based on the Custom/Own Project Request Form) and drafted user interface and storyboard for login and sign up page. I also created the GitHub Classroom team for our group.
+
+- what was planned for the period since the last work diary entry
+
+Our plans for this week were dependant on the results from the Custom/Own Project Request Form. In general, they were: draft background section of project proposal, create acceptance criteria for user stories, and draft storyboards and sprint start/end dates.
+
+- what was finished
+
+Storyboards and background section of project proposal were successfully drafted. Existing user stories were also edited to suit new specification. 
+
+- what were the main technical and non-technical obstacles and how they were overcome (or what was tried and did not work)
+
+The main non-technical obstacle was the rejection of our initial project request. This was overcome by discussing our options with our mentor and editing our functionalities to differentiate ourselves from other projects.
+
+- what was not finished, why this happened, how this affects the overall project progress and what adjustments (if any) are needed so the success of the project is not endangered
+
+Acceptance criteria for user stories and sprint start/end dates were not finalised. With appropriate adjustments to our workload for week 3, this shouldn't affect the rest of the project or the project's success. We simply have more work to do next week.
+
+- what is planned for the next period (e.g., next week)
+
+Finalise project proposal and all tasks it encompasses (i.e background section, user stories and sprints, and technical depth, scale, and report formatting).
