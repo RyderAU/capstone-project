@@ -21,14 +21,14 @@ INSERT INTO Students values (
     NULL,
     NULL);
 
-INSERT INTO Students values (
-    'z5555556', 
-    'Adam Spencer', 
-    'hi@gmail.com', 
-    'apple', 
-    'd1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082',
-    '6789dsf',
-    'Computer Science') RETURNING student_id;
+-- INSERT INTO Students values (
+--     'z5555556', 
+--     'Adam Spencer', 
+--     'hi@gmail.com', 
+--     'apple', 
+--     'd1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082',
+--     '6789dsf',
+--     'Computer Science') RETURNING student_id;
 
 
 -- DELETE FROM Students
