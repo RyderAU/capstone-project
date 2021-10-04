@@ -41,12 +41,12 @@ def register_student(
     return student_id
 
 if __name__ == '__main__':
-    # insert one student
+    # insert one student (Dummy data)
     register_student(
         'z5555556', 
         'Adam Spencer', 
         'hi@gmail.com', 
         'apple', 
-        'd1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082',
+        'f3e5ba88661b3b5f4ae8182d8ccded09da63ef8a5e96013525ea79f082948302',
         '6789dsf',
         'Computer Science')
