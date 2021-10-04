@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+''' Test inserting new student(aka user) into table with python '''
 import psycopg2
 from config import config
 
