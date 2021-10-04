@@ -12,14 +12,14 @@ create table Students (
 	primary key (student_id)
 );
 
-INSERT INTO Students values (
-    'z5555555', 
-    'Lol Clown', 
-    'lol@gmail.com', 
-    'random', 
-    'd1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082',
-    NULL,
-    NULL);
+-- INSERT INTO Students values (
+--     'z5555555', 
+--     'Lol Clown', 
+--     'lol@gmail.com', 
+--     'random', 
+--     'd1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082',
+--     NULL,
+--     NULL);
 
 -- INSERT INTO Students values (
 --     'z5555556', 

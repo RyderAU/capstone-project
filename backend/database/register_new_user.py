@@ -30,12 +30,12 @@ def register_student(student_id, name, email, display_name, hashed_pwd, login_to
             conn.close()
 
 if __name__ == '__main__':
-    # insert one student (Dummy data)
+    # Register one student (Dummy data)
     register_student(
         'z5555551', 
-        'Sleepless Cetaphil', 
-        'cetaphil@gmail.com', 
-        'lotion', 
+        'Sleepless Pfizer', 
+        'pfizer@gmail.com', 
+        'nicknamegoeshere', 
         'f3e5ba88661b3b5f4ae8182d8ccded09da63ef8a5e96013525ea79f082948302',
-        '6789dsf',
-        'Computer Science')
+        '',
+        '')
