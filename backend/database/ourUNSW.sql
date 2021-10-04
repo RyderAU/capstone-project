@@ -1,4 +1,4 @@
 -- Database for ourUNSW app
 
 -- create student table
-creatCREATE DATABASE student;
+CREATE DATABASE student;
