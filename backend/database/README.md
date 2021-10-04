@@ -10,6 +10,9 @@ You should stop running the service to free up resources on your local machine f
 
 `brew services stop postgresql`
 
+##
+some commands
+
 `psql postgres; CREATE DATABASE ourunsw;`
 
 `psql ourunsw -f ourunsw.sql`
