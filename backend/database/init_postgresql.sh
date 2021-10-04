@@ -11,3 +11,7 @@ brew services start postgresql
 
 psql postgres
 
+# You should stop running the service to free up resources on your local machine. 
+# You can use the following command to stop postgres from running.
+
+# brew services stop postgresql
