@@ -1,4 +1,4 @@
-`chmod +x virtualenv`
+`chmod +x virtualenv.sh`
 
 `./virtualenv.sh`
 
