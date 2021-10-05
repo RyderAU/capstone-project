@@ -4,7 +4,7 @@ import SideBar from "./SideBar";
 const CourseDashboard = ({ match }) => {
   return (
     <div className="course-main">
-      <SideBar />
+      <SideBar code={match.params.code} />
       hello this is {match.params.code}
     </div>
   );

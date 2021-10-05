@@ -17,20 +17,6 @@ const CourseBar = () => {
   console.log(studentCourses);
 
   return (
-    // <nav className="courses-container">
-    //   This student is doing {student.courses}
-    //   <ul className="courses-item">
-    //     <Link to="/subject-one">
-    //       <li>COURSE1</li>
-    //     </Link>
-    //     <Link to="/subject-two">
-    //       <li>COURSE2</li>
-    //     </Link>
-    //     <Link to="/subject-three">
-    //       <li>COURSE3</li>
-    //     </Link>
-    //   </ul>
-    // </nav>
     <nav className="courses-container">
       {studentCourses.map((course) => (
         <h1 key={course}>

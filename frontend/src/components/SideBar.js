@@ -1,11 +1,11 @@
 import "../App.css";
 import { Link } from "react-router-dom";
 
-const SideBar = () => {
+const SideBar = (props) => {
   return (
     <nav className="features-container">
       <ul className="features-item">
-        <Link to="/">
+        <Link to={`/${props.code}/chat`}>
           <li>Chat</li>
         </Link>
         <Link to="/">
