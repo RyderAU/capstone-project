@@ -33,7 +33,9 @@ const CourseBar = () => {
     // </nav>
     <nav className="courses-container">
       {studentCourses.map((course) => (
-        <h1 key={course}>{course}</h1>
+        <h1 key={course}>
+          <Link to={`/${course}`}>{course}</Link>
+        </h1>
       ))}
     </nav>
   );

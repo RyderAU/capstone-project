@@ -4,9 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import components
 import NavBar from "../components/NavBar";
 import CourseBar from "../components/CourseBar";
-import SubjectOne from "../components/SubjectOne";
-import SubjectTwo from "../components/SubjectTwo";
-import SubjectThree from "../components/SubjectThree";
+import CourseDashboard from "../components/CourseDashboard";
 
 function Dashboard() {
   return (
@@ -15,9 +13,7 @@ function Dashboard() {
         <NavBar />
         <CourseBar />
         <Switch>
-          <Route exact path="/subject-one" component={SubjectOne} />
-          <Route exact path="/subject-two" component={SubjectTwo} />
-          <Route exact path="/subject-three" component={SubjectThree} />
+          <Route exact path="/:code" component={CourseDashboard} />
         </Switch>
       </div>
     </Router>
