@@ -4,13 +4,6 @@
   align-items: left;
   min-height: 5vh;
 }
-.nav-container {
-  background: #6cbcf6;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 5vh;
-}
 
 .courses-container {
   display: flex;
