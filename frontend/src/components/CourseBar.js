@@ -12,10 +12,6 @@ const CourseBar = () => {
 
   const [studentCourses, setStudentCourses] = useState([]);
 
-  // setStudentDetails(student.courses);
-
-  console.log(studentCourses);
-
   return (
     <nav className="courses-container">
       {studentCourses.map((course) => (

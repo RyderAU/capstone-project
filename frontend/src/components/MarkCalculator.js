@@ -1,11 +1,7 @@
 import "../App.css";
 
 const MarkCalculator = () => {
-  return (
-    <div>
-      <h1>mark calculator</h1>
-    </div>
-  );
+  return <div>mark calculator</div>;
 };
 
 export default MarkCalculator;

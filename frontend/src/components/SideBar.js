@@ -8,10 +8,10 @@ const SideBar = (props) => {
         <Link to={`/${props.code}/chat`}>
           <li>Chat</li>
         </Link>
-        <Link to="/">
+        <Link to={`/${props.code}/course-outline`}>
           <li>Course Outline</li>
         </Link>
-        <Link to="/">
+        <Link to={`/${props.code}/mark-calculator`}>
           <li>Mark Calculation</li>
         </Link>
       </ul>
