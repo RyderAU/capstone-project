@@ -1,9 +1,11 @@
 import "../App.css";
+import SideBar from "./SideBar";
 
 const CourseDashboard = ({ match }) => {
   return (
-    <div>
-      <h1>hello this is {match.params.code}</h1>
+    <div className="course-main">
+      <SideBar />
+      hello this is {match.params.code}
     </div>
   );
 };
