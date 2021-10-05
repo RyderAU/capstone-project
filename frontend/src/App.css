@@ -4,3 +4,35 @@
   align-items: left;
   min-height: 5vh;
 }
+.nav-container {
+  background: #6cbcf6;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 5vh;
+}
+
+.courses-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 5vh;
+  background-color: #c7c7c7;
+}
+
+.courses-item {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.features-container {
+  height: 100vh;
+  width: 160px;
+  background-color: grey;
+}
+
+.features-item {
+  margin: 0;
+}
