@@ -25,6 +25,8 @@ function Dashboard() {
         <Switch>
           <Route exact path="/" component={CourseDashboard} />
           <Route exact path="/:code" component={CourseDashboard} />
+          {/* so refreshing doesn't remove side bar */}
+          <Route exact path="/:code/:feature" component={CourseDashboard} />
         </Switch>
       </div>
     </Router>
