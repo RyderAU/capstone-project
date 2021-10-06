@@ -63,3 +63,11 @@ Week 3
 
 - what is planned for the next period (e.g., next week)
 
+
+Week 3
+
+Set up database
+Implemented functions to insert new user (student) to db from backend using psycopg2
+Implemented functions to retrieve data from db using python psycopg2
+Wrote bash script to automate python virtual env for the team
+Wrote bash script connect to postgresql faster
