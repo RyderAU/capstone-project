@@ -5,7 +5,8 @@ def grabCourseIDs(email, password):
     PATH = "./geckodriver"
     settings = Options()
     settings.headless = True
-    driver = webdriver.Firefox(executable_path=PATH, options=settings)
+    driver = webdriver.Firefox(executable_path=PATH)
+    #driver = webdriver.Firefox(executable_path=PATH, options=settings)
     driver.get("https://my.unsw.edu.au/")
     link = driver.find_element_by_link_text('Sign On')
     link.click()
@@ -28,14 +29,19 @@ def grabCourseIDs(email, password):
     link = driver.find_element_by_xpath('//*[@id="pt1:pt_gl3j_id_1"]')
     link.click()
     time.sleep(2)
-    i = 0
+    
+    courseList = []
     for element in driver.find_elements_by_tag_name('label'):
-        print(i)
-        print (element.text)
-        i += 1
+
+        if(element.text[0:4].isupper() and element.text[4:8].isdigit()):
+            courseList.append(element.text[0:8])
+    
     driver.close()
+
+    print(courseList)
        #print (element.tag_name)
        #print (element.parent)
        #print (element.location)
        #print (element.size)
     
+grabCourseIDs("z5168024@ad.unsw.edu.au", "password")
