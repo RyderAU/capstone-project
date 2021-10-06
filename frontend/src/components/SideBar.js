@@ -3,25 +3,23 @@ import { NavLink } from "react-router-dom";
 
 const SideBar = (props) => {
   return (
-    <nav className="features-container">
-      <ul className="features-item">
-        <NavLink to={`/${props.code}/chat`} activeClassName="feature-highlight">
-          Chat <br />
-        </NavLink>
-        <NavLink
-          to={`/${props.code}/course-outline`}
-          activeClassName="feature-highlight"
-        >
-          Course Outline <br />
-        </NavLink>
-        <NavLink
-          to={`/${props.code}/mark-calculator`}
-          activeClassName="feature-highlight"
-        >
-          Mark Calculation
-        </NavLink>
-      </ul>
-    </nav>
+    <div className="features-container">
+      <NavLink to={`/${props.code}/chat`} activeClassName="feature-highlight">
+        <div className="features-item">Chat</div>
+      </NavLink>
+      <NavLink
+        to={`/${props.code}/course-outline`}
+        activeClassName="feature-highlight"
+      >
+        <div className="features-item">Course Outline</div>
+      </NavLink>
+      <NavLink
+        to={`/${props.code}/mark-calculator`}
+        activeClassName="feature-highlight"
+      >
+        <div className="features-item">Mark Calculation</div>
+      </NavLink>
+    </div>
   );
 };
 
