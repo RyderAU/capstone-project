@@ -2,11 +2,11 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
 def grabCourseIDs(email, password):
-    PATH = "C:\Program Files (x86)\chromedriver.exe"
-    headless = Options()
-    headless.add_argument("--headless")
-    driver = webdriver.Chrome(PATH, chrome_options=headless)
-    #driver = webdriver.Chrome(PATH)
+    PATH = "./geckodriver"
+    #headless = Options()
+    #headless.add_argument("--headless")
+    #driver = webdriver.Chrome(PATH, chrome_options=headless)
+    driver = webdriver.Firefox(executable_path=PATH)
     driver.get("https://my.unsw.edu.au/")
     link = driver.find_element_by_link_text('Sign On')
     link.click()
