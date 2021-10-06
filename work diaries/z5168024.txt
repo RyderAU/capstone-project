@@ -1,0 +1,35 @@
+Holidays
+
+My group got to know one another and we understood each other's strengths and weaknesses. We explored Jira together and got familiar with it. We also brainstormed project ideas which we would want to work on in the term.
+
+Week 1
+
+This week we discussed the various project ideas we had and decided on the 'Course Group Chat' idea. This would use student credentials to automatically add students to associated group chats. We submitted a project request form for this. We also wrote a draft of epic/user stories as a group. I was chosen as Scrum Master and a Jira account was setup. 
+
+I then explored the tools available to accomplish the task of grabbing student course codes from myUNSW. I then discovered a python library called Selenium, and I decided to see if this would help achieve the required goal. After playing around with it for a few hours, I was able to grab the course codes successfully. I then shared my findings with the team.
+
+Week 2
+
+Joseph mentioned that our project request requires few changes as there was another similar project done in 21T1. So few functionalities need to be changed to differentiate ourselves.
+
+We realised that our app was heavily centred around the chat feature, so as a group we decided to add functionalities encompasaing course outlines, timetables and a mark checker. All of which would be automatically added for the user based on their courses for the term. A revised project request form was sent to Joseph which was successfully approved.
+
+We then all worked to ammend our user stories and delegated stories to write up acceptance criteria.
+
+A draft of the tech stack was designed and we all collaboratively created a storyboard using the help of the software Figma.
+
+Week 3:
+
+- Propsal Template 
+- Moved stories to Jira
+- External Users in Proposal
+- Finsihed storyboard as group 
+- Assigned story points as group
+- Finished and submitted proposal
+- Delegated tasks for sprint one. I am working on the Selenium functions
+- Created timetable of work schedule
+
+Week 4:
+
+- Helped Haesun with database setup (high level overview)
+- Setup Selenium on Vlab
