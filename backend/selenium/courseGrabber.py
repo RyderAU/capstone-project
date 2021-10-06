@@ -55,7 +55,7 @@ def grabCourseIDs(email, password):
             courseDetails.append(element.text[0:8])
         
         # Degree extraction
-        if(element.text.find("Program") != -1):
+        if(element.text.find("Program: ") != -1):
             courseDetails.append(element.text)
 
     # Close the web browser
@@ -63,4 +63,4 @@ def grabCourseIDs(email, password):
 
     return courseDetails
     
-print(grabCourseIDs("z5168024@ad.unsw.edu.au", "password"))
+print(grabCourseIDs("z5168024@ad.unsw.edu.au", "PASSWORD"))
