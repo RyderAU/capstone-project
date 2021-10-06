@@ -1,12 +1,11 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 import time
 def grabCourseIDs(email, password):
     PATH = "./geckodriver"
-    #headless = Options()
-    #headless.add_argument("--headless")
-    #driver = webdriver.Chrome(PATH, chrome_options=headless)
-    driver = webdriver.Firefox(executable_path=PATH)
+    settings = Options()
+    settings.headless = True
+    driver = webdriver.Firefox(executable_path=PATH, options=settings)
     driver.get("https://my.unsw.edu.au/")
     link = driver.find_element_by_link_text('Sign On')
     link.click()
@@ -28,6 +27,7 @@ def grabCourseIDs(email, password):
     time.sleep(2)
     link = driver.find_element_by_xpath('//*[@id="pt1:pt_gl3j_id_1"]')
     link.click()
+    time.sleep(2)
     i = 0
     for element in driver.find_elements_by_tag_name('label'):
         print(i)
@@ -38,5 +38,4 @@ def grabCourseIDs(email, password):
        #print (element.parent)
        #print (element.location)
        #print (element.size)
-    
     
