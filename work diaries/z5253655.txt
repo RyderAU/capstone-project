@@ -6,6 +6,7 @@ Meeting on 15/9
 Plans
 Group created 
 add to Jira project
+brainstorming, discuss and suggest ideas of the project
 
 - what was planned for the period since the last work diary entry
 
@@ -27,6 +28,8 @@ add to Jira project
 
 Week 2
 
+planned and created backed achitecture diagram
+user story
 
 - what was planned for the period since the last work diary entry
 
@@ -46,6 +49,7 @@ Week 2
 
 
 Week 3
+
 
 
 - what was planned for the period since the last work diary entry
