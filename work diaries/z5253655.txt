@@ -64,7 +64,7 @@ Week 3
 - what is planned for the next period (e.g., next week)
 
 
-Week 3
+Week 4
 
 Set up database
 Implemented functions to insert new user (student) to db from backend using psycopg2
