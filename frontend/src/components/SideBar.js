@@ -1,19 +1,25 @@
 import "../App.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const SideBar = (props) => {
   return (
     <nav className="features-container">
       <ul className="features-item">
-        <Link to={`/${props.code}/chat`}>
-          <li>Chat</li>
-        </Link>
-        <Link to={`/${props.code}/course-outline`}>
-          <li>Course Outline</li>
-        </Link>
-        <Link to={`/${props.code}/mark-calculator`}>
-          <li>Mark Calculation</li>
-        </Link>
+        <NavLink to={`/${props.code}/chat`} activeClassName="feature-highlight">
+          Chat <br />
+        </NavLink>
+        <NavLink
+          to={`/${props.code}/course-outline`}
+          activeClassName="feature-highlight"
+        >
+          Course Outline <br />
+        </NavLink>
+        <NavLink
+          to={`/${props.code}/mark-calculator`}
+          activeClassName="feature-highlight"
+        >
+          Mark Calculation
+        </NavLink>
       </ul>
     </nav>
   );

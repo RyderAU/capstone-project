@@ -1,6 +1,6 @@
 import "../App.css";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const CourseBar = () => {
   useEffect(() => {
@@ -16,7 +16,9 @@ const CourseBar = () => {
     <nav className="courses-container">
       {studentCourses.map((course) => (
         <h1 key={course}>
-          <Link to={`/${course}`}>{course}</Link>
+          <NavLink to={`/${course}`} activeClassName="course-highlight">
+            {course}
+          </NavLink>
         </h1>
       ))}
     </nav>
