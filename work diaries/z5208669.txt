@@ -1,0 +1,8 @@
+Week 1
+
+Team was formed. I created Jira account. As everyone else in the team, I brainstormed 3 ideas for the project choice and elaborated on the most popular choice by coming up with 8 functionalities. After confirming with final project choice with the tutor, I wrote the project request form together with everyone in the team. Also with everyone in the team, I wrote user stories under the epic story “adding friends and private dm”. 
+
+
+Week 2
+
+Plan for this week was to finalise user stories, storyboard, acceptance criteria and tech stack to start on the proposal. I wrote user stories and drew up storyboard using Figma with the team, as well as confirming the overall tech stack. The progress is a little behind because the functionalities outlined in the project request form clashed with a previous project. Extra time was taken in adding new non-chatting functionalities (e.g. timetable viewing, link to course outline and assessment mark calculation) to differentiate our app from the previous project. Acceptance criteria of the user stories is delegated to everyone to complete in their own time in order to make up for delay in progress. In the following week, we aim to finish planning sprints based on the user stories and writing about background and system architecture for the proposal. My personal plan for next week is to finish revising Python to prep for backend construction.
