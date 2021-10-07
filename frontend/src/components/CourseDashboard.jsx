@@ -15,17 +15,17 @@ const CourseDashboard = ({ match }) => {
         <Switch>
           <Route
             exact
-            path={`/${match.params.code}/chat`}
+            path={`/dashboard/${match.params.code}/chat`}
             component={CourseChat}
           />
           <Route
             exact
-            path={`/${match.params.code}/course-outline`}
+            path={`/dashboard/${match.params.code}/course-outline`}
             component={CourseOutline}
           />
           <Route
             exact
-            path={`/${match.params.code}/mark-calculator`}
+            path={`/dashboard/${match.params.code}/mark-calculator`}
             component={MarkCalculator}
           />
         </Switch>

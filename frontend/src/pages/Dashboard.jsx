@@ -22,10 +22,10 @@ function Dashboard() {
         <NavBar />
         <CourseBar courses={studentCourses} />
         <Switch>
-          <Route exact path="/" component={CourseDashboard} />
-          <Route exact path="/:code" component={CourseDashboard} />
+          <Route exact path="/dashboard/" component={CourseDashboard} />
+          <Route exact path="/dashboard/:code" component={CourseDashboard} />
           {/* so refreshing doesn't remove side bar */}
-          <Route path="/:code/:feature" component={CourseDashboard} />
+          <Route path="/dashboard/:code/:feature" component={CourseDashboard} />
         </Switch>
       </div>
     </Router>
