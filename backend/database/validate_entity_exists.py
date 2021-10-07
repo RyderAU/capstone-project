@@ -5,8 +5,8 @@ from config import config
 Return the first element when the value meets the given column under the specified field.
 Can be used for overlap check and get hashed password for the corresponding email account.
 '''
-def validate_entity_exists(field, column, value):
-    query = "SELECT " + field + " FROM students WHERE " + column + "='" + value +"'"
+def validate_entity_exists(column1, column2, value):
+    query = "SELECT " + column1 + " FROM students WHERE " + column2 + "='" + value +"'"
     output = ""
     conn = None
     try:
