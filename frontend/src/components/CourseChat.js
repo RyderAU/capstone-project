@@ -1,7 +1,7 @@
 import "../App.css";
 
-const CourseChat = (match) => {
-  return <div>{match.match.path}course group chat</div>;
+const CourseChat = () => {
+  return <div>course group chat</div>;
 };
 
 export default CourseChat;

@@ -9,11 +9,10 @@ import CourseDashboard from "../components/CourseDashboard";
 
 function Dashboard() {
   useEffect(() => {
+    // grab student details
+    const student = { courses: ["COMP3900", "COMP4920", "COMP1234"] };
     setStudentCourses(student.courses);
   }, []);
-
-  // grab student details
-  const student = { courses: ["COMP3900", "COMP4920", "COMP1234"] };
 
   const [studentCourses, setStudentCourses] = useState([]);
 
@@ -26,7 +25,7 @@ function Dashboard() {
           <Route exact path="/" component={CourseDashboard} />
           <Route exact path="/:code" component={CourseDashboard} />
           {/* so refreshing doesn't remove side bar */}
-          <Route exact path="/:code/:feature" component={CourseDashboard} />
+          <Route path="/:code/:feature" component={CourseDashboard} />
         </Switch>
       </div>
     </Router>

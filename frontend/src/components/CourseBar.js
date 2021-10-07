@@ -6,7 +6,7 @@ const CourseBar = (props) => {
     <nav className="courses-container">
       {props.courses.map((course) => (
         <h1 key={course}>
-          <NavLink to={`/${course}`} activeClassName="course-highlight">
+          <NavLink to={`/${course}/chat`} activeClassName="course-highlight">
             {course}
           </NavLink>
         </h1>
