@@ -2,11 +2,11 @@ import psycopg2
 from config import config
 
 '''
-Return the first element when the value meets the given criteria under the specified field.
+Return the first element when the value meets the given column under the specified field.
 Can be used for overlap check and get hashed password for the corresponding email account.
 '''
-def validate_entity_exists(field, criteria, value):
-    query = "SELECT " + field + " FROM students WHERE " + criteria + "='" + value +"'"
+def validate_entity_exists(field, column, value):
+    query = "SELECT " + field + " FROM students WHERE " + column + "='" + value +"'"
     output = ""
     conn = None
     try:
