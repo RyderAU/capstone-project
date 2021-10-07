@@ -1,13 +1,11 @@
-import "react-router-dom";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-
-// import components
-import NavBar from "../components/NavBar";
+import "../App.css";
 import CourseBar from "../components/CourseBar";
-import CourseDashboard from "../components/CourseDashboard";
+import NavBar from "../components/NavBar";
+import { useEffect, useState } from "react";
+import { useRouteMatch } from "react-router-dom";
 
 function Dashboard() {
+  const { url, path } = useRouteMatch();
   useEffect(() => {
     // grab student details
     const student = { courses: ["COMP3900", "COMP4920", "COMP1234"] };
@@ -17,18 +15,10 @@ function Dashboard() {
   const [studentCourses, setStudentCourses] = useState([]);
 
   return (
-    <Router>
-      <div>
-        <NavBar />
-        <CourseBar courses={studentCourses} />
-        <Switch>
-          <Route exact path="/dashboard/" component={CourseDashboard} />
-          <Route exact path="/dashboard/:code" component={CourseDashboard} />
-          {/* so refreshing doesn't remove side bar */}
-          <Route path="/dashboard/:code/:feature" component={CourseDashboard} />
-        </Switch>
-      </div>
-    </Router>
+    <div>
+      <NavBar />
+      <CourseBar studentCourses={studentCourses} />
+    </div>
   );
 }
 

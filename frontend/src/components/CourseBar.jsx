@@ -1,21 +1,33 @@
 import "../App.css";
-import { NavLink } from "react-router-dom";
+import { BrowserRouter, NavLink, Route, useRouteMatch } from "react-router-dom";
+import SideBar from "./SideBar";
 
-const CourseBar = (props) => {
+function CourseBar({ studentCourses }) {
+  const { url, path } = useRouteMatch();
+  console.log(`url from course bar is: ${url}`);
+  console.log(`path from course bar is: ${path}`);
   return (
-    <nav className="courses-container">
-      {props.courses.map((course) => (
-        <h1 key={course}>
-          <NavLink
-            to={`/dashboard/${course}/chat`}
-            activeClassName="course-highlight"
-          >
-            {course}
-          </NavLink>
-        </h1>
-      ))}
-    </nav>
+    <BrowserRouter>
+      <div>
+        <div className="courses-container">
+          {studentCourses.map((course) => (
+            <li key={course}>
+              {/*Default to chat tab*/}
+              <NavLink
+                to={`${url}/${course}/chat`}
+                activeClassName="active-link"
+              >
+                {course}
+              </NavLink>
+            </li>
+          ))}
+        </div>
+        <Route path={`${path}/:courseid`}>
+          <SideBar />
+        </Route>
+      </div>
+    </BrowserRouter>
   );
-};
+}
 
 export default CourseBar;

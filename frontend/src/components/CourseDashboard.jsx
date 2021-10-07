@@ -11,21 +11,17 @@ const CourseDashboard = ({ match }) => {
   return (
     <Router>
       <div className="course-main">
-        <SideBar code={match.params.code} />
+        <SideBar />
         <Switch>
+          <Route exact path={`/dashboard/chat`} component={CourseChat} />
           <Route
             exact
-            path={`/dashboard/${match.params.code}/chat`}
-            component={CourseChat}
-          />
-          <Route
-            exact
-            path={`/dashboard/${match.params.code}/course-outline`}
+            path={`/dashboard/course-outline`}
             component={CourseOutline}
           />
           <Route
             exact
-            path={`/dashboard/${match.params.code}/mark-calculator`}
+            path={`/dashboard/mark-calculator`}
             component={MarkCalculator}
           />
         </Switch>

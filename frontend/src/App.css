@@ -52,3 +52,7 @@
 .feature-highlight {
   background-color: rgb(161, 199, 111);
 }
+
+.active-link {
+  background-color: violet;
+}

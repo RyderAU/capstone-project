@@ -1,29 +1,48 @@
 import "../App.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useRouteMatch, BrowserRouter, Route } from "react-router-dom";
+import CourseChat from "./CourseChat";
+import CourseOutline from "./CourseOutline";
+import MarkCalculator from "./MarkCalculator";
 
-const SideBar = (props) => {
+function SideBar() {
+  console.log("WE IN");
+  const { url, path } = useRouteMatch();
+  console.log(`url from SideBar is: ${url}`);
+  console.log(`path from SideBar is: ${path}`);
   return (
-    <div className="features-container">
-      <NavLink
-        to={`/dashboard/${props.code}/chat`}
-        activeClassName="feature-highlight"
-      >
-        <div className="features-item">Chat</div>
-      </NavLink>
-      <NavLink
-        to={`/dashboard/${props.code}/course-outline`}
-        activeClassName="feature-highlight"
-      >
-        <div className="features-item">Course Outline</div>
-      </NavLink>
-      <NavLink
-        to={`/dashboard/${props.code}/mark-calculator`}
-        activeClassName="feature-highlight"
-      >
-        <div className="features-item">Mark Calculation</div>
-      </NavLink>
-    </div>
+    <BrowserRouter>
+      <div>
+        <div className="features-container">
+          <ul>
+            <li>
+              <NavLink to={`${url}/chat`} activeClassName="active-link">
+                chat
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={`${url}/outline`} activeClassName="active-link">
+                outline
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={`${url}/calc`} activeClassName="active-link">
+                calc
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+        <Route path={`${path}/chat`}>
+          <CourseChat />
+        </Route>
+        <Route path={`${path}/outline`}>
+          <CourseOutline />
+        </Route>
+        <Route path={`${path}/calc`}>
+          <MarkCalculator />
+        </Route>
+      </div>
+    </BrowserRouter>
   );
-};
+}
 
 export default SideBar;

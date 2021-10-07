@@ -1,7 +1,9 @@
 import "../App.css";
+import { useParams } from "react-router";
 
 const MarkCalculator = () => {
-  return <div>mark calculator</div>;
+  const { courseid } = useParams();
+  return <div className="course-main">mark calculator for {courseid}</div>;
 };
 
 export default MarkCalculator;
