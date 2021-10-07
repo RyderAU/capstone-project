@@ -46,21 +46,31 @@ def grabCourseIDs(email, password):
     
     # Setup list to store student course details
     courseDetails = []
-
+    startCourseGrab = False
+    stopCourseGrab = False
     # Web crawl page and extract courses and degree
     for element in driver.find_elements_by_tag_name('label'):
 
         # Course extraction
-        if(element.text[0:4].isupper() and element.text[4:8].isdigit()):
+        if(element.text[0:4].isupper() and element.text[4:8].isdigit() and startCourseGrab == True and stopCourseGrab == False):
             courseDetails.append(element.text[0:8])
         
         # Degree extraction
         if(element.text.find("Program: ") != -1):
             courseDetails.append(element.text)
 
+        if(element.text.find("Term") != -1 and element.text.find("Complete") == -1):
+           
+            if (startCourseGrab == False):
+                startCourseGrab = True
+            
+            # Another term
+            else:
+               stopCourseGrab = True
+
     # Close the web browser
     driver.close()
 
     return courseDetails
     
-print(grabCourseIDs("z5168024@ad.unsw.edu.au", "PASSWORD"))
+print(grabCourseIDs("z5168024@ad.unsw.edu.au", "password"))
