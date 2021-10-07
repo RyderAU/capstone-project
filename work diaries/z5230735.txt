@@ -46,3 +46,31 @@ Acceptance criteria for user stories and sprint start/end dates were not finalis
 - what is planned for the next period (e.g., next week)
 
 Finalise project proposal and all tasks it encompasses (i.e background section, user stories and sprints, and technical depth, scale, and report formatting).
+
+
+Week 3
+
+Myself and z5208669 reworked the UI of our current storyboard design and presented it to the rest of the team. After approval of the new interface, our storyboard was updated to reflect the changes. I developed acceptance criteria for the user stories for group chat functionality. I also wrote the background section of the project proposal document.
+
+- what was planned for the period since the last work diary entry
+
+Finalise project proposal and all tasks it encompasses (i.e background section, user stories and sprints, and technical depth, scale, and report formatting).
+
+- what was finished
+
+Project proposal finalised and user stories for first sprint delegated.
+
+- what were the main technical and non-technical obstacles and how they were overcome (or what was tried and did not work)
+
+Some user stories proved difficult to come up with and provide acceptance criteria for. Overcame this by thinking more of the user's path through the system.
+
+- what was not finished, why this happened, how this affects the overall project progress and what adjustments (if any) are needed so the success of the project is not endangered
+
+N/A
+
+- what is planned for the next period (e.g., next week)
+
+Commence and work on first sprint.
+
+
+Week 4
