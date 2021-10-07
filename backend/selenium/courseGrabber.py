@@ -46,6 +46,7 @@ def grabCourseIDs(email, password):
     
     # Setup list to store student course details
     courseDetails = []
+    courseDetails.append(email[0:8])
     startCourseGrab = False
     stopCourseGrab = False
     # Web crawl page and extract courses and degree
@@ -73,4 +74,4 @@ def grabCourseIDs(email, password):
 
     return courseDetails
     
-print(grabCourseIDs("z5168024@ad.unsw.edu.au", "password"))
+print(grabCourseIDs("z5168024@ad.unsw.edu.au", "Password"))
