@@ -81,3 +81,13 @@ export const SignUpForm = styled.div`
   height: 650px;
   border-radius: 15px;
 `;
+
+export const LandingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 75px auto;
+  background-color: #0086E8;
+  width: 350px;
+  height: 250px;
+  border-radius: 15px;
+`;
