@@ -2,7 +2,7 @@ import "react-router-dom";
 // import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // import components
-import { LandingContainer, Title, Label, Input, Button, ButtonSecondary } from "../components/login/LoginCSS";
+import { LandingContainer, Title, Label, Input, Button, ButtonSecondary } from "../components/AuthCSS";
 
 let emailInput;
 let passwordInput;

@@ -1,7 +1,7 @@
 import "react-router-dom";
 
 // import components
-import { SignUpForm, Title, Label, Input, Button } from "../components/login/LoginCSS";
+import { SignUpForm, Title, Label, Input, Button } from "../components/AuthCSS";;
 
 let displayInput;
 let nameInput;
