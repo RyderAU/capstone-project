@@ -12,24 +12,34 @@ function SideBar() {
   return (
     <BrowserRouter>
       <div>
-        <div className="features-container">
-          <ul>
-            <li>
-              <NavLink to={`${url}/chat`} activeClassName="active-link">
-                chat
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={`${url}/outline`} activeClassName="active-link">
-                outline
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={`${url}/calc`} activeClassName="active-link">
-                calc
-              </NavLink>
-            </li>
-          </ul>
+        <div className="feature-container">
+          <div>
+            <NavLink
+              to={`${url}/chat`}
+              className="feature-item"
+              activeClassName="active-link"
+            >
+              chat
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              to={`${url}/outline`}
+              className="feature-item"
+              activeClassName="active-link"
+            >
+              outline
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              to={`${url}/calc`}
+              className="feature-item"
+              activeClassName="active-link"
+            >
+              calc
+            </NavLink>
+          </div>
         </div>
         <Route path={`${path}/chat`}>
           <CourseChat />

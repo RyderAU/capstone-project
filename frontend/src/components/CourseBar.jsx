@@ -10,17 +10,18 @@ function CourseBar({ studentCourses }) {
   return (
     <BrowserRouter>
       <div>
-        <div className="courses-container">
+        <div className="course-container">
           {studentCourses.map((course) => (
-            <li key={course}>
+            <div key={course}>
               {/*Default to chat tab*/}
               <NavLink
                 to={`${url}/${course}/chat`}
+                className="course-item"
                 activeClassName="active-link"
               >
                 {course}
               </NavLink>
-            </li>
+            </div>
           ))}
         </div>
         <Route path={`${path}/:courseid`}>
