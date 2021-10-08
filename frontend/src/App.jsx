@@ -8,12 +8,9 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Switch>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route exact path="/"></Route>
-        </Switch>
+        <Route exact path="/dashboard">
+          <Dashboard />
+        </Route>
       </div>
     </BrowserRouter>
   );
