@@ -1,11 +1,21 @@
 import "./CourseBar.css";
-import { BrowserRouter, NavLink, Route, useRouteMatch } from "react-router-dom";
+import {
+  BrowserRouter,
+  NavLink,
+  Route,
+  useRouteMatch,
+  useParams,
+} from "react-router-dom";
+import { useState } from "react";
 import SideBar from "./SideBar";
 
 function CourseBar({ studentCourses }) {
   const { url, path } = useRouteMatch();
   console.log(`url from course bar is: ${url}`);
   console.log(`path from course bar is: ${path}`);
+
+  const [selectedCourse, setSelectedCourse] = useState(``);
+  console.log(`selectedCourse is ${selectedCourse}`);
 
   return (
     <BrowserRouter>
@@ -18,6 +28,9 @@ function CourseBar({ studentCourses }) {
                 to={`${url}/${course}/chat`}
                 className="course-item"
                 activeClassName="active-link"
+                onClick={() => {
+                  setSelectedCourse(`${course}`);
+                }}
               >
                 {course}
               </NavLink>
@@ -25,7 +38,7 @@ function CourseBar({ studentCourses }) {
           ))}
         </div>
         <Route path={`${path}/:courseid`}>
-          <SideBar />
+          <SideBar selectedCourse={selectedCourse} />
         </Route>
       </div>
     </BrowserRouter>
