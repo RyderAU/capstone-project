@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const Label = styled.label`
   margin: 8px auto;
   font-weight: bold;
+  font-size: 0.9em;
   width: 250px;
-  color: #fff
+  color: #fff;
 `;
 
 export const Title = styled.label`
