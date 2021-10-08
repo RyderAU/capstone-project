@@ -3,14 +3,14 @@ import { NavLink, useRouteMatch, BrowserRouter, Route } from "react-router-dom";
 import CourseChat from "./CourseChat";
 import CourseOutline from "./CourseOutline";
 import MarkCalculator from "./MarkCalculator";
+import Feature from "./Feature";
 
-function SideBar() {
-  console.log("WE IN");
+function SideBar({ selectedCourse }) {
   const { url, path } = useRouteMatch();
   console.log(`url from SideBar is: ${url}`);
   console.log(`path from SideBar is: ${path}`);
   return (
-    <BrowserRouter>
+    <BrowserRouter key={selectedCourse}>
       <div>
         <div className="feature-container">
           <div>
@@ -19,36 +19,30 @@ function SideBar() {
               className="feature-item"
               activeClassName="active-link"
             >
-              chat
+              Chat
             </NavLink>
           </div>
           <div>
             <NavLink
-              to={`${url}/outline`}
+              to={`${url}/course-outline`}
               className="feature-item"
               activeClassName="active-link"
             >
-              outline
+              Course Outline
             </NavLink>
           </div>
           <div>
             <NavLink
-              to={`${url}/calc`}
+              to={`${url}/mark-calculation`}
               className="feature-item"
               activeClassName="active-link"
             >
-              calc
+              Mark Calculation
             </NavLink>
           </div>
         </div>
-        <Route path={`${path}/chat`}>
-          <CourseChat />
-        </Route>
-        <Route path={`${path}/outline`}>
-          <CourseOutline />
-        </Route>
-        <Route path={`${path}/calc`}>
-          <MarkCalculator />
+        <Route path={`${path}/:feature`}>
+          <Feature selectedCourse={selectedCourse} />
         </Route>
       </div>
     </BrowserRouter>

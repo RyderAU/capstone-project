@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Switch>
-          <Route exact path="/dashboard">
+          <Route path="/dashboard">
             <Dashboard />
           </Route>
           <Route exact path="/"></Route>
