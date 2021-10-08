@@ -1,0 +1,21 @@
+.feature-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 90vh;
+  width: 10%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  background-color: grey;
+  overflow-x: hidden;
+}
+
+.feature-item {
+  text-decoration: none;
+}
+
+.active-link {
+  color: red;
+}
