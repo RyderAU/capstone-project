@@ -3,9 +3,11 @@
 from flask import Flask
 from flask_login import LoginManager
 from database.register_new_user import register_student
-from database.read_db import read
+from database.read_db import read_db
+from database.validate_entity_exists import validate_entity_exists
+from database.update_user import update_user_data
 from argon2 import PasswordHasher
-
+import uuid, M2Crypto
 import re
 import jwt
 
@@ -38,44 +40,36 @@ class System:
                     - password is not correct
 
     Return Value:
-        - returns token on user is registered
-        - returns auth_user_id  on user is registered
+        - returns login token
+        - returns email of the user
     '''
 
 # Logs an user in
-    def auth_login(email, password):
-        #  sanitise input
-        sanitise_input(email)
+    def auth_login(self, email, password):
 
         # check if email is in the correct format
         if not re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", email):
             raise InputError('Email not in correct format')
         
         # check if user exists, if not then raise error
-        if not validate_entity_exists(email):
+        if validate_entity_exists('*', 'email', email) is None:
             raise InputError('User does not exist')
 
         # grab hash from database
-        query = "select password from students where email=" + email
-        result = read(query)
+        correct_pwd = validate_entity_exists('hashed_pwd', 'email', email)
         ph = PasswordHasher()
         try:
-            ph.verify(result, password)
+            ph.verify(correct_pwd, password)
         except argon2.exceptions.VerifyMismatchError:
-            raise FailedLoginError('Username or password is incorrect.')
+            raise InputError('Username or password is incorrect.')
         finally:
             # generate token
             session_id = new_session_id()
             token = jwt.encode({"session_id": session_id, "email": email}, "thisisakey", algorithm="HS256")
+            update_user_data('login_token', token, 'email', email)
             return {"token" : token, "email" : email}
 
-    def validate_entity_exists(email):
-        # read from database
-        query = "select * from students where email=" + email
-        result = read(query)
-        return False if result is None else True
-
-    def register(self, username, password, email):
+    def register(self, username, password, reentered_password, email):
         '''
         Creates a new account for a user and returns a token.
 
@@ -85,26 +79,24 @@ class System:
         Exceptions:
             InputError - Occurs when:
                 - username is not between 1 and 30 characters inclusive in length
-                - username contains illegal characters such as '";<lol/>../--#`ls` (or just sanitise?)
                 - email entered is not in the format of email@something.com
                 - email address is already being used by another user
-                - email contains illegal characters
                 - password entered is less than 6 characters long
                 - password entered does not contain at least 1 upper case character, 1 lower case character and 1 digit
-                - password entered contains illegal characters (?)
+                - username, password and email are sanitised by psycopg2 library when inserting input into database
 
         Return Value:
             - returns token
-            - returns auth_user_id 
+            - returns email
         '''
 
         # all the checks
-        register_info = {}
-        for variable in ["username", "password", "email"]:
-            register_info[variable] = eval(variable)
+        # register_info = {}
+        # for variable in ["username", "password", "email"]:
+        #     register_info[variable] = eval(variable)
 
-        for attribute, value in register_info.items():
-            sanitise_input(attribute, value)
+        # for attribute, value in register_info.items():
+        #     sanitise_input(attribute, value)
 
         if len(username) not in range(1, 31):
             raise InputError('Username should be 1 to 30 characters inclusive in length')
@@ -112,17 +104,17 @@ class System:
         if not re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", email):
             raise InputError('Email not in correct format')
 
-        if validate_entity_exists(email):
+        if validate_entity_exists('*', 'email', email) is not None:
             raise InputError('User already exists')
 
-        if validate_entity_exists(username):
+        if validate_entity_exists('*', 'display_name', username) is not None:
             raise InputError('Username already exists')
-
-        if len(password) < 6:
-            raise InputError('Password too short, please try again!')
         
         if not password_format_check(password):
-            raise InputError('Password entered must contain at least 1 upper case character, 1 lower case character and 1 digit')
+            raise InputError('Password entered must be more than 6 characters, and contain at least 1 upper case character, 1 lower case character and 1 digit')
+
+        if password != reentered_password:
+            raise InputError('Passwords do not match')
 
         # hash the password
         ph = PasswordHasher()
@@ -135,70 +127,83 @@ class System:
 
         return {"token" : token, "email" : email}
 
-# helper functions to-do
-    def password_format_check(password):
+# helper functions for register
+    def password_format_check(self, password):
+        # calculating the length
+        length_error = len(password) < 6
 
-    def new_session_id():
-        
-    def sanitise_input('email', email):
-        sanitise library to do
+        # searching for digits
+        digit_error = re.search(r"\d", password) is None
 
+        # searching for uppercase
+        uppercase_error = re.search(r"[A-Z]", password) is None
 
-# to do
-    def logout(token: str) -> dict:
+        # searching for lowercase
+        lowercase_error = re.search(r"[a-z]", password) is None
+
+        # overall result
+        password_ok = not (length_error or digit_error or uppercase_error or lowercase_error)
+
+        return password_ok
+
+    def new_session_id(self):
+        num_bytes = 16
+        session_id = uuid.UUID(bytes = M2Crypto.m2.rand_bytes(num_bytes))
+        return str(session_id)
+
+# logout and helper functions
+    def logout(self, token):
         '''
-        Inactivates a given token, ending a users session.
+        Validate a given token. If valid, delete the token from database to indicate that the user has logged out
 
         Arguments:
             token (string) - a randomly generated code that adds extra security for users
 
         Return Value:
-            - returns {boolean} on condition <is success>
+            - returns True
         '''
-        validate_token(token)
-        session_id = token_to_session_id(token)
-        auth_user_id = session_id_to_auth_id(session_id)
-
-        remove_from_list_in_entity('user', auth_user_id, 'session_ids', session_id)
+        email = validate_token(token)
+        update_user_data('login_token', '', 'email', email)
         
-        return {'is_success': True}
+        return True
 
-        
-    '''
-    Personal Information Services
-    '''
-    @property
-    def patients(self):
-        return self._patients
+    def validate_token(self, token):
+        '''
+        Validate a token
 
-    def rewrite_patt_csv(self):
-        remove_patt_csv()
-        new_patt_csv()
-        for patt in self._patients:
-            record_patient(patt.name, patt.email, patt.password, patt.phone, patt.medicare_num)
+        Arguments:
+            token - strings
 
-    def rewrite_prov_csv(self):
-        remove_prov_csv()
-        new_prov_csv()
-        for prov in self._providers:
-            record_provider(prov.name, prov.email, prov.profession, prov.password, prov.phone, prov.num)
+        Exceptions:
+            LogoutError - Occurs when:
+                - token cannot be decoded by jwt module
+                - token is not in the correct format of {"session_id": session_id, "email": email}
+                - user with the email specified in the token does not exist
+                - token is different from token recorded in the database upon login
 
-    def rewrite_prov_rate_csv(self):
-        remove_prov_rate_csv()
-        patt_list = []
-        for patt in self._patients:
-            patt_list.append(patt.email)
+        Return Value:
+            - returns email of the user owning the token
+        '''
+        try:
+            decoded = jwt.decode(token, "thisisakey", algorithms=["HS256"])
+            for key, value in decoded.items():
+                if key == 'email':
+                    recorded_token = validate_entity_exists('login_token', 'email', value)
+                    if recorded_token is None:
+                        raise LogoutError('User does not exist')
+                    if token != recorded_token:
+                        raise LogoutError('Wrong login token. You are a hacker!!!')
+                    return value
+                else:
+                    # When there is no email field in the login token
+                    raise LogoutError('Invalid token')
+        except (Exception, jwt.exceptions.InvalidTokenError) as error:
+            raise LogoutError('Invalid token')
 
-        new_prov_rate_csv(patt_list)
-        for prov in self._providers:
-            record_prov_rate(prov, patt_list)
 
-    def rewrite_ctr_rate_csv(self):
-        remove_ctr_rate_csv()
-        patt_list = []
-        for patt in self._patients:
-            patt_list.append(patt.email)
-
-        new_ctr_rate_csv(patt_list)
-        for ctr in self._centres:
-            record_ctr_rate(ctr, patt_list)
+    # '''
+    # Personal Information Services
+    # '''
+    # @property
+    # def patients(self):
+    #     return self._patients

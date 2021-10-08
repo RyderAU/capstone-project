@@ -2,9 +2,9 @@
 import psycopg2
 from config import config
 
+def read(field, criteria, value)
 # Grab data
-select_query = "select * from students"
-
+select_query = "select "  + field + " from students where " + criteria + "=" + value
 conn = None
 try:
     # read database configuration
