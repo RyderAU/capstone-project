@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import backgroundImage from "../images/illustration.jpeg"
+import logoUNSWImage from "../images/unswlogo.png"
 
 export const Container = styled.div`
   width: 100vw;
@@ -7,11 +8,11 @@ export const Container = styled.div`
   position: relative;
 `;
 
-export const Img = styled.img`
+export const Background = styled.img`
   height: 100%;
   width: 100%;
 `
-Img.defaultProps = {
+Background.defaultProps = {
   src: backgroundImage,
   alt: "UNSW background",
 };
@@ -27,4 +28,48 @@ export const SignInBox = styled.div`
   right: 0;
   bottom: 0;
   margin: auto;
+  display: flex;
+  flex-direction: column;
 `
+export const LogoUNSW = styled.img`
+  height: 36px;
+  width: 168px;
+`
+LogoUNSW.defaultProps = {
+  src: logoUNSWImage,
+  alt: "UNSW background",
+};
+
+export const SignInTitle =styled.div`
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 10px 0;
+`
+export const Input =styled.input`
+  width: 350px;
+  padding: 6px 0px;
+  height: 32px;
+  border: none;
+  border-bottom: 1px solid;
+  border-color: #666;
+  border-width: 1px;
+  font-size: 0.9em;
+  // margin: 8px auto;
+  // border: 1px solid #ccc;
+  // box-sizing: border-box;
+`
+
+export const Button = styled.button`
+  background-color: #005EA6;
+  color: #fff;
+  font-size: 1.0em;
+  padding: 14px 20px;
+  margin: 8px auto;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+  &:hover {
+    // opacity: 0.8;
+    font-weight: bold;
+  }
+`;
