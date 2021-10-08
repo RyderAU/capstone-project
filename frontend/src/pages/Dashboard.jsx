@@ -1,4 +1,3 @@
-import "../App.css";
 import CourseBar from "../components/CourseBar";
 import NavBar from "../components/NavBar";
 import { useEffect, useState } from "react";

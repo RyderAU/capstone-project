@@ -1,4 +1,4 @@
-import "../App.css";
+import "./MarkCalculator.css";
 import { useParams } from "react-router";
 
 const MarkCalculator = () => {

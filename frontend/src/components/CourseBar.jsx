@@ -1,4 +1,4 @@
-import "../App.css";
+import "./CourseBar.css";
 import { BrowserRouter, NavLink, Route, useRouteMatch } from "react-router-dom";
 import SideBar from "./SideBar";
 
@@ -6,6 +6,7 @@ function CourseBar({ studentCourses }) {
   const { url, path } = useRouteMatch();
   console.log(`url from course bar is: ${url}`);
   console.log(`path from course bar is: ${path}`);
+
   return (
     <BrowserRouter>
       <div>

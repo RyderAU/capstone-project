@@ -1,0 +1,11 @@
+.courses-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 5vh;
+  background-color: #c7c7c7;
+}
+
+.active-link {
+  background-color: violet;
+}

@@ -1,4 +1,4 @@
-import "../App.css";
+import "./SideBar.css";
 import { NavLink, useRouteMatch, BrowserRouter, Route } from "react-router-dom";
 import CourseChat from "./CourseChat";
 import CourseOutline from "./CourseOutline";

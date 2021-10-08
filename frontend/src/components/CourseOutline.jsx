@@ -1,4 +1,4 @@
-import "../App.css";
+import "./CourseOutline.css";
 import { useParams } from "react-router";
 
 const CourseOutline = () => {
