@@ -27,13 +27,13 @@ import { LoginForm, Title, Label, Input, Button,
 
     axios.post(`${url}/login`, {
       email: emailInput,
-      password: passwordInput
+      password: passwordInput,
     })
       .then(r => {
         console.log('Login Success');
         // console.log(r.token);
         // localStorage.setItem('token', r.token);
-        history.push("/linking");
+        history.push("/dashboard");
       })
       .catch(err => {
         console.log('Login Failure');
