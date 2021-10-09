@@ -1,27 +1,21 @@
 import "./CourseBar.css";
-import {
-  BrowserRouter,
-  NavLink,
-  Route,
-  useRouteMatch,
-  useParams,
-} from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter, NavLink, Route, useRouteMatch } from "react-router-dom";
+import { useState, useContext } from "react";
+import { StoreContext } from "../Store";
 import SideBar from "./SideBar";
 
-function CourseBar({ studentCourses }) {
+function CourseBar() {
   const { url, path } = useRouteMatch();
-  console.log(`url from course bar is: ${url}`);
-  console.log(`path from course bar is: ${path}`);
 
   const [selectedCourse, setSelectedCourse] = useState(``);
-  console.log(`selectedCourse is ${selectedCourse}`);
+
+  const { courses } = useContext(StoreContext);
 
   return (
     <BrowserRouter>
       <div>
         <div className="course-container">
-          {studentCourses.map((course) => (
+          {courses[0].map((course) => (
             <div key={course}>
               {/*Default to chat tab*/}
               <NavLink

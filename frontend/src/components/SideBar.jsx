@@ -1,14 +1,9 @@
 import "./SideBar.css";
 import { NavLink, useRouteMatch, BrowserRouter, Route } from "react-router-dom";
-import CourseChat from "./CourseChat";
-import CourseOutline from "./CourseOutline";
-import MarkCalculator from "./MarkCalculator";
 import Feature from "./Feature";
 
 function SideBar({ selectedCourse }) {
   const { url, path } = useRouteMatch();
-  console.log(`url from SideBar is: ${url}`);
-  console.log(`path from SideBar is: ${path}`);
   return (
     <BrowserRouter key={selectedCourse}>
       <div>
