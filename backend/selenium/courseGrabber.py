@@ -71,7 +71,11 @@ def grabCourseIDs(email, password):
                stopCourseGrab = True
 
     userDetails['courses'] = courses
+
+    nameElement = driver.find_element_by_xpath('//*[@id="pt1:pt_pgl23"]')
+    userDetails['name'] = nameElement.text[13:]
     print(userDetails)
+    
     # Close the web browser
     driver.close()
 
