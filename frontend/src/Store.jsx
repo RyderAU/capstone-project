@@ -9,7 +9,7 @@ export default ({ children }) => {
   const [password, setPassword] = React.useState("");
   const [emailUNSW, setEmailUNSW] = React.useState("");
   const [passwordUNSW, setPasswordUNSW] = React.useState("");
-  const [url, setUrl] = React.useState("http://localhost:3000");
+  const [url, setUrl] = React.useState("http://localhost:3030");
   const [courses, setCourses] = React.useState(["COMP3900", "COMP6080", "COMP3331"]);
 
   const store = {
