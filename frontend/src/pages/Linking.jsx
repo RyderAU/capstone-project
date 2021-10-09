@@ -22,7 +22,7 @@ const Linking = () => {
   // API request
   const handleLinking = () => {
     console.log(emailInput);
-    console.log(passwordInput);
+    //console.log(passwordInput);
 
     axios.post(`${url}/linking`, {
       email: emailInput,
