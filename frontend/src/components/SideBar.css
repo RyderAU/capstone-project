@@ -2,20 +2,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 10px;
+  border-right: 1px solid #dddddd;
   justify-content: flex-start;
   height: 90vh;
   width: 10%;
   position: fixed;
   z-index: 1;
   left: 0;
-  background-color: grey;
   overflow-x: hidden;
 }
 
 .feature-item {
   text-decoration: none;
+  border-top: 1px solid #dddddd;
 }
 
 .active-link {
-  color: red;
+  background-color: lightblue;
 }

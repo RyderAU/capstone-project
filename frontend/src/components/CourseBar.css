@@ -4,7 +4,7 @@
   padding-left: 15%;
   align-items: center;
   height: 5vh;
-  background-color: white;
+  border-bottom: 1px solid #dddddd;
 }
 
 .course-item {
