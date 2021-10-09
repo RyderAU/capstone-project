@@ -125,7 +125,7 @@ class System:
         # store into database
         register_student('', '', email, username, hashed_pwd, token, '')
 
-        return {"token" : token, "email" : email}
+        return {'is_success': is_success,}
 
 # helper functions for register
     def password_format_check(self, password):
