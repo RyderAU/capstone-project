@@ -42,15 +42,14 @@ def linking_route():
     print(email, file=sys.stderr)
     print(password, file=sys.stderr)
 
-    course_details = []
     # u_id_and_token = 42
     try:
-        course_details = grabCourseIDs("z5555555", password)
+        return dumps(grabCourseIDs(email, password))
     except:
         return dumps([])
     # time.sleep(20)
 
-    return dumps(course_details)
+    return dumps([])
 
 
 #------------------------------------------------------------------------------#
