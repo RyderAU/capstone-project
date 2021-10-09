@@ -45,8 +45,9 @@ def grabCourseIDs(email, password):
     time.sleep(1)
     
     # Setup list to store student course details
-    courseDetails = []
-    courseDetails.append(email[0:8])
+    userDetails = {}
+    userDetails['zID'] = email[0:8]
+    courses = []
     startCourseGrab = False
     stopCourseGrab = False
     # Web crawl page and extract courses and degree
@@ -54,11 +55,11 @@ def grabCourseIDs(email, password):
 
         # Course extraction
         if(element.text[0:4].isupper() and element.text[4:8].isdigit() and startCourseGrab == True and stopCourseGrab == False):
-            courseDetails.append(element.text[0:8])
+            courses.append(element.text[0:8])
         
         # Degree extraction
         if(element.text.find("Program: ") != -1):
-            courseDetails.append(element.text)
+            userDetails['degree'] = element.text
 
         if(element.text.find("Term") != -1 and element.text.find("Complete") == -1):
            
@@ -69,9 +70,12 @@ def grabCourseIDs(email, password):
             else:
                stopCourseGrab = True
 
+    userDetails['courses'] = courses
+    print(userDetails)
     # Close the web browser
     driver.close()
 
-    return courseDetails
+    return userDetails
     
 
+grabCourseIDs("z5168024@ad.unsw.edu.au", "Marble12345")
