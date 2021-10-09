@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { StoreContext } from '../Store';
 import { useHistory } from 'react-router-dom'
 // import components
-import { LandingContainer, Title, Label, Input,
-        Button, ButtonSecondary } from "../components/AuthCSS";
+import { LandingContainer, Title, Label, Input, Button,
+  ButtonSecondary } from "../components/AuthCSS";
 
 /**
  * Landing page
@@ -15,11 +15,13 @@ const Landing = () => {
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
 
+  // Login button redirects to /login
   const handleLogin = () => {
     console.log("Login Button Clicked");
     history.push("/login");
   };
 
+  // SignUp button redirections to /signup
   const handleSignUp = () => {
     console.log("Sign Up Button Clicked");
     history.push("/signup");
