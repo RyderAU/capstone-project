@@ -1,8 +1,8 @@
 import "react-router-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import React from 'react';
-import { StoreContext } from './Store';
-import StoreProvider from './Store';
+import React from "react";
+import { StoreContext } from "./Store";
+import StoreProvider from "./Store";
 // import pages
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
