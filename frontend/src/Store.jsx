@@ -10,6 +10,7 @@ export default ({ children }) => {
   const [emailUNSW, setEmailUNSW] = React.useState("");
   const [passwordUNSW, setPasswordUNSW] = React.useState("");
   const [url, setUrl] = React.useState("http://localhost:3000");
+  const [courses, setCourses] = React.useState(["COMP3900", "COMP6080", "COMP3331"]);
 
   const store = {
     fullName: [fullName, setFullName],
@@ -19,6 +20,7 @@ export default ({ children }) => {
     emailUNSW: [emailUNSW, setEmailUNSW],  
     passwordUNSW: [passwordUNSW, setPasswordUNSW],
     url: [url, setUrl],
+    courses: [courses, setCourses],
   }
 
   return <StoreContext.Provider value={store}>{ children }</StoreContext.Provider>

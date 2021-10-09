@@ -74,4 +74,4 @@ def grabCourseIDs(email, password):
 
     return courseDetails
     
-print(grabCourseIDs("z5168024@ad.unsw.edu.au", "Password"))
+
