@@ -10,9 +10,6 @@ import { Container, Background, SignInBox, LogoUNSW, SignInTitle, Input,
 
 
 const Linking = () => {
-
-  // let emailInput;
-  // let passwordInput;
   
   const context = React.useContext(StoreContext);
   const [emailInput, setEmailInput] = context.emailUNSW;

@@ -3,10 +3,10 @@ import React from "react";
 export const StoreContext = React.createContext(null);
 
 export default ({ children }) => {
-  const [fullName, setFullName] = React.useState("");
   const [displayName, setDisplayName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [passwordConfirm, setPasswordConfirm] = React.useState("");
   const [emailUNSW, setEmailUNSW] = React.useState("");
   const [passwordUNSW, setPasswordUNSW] = React.useState("");
   const [url, setUrl] = React.useState("http://localhost:3030");
@@ -17,10 +17,10 @@ export default ({ children }) => {
   ]);
 
   const store = {
-    fullName: [fullName, setFullName],
     displayName: [displayName, setDisplayName],
     email: [email, setEmail],
     password: [password, setPassword],
+    passwordConfirm: [passwordConfirm, setPasswordConfirm],
     emailUNSW: [emailUNSW, setEmailUNSW],
     passwordUNSW: [passwordUNSW, setPasswordUNSW],
     url: [url, setUrl],
