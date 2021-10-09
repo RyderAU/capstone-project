@@ -1,3 +1,21 @@
+# Notes:
+1. To install dependencies:
+`npm install`
+2. To run the front end:
+`npm start`
+3. Make sure you run the backend inside `/backend/selenium/server.py`
+`python3 server.py`
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -39,8 +39,6 @@ def linking_route():
     ''' Authenticates email / password and returns id / token '''
     email = request.get_json()['email']
     password = request.get_json()['password']
-    print(email, file=sys.stderr)
-    print(password, file=sys.stderr)
 
     # u_id_and_token = 42
     try:

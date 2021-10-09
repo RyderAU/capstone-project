@@ -1,26 +1,46 @@
-import "react-router-dom";
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import React, { useState } from 'react';
+import { StoreContext } from '../Store';
+import { useHistory } from 'react-router-dom'
 // import components
-import { LandingContainer, Title, Label, Input, Button, ButtonSecondary } from "../components/AuthCSS";
+import { LandingContainer, Title, Label, Input, Button,
+  ButtonSecondary } from "../components/AuthCSS";
 
-let emailInput;
-let passwordInput;
+/**
+ * Landing page
+ * @returns Contains the title, login button and signup button
+ */
+const Landing = () => {
 
-function Landing() {
+  const history = useHistory();
+  const context = React.useContext(StoreContext);
+  const [url, ] = context.url;
+
+  // Login button redirects to /login
+  const handleLogin = () => {
+    console.log("Login Button Clicked");
+    history.push("/login");
+  };
+
+  // SignUp button redirections to /signup
+  const handleSignUp = () => {
+    console.log("Sign Up Button Clicked");
+    history.push("/signup");
+  };
+
   return (
       <div>
      
       <LandingContainer>
         <Title>ourUNSW</Title>
 
-        <Button onClick={() => console.log("Login button clicked")} type="submit" id ="login-submit"
-          aria-label="login-button">
+        <Button onClick={() => handleLogin()} type="submit" id ="login-redirect"
+          aria-label="login-button-redirect">
           Login
-        </Button> 
-        <ButtonSecondary onClick={() => console.log(`Register button blicked`)}
+        </Button>
+        
+        <ButtonSecondary onClick={() => handleSignUp()}
           type="submit" id ="signup-redirect"
-          aria-label="signup-button">
+          aria-label="signup-button-redirect">
           Sign Up
         </ButtonSecondary>
       </LandingContainer>

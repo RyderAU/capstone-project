@@ -13,6 +13,7 @@ const Linking = () => {
 
   // let emailInput;
   // let passwordInput;
+  
   const context = React.useContext(StoreContext);
   const [emailInput, setEmailInput] = context.emailUNSW;
   const [passwordInput, setPasswordInput] = context.passwordUNSW;
