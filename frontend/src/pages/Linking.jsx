@@ -1,6 +1,6 @@
 import "react-router-dom";
 // import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { StoreContext } from '../Store';
 // import components
@@ -16,11 +16,25 @@ const Linking = () => {
   const context = React.useContext(StoreContext);
   const [emailInput, setEmailInput] = context.emailUNSW;
   const [passwordInput, setPasswordInput] = context.passwordUNSW;
+  const [url, ] = context.url;
+  // const [loading, setLoading] = useState(false);
 
   // API request
   const handleLinking = () => {
     console.log(emailInput);
     console.log(passwordInput);
+
+    axios.post(`${url}/linking`, {
+      email: emailInput,
+      password: passwordInput
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+
     // axios.post('auth/linking', {
     //   headers: {
     //     'Content-Type': 'application/json',
