@@ -32,9 +32,13 @@ const Linking = () => {
       password: passwordInput
     })
     .then((response) => {
-      console.log(response);
-      console.log(response.data);
+      // Reset variables
+      setLoading(false);
       setSignInText("Sign in");
+      console.log(response);
+      console.log(response.data["courses"]);
+
+      // Move to next page
       history.push('/dashboard');
     })
     .catch( (error) => {
