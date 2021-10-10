@@ -1,5 +1,3 @@
-# from User import Provider, Patient, Appointment
-# from Centre import Centres
 from flask import Flask
 from flask_login import LoginManager
 from .database.register_new_user import register_student
