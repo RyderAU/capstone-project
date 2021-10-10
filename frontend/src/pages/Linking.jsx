@@ -16,7 +16,7 @@ const Linking = () => {
   const [emailInput, setEmailInput] = context.emailUNSW;
   const [passwordInput, setPasswordInput] = context.passwordUNSW;
   const [url, ] = context.url;
-  const [, setCourses] = context.courses;
+  const [courses, setCourses] = context.courses;
 
   const [signInText, setSignInText] = React.useState("Sign in");
   const [loading, setLoading] = useState(false);
