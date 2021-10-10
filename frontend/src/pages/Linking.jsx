@@ -35,30 +35,39 @@ const Linking = () => {
       password: passwordInput
     })
     .then((response) => {
-      // Reset variables
-      setLoading(false);
-      setSignInText("Sign in");
-      console.log(response);
-      console.log(response.data["courses"]);
-
-      // Move to next page
-      history.push('/dashboard');
+      handleSuccess(response);
     })
     .catch( (error) => {
-      // Reset the loading button to signin button
-      setLoading(false);
-      setSignInText("Sign in");
-
-      // Reset text fields
-      setEmailInput("");
-      setPasswordInput("");
-
-      // Print error message
-      console.log(error);
-      setErrorMsg("Error: Incorrect details! Please try again!");
-      setIsError(true);
+      handleError(error);
     });
+  };
+  
+  // Case 1: API returns success
+  const handleSuccess = (response) => {
+    // Reset variables
+    setLoading(false);
+    setSignInText("Sign in");
+    console.log(response);
+    console.log(response.data["courses"]);
+  
+    // Move to next page
+    history.push('/dashboard');
+  };
 
+  // Case 2: API returns error
+  const handleError = (error) => {
+    // Reset the loading button to signin button
+    setLoading(false);
+    setSignInText("Sign in");
+
+    // Reset text fields
+    setEmailInput("");
+    setPasswordInput("");
+
+    // Print error message
+    console.log(error);
+    setErrorMsg("Error: Incorrect details! Please try again!");
+    setIsError(true);
   };
 
 

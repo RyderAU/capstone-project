@@ -41,20 +41,10 @@ def linking_route():
     password = request.get_json()['password']
 
     details = grabCourseIDs(email, password)
+    time.sleep(5) #remove later, just for frontend testing
     return dumps({
         "courses": details["courses"]
     })
-    # # u_id_and_token = 42
-    # try:
-    #     details = grabCourseIDs(email, password)
-    #     return dumps({
-    #         "courses": details["courses"]
-    #     })
-    # except Exception:
-    #     raise Exception
-    # # time.sleep(20)
-
-    # return dumps([])
 
 
 #------------------------------------------------------------------------------#
