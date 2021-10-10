@@ -91,3 +91,12 @@ export const LandingContainer = styled.div`
   height: 250px;
   border-radius: 15px;
 `;
+
+export const ErrorWarning = styled.div`
+  width: 100%;
+  color: #FF7F7F;
+  margin-top: 10px;
+  text-align: right;
+  font-size: 0.9em;
+  text-align: center;
+`
