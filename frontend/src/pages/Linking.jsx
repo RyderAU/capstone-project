@@ -33,6 +33,7 @@ const Linking = () => {
     })
     .then((response) => {
       console.log(response);
+      console.log(response.data);
       setSignInText("Sign in");
       history.push('/dashboard');
     })
