@@ -45,8 +45,17 @@ const Linking = () => {
       history.push('/dashboard');
     })
     .catch( (error) => {
+      // Reset the loading button to signin button
+      setLoading(false);
+      setSignInText("Sign in");
+
+      // Reset text fields
+      setEmailInput("");
+      setPasswordInput("");
+
+      // Print error message
       console.log(error);
-      setErrorMsg(error);
+      setErrorMsg("Error: Incorrect details! Please try again!");
       setIsError(true);
     });
 
