@@ -1,3 +1,4 @@
 env/
 database.ini
 config.cpython-39.pyc
+.DS_Store
