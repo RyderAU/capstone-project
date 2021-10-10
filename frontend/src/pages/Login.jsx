@@ -98,7 +98,7 @@ import { LoginForm, Title, Label, Input, Button,
           Login
         </Button> 
 
-        <ButtonSecondary onClick={() => handleSignUp(`SignUp button blicked`)}
+        <ButtonSecondary onClick={() => handleSignUp()}
           type="submit" id ="signup-login-redirect"
           aria-label="signup-button-from-login">
           Sign Up

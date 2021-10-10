@@ -46,7 +46,7 @@ def signup_route():
     time.sleep(2) #remove later, just for frontend testing
 
     return dumps({
-        "is_success": True
+        "token": "i7sdofg7ihsodifugh"
     })
 
 @APP.route("/login", methods=['POST'])
@@ -65,14 +65,26 @@ def login_route():
         "courses": ["COMP3900", "COMP3331", "COMP6080"]
     })
 
+@APP.route("/logout", methods=['POST'])
+def logout_route():
+    ''' Authenticates email / password and returns id / token '''
+    token = request.get_json()['token']
+    print(f'{token}', file=sys.stderr)
+    time.sleep(1) #remove later, just for frontend testing
+
+    return dumps({
+        "is_success": True
+    })
+
 @APP.route("/linking", methods=['POST'])
 def linking_route():
     ''' Authenticates email / password and returns id / token '''
+    token = request.get_json()['token']
     email = request.get_json()['email']
     password = request.get_json()['password']
 
     # details = grabCourseIDs(email, password)
-    print(f'{email} {password}', file=sys.stderr)
+    print(f'{token} {email} {password}', file=sys.stderr)
     time.sleep(2) #remove later, just for frontend testing
 
     return dumps({

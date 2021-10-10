@@ -4,7 +4,8 @@ import { StoreContext } from '../Store';
 import { useHistory } from 'react-router-dom'
 // import components
 import { SignUpForm, Title, Label, Input, Button,
-  ErrorWarning } from "../components/AuthCSS";;
+  ErrorWarning, 
+  ButtonSecondary} from "../components/AuthCSS";;
 
 
 const SignUp = () => {
@@ -37,37 +38,43 @@ const SignUp = () => {
       .catch(err => {
         handleError(err);
       });
-    };
+  };
     
-    // Case 1: API returns success
-    const handleSuccess = (response) => {
-      console.log('SignUp Success');
-      console.log(response);
-      // Sets the token to be used for linking
-      setToken(response.data["token"]);
-      resetFields();
-      
-      // Move to next page
-      history.push('/linking');
-    };
+  // Case 1: API returns success
+  const handleSuccess = (response) => {
+    console.log('SignUp Success');
+    console.log(response);
+    // Sets the token to be used for linking
+    setToken(response.data["token"]);
+    resetFields();
     
-    // Case 2: API returns error
-    const handleError = (error) => {
-      console.log('SignUp Failure');
-      resetFields();
-      
-      // Print error message
-      console.log(error);
-      setErrorMsg("Error: Incorrect details! Please try again!");
-      setIsError(true);
-    };
+    // Move to next page
+    history.push('/linking');
+  };
     
-    const resetFields = () => {
-      setDisplayName("");
-      setEmail("");
-      setPassword("");
-      setPasswordConfirm("");
-    };
+  // Case 2: API returns error
+  const handleError = (error) => {
+    console.log('SignUp Failure');
+    resetFields();
+    
+    // Print error message
+    console.log(error);
+    setErrorMsg("Error: Incorrect details! Please try again!");
+    setIsError(true);
+  };
+    
+  const resetFields = () => {
+    setDisplayName("");
+    setEmail("");
+    setPassword("");
+    setPasswordConfirm("");
+  };
+
+  // SignUp button redirections to /signup
+  const handleLoginSubmit = () => {
+    console.log("Login Button Clicked");
+    history.push("/login");
+  };
 
   return (
       <div>
@@ -94,6 +101,11 @@ const SignUp = () => {
           aria-label="link-button">
           Link to myUNSW
         </Button> 
+
+        <ButtonSecondary onClick={() => handleLoginSubmit()} type="submit" id ="login-redirect"
+          aria-label="login-button-from-signup">
+          Login
+        </ButtonSecondary> 
 
         {
           isError && 
