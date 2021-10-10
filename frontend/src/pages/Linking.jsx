@@ -56,9 +56,9 @@ const Linking = () => {
                 type="password" placeholder="Enter Password" id="linking-password" required />
 
               <SpinnerContainer>                
-                <Spinner size={40} spinnerColor={"#005EA6"} spinnerWidth={2} visible={true} />
+                <Spinner size={40} spinnerColor={"#005EA6"} spinnerWidth={2} visible={loading} />
                 <Button onClick={() => handleLinking()} type="submit" id ="linking-submit"
-                  aria-label="linking-button">
+                  aria-label="linking-button" disabled={loading}>
                   {signInText}
                 </Button>
               </SpinnerContainer>
