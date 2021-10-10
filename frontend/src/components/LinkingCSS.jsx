@@ -64,7 +64,8 @@ export const Button = styled.button`
   color: #fff;
   font-size: 1.0em;
   padding: 14px 20px;
-  margin: 8px auto;
+  // margin: 25px 90px 8px 0px;
+  margin-left: 20px;
   border: none;
   cursor: pointer;
   width: 100px;
@@ -73,3 +74,14 @@ export const Button = styled.button`
     font-weight: bold;
   }
 `;
+export const SpinnerContainer = styled.div`
+  margin: 25px 90px 8px 0px;
+  display: flex;
+  justify-content: flex-end;
+`
+export const LoadingWarning = styled.div`
+  color: red;
+  text-align: right;
+  margin: 10px 90px 8px 0px;
+  font-size: 0.8em;
+`
