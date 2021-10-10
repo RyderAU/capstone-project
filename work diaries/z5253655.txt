@@ -1,5 +1,77 @@
 Week 1
 
+Meetings during holiday
+Research
+Meeting on 15/9
+Plans
+Group created 
+add to Jira project
+brainstorming, discuss and suggest ideas of the project
+
+- what was planned for the period since the last work diary entry
+
+
+- what was finished
+
+
+- what were the main technical and non-technical obstacles and how they were overcome (or what was tried and did not work)
+
+
+- what was not finished, why this happened, how this affects the overall project progress and what adjustments (if any) are needed so the success of the project is not endangered
+
+
+
+- what is planned for the next period (e.g., next week)
+
+
+
+
 Week 2
 
+planned and created backed achitecture diagram
+user story
+
+- what was planned for the period since the last work diary entry
+
+
+- what was finished
+
+
+- what were the main technical and non-technical obstacles and how they were overcome (or what was tried and did not work)
+
+
+- what was not finished, why this happened, how this affects the overall project progress and what adjustments (if any) are needed so the success of the project is not endangered
+
+
+
+- what is planned for the next period (e.g., next week)
+
+
+
 Week 3
+
+
+
+- what was planned for the period since the last work diary entry
+
+
+- what was finished
+
+
+- what were the main technical and non-technical obstacles and how they were overcome (or what was tried and did not work)
+
+
+- what was not finished, why this happened, how this affects the overall project progress and what adjustments (if any) are needed so the success of the project is not endangered
+
+
+
+- what is planned for the next period (e.g., next week)
+
+
+Week 4
+
+Set up database
+Implemented functions to insert new user (student) to db from backend using psycopg2
+Implemented functions to retrieve data from db using python psycopg2
+Wrote bash script to automate python virtual env for the team
+Wrote bash script connect to postgresql faster

@@ -6,6 +6,7 @@ from .database.register_new_user import register_student
 from .database.read_db import read_db
 from .database.validate_entity_exists import validate_entity_exists
 from .database.update_user import update_user_data
+import argon2
 from argon2 import PasswordHasher
 from .error import *
 import uuid, M2Crypto
