@@ -9,7 +9,7 @@ export const Label = styled.label`
 `;
 
 export const Title = styled.label`
-  // font-family: 'Roboto';
+  font-family: 'Luna';
   font-size: 36px;
   // color: rgb(26, 17, 145);
   color: #fff;
@@ -99,4 +99,17 @@ export const ErrorWarning = styled.div`
   text-align: right;
   font-size: 0.9em;
   text-align: center;
+`
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const BigTitle = styled.div`
+  margin: 50px auto;
+  padding: 0 50px;
+  font-family: 'Luna';
+  font-size: 36px;
+  color: #333;
 `
