@@ -54,7 +54,8 @@ const Linking = () => {
     setCourses(courses);
   
     // Move to next page
-    history.push(`/dashboard/${courses[0]}/chat`);
+    history.push(`/login`);
+    // history.push(`/dashboard/${courses[0]}/chat`);
   };
 
   // Case 2: API returns error

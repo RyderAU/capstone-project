@@ -32,7 +32,7 @@ function App() {
               <Linking />
             </Route>
 
-            <Route exact path="/dashboard">
+            <Route path="/dashboard">
               <Dashboard />
             </Route>
           </Switch>
