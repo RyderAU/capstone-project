@@ -10,11 +10,12 @@ import { SignUpForm, Title, Label, Input, Button,
 const SignUp = () => {
   const history = useHistory();
   const context = React.useContext(StoreContext);
-  const [url, ] = context.url;
+  const [url] = context.url;
   const [displayName, setDisplayName] = context.displayName;
   const [emailInput, setEmail] = context.email;
   const [passwordInput, setPassword] = context.password;
   const [passwordConfirmInput, setPasswordConfirm] = context.passwordConfirm;
+  const [, setToken] = context.token;
 
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("Erorr: Input invalid");
@@ -42,6 +43,9 @@ const SignUp = () => {
     const handleSuccess = (response) => {
       console.log('SignUp Success');
       console.log(response);
+      // Sets the token to be used for linking
+      setToken(response.data["token"]);
+      resetFields();
       
       // Move to next page
       history.push('/linking');
@@ -50,17 +54,19 @@ const SignUp = () => {
     // Case 2: API returns error
     const handleError = (error) => {
       console.log('SignUp Failure');
-
-      // Reset text fields
-      setDisplayName("");
-      setEmail("");
-      setPassword("");
-      setPasswordConfirm("");
-
+      resetFields();
+      
       // Print error message
       console.log(error);
       setErrorMsg("Error: Incorrect details! Please try again!");
       setIsError(true);
+    };
+    
+    const resetFields = () => {
+      setDisplayName("");
+      setEmail("");
+      setPassword("");
+      setPasswordConfirm("");
     };
 
   return (

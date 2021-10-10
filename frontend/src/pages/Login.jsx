@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { StoreContext } from '../Store';
 import { useHistory } from 'react-router-dom'
 // import components
 import { LoginForm, Title, Label, Input, Button,
-  ButtonSecondary } from "../components/AuthCSS";
+  ButtonSecondary, ErrorWarning } from "../components/AuthCSS";
 
 /**
  * Login page
@@ -16,30 +16,63 @@ import { LoginForm, Title, Label, Input, Button,
   const [url, ] = context.url;
   const [emailInput, setEmail] = context.email;
   const [passwordInput, setPassword] = context.password;
+  const [courses] = context.courses;
+  const [, setToken] = context.token;
 
-  // Resetting email and password if they came from SignUp
-  setEmail("");
-  setPassword("");
+  const [isError, setIsError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("Erorr: Input invalid");
 
   // Send request to backend, if request successful move to /linking
   const handleLogin = () => {
     console.log("Login Button Clicked");
+    setIsError(false);
+    console.log(emailInput);
+    console.log(passwordInput);
+
 
     axios.post(`${url}/login`, {
       email: emailInput,
       password: passwordInput,
     })
       .then(r => {
-        console.log('Login Success');
-        // console.log(r.token);
-        // localStorage.setItem('token', r.token);
-        history.push("/dashboard");
+        handleSuccess(r);
       })
       .catch(err => {
-        console.log('Login Failure');
-        console.log(err);
+        handleError(err);
       });
+    };
+    
+  // Case 1: API returns success
+  const handleSuccess = (response) => {
+    console.log('Login Success');
+    console.log(response);
+    console.log(response.data["token"]);
+    console.log(response.data["courses"]);
+
+    // Stores token
+    setToken(response.data["token"]);
+    // Resets all text fields
+    resetFields();
+    history.push(`/dashboard/${courses[0]}/chat`);
   };
+  
+  // Case 2: API returns error
+  const handleError = (error) => {
+    console.log('Login Failure');
+    // Resets all text fields
+    resetFields();
+    
+    // Print error message
+    console.log(error);
+    setErrorMsg("Error: Incorrect details! Please try again!");
+    setIsError(true);
+  };
+
+  const resetFields = () => {
+    setEmail("");
+    setPassword("");
+  };
+
 
   // SignUp button redirections to /signup
   const handleSignUp = () => {
@@ -70,6 +103,13 @@ import { LoginForm, Title, Label, Input, Button,
           aria-label="signup-button-from-login">
           Sign Up
         </ButtonSecondary>
+
+        {
+          isError && 
+          <ErrorWarning display= "hidden">
+            {errorMsg}
+          </ErrorWarning>
+        }
       </LoginForm>
       </div>
   );

@@ -16,12 +16,13 @@ const Linking = () => {
   const [emailInput, setEmailInput] = context.emailUNSW;
   const [passwordInput, setPasswordInput] = context.passwordUNSW;
   const [url, ] = context.url;
-  const [, setCourses] = context.courses;
+  // const [, setCourses] = context.courses;
 
   const [signInText, setSignInText] = React.useState("Sign in");
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [token] = context.token;
 
   // API request
   const handleLinking = () => {
@@ -32,6 +33,7 @@ const Linking = () => {
     setLoading(true);
 
     axios.post(`${url}/linking`, {
+      token: token,
       email: emailInput,
       password: passwordInput
     })
@@ -49,12 +51,14 @@ const Linking = () => {
     setLoading(false);
     setSignInText("Sign in");
     console.log(response);
-    const courses = response.data["courses"];
-    console.log(courses);
-    setCourses(courses);
+    resetFields();
+    // const courses = response.data["courses"];
+    // console.log(courses);
+    // setCourses(courses);
   
     // Move to next page
-    history.push(`/dashboard/${courses[0]}/chat`);
+    history.push(`/login`);
+    // history.push(`/dashboard/${courses[0]}/chat`);
   };
 
   // Case 2: API returns error
@@ -62,15 +66,18 @@ const Linking = () => {
     // Reset the loading button to signin button
     setLoading(false);
     setSignInText("Sign in");
+    resetFields();
 
-    // Reset text fields
-    setEmailInput("");
-    setPasswordInput("");
 
     // Print error message
     console.log(error);
     setErrorMsg("Error: Incorrect details! Please try again!");
     setIsError(true);
+  };
+
+  const resetFields = () => {
+    setEmailInput("");
+    setPasswordInput("");
   };
 
 
