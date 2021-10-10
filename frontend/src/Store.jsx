@@ -15,6 +15,7 @@ export default ({ children }) => {
     "COMP6080",
     "COMP3331",
   ]);
+  const [token, setToken] = React.useState("");
 
   const store = {
     displayName: [displayName, setDisplayName],
@@ -25,6 +26,7 @@ export default ({ children }) => {
     passwordUNSW: [passwordUNSW, setPasswordUNSW],
     url: [url, setUrl],
     courses: [courses, setCourses],
+    token: [token, setToken],
   };
 
   return (

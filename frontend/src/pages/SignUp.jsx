@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { StoreContext } from '../Store';
 import { useHistory } from 'react-router-dom'
 // import components
-import { SignUpForm, Title, Label, Input, Button } from "../components/AuthCSS";;
+import { SignUpForm, Title, Label, Input, Button,
+  ErrorWarning } from "../components/AuthCSS";;
 
 
 const SignUp = () => {
@@ -15,12 +16,17 @@ const SignUp = () => {
   const [passwordInput, setPassword] = context.password;
   const [passwordConfirmInput, setPasswordConfirm] = context.passwordConfirm;
 
+  const [isError, setIsError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("Erorr: Input invalid");
+
   // Resetting email and password if they came from SignUp
   setEmail("");
   setPassword("");
 
+  // Executed when button clicked
   const handleSignUpSubmit = () => {
-    console.log("Linking button clicked")
+    console.log("Linking button clicked");
+    setIsError(false);
 
     axios.post(`${url}/signup`, {
       displayName: displayName,
@@ -29,39 +35,37 @@ const SignUp = () => {
       passwordConfirm: passwordConfirmInput,
     })
       .then(r => {
-        console.log('SignUp Success');
-        // console.log(r.token);
-        // localStorage.setItem('token', r.token);
-        // handleLinking();
-        history.push('/linking');
+        handleSuccess(r);
       })
       .catch(err => {
-        console.log('SignUp Failure');
-        console.log(err);
+        handleError(err);
       });
-  };
+    };
     
-  // const handleLinking = () => {
-  //   console.log("Attempting to link")
+    // Case 1: API returns success
+    const handleSuccess = (response) => {
+      console.log('SignUp Success');
+      console.log(response);
+      
+      // Move to next page
+      history.push('/linking');
+    };
     
-  //   axios.post(`${url}`, {
-  //     displayName: displayName,
-  //     email: emailInput,
-  //     password: passwordInput,
-  //     passwordConfirm: passwordConfirmInput,
-  //   })
-  //   .then(r => {
-  //     console.log('SignUp Success');
-  //       console.log(r.token);
-  //       localStorage.setItem('token', r.token);
-  //       history.push("/linking");
-  //     })
-  //     .catch(err => {
-  //       console.log('Login Failure');
-  //       console.log(err);
-  //     });
-  // };
+    // Case 2: API returns error
+    const handleError = (error) => {
+      console.log('SignUp Failure');
 
+      // Reset text fields
+      setDisplayName("");
+      setEmail("");
+      setPassword("");
+      setPasswordConfirm("");
+
+      // Print error message
+      console.log(error);
+      setErrorMsg("Error: Incorrect details! Please try again!");
+      setIsError(true);
+    };
 
   return (
       <div>
@@ -88,6 +92,13 @@ const SignUp = () => {
           aria-label="link-button">
           Link to myUNSW
         </Button> 
+
+        {
+          isError && 
+          <ErrorWarning display= "hidden">
+            {errorMsg}
+          </ErrorWarning>
+        }
 
       </SignUpForm>
       </div>
