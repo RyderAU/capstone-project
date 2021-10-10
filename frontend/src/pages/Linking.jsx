@@ -19,11 +19,14 @@ const Linking = () => {
 
   const [signInText, setSignInText] = React.useState("Sign in");
   const [loading, setLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   // API request
   const handleLinking = () => {
     console.log(emailInput);
     // Loading button
+    setIsError(false);
     setSignInText("Loading");
     setLoading(true);
 
@@ -43,6 +46,8 @@ const Linking = () => {
     })
     .catch( (error) => {
       console.log(error);
+      setErrorMsg(error);
+      setIsError(true);
     });
 
   };
@@ -75,6 +80,12 @@ const Linking = () => {
                 </LoadingWarning>
               }
 
+              {
+                isError && 
+                <LoadingWarning display= "hidden">
+                  {errorMsg}
+                </LoadingWarning>
+              }
 
           </SignInBox>
         </Container>
