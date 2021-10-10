@@ -1,9 +1,7 @@
 '''
 Description: All the routes for the server are contained here
 
-Created by: Sandeep Das (Tutorial: H15A by Hoang Pham)
-Created: 2020-03-27
-Last Modified: 2020-03-31
+Created by: Helena Ling and Sandeep Das
 '''
 import sys
 from json import dumps
