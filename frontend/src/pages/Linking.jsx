@@ -49,11 +49,12 @@ const Linking = () => {
     setLoading(false);
     setSignInText("Sign in");
     console.log(response);
-    console.log(response.data["courses"]);
-    setCourses(response.data["courses"]);
+    courses = response.data["courses"];
+    console.log(courses);
+    setCourses(courses);
   
     // Move to next page
-    history.push('/dashboard');
+    history.push(`/dashboard/${courses[0]}/chat`);
   };
 
   // Case 2: API returns error
