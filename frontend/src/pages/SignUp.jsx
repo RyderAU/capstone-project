@@ -19,10 +19,6 @@ const SignUp = () => {
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("Erorr: Input invalid");
 
-  // Resetting email and password if they came from SignUp
-  setEmail("");
-  setPassword("");
-
   // Executed when button clicked
   const handleSignUpSubmit = () => {
     console.log("Linking button clicked");
