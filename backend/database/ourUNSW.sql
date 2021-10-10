@@ -2,16 +2,17 @@
 -- Table of data about Students
 
 create table Students (
-	student_id      varchar(10),
-	name        varchar(30) NOT NULL,
-    email       varchar(100) NOT NULL,
-    display_name varchar(20) NOT NULL,
-    hashed_pwd   varchar(64),
-    login_token  varchar(30),
-	degree      varchar(70),
-	primary key (student_id)
+	email           varchar(100) NOT NULL,
+    student_id      varchar(10),
+	name            varchar(30),
+    display_name    varchar(20) NOT NULL,
+    hashed_pwd      varchar(500) NOT NULL,
+    login_token     varchar(30),
+	degree          varchar(70),
+    course          varchar(500),
+	primary key (email)
 );
-
+-- ALTER TABLE Students ALTER COLUMN hashed_pwd VARCHAR(500);
 -- INSERT INTO Students values (
 --     'z5555555', 
 --     'Lol Clown', 
