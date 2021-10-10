@@ -16,6 +16,7 @@ const Linking = () => {
   const [emailInput, setEmailInput] = context.emailUNSW;
   const [passwordInput, setPasswordInput] = context.passwordUNSW;
   const [url, ] = context.url;
+  const [, setCourses] = context.courses;
 
   const [signInText, setSignInText] = React.useState("Sign in");
   const [loading, setLoading] = useState(false);
@@ -49,6 +50,7 @@ const Linking = () => {
     setSignInText("Sign in");
     console.log(response);
     console.log(response.data["courses"]);
+    setCourses(response.data["courses"]);
   
     // Move to next page
     history.push('/dashboard');
