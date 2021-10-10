@@ -55,4 +55,4 @@ def linking_route():
 #------------------------------------------------------------------------------#
 
 if __name__ == "__main__":
-    APP.run(port=(3001), debug=False)
+    APP.run(port=(3030), debug=False)
