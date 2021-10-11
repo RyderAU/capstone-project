@@ -202,7 +202,7 @@ class System:
 
 
 var =  System()
-print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com'))  # First user registeration - (PASS)
+# print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com'))  # First user registeration - (PASS)
 # print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com')) # Duplicate check (User already exists) - (PASS)
 # print(var.register('new_pika', '123123aA!2', '123123aA!3', 'email2@mail.com')) # wrong password re-enter - (PASS)
 # print(var.register('new_pika', '123123aA!2', '123123aA!2', 'email2@mail.com2')) # email wrong format check - (PASS)
