@@ -10,7 +10,7 @@ from error import *
 import uuid, M2Crypto
 import re
 import jwt
-# '''
+    # '''
     # Backend system that is responsible for processing data from, and transimitting data between front end and database
     # '''
 class System:
@@ -35,7 +35,7 @@ class System:
 
 
 
-# helper functions for register
+    # helper functions for register
     @classmethod
     def password_format_check(self, password):
         # calculating the length
@@ -55,13 +55,13 @@ class System:
 
         return password_ok
 
-# generate a random number using m2crypto library, which is used to generate an unique session id using uuid library
+    # generate a random number using m2crypto library, which is used to generate an unique session id using uuid library
     def new_session_id(self):
         num_bytes = 16
         session_id = uuid.UUID(bytes = M2Crypto.m2.rand_bytes(num_bytes))
         return str(session_id)
 
-# logout and helper functions
+    # logout and helper functions
     def logout(self, token):
         '''
         Validate a given token. If valid, delete the token from database to indicate that the user has logged out
@@ -114,7 +114,7 @@ class System:
 
 
 
-# Logs an user in
+    # Logs an user in
     @classmethod
     def auth_login(self, email, password):
         # check if email is in the correct format
@@ -210,3 +210,7 @@ var =  System()
 
 
 # register(username, password, reentered_password, email)
+
+# currently register func works, 
+
+# need to test login/logout and all the src_server.py
