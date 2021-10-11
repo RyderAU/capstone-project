@@ -142,5 +142,3 @@ def grabCourseIDs(email, password):
     return userDetails
 
 
-    
-grabCourseIDs("z5168024@ad.unsw.edu.au", "Marble12345")
