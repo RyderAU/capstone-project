@@ -34,22 +34,75 @@ APP.register_error_handler(Exception, default_handler)
 #                                routes: auth                                  #
 #------------------------------------------------------------------------------#
 
-@APP.route("/linking", methods=['POST'])
-def linking_route():
+@APP.route("/signup", methods=['POST'])
+def signup_route():
+    ''' Authenticates email / password and returns id / token '''
+    display_name = request.get_json()['displayName']
+    email = request.get_json()['email']
+    password = request.get_json()['password']
+    password_confirm = request.get_json()['passwordConfirm']
+
+    print(f'{display_name} {email} {password} {password_confirm}', file=sys.stderr)
+    time.sleep(2) #remove later, just for frontend testing
+
+    return dumps({
+        "token": "i7sdofg7ihsodifugh"
+    })
+
+@APP.route("/login", methods=['POST'])
+def login_route():
     ''' Authenticates email / password and returns id / token '''
     email = request.get_json()['email']
     password = request.get_json()['password']
-    print(email, file=sys.stderr)
-    print(password, file=sys.stderr)
 
-    # u_id_and_token = 42
-    try:
-        return dumps(grabCourseIDs(email, password))
-    except:
-        return dumps([])
-    # time.sleep(20)
+    print(f'{email} {password}', file=sys.stderr)
+    time.sleep(2) #remove later, just for frontend testing
 
-    return dumps([])
+    # return the actual list of courses from Shoan's selenium:
+    # courses = grabCourseIDs(email, password)["courses"]
+    return dumps({
+        "token": "token",
+        "courses": ["COMP3900", "COMP3331", "COMP6080"]
+    })
+
+@APP.route("/logout", methods=['POST'])
+def logout_route():
+    ''' Authenticates email / password and returns id / token '''
+    token = request.get_json()['token']
+    print(f'{token}', file=sys.stderr)
+    time.sleep(1) #remove later, just for frontend testing
+
+    return dumps({
+        "is_success": True
+    })
+
+@APP.route("/linking", methods=['POST'])
+def linking_route():
+    ''' Authenticates email / password and returns id / token '''
+    token = request.get_json()['token']
+    email = request.get_json()['email']
+    password = request.get_json()['password']
+
+    # details = grabCourseIDs(email, password)
+    print(f'{token} {email} {password}', file=sys.stderr)
+    time.sleep(2) #remove later, just for frontend testing
+
+    return dumps({
+        "is_success": True
+    })
+
+
+# @APP.route("/linking", methods=['POST'])
+# def linking_route():
+#     ''' Authenticates email / password and returns id / token '''
+#     email = request.get_json()['email']
+#     password = request.get_json()['password']
+
+#     details = grabCourseIDs(email, password)
+#     time.sleep(5) #remove later, just for frontend testing
+#     return dumps({
+#         "courses": details["courses"]
+#     })
 
 
 #------------------------------------------------------------------------------#
@@ -57,4 +110,4 @@ def linking_route():
 #------------------------------------------------------------------------------#
 
 if __name__ == "__main__":
-    APP.run(port=(3000), debug=False)
+    APP.run(port=(3030), debug=False)
