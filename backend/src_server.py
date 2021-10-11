@@ -93,7 +93,8 @@ def linking_route():
         update_user_data('course', 'email', db_course, personal_email)
 
         # For frontend
-        return dumps(courses)
+        is_success = True
+        return dumps({'is_success': is_success,})
     except:
         # Error in selenium or error in inserting into database
         raise InputError('Unable to link to myUNSW. Please check your credentials again')
