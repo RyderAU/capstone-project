@@ -65,7 +65,8 @@ import { LoginForm, Title, Label, Input, Button,
     
     // Print error message
     console.log(error);
-    setErrorMsg("Error: Incorrect details! Please try again!");
+    setErrorMsg(error);
+    // setErrorMsg("Error: Incorrect details! Please try again!");
     setIsError(true);
   };
 
