@@ -74,3 +74,25 @@ Commence and work on first sprint.
 
 
 Week 4
+
+Commenced first sprint. I developed functionality to display the student's courses on the main dashboard and established routing methods for the various menu options, using React and React Router respectively.
+
+- what was planned for the period since the last work diary entry
+
+Commence and work on first sprint.
+
+- what was finished
+
+I successfully set up the dashboard page (without regards to styling).
+
+- what were the main technical and non-technical obstacles and how they were overcome (or what was tried and did not work)
+
+I was initially confused with how to nest routes within react, but I was able to overcome this through revision of react router.
+
+- what was not finished, why this happened, how this affects the overall project progress and what adjustments (if any) are needed so the success of the project is not endangered
+
+N/A
+
+- what is planned for the next period (e.g., next week)
+
+Complete first sprint and deliver demonstration. Commence second sprint.

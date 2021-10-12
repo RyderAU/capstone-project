@@ -2,55 +2,12 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 import time
 
-def grabCourseIDs(email, password):
-
-    # Web driver set for the bot to run on. Options to make it 'headless' (run as a background process) is set
-    PATH = "./geckodriver"
-    settings = Options()
-    settings.headless = True # Change to False for testing purposes
-    driver = webdriver.Firefox(executable_path=PATH, options=settings)
-
-    # Open the web browser and click the 'Sign On' link 
-    driver.get("https://my.unsw.edu.au/")
-    link = driver.find_element_by_link_text('Sign On')
-    link.click()
-
-    # Click the link to redirect to the UNSW login portal
-    link = driver.find_element_by_xpath('//*[@id="current-login"]/div/div/div[2]/div[1]/a')
-    link.click()
-    time.sleep(1) 
-
-    # Enter email and press next
-    field = driver.find_element_by_xpath('//*[@id="i0116"]')
-    field.send_keys(email)
-    link = driver.find_element_by_xpath('//*[@id="idSIButton9"]')
-    link.click()
-    time.sleep(1)
-
-    # Enter password and press next
-    field = driver.find_element_by_xpath('//*[@id="i0118"]')
-    field.send_keys(password)
-    link = driver.find_element_by_xpath('//*[@id="idSIButton9"]')
-    link.click()
-    time.sleep(1)
-
-    # Click "No" to save password
-    link = driver.find_element_by_xpath('//*[@id="idBtn_Back"]')
-    link.click()
-    time.sleep(1)
-
-    # Click the link to redirect to the student profile page
-    link = driver.find_element_by_xpath('//*[@id="pt1:pt_gl3j_id_1"]')
-    link.click()
-    time.sleep(1)
-    
-    # Setup list to store student course details
+def grabCourseDetails(driver):
     userDetails = {}
-    userDetails['zID'] = email[0:8]
     courses = []
     startCourseGrab = False
     stopCourseGrab = False
-    # Web crawl page and extract courses and degree
+
     for element in driver.find_elements_by_tag_name('label'):
 
         # Course extraction
@@ -74,10 +31,114 @@ def grabCourseIDs(email, password):
 
     nameElement = driver.find_element_by_xpath('//*[@id="pt1:pt_pgl23"]')
     userDetails['name'] = nameElement.text[13:]
+
+    return userDetails
+
+def grabCourseIDs(email, password):
+    start_time = time.time()
+    # Web driver set for the bot to run on. Options to make it 'headless' (run as a background process) is set
+    PATH = "./geckodriver"
+    settings = Options()
+    settings.headless = True # Change to False for testing purposes
+    driver = webdriver.Firefox(executable_path=PATH, options=settings)
+
+    # Open the web browser and click the 'Sign On' link 
+    driver.get("https://my.unsw.edu.au/")
+    try:
+        link = driver.find_element_by_link_text('Sign On')
+        link.click()
+    except: 
+        print("Network Retry A")
+        time.sleep(5)
+        link = driver.find_element_by_link_text('Sign On')
+        link.click()
+
+    # Click the link to redirect to the UNSW login portal
+    try:
+        link = driver.find_element_by_xpath('//*[@id="current-login"]/div/div/div[2]/div[1]/a')
+        link.click()
+    except:
+        print("Network Retry B")
+        time.sleep(5)
+        link = driver.find_element_by_xpath('//*[@id="current-login"]/div/div/div[2]/div[1]/a')
+        link.click()
+    
+    time.sleep(1) 
+
+    # Enter email and press next
+    try:
+        field = driver.find_element_by_xpath('//*[@id="i0116"]')
+        field.send_keys(email)
+        link = driver.find_element_by_xpath('//*[@id="idSIButton9"]')
+        link.click()
+    except:
+        print("Network Retry C")
+        time.sleep(5)
+        field = driver.find_element_by_xpath('//*[@id="i0116"]')
+        field.clear()
+        field.send_keys(email)
+        link = driver.find_element_by_xpath('//*[@id="idSIButton9"]')
+        link.click()
+    
+    time.sleep(1)
+
+    # Enter password and press next
+    try:
+        field = driver.find_element_by_xpath('//*[@id="i0118"]')
+        field.send_keys(password)
+        link = driver.find_element_by_xpath('//*[@id="idSIButton9"]')
+        link.click()
+    except:
+        print("Network Retry D")
+        time.sleep(5)
+        field = driver.find_element_by_xpath('//*[@id="i0118"]')
+        field.clear()
+        field.send_keys(password)
+        link = driver.find_element_by_xpath('//*[@id="idSIButton9"]')
+        link.click()
+
+    time.sleep(1)
+
+    # Click "No" to save password
+    try:
+        link = driver.find_element_by_xpath('//*[@id="idBtn_Back"]')
+        link.click()
+    except:
+        print("Network Retry E")
+        time.sleep(5)
+        link = driver.find_element_by_xpath('//*[@id="idBtn_Back"]')
+        link.click()
+
+    time.sleep(1)
+
+    # Click the link to redirect to the student profile page
+    try:
+        link = driver.find_element_by_xpath('//*[@id="pt1:pt_gl3j_id_1"]')
+        link.click()
+    except:
+        print("Network Retry F")
+        time.sleep(5)
+        link = driver.find_element_by_xpath('//*[@id="pt1:pt_gl3j_id_1"]')
+        link.click()
+
+    time.sleep(1)
+    
+    # Setup list to store student course details
+    try:
+        userDetails = grabCourseDetails(driver)
+        userDetails['zID'] = email[0:8]
+    except:
+        print("Network Retry G")
+        time.sleep(5)
+        userDetails = grabCourseDetails(driver)
+        userDetails['zID'] = email[0:8]
+    # Web crawl page and extract courses and degree
+        
     print(userDetails)
     
     # Close the web browser
     driver.close()
-
+    print("--- %s seconds ---" % (time.time() - start_time))
     return userDetails
-    
+
+

@@ -1,5 +1,5 @@
 import psycopg2
-from config import config
+from .config import config
 import sys
 
 def update_user_data(column1, column2, value1, value2):

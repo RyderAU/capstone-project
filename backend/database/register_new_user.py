@@ -1,14 +1,14 @@
 #!/usr/bin/python
 ''' Test inserting new student(aka user) into table with python '''
 import psycopg2
-from config import config
+from .config import config
 
 
-def register_student(student_id, name, email, display_name, hashed_pwd, login_token, degree):
+def register_student(student_id, name, email, display_name, hashed_pwd, login_token, degree, course):
 
     sql = """INSERT INTO Students(
-                student_id, name, email, display_name, hashed_pwd, login_token, degree)
-                VALUES(%s, %s, %s, %s, %s, %s, %s);"""
+                student_id, name, email, display_name, hashed_pwd, login_token, degree, course)
+                VALUES(%s, %s, %s, %s, %s, %s, %s, %s);"""
     conn = None
     try:
         # read database configuration
@@ -18,7 +18,7 @@ def register_student(student_id, name, email, display_name, hashed_pwd, login_to
         # create a new cursor
         cur = conn.cursor()
         # execute the INSERT statement
-        cur.execute(sql, (student_id, name, email, display_name, hashed_pwd, login_token, degree,))
+        cur.execute(sql, (student_id, name, email, display_name, hashed_pwd, login_token, degree, course,))
         # commit the changes to the database
         conn.commit()
         # close communication with the database
@@ -37,5 +37,6 @@ if __name__ == '__main__':
         'pfizer@gmail.com', 
         'nicknamegoeshere', 
         'f3e5ba88661b3b5f4ae8182d8ccded09da63ef8a5e96013525ea79f082948302',
+        '',
         '',
         '')

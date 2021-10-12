@@ -1,5 +1,5 @@
 selenium
-psycopg2
+psycopg2-binary
 argon2-cffi
 pyjwt
 m2crypto
