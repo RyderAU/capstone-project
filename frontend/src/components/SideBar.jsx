@@ -8,33 +8,37 @@ function SideBar({ selectedCourse }) {
     <BrowserRouter key={selectedCourse}>
       <div>
         <div className="feature-container">
-          <div>
-            <NavLink
-              to={`${url}/chat`}
-              className="feature-item"
-              activeClassName="active-link"
-            >
-              Chat
-            </NavLink>
-          </div>
-          <div>
-            <NavLink
-              to={`${url}/course-outline`}
-              className="feature-item"
-              activeClassName="active-link"
-            >
-              Course Outline
-            </NavLink>
-          </div>
-          <div>
-            <NavLink
-              to={`${url}/mark-calculation`}
-              className="feature-item"
-              activeClassName="active-link"
-            >
-              Mark Calculation
-            </NavLink>
-          </div>
+          <NavLink
+            to={`${url}/chat`}
+            className="feature-item"
+            activeClassName="active-link"
+          >
+            <div>Chat</div>
+          </NavLink>
+
+          <NavLink
+            to={`${url}/course-outline`}
+            className="feature-item"
+            activeClassName="active-link"
+          >
+            <div>
+              Course
+              <br />
+              Outline
+            </div>
+          </NavLink>
+
+          <NavLink
+            to={`${url}/mark-calculation`}
+            className="feature-item"
+            activeClassName="active-link"
+          >
+            <div>
+              Mark
+              <br />
+              Calculation
+            </div>
+          </NavLink>
         </div>
         <Route path={`${path}/:feature`}>
           <Feature selectedCourse={selectedCourse} />

@@ -1,9 +1,10 @@
 .feature-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
+  padding-top: 5px;
   justify-content: flex-start;
-  height: 80vh;
+  height: 50vh;
   width: 10%;
   position: absolute;
   z-index: 1;
@@ -13,10 +14,12 @@
 
 .feature-item {
   text-decoration: none;
+  margin-top: 10px;
+  font-size: 20px;
+  background-color: #efdbd0;
   color: black;
-  border-top: 1px solid #dddddd;
 }
 
 .active-link {
-  background-color: coral;
+  background-color: #f48383;
 }
