@@ -42,7 +42,7 @@ system = Systems()
 #                                routes: auth                                  #
 #------------------------------------------------------------------------------#
 
-@APP.route("/auth/login", methods=['POST'])
+@APP.route("/login", methods=['POST'])
 def auth_login_route():
     ''' Authenticates email / password and returns id / token '''
     email = request.get_json()['email']
@@ -51,7 +51,7 @@ def auth_login_route():
     courses_and_token = system.auth_login(email, password)
     return dumps(courses_and_token)
 
-@APP.route("/auth/logout", methods=['POST'])
+@APP.route("/logout", methods=['POST'])
 def auth_logout_route():
     ''' Logs user out when given a valid token '''
     token = request.get_json()['token']
@@ -59,15 +59,15 @@ def auth_logout_route():
     is_success = system.logout(token)
     return dumps(is_success)
 
-@APP.route("/auth/register", methods=['POST'])
+@APP.route("/signup", methods=['POST'])
 def auth_register_route():
     ''' Creates an account given details and returns id / token '''
     email = request.get_json()['email']
     password = request.get_json()['password']
-    reentered_password = request.get_json()['reentered_password']
-    username = request.get_json()['username']
+    passwordConfirm = request.get_json()['passwordConfirm']
+    displayName = request.get_json()['displayName']
 
-    email_and_token = system.register(username, password, reentered_password, email)
+    email_and_token = system.register(displayName, password, passwordConfirm, email)
     return dumps(email_and_token)
 
 #------------------------------------------------------------------------------#
@@ -93,14 +93,17 @@ def linking_route():
         update_user_data('student_id', 'email', userDetails.get("zID"), personal_email)
         update_user_data('degree', 'email', userDetails.get("degree"), personal_email)
         update_user_data('name', 'email', userDetails.get("name"), personal_email)
-        update_user_data('course', 'email', db_course, personal_email)
+        update_user_data('course', 'email', db_courses, personal_email)
 
+        update_user_data('token', 'email', '', personal_email)
+        
         # For frontend
         is_success = True
         return dumps({'is_success': is_success,})
-    except:
+    except Exception as e:
         # Error in selenium or error in inserting into database
-        raise InputError('Unable to link to myUNSW. Please check your credentials again')
+        raise e
+        # raise InputError('Unable to link to myUNSW. Please check your credentials again')
 
 
 #------------------------------------------------------------------------------#
@@ -108,7 +111,8 @@ def linking_route():
 #------------------------------------------------------------------------------#
 
 if __name__ == "__main__":
-    APP.run(port=(3030), debug=False)
+    APP.run(port=(3030), debug=True)
+
 
 
 #------------------------------------------------------------------------------#

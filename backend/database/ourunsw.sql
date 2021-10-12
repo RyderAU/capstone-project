@@ -7,7 +7,7 @@ create table Students (
 	name            varchar(30),
     display_name    varchar(20) NOT NULL,
     hashed_pwd      varchar(500) NOT NULL,
-    login_token     varchar(30),
+    login_token     varchar(500),
 	degree          varchar(70),
     course          varchar(500),
 	primary key (email)

@@ -72,7 +72,7 @@ class Systems:
         Return Value:
             - returns True
         '''
-        email = validate_token(token)
+        email = self.validate_token(token)
         update_user_data('login_token', '', 'email', email)
         
         is_success = True
@@ -97,25 +97,24 @@ class Systems:
         '''
         try:
             decoded = jwt.decode(token, "thisisakey", algorithms=["HS256"])
+
             for key, value in decoded.items():
+
                 if key == 'email':
                     recorded_token = validate_entity_exists('login_token', 'email', value)
                     if recorded_token is None:
                         raise LogoutError('User does not exist')
                     if token != recorded_token:
+                        recorded_decoded = jwt.decode(recorded_token, "thisisakey", algorithms=["HS256"])
+
                         raise LogoutError('Wrong login token. You are a hacker!!!')
                     return value
-                else:
-                    # When there is no email field in the login token
-                    raise LogoutError('Invalid token')
-        except (Exception, jwt.exceptions.InvalidTokenError) as error:
             raise LogoutError('Invalid token')
 
-
-
+        except (Exception, jwt.exceptions.InvalidTokenError) as error:
+            raise error
 
     # Logs an user in
-    @classmethod
     def auth_login(self, email, password):
         # check if email is in the correct format
         if not re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", email):
@@ -135,10 +134,10 @@ class Systems:
             token = jwt.encode({"session_id": session_id, "email": email}, "thisisakey", algorithm="HS256")
 
             # update database that user has logged in
-            update_user_data('login_token', token, 'email', email)
+            update_user_data('login_token', 'email', token, email)
 
             # grab courses from database and return to front end
-            db_courses = validate_entity_exists('courses', 'email', email)
+            db_courses = validate_entity_exists('course', 'email', email)
             courses = {}
             courses["courses"] = db_courses.split(",")
 
@@ -208,12 +207,14 @@ class Systems:
 
 
 var =  Systems()
-print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com'))  # First user registeration - (PASS)
-print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com')) # Duplicate check (User already exists) - (PASS)
-print(var.register('new_pika', '123123aA!2', '123123aA!3', 'email2@mail.com')) # wrong password re-enter - (PASS)
-print(var.register('new_pika', '123123aA!2', '123123aA!2', 'email2@mail.com2')) # email wrong format check - (PASS)
-print(var.register('new_pika', '123123a!2', '123123a!2', 'email2@mail.com')) # password wrong format check - (PASS)
-print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email3@mail.com')) # same username but different email check, registration should be successful - (PASS)
+
+# For future unit test
+# print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com'))  # First user registeration - (PASS)
+# print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com')) # Duplicate check (User already exists) - (PASS)
+# print(var.register('new_pika', '123123aA!2', '123123aA!3', 'email2@mail.com')) # wrong password re-enter - (PASS)
+# print(var.register('new_pika', '123123aA!2', '123123aA!2', 'email2@mail.com2')) # email wrong format check - (PASS)
+# print(var.register('new_pika', '123123a!2', '123123a!2', 'email2@mail.com')) # password wrong format check - (PASS)
+# print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email3@mail.com')) # same username but different email check, registration should be successful - (PASS)
 
 
 # register(username, password, reentered_password, email)
