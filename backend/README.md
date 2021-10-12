@@ -1,5 +1,7 @@
 just some notes
 
+# For Mac OS people
+
 Use the command as follows to start running the service.
 `brew services start postgresql`
 

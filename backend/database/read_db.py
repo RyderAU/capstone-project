@@ -1,6 +1,6 @@
 ''' Read stored database '''
 import psycopg2
-from config import config
+from .config import config
 
 def read_db(field):
     # Grab data
