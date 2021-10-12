@@ -5,7 +5,7 @@
   padding-top: 5px;
   justify-content: flex-start;
   height: 50vh;
-  width: 10%;
+  width: 125px;
   position: absolute;
   z-index: 1;
   left: 0;
@@ -15,9 +15,15 @@
 .feature-item {
   text-decoration: none;
   margin-top: 10px;
+  padding: 5px;
   font-size: 20px;
   background-color: #efdbd0;
   color: black;
+}
+
+.feature-item:hover {
+  background-color: #f48383;
+  transition: background-color 0.5s;
 }
 
 .active-link {
