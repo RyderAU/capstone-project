@@ -48,7 +48,7 @@ import { LoginForm, Title, Label, Input, Button,
     console.log(response);
     console.log(response.data["token"]);
     console.log(response.data["courses"]);
-    setCourses(response.data["courses"])
+    setCourses(response.data["courses"]);
 
     // Stores token
     setToken(response.data["token"]);
