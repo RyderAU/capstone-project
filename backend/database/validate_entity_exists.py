@@ -1,5 +1,5 @@
 import psycopg2
-from config import config
+from .config import config
 
 '''
 Return the first element when the value meets the given column under the specified field.

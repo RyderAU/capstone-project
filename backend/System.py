@@ -1,19 +1,19 @@
 from flask import Flask
 from flask_login import LoginManager
-from register_new_user import register_student
-from read_db import read_db
-from validate_entity_exists import validate_entity_exists
-from update_user import update_user_data
+from database.register_new_user import register_student
+from database.read_db import read_db
+from database.validate_entity_exists import validate_entity_exists
+from database.update_user import update_user_data
 import argon2
 from argon2 import PasswordHasher
-from error import *
+from error import InputError, LogoutError
 import uuid, M2Crypto
 import re
 import jwt
-# '''
+    # '''
     # Backend system that is responsible for processing data from, and transimitting data between front end and database
     # '''
-class System:
+class Systems:
     # def __init__(self):
 
     # '''
@@ -35,7 +35,7 @@ class System:
 
 
 
-# helper functions for register
+    # helper functions for register
     @classmethod
     def password_format_check(self, password):
         # calculating the length
@@ -55,13 +55,13 @@ class System:
 
         return password_ok
 
-# generate a random number using m2crypto library, which is used to generate an unique session id using uuid library
+    # generate a random number using m2crypto library, which is used to generate an unique session id using uuid library
     def new_session_id(self):
         num_bytes = 16
         session_id = uuid.UUID(bytes = M2Crypto.m2.rand_bytes(num_bytes))
         return str(session_id)
 
-# logout and helper functions
+    # logout and helper functions
     def logout(self, token):
         '''
         Validate a given token. If valid, delete the token from database to indicate that the user has logged out
@@ -114,7 +114,7 @@ class System:
 
 
 
-# Logs an user in
+    # Logs an user in
     @classmethod
     def auth_login(self, email, password):
         # check if email is in the correct format
@@ -136,7 +136,12 @@ class System:
 
             # update database that user has logged in
             update_user_data('login_token', token, 'email', email)
-            courses = validate_entity_exists('courses', 'email', email)
+
+            # grab courses from database and return to front end
+            db_courses = validate_entity_exists('courses', 'email', email)
+            courses = {}
+            courses["courses"] = db_courses.split(",")
+
             return {"token" : token, "courses" : courses,}
         except argon2.exceptions.VerifyMismatchError:
             raise InputError('Username or password is incorrect.')
@@ -194,7 +199,7 @@ class System:
 
 
         # store into database
-        register_student('', '', email, username, hashed_pwd, token, '')
+        register_student('', '', email, username, hashed_pwd, token, '', '')
 
         # is_success = True
         # return {'is_success': is_success,}
@@ -202,7 +207,7 @@ class System:
 
 
 
-var =  System()
+var =  Systems()
 print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com'))  # First user registeration - (PASS)
 print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com')) # Duplicate check (User already exists) - (PASS)
 print(var.register('new_pika', '123123aA!2', '123123aA!3', 'email2@mail.com')) # wrong password re-enter - (PASS)
@@ -212,3 +217,7 @@ print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email3@mail.com')) # 
 
 
 # register(username, password, reentered_password, email)
+
+# currently register func works, 
+
+# need to test login/logout and all the src_server.py

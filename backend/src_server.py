@@ -4,13 +4,19 @@ Description: All the routes for the server are contained here
 Created by: Helena Ling and Sandeep Das
 '''
 import sys
+print(sys.path)
 from json import dumps
 from flask import Flask, request, send_from_directory
 from flask_cors import CORS
+from database.register_new_user import register_student
+from database.read_db import read_db
+from database.validate_entity_exists import validate_entity_exists
+from database.update_user import update_user_data
 from courseGrabber import grabCourseIDs
-from update_user import update_user_data
 # from System import *
-from System import auth_login, logout, register, validate_token
+from System import Systems
+# from System import auth_login, logout, register, validate_token
+from error import InputError, LogoutError
 
 def default_handler(err):
     '''Handles errors'''
@@ -30,6 +36,8 @@ CORS(APP)
 APP.config['TRAP_HTTP_EXCEPTIONS'] = True
 APP.register_error_handler(Exception, default_handler)
 
+system = Systems()
+
 #------------------------------------------------------------------------------#
 #                                routes: auth                                  #
 #------------------------------------------------------------------------------#
@@ -40,15 +48,15 @@ def auth_login_route():
     email = request.get_json()['email']
     password = request.get_json()['password']
 
-    email_and_token = auth_login(email, password)
-    return dumps(email_and_token)
+    courses_and_token = system.auth_login(email, password)
+    return dumps(courses_and_token)
 
 @APP.route("/auth/logout", methods=['POST'])
 def auth_logout_route():
     ''' Logs user out when given a valid token '''
     token = request.get_json()['token']
 
-    is_success = logout(token)
+    is_success = system.logout(token)
     return dumps(is_success)
 
 @APP.route("/auth/register", methods=['POST'])
@@ -59,7 +67,7 @@ def auth_register_route():
     reentered_password = request.get_json()['reentered_password']
     username = request.get_json()['username']
 
-    email_and_token = register(username, password, reentered_password, email)
+    email_and_token = system.register(username, password, reentered_password, email)
     return dumps(email_and_token)
 
 #------------------------------------------------------------------------------#
@@ -76,24 +84,20 @@ def linking_route():
         # Grab user relevant details using selenium library
         userDetails = grabCourseIDs(email, password)
 
+        # Prepare to store in database the string "course1,course2,course3"
         courses = userDetails.get("courses")
-        db_course = ''
-        for element in courses:
-            db_course += element
-            if (courses[-1] != element):
-                db_course += ','
-            
-        # expected is db_course == 'elem1, elem2'
+        db_courses = ",".join(courses)
 
         # Insert into the database
-        personal_email = validate_token(token)
+        personal_email = system.validate_token(token)
         update_user_data('student_id', 'email', userDetails.get("zID"), personal_email)
         update_user_data('degree', 'email', userDetails.get("degree"), personal_email)
         update_user_data('name', 'email', userDetails.get("name"), personal_email)
         update_user_data('course', 'email', db_course, personal_email)
 
         # For frontend
-        return dumps(courses)
+        is_success = True
+        return dumps({'is_success': is_success,})
     except:
         # Error in selenium or error in inserting into database
         raise InputError('Unable to link to myUNSW. Please check your credentials again')

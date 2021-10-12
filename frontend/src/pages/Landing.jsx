@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { StoreContext } from '../Store';
 import { useHistory } from 'react-router-dom'
 // import components
-import { LandingContainer, Title, Label, Input, Button,
-  ButtonSecondary } from "../components/AuthCSS";
+import { Container, LandingContainer, Title, Label, Input, Button,
+  ButtonSecondary, BigTitle } from "../components/AuthCSS";
 
 /**
  * Landing page
@@ -29,21 +29,24 @@ const Landing = () => {
 
   return (
       <div>
-     
-      <LandingContainer>
-        <Title>ourUNSW</Title>
+      <Container>
+        <BigTitle> Tired of the slow, pre-historic UNSW portal? Find all your needs in one place. </BigTitle>
+        <LandingContainer>
+          <Title>ourUNSW</Title>
 
-        <Button onClick={() => handleLogin()} type="submit" id ="login-redirect"
-          aria-label="login-button-redirect">
-          Login
-        </Button>
-        
-        <ButtonSecondary onClick={() => handleSignUp()}
-          type="submit" id ="signup-redirect"
-          aria-label="signup-button-redirect">
-          Sign Up
-        </ButtonSecondary>
-      </LandingContainer>
+          <Button onClick={() => handleLogin()} type="submit" id ="login-redirect"
+            aria-label="login-button-redirect">
+            Login
+          </Button>
+          
+          <ButtonSecondary onClick={() => handleSignUp()}
+            type="submit" id ="signup-redirect"
+            aria-label="signup-button-redirect">
+            Sign Up
+          </ButtonSecondary>
+        </LandingContainer>
+      </Container>
+     
       </div>
   );
 }
