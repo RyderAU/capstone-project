@@ -1,5 +1,6 @@
 selenium
-psycopg2-binary
+psycopg2
+# psycopg2-binary -> Use binary if above doesn't work
 argon2-cffi
 pyjwt
 m2crypto
