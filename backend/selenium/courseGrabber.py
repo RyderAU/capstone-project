@@ -1,15 +1,17 @@
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
+# from selenium.webdriver.firefox.options import Options
 import time
 
 def grabCourseIDs(email, password):
 
     # Web driver set for the bot to run on. Options to make it 'headless' (run as a background process) is set
-    PATH = "./geckodriver"
-    settings = Options()
-    settings.headless = True # Change to False for testing purposes
-    driver = webdriver.Firefox(executable_path=PATH, options=settings)
-
+    # PATH = "./geckodriver"
+    PATH = "./chromedriver"
+    # settings = Options()
+    # settings.headless = True # Change to False for testing purposes
+    # driver = webdriver.Firefox(executable_path=PATH, options=settings)
+    # driver = webdriver.Chrome(executable_path=PATH, options=settings)
+    driver = webdriver.Chrome(executable_path=PATH)
     # Open the web browser and click the 'Sign On' link 
     driver.get("https://my.unsw.edu.au/")
     link = driver.find_element_by_link_text('Sign On')
@@ -81,3 +83,4 @@ def grabCourseIDs(email, password):
 
     return userDetails
     
+grabCourseIDs('z5253655@ad.unsw.edu.au', 'thrasher0202~')
