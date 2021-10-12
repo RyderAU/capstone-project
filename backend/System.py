@@ -206,7 +206,7 @@ class Systems:
 
 
 
-var =  Systems()
+# var =  Systems()
 
 # For future unit test
 # print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com'))  # First user registeration - (PASS)

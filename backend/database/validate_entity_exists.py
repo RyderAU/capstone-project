@@ -41,8 +41,8 @@ def validate_entity_exists(column1, column2, value):
         if conn is not None:
             conn.close()
 
-print(validate_entity_exists('hashed_pwd', 'email', "pfizer@gmail.com")) # this one exists in db
-print(validate_entity_exists('*', 'email', 'pfizer2@gmail.com')) # this one is unique email
+# print(validate_entity_exists('hashed_pwd', 'email', "pfizer@gmail.com")) # this one exists in db
+# print(validate_entity_exists('*', 'email', 'pfizer2@gmail.com')) # this one is unique email
 
 """
 e.g. 
