@@ -16,7 +16,7 @@ import { LoginForm, Title, Label, Input, Button,
   const [url, ] = context.url;
   const [emailInput, setEmail] = context.email;
   const [passwordInput, setPassword] = context.password;
-  const [courses] = context.courses;
+  const [courses, setCourses] = context.courses;
   const [, setToken] = context.token;
 
   const [isError, setIsError] = useState(false);
@@ -48,6 +48,7 @@ import { LoginForm, Title, Label, Input, Button,
     console.log(response);
     console.log(response.data["token"]);
     console.log(response.data["courses"]);
+    setCourses(response.data["courses"])
 
     // Stores token
     setToken(response.data["token"]);
