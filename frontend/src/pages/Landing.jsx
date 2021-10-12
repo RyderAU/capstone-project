@@ -30,7 +30,7 @@ const Landing = () => {
   return (
       <div>
       <Container>
-        <BigTitle> Tired of the slow, pre-historic UNSW portal? Find all your needs in one place. </BigTitle>
+        {/* <BigTitle> Tired of the slow, pre-historic UNSW portal? Find all your needs in one place. </BigTitle> */}
         <LandingContainer>
           <Title>ourUNSW</Title>
 
