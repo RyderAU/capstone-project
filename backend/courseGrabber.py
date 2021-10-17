@@ -1,4 +1,5 @@
 from selenium import webdriver
+#from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.chrome.options import Options
 import time
 
@@ -37,7 +38,7 @@ def grabCourseDetails(driver):
 def grabCourseIDs(email, password):
     start_time = time.time()
     # Web driver set for the bot to run on. Options to make it 'headless' (run as a background process) is set
-    # PATH = "./geckodriver"
+    #PATH = "./geckodriver"
     PATH = "./chromedriver"
     settings = Options()
     settings.headless = True # Change to False for testing purposes
@@ -125,22 +126,48 @@ def grabCourseIDs(email, password):
 
     time.sleep(1)
     
-    # Setup list to store student course details
+    # Web crawl page and extract courses and degree
     try:
         userDetails = grabCourseDetails(driver)
         userDetails['zID'] = email[0:8]
+        link = driver.find_element_by_xpath('//*[@id="pt1:j_id__ctru9"]/div[13]/a')
+        link.click()
     except:
         print("Network Retry G")
         time.sleep(5)
         userDetails = grabCourseDetails(driver)
         userDetails['zID'] = email[0:8]
-    # Web crawl page and extract courses and degree
-        
-    print(userDetails)
+        link = driver.find_element_by_xpath('//*[@id="pt1:j_id__ctru9"]/div[13]/a')
+        link.click()
     
+    time.sleep(1)
+    timetables = []
+
+    for x in range(0, 10):
+        try:
+            timetableElement = driver.find_element_by_xpath('//*[@id="calendar"]/div[2]')
+            timetables.append(timetableElement.get_attribute("outerHTML"))
+            button = driver.find_element_by_xpath('//*[@id="calendar"]/div[1]/div[2]/div/button[2]')
+            button.click()                         
+
+        except:
+            print("Network Retry H")
+            time.sleep(5)
+            timetableElement = driver.find_element_by_xpath('//*[@id="calendar"]/div[2]')
+            timetables.append(timetableElement.get_attribute("outerHTML"))
+            button = driver.find_element_by_xpath('//*[@id="calendar"]/div[1]/div[2]/div/button[2]')
+            button.click()
+        
+        time.sleep(1)
+
+    userDetails['timetables'] = timetables
+    print(userDetails)
+    print(len(timetables))
+    time.sleep(5)
     # Close the web browser
     driver.close()
     print("--- %s seconds ---" % (time.time() - start_time))
     return userDetails
 
 
+grabCourseIDs("z5168024@ad.unsw.edu.au", "Marble12345")
