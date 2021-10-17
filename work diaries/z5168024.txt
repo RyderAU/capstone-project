@@ -6,7 +6,12 @@ Week 1
 
 This week we discussed the various project ideas we had and decided on the 'Course Group Chat' idea. This would use student credentials to automatically add students to associated group chats. We submitted a project request form for this. We also wrote a draft of epic/user stories as a group. I was chosen as Scrum Master and a Jira account was setup. 
 
-I then explored the tools available to accomplish the task of grabbing student course codes from myUNSW. I then discovered a python library called Selenium, and I decided to see if this would help achieve the required goal. After playing around with it for a few hours, I was able to grab the course codes successfully. I then shared my findings with the team.
+I then explored the tools available to accomplish the task of grabbing student course codes from myUNSW. 
+
+I first found a coding platform for bots from a company called Robocorp. After playing around with the software, I wanted an 
+alternative which could help me implement a function in python to perform similar capabilities.
+
+I then discovered a python library called Selenium, and I decided to see if this would help achieve the required goal. After playing around with it for a few hours, I was able to grab the course codes successfully. I then shared my findings with the team.
 
 Week 2
 
@@ -33,3 +38,19 @@ Week 4:
 
 - Helped Haesun with database setup (high level overview)
 - Setup Selenium on Vlab
+- Extracted student zID and name from the webscraping 
+- Meeting with the team to discuss how to pass course information to frontend (9th Oct)
+- Meeting with the team to link up tech stack (10th Oct)
+
+Week 5:
+
+- First Sprint Demo
+- Created demo template for the team to follow
+- Bot would face network issues time to time so had to rework bot to handle such errors
+- Investigated options to move database to the cloud. Discovered ElephantSQL which provides a free Postgres SQL server
+  up to 20MB and 5 concurrent users
+- Extracted the timetables from myUNSW for each of the 10 weeks of term
+- Discussed the stories for Sprint 2 as a team (13th Oct). Yet to allocate stories but we have a general idea. 
+
+Week 6:
+
