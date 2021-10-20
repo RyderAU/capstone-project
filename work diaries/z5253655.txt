@@ -41,6 +41,6 @@ Demo prep
 Set up everything for the demo and helped other teammates to set up their environments and database as a back up
 Fixed the bugs from our main repo
 Screen-shared and demonstrated for our team
-Suggested the group to have at least one person code review when they try to attempt mergining into main, and to have a naming convention when creating new branch (having 'name/branch_name') to communicate better
+Suggested the group to have at least one person code review when they try to attempt merging into main, and to have a naming convention when creating new branch (having 'name/branch_name') to communicate better
 
 Week 6
