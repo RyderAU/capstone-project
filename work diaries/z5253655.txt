@@ -7,66 +7,21 @@ Plans
 Group created 
 add to Jira project
 brainstorming, discuss and suggest ideas of the project
-
-- what was planned for the period since the last work diary entry
-
-
-- what was finished
-
-
-- what were the main technical and non-technical obstacles and how they were overcome (or what was tried and did not work)
-
-
-- what was not finished, why this happened, how this affects the overall project progress and what adjustments (if any) are needed so the success of the project is not endangered
-
-
-
-- what is planned for the next period (e.g., next week)
-
-
-
+Finalised the project and planned for system architechture layers
+Created user stories and epic story.
 
 Week 2
 
-planned and created backed achitecture diagram
-user story
-
-- what was planned for the period since the last work diary entry
-
-
-- what was finished
-
-
-- what were the main technical and non-technical obstacles and how they were overcome (or what was tried and did not work)
-
-
-- what was not finished, why this happened, how this affects the overall project progress and what adjustments (if any) are needed so the success of the project is not endangered
-
-
-
-- what is planned for the next period (e.g., next week)
-
-
+Update the planned architecture and created backend achitecture diagram
+Introduced figma to the teammates and guide them how to use it
+Updated user story
+Created README and folders to make a guidance on our GitHub repo
+Start writing acceptance criteria
 
 Week 3
-
-
-
-- what was planned for the period since the last work diary entry
-
-
-- what was finished
-
-
-- what were the main technical and non-technical obstacles and how they were overcome (or what was tried and did not work)
-
-
-- what was not finished, why this happened, how this affects the overall project progress and what adjustments (if any) are needed so the success of the project is not endangered
-
-
-
-- what is planned for the next period (e.g., next week)
-
+Finished storyboard with the group and assigned stories
+Decided which database to use (I chose postgreSQL)
+Worked on delegated part (database, create functions to interact with db so backend can easily import and use the function)
 
 Week 4
 
@@ -77,8 +32,13 @@ Wrote bash script to automate python virtual env for the team
 Wrote bash script connect to postgresql faster
 Helped Helena setting up database locally
 Worked on backend & database connection testing
-something more
+Figure out how to make database and python interaction working in CSE vlab, later on decided to switch to VM and for the upcoming demo I demonstrated locally.
+Introducded GitKraken to my team so we can visualise the git and easily fix merge conflict issues
 
 Week 5
 
 Demo prep
+Set up everything for the demo and helped other teammates to set up their environments and database as a back up
+Fixed the bugs from our main repo
+Screen-shared and demonstrated for our team
+Suggested the group to have at least one person code review when they try to attempt mergining into main
