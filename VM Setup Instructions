@@ -43,4 +43,6 @@ Replace with your email
 12. Clone the repository using the command 
 'git clone git@github.com:unsw-cse-comp3900-9900-21T3/capstone-project-3900-w18b-sudo_sandeep_reply.git'
 
-13. You are ready to roll! Python 3.8.5 is already installed!
+
+13. You are ready to roll! Python 3.8.5 is already installed. But you will need to install pip. Use 'sudo su'
+then run 'sudo apt install python3-pip'. It takes some time to install so please be patient.
