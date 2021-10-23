@@ -3,7 +3,8 @@ psycopg2
 # psycopg2-binary -> Use binary if above doesn't work
 argon2-cffi
 pyjwt
-m2crypto
 flask
 flask_cors
 flask_login
+m2crypto
+
