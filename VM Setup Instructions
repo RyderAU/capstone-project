@@ -46,3 +46,5 @@ Replace with your email
 
 13. You are ready to roll! Python 3.8.5 is already installed. But you will need to install pip. Use 'sudo su'
 then run 'sudo apt install python3-pip'. It takes some time to install so please be patient.
+
+14. Run 'sudo apt-get install libpq-dev'. This is required to install psycopg2
