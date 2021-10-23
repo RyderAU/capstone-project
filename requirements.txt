@@ -6,5 +6,5 @@ pyjwt
 flask
 flask_cors
 flask_login
-m2crypto
+
 
