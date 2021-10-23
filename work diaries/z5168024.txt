@@ -60,3 +60,4 @@ Week 6:
 - Migrated Database to the cloud with Haesun
 - Design of Database with Haesun
 - Message retrieval algorithm planning between front/backend and DB. Design done with Haesun
+- Setup VM and created detailed setup instructions for the team
