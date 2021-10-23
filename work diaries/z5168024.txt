@@ -54,3 +54,9 @@ Week 5:
 
 Week 6:
 
+- Retrospective A with team
+- Created subtasks on Jira and assigned them stories/subtasks to the team
+- Created a basic interface in a team meeting for shared variable names
+- Migrated Database to the cloud with Haesun
+- Design of Database with Haesun
+- Message retrieval algorithm planning between front/backend and DB. Design done with Haesun
