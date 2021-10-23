@@ -39,12 +39,20 @@ Replace with your email
 11. Find your key using '/home/lubuntu/.ssh/id_ed22519.pub'. Copy and add to your GitHub 
 (https://github.com/settings/keys)
 
- 
 12. Clone the repository using the command 
 'git clone git@github.com:unsw-cse-comp3900-9900-21T3/capstone-project-3900-w18b-sudo_sandeep_reply.git'
-
 
 13. You are ready to roll! Python 3.8.5 is already installed. But you will need to install pip. Use 'sudo su'
 then run 'sudo apt install python3-pip'. It takes some time to install so please be patient.
 
 14. Run 'sudo apt-get install libpq-dev'. This is required to install psycopg2
+
+15. Run 'apt install npm'. Be patient once again this takes time.
+
+16. Run 'pip3 install -r requirement.txt'
+
+17. Now run these two commands 
+'sudo apt-get update -y'
+'sudo apt-get install -y python3-m2crypto'
+
+18. Exit 'sudo su', go to the frontend directory and type 'npm install'
