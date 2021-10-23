@@ -1,0 +1,46 @@
+NOTE: Ignore any update/upgrade notifications
+
+Virtual Machine Credentials:
+
+Username: lubuntu
+Password: lubuntu
+(to become root, use sudo su)
+
+Steps to Setup:
+
+1. Download VM (https://rebrand.ly/o1fy80n). This will be a zip. Extract the file. You shoud see
+a OVF file called 'lubuntu_20.04.1_VM_LinuxVMImages'. We will need this file to open this file with the VM Player
+so make sure you place the file in an accessible location.
+
+2. Download the VM Player 
+  - WINDOWS USERS - VMware Workstation 16 Player (https://rebrand.ly/0fhuhzh)
+  - MAC USERS - VMWare Fusion (https://rebrand.ly/e0jl753 ) 
+
+3. Import/Open the OVF file into the VM Player
+  - WINDOWS USERS - Click 'Open a Virtual Machine'
+  - MAC USERS - 'Choose File...'
+
+4. Launch the VM. Be patient the boot process takes some time
+
+5. Once you see a login interface, enter the 'Virtual Machine Credentials' (top of this document)
+
+6. Search QTerminal 
+
+7. Type 'sudo su' in terminal
+
+8. Type 'sudo snap install --classic code' in terminal. This will install VSCode. Be patient this
+will take time. You will get a successfully installed message in the terminal.
+
+9. Exit 'sudo su' using Cntrl + D.
+
+10. Then let us generate a git key. Type 'ssh-keygen -t ed25519 -C z5555555@ad.unsw.edu.au"' in the terminal.
+Replace with your email
+
+11. Find your key using '/home/lubuntu/.ssh/id_ed22519.pub'. Copy and add to your GitHub 
+(https://github.com/settings/keys)
+
+ 
+12. Clone the repository using the command 
+'git clone git@github.com:unsw-cse-comp3900-9900-21T3/capstone-project-3900-w18b-sudo_sandeep_reply.git'
+
+13. You are ready to roll! Python 3.8.5 is already installed!
