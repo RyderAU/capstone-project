@@ -1,5 +1,5 @@
-import "./Timetable.css";
-import "./Timetable2.css";
+// import "./Timetable.css";
+// import "./Timetable2.css";
 
 const Timetable = () => {
   console.log("timetable loaded");
@@ -311,14 +311,7 @@ const Timetable = () => {
                                   <div className="fc-event-container fc-helper-container" />
                                   <div className="fc-event-container">
                                     <a
-                                      className="
-                                fc-time-grid-event
-                                fc-v-event
-                                fc-event
-                                fc-start
-                                fc-end
-                                un-bskt-registered
-                              "
+                                      className="fc-time-grid-event fc-v-event fc-event fc-start fc-end un-bskt-registered"
                                       style={{
                                         borderColor: "rgb(153, 153, 153)",
                                         inset: "194.625px 0% -292.188px",
@@ -338,7 +331,7 @@ const Timetable = () => {
                                               right: "2px",
                                             }}
                                           >
-                                            Wks
+                                            Wks{" "}
                                           </span>
                                         </div>
                                         <div className="fc-title">
@@ -358,14 +351,7 @@ const Timetable = () => {
                                   <div className="fc-event-container fc-helper-container" />
                                   <div className="fc-event-container">
                                     <a
-                                      className="
-                                fc-time-grid-event
-                                fc-v-event
-                                fc-event
-                                fc-start
-                                fc-end
-                                un-bskt-registered
-                              "
+                                      className="fc-time-grid-event fc-v-event fc-event fc-start fc-end un-bskt-registered"
                                       style={{
                                         borderColor: "rgb(153, 153, 153)",
                                         inset: "194.625px 0% -292.188px",
@@ -385,7 +371,7 @@ const Timetable = () => {
                                               right: "2px",
                                             }}
                                           >
-                                            Wks
+                                            Wks{" "}
                                           </span>
                                         </div>
                                         <div className="fc-title">
@@ -405,14 +391,7 @@ const Timetable = () => {
                                   <div className="fc-event-container fc-helper-container" />
                                   <div className="fc-event-container">
                                     <a
-                                      className="
-                                fc-time-grid-event
-                                fc-v-event
-                                fc-event
-                                fc-start
-                                fc-end
-                                un-bskt-registered
-                              "
+                                      className="fc-time-grid-event fc-v-event fc-event fc-start fc-end un-bskt-registered"
                                       style={{
                                         borderColor: "rgb(153, 153, 153)",
                                         inset: "292.188px 0% -389.75px",
@@ -432,7 +411,7 @@ const Timetable = () => {
                                               right: "2px",
                                             }}
                                           >
-                                            Wks
+                                            Wks{" "}
                                           </span>
                                         </div>
                                         <div className="fc-title">
@@ -442,14 +421,7 @@ const Timetable = () => {
                                       </div>
                                     </a>
                                     <a
-                                      className="
-                                fc-time-grid-event
-                                fc-v-event
-                                fc-event
-                                fc-start
-                                fc-end
-                                un-bskt-registered
-                              "
+                                      className="fc-time-grid-event fc-v-event fc-event fc-start fc-end un-bskt-registered"
                                       style={{
                                         borderColor: "rgb(153, 153, 153)",
                                         inset: "487.312px 0% -584.375px",
@@ -469,7 +441,7 @@ const Timetable = () => {
                                               right: "2px",
                                             }}
                                           >
-                                            Wks
+                                            Wks{" "}
                                           </span>
                                         </div>
                                         <div className="fc-title">
