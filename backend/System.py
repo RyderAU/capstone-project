@@ -132,7 +132,8 @@ class Systems:
             # generate token
             session_id = self.new_session_id()
             token = jwt.encode({"session_id": session_id, "email": email}, "thisisakey", algorithm="HS256")
-
+            token = str(token)
+            token = token[2:-1]    
             # update database that user has logged in
             update_user_data('login_token', 'email', token, email)
 
@@ -195,7 +196,9 @@ class Systems:
         # generate token
         session_id = self.new_session_id()
         token = jwt.encode({"session_id": session_id, "email": email}, "thisisakey", algorithm="HS256")
-
+        token = str(token)
+        token = token[2:-1]
+        #token = jwt.encode({session_id,"email": email}, "thisisakey", algorithm="HS256")
 
         # store into database
         register_student('', '', email, username, hashed_pwd, token, '', '')

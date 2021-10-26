@@ -57,6 +57,8 @@ def auth_logout_route():
     token = request.get_json()['token']
 
     is_success = system.logout(token)
+
+
     return dumps(is_success)
 
 @APP.route("/signup", methods=['POST'])
@@ -68,6 +70,9 @@ def auth_register_route():
     displayName = request.get_json()['displayName']
 
     email_and_token = system.register(displayName, password, passwordConfirm, email)
+
+    #email_and_token = {'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uX2lkIjoiNTcwMmM0ODUtYTk4MS1mMDVjLTUzYWItOGM1YjNkZGM1NWEzIiwiZW1haWwiOiJoaW5hdGFAbWFpbC5jb20ifQ.OlQSohVVHrPfdDLFTO3B6umSnEf9AjDO119S2QLVqEA'}
+
     return dumps(email_and_token)
 
 #------------------------------------------------------------------------------#
