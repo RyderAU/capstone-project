@@ -72,7 +72,7 @@ class Systems:
         Return Value:
             - returns True
         '''
-        email = validate_token(token)
+        email = self.validate_token(token)
         update_user_data('login_token', '', 'email', email)
         
         is_success = True
@@ -97,25 +97,24 @@ class Systems:
         '''
         try:
             decoded = jwt.decode(token, "thisisakey", algorithms=["HS256"])
+
             for key, value in decoded.items():
+
                 if key == 'email':
                     recorded_token = validate_entity_exists('login_token', 'email', value)
                     if recorded_token is None:
                         raise LogoutError('User does not exist')
                     if token != recorded_token:
+                        recorded_decoded = jwt.decode(recorded_token, "thisisakey", algorithms=["HS256"])
+
                         raise LogoutError('Wrong login token. You are a hacker!!!')
                     return value
-                else:
-                    # When there is no email field in the login token
-                    raise LogoutError('Invalid token')
-        except (Exception, jwt.exceptions.InvalidTokenError) as error:
             raise LogoutError('Invalid token')
 
-
-
+        except (Exception, jwt.exceptions.InvalidTokenError) as error:
+            raise error
 
     # Logs an user in
-    @classmethod
     def auth_login(self, email, password):
         # check if email is in the correct format
         if not re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", email):
@@ -133,12 +132,13 @@ class Systems:
             # generate token
             session_id = self.new_session_id()
             token = jwt.encode({"session_id": session_id, "email": email}, "thisisakey", algorithm="HS256")
-
+            token = str(token)
+            token = token[2:-1]    
             # update database that user has logged in
-            update_user_data('login_token', token, 'email', email)
+            update_user_data('login_token', 'email', token, email)
 
             # grab courses from database and return to front end
-            db_courses = validate_entity_exists('courses', 'email', email)
+            db_courses = validate_entity_exists('course', 'email', email)
             courses = {}
             courses["courses"] = db_courses.split(",")
 
@@ -196,7 +196,9 @@ class Systems:
         # generate token
         session_id = self.new_session_id()
         token = jwt.encode({"session_id": session_id, "email": email}, "thisisakey", algorithm="HS256")
-
+        token = str(token)
+        token = token[2:-1]
+        #token = jwt.encode({session_id,"email": email}, "thisisakey", algorithm="HS256")
 
         # store into database
         register_student('', '', email, username, hashed_pwd, token, '', '')
@@ -205,15 +207,48 @@ class Systems:
         # return {'is_success': is_success,}
         return {"token" : token}
 
+    def profile(self, email):
+        # '''
+        # Return all information of an user
+
+        # Arguments:
+        #     email - string
+
+        # Return Value:
+        #     - returns dictionary including fields of username, actual name, zid, degree, courses, biography, timetable
+        # '''
+
+        username = validate_entity_exists('display_name', 'email', email)
+        real_name = validate_entity_exists('name', 'email', email)
+        zid = validate_entity_exists('student_id', 'email', email)
+        degree = validate_entity_exists('degree', 'email', email)
+        bio = validate_entity_exists('bio', 'email', email)
+        courses = validate_entity_exists('course', 'email', email)
+        courses = courses.replace(",", ", ")
+        # Grab timetables from database and put them into a list
+        timetables = []
+        fixed = 'timetable_week_'
+        for i in range(8):
+            if i < 5:
+                var = str(i+1)
+            else:
+                var = str(i+2)
+            col_name = fixed + var
+            table = validate_entity_exists(col_name, 'email', email)
+            timetables.append(table)
+        return {"username" : username, "real_name" : real_name, "zid" : zid, "degree" : degree, "bio" : bio, "courses" : courses, "timetables" : timetables}
 
 
-var =  Systems()
-print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com'))  # First user registeration - (PASS)
-print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com')) # Duplicate check (User already exists) - (PASS)
-print(var.register('new_pika', '123123aA!2', '123123aA!3', 'email2@mail.com')) # wrong password re-enter - (PASS)
-print(var.register('new_pika', '123123aA!2', '123123aA!2', 'email2@mail.com2')) # email wrong format check - (PASS)
-print(var.register('new_pika', '123123a!2', '123123a!2', 'email2@mail.com')) # password wrong format check - (PASS)
-print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email3@mail.com')) # same username but different email check, registration should be successful - (PASS)
+
+# var =  Systems()
+
+# For future unit test
+# print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com'))  # First user registeration - (PASS)
+# print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com')) # Duplicate check (User already exists) - (PASS)
+# print(var.register('new_pika', '123123aA!2', '123123aA!3', 'email2@mail.com')) # wrong password re-enter - (PASS)
+# print(var.register('new_pika', '123123aA!2', '123123aA!2', 'email2@mail.com2')) # email wrong format check - (PASS)
+# print(var.register('new_pika', '123123a!2', '123123a!2', 'email2@mail.com')) # password wrong format check - (PASS)
+# print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email3@mail.com')) # same username but different email check, registration should be successful - (PASS)
 
 
 # register(username, password, reentered_password, email)

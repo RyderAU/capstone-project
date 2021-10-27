@@ -42,7 +42,7 @@ system = Systems()
 #                                routes: auth                                  #
 #------------------------------------------------------------------------------#
 
-@APP.route("/auth/login", methods=['POST'])
+@APP.route("/login", methods=['POST'])
 def auth_login_route():
     ''' Authenticates email / password and returns id / token '''
     email = request.get_json()['email']
@@ -51,23 +51,28 @@ def auth_login_route():
     courses_and_token = system.auth_login(email, password)
     return dumps(courses_and_token)
 
-@APP.route("/auth/logout", methods=['POST'])
+@APP.route("/logout", methods=['POST'])
 def auth_logout_route():
     ''' Logs user out when given a valid token '''
     token = request.get_json()['token']
 
     is_success = system.logout(token)
+
+
     return dumps(is_success)
 
-@APP.route("/auth/register", methods=['POST'])
+@APP.route("/signup", methods=['POST'])
 def auth_register_route():
     ''' Creates an account given details and returns id / token '''
     email = request.get_json()['email']
     password = request.get_json()['password']
-    reentered_password = request.get_json()['reentered_password']
-    username = request.get_json()['username']
+    passwordConfirm = request.get_json()['passwordConfirm']
+    displayName = request.get_json()['displayName']
 
-    email_and_token = system.register(username, password, reentered_password, email)
+    email_and_token = system.register(displayName, password, passwordConfirm, email)
+
+    #email_and_token = {'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uX2lkIjoiNTcwMmM0ODUtYTk4MS1mMDVjLTUzYWItOGM1YjNkZGM1NWEzIiwiZW1haWwiOiJoaW5hdGFAbWFpbC5jb20ifQ.OlQSohVVHrPfdDLFTO3B6umSnEf9AjDO119S2QLVqEA'}
+
     return dumps(email_and_token)
 
 #------------------------------------------------------------------------------#
@@ -93,14 +98,87 @@ def linking_route():
         update_user_data('student_id', 'email', userDetails.get("zID"), personal_email)
         update_user_data('degree', 'email', userDetails.get("degree"), personal_email)
         update_user_data('name', 'email', userDetails.get("name"), personal_email)
-        update_user_data('course', 'email', db_course, personal_email)
+        update_user_data('course', 'email', db_courses, personal_email)
+        update_user_data('token', 'email', '', personal_email)
 
+        timetables = userDetails.get("timetables")
+        fixed = 'timetable_week_'
+        for i in range(8):
+            if i < 5:
+                var = str(i+1)
+            else:
+                var = str(i+2)
+            col_name = fixed + var
+            update_user_data(col_name, 'email', timetables[i], personal_email)
+        
         # For frontend
         is_success = True
         return dumps({'is_success': is_success,})
-    except:
+    except Exception as e:
         # Error in selenium or error in inserting into database
-        raise InputError('Unable to link to myUNSW. Please check your credentials again')
+        raise e
+        # raise InputError('Unable to link to myUNSW. Please check your credentials again')
+
+
+#------------------------------------------------------------------------------#
+#                              routes: profile                                 #
+#------------------------------------------------------------------------------#
+
+@APP.route("/profile", methods=['GET'])
+def user_profile_flask():
+    '''returns information of a user'''
+
+    token = request.get_json()['token']
+    try:
+        # Grab data from the database
+        email = system.validate_token(token)
+        info = system.profile(email)
+        
+        return dumps(info)
+    except Exception as e:
+        # Error in selenium or error in inserting into database
+        raise e
+
+
+@APP.route("/user/profile/setname/v2", methods=['PUT'])
+def user_profile_setname_flask():
+    '''returns an empty dictionary'''
+
+    incoming = request.get_json()
+    token = incoming['token']
+    new_user_values = {'name_first': incoming['name_first'], 'name_last': incoming['name_last']}
+
+    payload = set_user_profile(token, new_user_values)
+    saveData()
+    return dumps(payload)
+
+
+# 300 characters limit
+@APP.route("/profile/setbio", methods=['PUT'])
+def user_profile_setemail_flask():
+    '''returns an empty dictionary'''
+
+    incoming = request.get_json()
+
+    token = incoming['token']
+    email = incoming['email']
+
+    payload = set_user_profile(token, {'email': email})
+    saveData()
+    return dumps(payload)
+
+@APP.route("/user/profile/sethandle/v1", methods=['PUT'])
+def user_profile_sethandle_flask():
+    '''returns an empty dictionary'''
+
+    incoming = request.get_json()
+
+    token = incoming['token']
+    handle_str = incoming['handle_str']
+
+    payload = set_user_profile(token, {'handle_str': handle_str})
+    saveData()
+    return dumps(payload)
 
 
 #------------------------------------------------------------------------------#
@@ -108,7 +186,8 @@ def linking_route():
 #------------------------------------------------------------------------------#
 
 if __name__ == "__main__":
-    APP.run(port=(3030), debug=False)
+    APP.run(port=(3030), debug=True)
+
 
 
 #------------------------------------------------------------------------------#
