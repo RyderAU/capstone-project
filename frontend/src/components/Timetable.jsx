@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const Timetable = () => {
   // dummy response
   const res = {
@@ -19,22 +21,38 @@ const Timetable = () => {
     ],
   };
 
-  const htmlString = res.timetables[0];
+  const [current, setCurrent] = useState(0);
+  const length = res.timetables.length;
+
+  const nextSlide = () => {
+    setCurrent(current === length - 1 ? 0 : current + 1);
+  };
+
+  const prevSlide = () => {
+    setCurrent(current === 0 ? length - 1 : current - 1);
+  };
+
+  console.log(current);
 
   return (
     <div>
+      <button onClick={prevSlide}>back</button>
+      <button onClick={nextSlide}>forward</button>
+      <div>week {current + 1}</div>
       <div className="carousel">
-        {res.timetables.map((table) => {
+        {res.timetables.map((table, index) => {
           return (
             <div
-              className="carousel-slide"
-              dangerouslySetInnerHTML={{ __html: table }}
-            />
+              className={index === current ? "table-active" : "table"}
+              key={index}
+            >
+              {index === current && (
+                <div dangerouslySetInnerHTML={{ __html: table }} />
+              )}
+            </div>
           );
         })}
       </div>
-      <button class="carousel-button carousel-button-left">back</button>
-      <button class="carousel-button carousel-button-right">forward</button>
     </div>
   );
 };
