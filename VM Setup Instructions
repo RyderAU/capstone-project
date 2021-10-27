@@ -49,7 +49,7 @@ then run 'sudo apt install python3-pip'. It takes some time to install so please
 
 15. Run 'apt install npm'. Be patient once again this takes time.
 
-16. Run 'pip3 install -r requirement.txt'
+16. Run 'pip3 install -r requirements.txt'
 
 17. Now run these two commands 
 'sudo apt-get update -y'
