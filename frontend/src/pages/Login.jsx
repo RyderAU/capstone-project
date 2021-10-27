@@ -16,7 +16,7 @@ import { LoginForm, Title, Label, Input, Button,
   const [url, ] = context.url;
   const [emailInput, setEmail] = context.email;
   const [passwordInput, setPassword] = context.password;
-  const [courses] = context.courses;
+  const [courses, setCourses] = context.courses;
   const [, setToken] = context.token;
 
   const [isError, setIsError] = useState(false);
@@ -47,7 +47,8 @@ import { LoginForm, Title, Label, Input, Button,
     console.log('Login Success');
     console.log(response);
     console.log(response.data["token"]);
-    console.log(response.data["courses"]);
+    console.log(response.data["courses"].courses);
+    setCourses(response.data["courses"].courses);
 
     // Stores token
     setToken(response.data["token"]);
@@ -64,6 +65,7 @@ import { LoginForm, Title, Label, Input, Button,
     
     // Print error message
     console.log(error);
+    // setErrorMsg(error);
     setErrorMsg("Error: Incorrect details! Please try again!");
     setIsError(true);
   };

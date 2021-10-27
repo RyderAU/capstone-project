@@ -2,3 +2,7 @@ env/
 database.ini
 config.cpython-39.pyc
 .DS_Store
+backend/.DS_Store
+backend/database/__pycache__
+backend/__pycache__
+backend/database/selenium/__pycache__

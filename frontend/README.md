@@ -3,8 +3,8 @@
 `npm install`
 2. To run the front end:
 `npm start`
-3. Make sure you run the backend inside `/backend/selenium/server.py`
-`python3 server.py`
+1. Make sure you run the backend inside `/backend/`
+`python3 src_server.py`
 
 
 

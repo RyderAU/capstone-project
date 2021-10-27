@@ -96,3 +96,28 @@ N/A
 - what is planned for the next period (e.g., next week)
 
 Complete first sprint and deliver demonstration. Commence second sprint.
+
+
+Week 5
+
+Completed first sprint and delivered demo. Commenced second sprint. I provided updates to the platform's user interface and researched ways to implement the timetable viewing functionality on our app.
+
+- what was planned for the period since the last work diary entry
+
+Complete first sprint and deliver demonstration. Commence second sprint.
+
+- what was finished
+
+First sprint.
+
+- what were the main technical and non-technical obstacles and how they were overcome (or what was tried and did not work)
+
+N/A
+
+- what was not finished, why this happened, how this affects the overall project progress and what adjustments (if any) are needed so the success of the project is not endangered
+
+N/A
+
+- what is planned for the next period (e.g., next week)
+
+Work on second sprint.

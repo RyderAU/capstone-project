@@ -59,6 +59,7 @@ const SignUp = () => {
     
     // Print error message
     console.log(error);
+    // setErrorMsg(error.toString());
     setErrorMsg("Error: Incorrect details! Please try again!");
     setIsError(true);
   };
