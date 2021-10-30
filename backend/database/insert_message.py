@@ -31,6 +31,7 @@ def insert_message(message_id, message_content, course_id, student_id):
         if conn is not None:
             conn.close()
 
+
 # Driver code
 if __name__ == '__main__':
     # utilise this code like below:
