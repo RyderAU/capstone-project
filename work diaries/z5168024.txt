@@ -61,3 +61,11 @@ Week 6:
 - Design of Database with Haesun
 - Message retrieval algorithm planning between front/backend and DB. Design done with Haesun
 - Setup VM and created detailed setup instructions for the team
+
+Week 7:
+
+- Major bug fixes of registering issues. Peer reviewed by Helena
+- Team meeting during lab time. Discussed how we would approach messages and timetables
+- Ryder had a blocker to obtain styles for timetables. Told him how to extract the styles in a meeting
+- Wrote Helena a SQL function to grab list of members in a course
+
