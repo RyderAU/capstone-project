@@ -103,11 +103,8 @@ def linking_route():
 
         timetables = userDetails.get("timetables")
         fixed = 'timetable_week_'
-        for i in range(8):
-            if i < 5:
-                var = str(i+1)
-            else:
-                var = str(i+2)
+        for i in range(9):
+            var = str(i+1)
             col_name = fixed + var
             update_user_data(col_name, 'email', timetables[i], personal_email)
         
@@ -124,7 +121,7 @@ def linking_route():
 #                              routes: profile                                 #
 #------------------------------------------------------------------------------#
 
-@APP.route("/profile", methods=['GET'])
+@APP.route("/dashboard/profile", methods=['GET'])
 def user_profile_flask():
     '''returns information of a user'''
 
@@ -140,45 +137,75 @@ def user_profile_flask():
         raise e
 
 
-@APP.route("/user/profile/setname/v2", methods=['PUT'])
+@APP.route("/dashboard/profile", methods=['POST'])
+def user_profile_setbio_flask():
+    '''returns an empty dictionary'''
+
+    token = request.get_json()['token']
+    bio = request.get_json()['bio']
+    if bio is None or len(bio) not in range(1, 301):
+        raise InputError('Bio should be between 1 and 300 characters inclusive')
+        
+    try:
+        # Insert into the database
+        email = system.validate_token(token)
+        update_user_data('bio', 'email', bio, email)
+        return dumps({'is_success': True,})
+    except Exception as e:
+        # Error in selenium or error in inserting into database
+        raise e
+
+@APP.route("/dashboard/profile", methods=['POST'])
 def user_profile_setname_flask():
     '''returns an empty dictionary'''
 
-    incoming = request.get_json()
-    token = incoming['token']
-    new_user_values = {'name_first': incoming['name_first'], 'name_last': incoming['name_last']}
+    token = request.get_json()['token']
+    name = request.get_json()['display_name']
+    if name is None or len(name) not in range(1, 21):
+        raise InputError('Username should be between 1 and 20 characters inclusive')
+      
+    try:
+        # Insert into the database
+        email = system.validate_token(token)
+        update_user_data('display_name', 'email', name, email)
+        return dumps({'is_success': True,})
+    except Exception as e:
+        # Error in selenium or error in inserting into database
+        raise e
+    
 
-    payload = set_user_profile(token, new_user_values)
-    saveData()
-    return dumps(payload)
+# #------------------------------------------------------------------------------#
+# #                              routes: message                                 #
+# #------------------------------------------------------------------------------#
 
+# routing path????
+@APP.route("/message_send", methods=['POST'])
+def message_send_route():
+    '''Sends a message'''
+    token = request.get_json()['token']
+    course = request.get_json()['course_name']
+    message = request.get_json()['message']
 
-# 300 characters limit
-@APP.route("/profile/setbio", methods=['PUT'])
-def user_profile_setemail_flask():
-    '''returns an empty dictionary'''
+    system.message_send(token, course, message)
+    return dumps({'is_success': True,})
 
-    incoming = request.get_json()
+@APP.route("/message_list_all", methods=['GET'])
+def message_list_all():
+    '''Read all messages in the chat'''
+    token = request.get_json()['token']
+    course = request.get_json()['course_name']
 
-    token = incoming['token']
-    email = incoming['email']
+    messages = system.message_list_all(token, course)
+    return dumps(messages)
 
-    payload = set_user_profile(token, {'email': email})
-    saveData()
-    return dumps(payload)
+@APP.route("/channel_members", methods=['GET'])
+def channel_members():
+    '''Get the list of members in a course group chat'''
+    token = request.get_json()['token']
+    course = request.get_json()['course_name']
 
-@APP.route("/user/profile/sethandle/v1", methods=['PUT'])
-def user_profile_sethandle_flask():
-    '''returns an empty dictionary'''
-
-    incoming = request.get_json()
-
-    token = incoming['token']
-    handle_str = incoming['handle_str']
-
-    payload = set_user_profile(token, {'handle_str': handle_str})
-    saveData()
-    return dumps(payload)
+    members = system.members_list(token, course)
+    return dumps(members)
 
 
 #------------------------------------------------------------------------------#
@@ -187,8 +214,6 @@ def user_profile_sethandle_flask():
 
 if __name__ == "__main__":
     APP.run(port=(3030), debug=True)
-
-
 
 #------------------------------------------------------------------------------#
 #                              routes: channel                                 #
@@ -298,95 +323,6 @@ if __name__ == "__main__":
 
 #     channel_id = channels_create(token, name, int(is_public))
 #     return dumps(channel_id)
-
-
-# #------------------------------------------------------------------------------#
-# #                              routes: message                                 #
-# #------------------------------------------------------------------------------#
-
-# @APP.route("/message/send", methods=['POST'])
-# def message_send_route():
-#     '''Sends a message'''
-#     token = request.get_json()['token']
-#     channel_id = request.get_json()['channel_id']
-#     message = request.get_json()['message']
-
-#     message_id = message_send(token, int(channel_id), message)
-#     return dumps(message_id)
-
-
-# @APP.route("/message/sendlater", methods=['POST'])
-# def message_sendlater_route():
-#     '''Sends a message after a buffer time'''
-#     token = request.get_json()['token']
-#     channel_id = request.get_json()['channel_id']
-#     message = request.get_json()['message']
-#     time_sent = request.get_json()['time_sent']
-
-#     message_id = message_sendlater(token, int(channel_id), message, int(time_sent))
-#     return dumps(message_id)
-
-
-# @APP.route("/message/react", methods=['POST'])
-# def message_react_route():
-#     '''Reacts to a message'''
-#     token = request.get_json()['token']
-#     message_id = request.get_json()['message_id']
-#     react_id = request.get_json()['react_id']
-
-#     empty_dict = message_react(token, int(message_id), int(react_id))
-#     return dumps(empty_dict)
-
-
-# @APP.route("/message/unreact", methods=['POST'])
-# def message_unreact_route():
-#     '''unreacts to a message'''
-#     token = request.get_json()['token']
-#     message_id = request.get_json()['message_id']
-#     react_id = request.get_json()['react_id']
-
-#     empty_dict = message_unreact(token, int(message_id), int(react_id))
-#     return dumps(empty_dict)
-
-
-# @APP.route("/message/pin", methods=['POST'])
-# def message_pin_route():
-#     '''Pins to a message'''
-#     token = request.get_json()['token']
-#     message_id = request.get_json()['message_id']
-
-#     empty_dict = message_pin(token, int(message_id))
-#     return dumps(empty_dict)
-
-
-# @APP.route("/message/unpin", methods=['POST'])
-# def message_unpin_route():
-#     '''Unpins to a message'''
-#     token = request.get_json()['token']
-#     message_id = request.get_json()['message_id']
-
-#     empty_dict = message_unpin(token, int(message_id))
-#     return dumps(empty_dict)
-
-# @APP.route("/message/remove", methods=['DELETE'])
-# def message_remove_route():
-#     '''Removes a message'''
-#     token = request.get_json()['token']
-#     message_id = request.get_json()['message_id']
-
-#     empty_dict = message_remove(token, int(message_id))
-#     return dumps(empty_dict)
-
-
-# @APP.route("/message/edit", methods=['PUT'])
-# def message_edit_route():
-#     '''Edits a message'''
-#     token = request.get_json()['token']
-#     message_id = request.get_json()['message_id']
-#     message = request.get_json()['message']
-
-#     empty_dict = message_edit(token, int(message_id), message)
-#     return dumps(empty_dict)
 
 # #------------------------------------------------------------------------------#
 # #                               routes: user                                   #
