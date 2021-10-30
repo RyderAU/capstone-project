@@ -47,9 +47,8 @@ def validate_entity_exists(column1, column2, value):
         if conn is not None:
             conn.close()
 
-
-def grabCourseMemberEmails(course):
-    query = "SELECT email FROM students WHERE course LIKE '%" + course + "%'"
+def grabCourseMembers(course):
+    query = "SELECT email, display_name FROM students WHERE course LIKE '%" + course + "%'"
     output = ""
     conn = None
     try:
@@ -80,9 +79,14 @@ def grabCourseMemberEmails(course):
             return None
         else:
         #clean output
+            
             outputList = []
+            displayNameList = []
             for element in output: 
-                outputList.append(element[0])
+                userDictionary = {}
+                userDictionary["name"] = element[1]
+                userDictionary["email"] = element[0]
+                outputList.append(userDictionary)
             return(outputList)
 
         # close communication with the database
