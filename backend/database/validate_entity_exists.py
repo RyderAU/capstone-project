@@ -49,7 +49,6 @@ def validate_entity_exists(column1, column2, value):
 
 # print(validate_entity_exists('hashed_pwd', 'email', "pfizer@gmail.com")) # this one exists in db
 # print(validate_entity_exists('*', 'email', 'pfizer2@gmail.com')) # this one is unique email
-
 """
 e.g. 
 SELECT hashed_pwd FROM students
