@@ -5,6 +5,8 @@ import psycopg2
 import urllib.parse as up
 
 
+# Basically sending message to the course group chat.
+# If a message is sent, 
 def insert_message(message_id, message_content, course_id, student_id):
 
     sql = """INSERT INTO messages(
