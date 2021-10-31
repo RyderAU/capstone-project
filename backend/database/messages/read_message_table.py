@@ -94,4 +94,4 @@ def get_message_list_by_course_id(course_id):
             conn.close()
 
 # usage
-print(get_message_list_by_course_id(1))
+# print(get_message_list_by_course_id(1))
