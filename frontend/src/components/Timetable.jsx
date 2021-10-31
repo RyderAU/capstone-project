@@ -1,3 +1,9 @@
+import "./TimetableScripts/myunsw-bootstrap-min.css";
+import "./TimetableScripts/myunsw-custom-min.css";
+import "./TimetableScripts/fullcalendar-3.9.0-min.css";
+import "./TimetableScripts/fullcalendar-3.9.0-print-min.css";
+import "./Timetable.css";
+
 import { useState } from "react";
 
 const Timetable = () => {
@@ -35,20 +41,26 @@ const Timetable = () => {
   console.log(current);
 
   return (
-    <div>
+    <div className="timetable-container">
       <button onClick={prevSlide}>back</button>
       <button onClick={nextSlide}>forward</button>
       <div>week {current + 1}</div>
       <div className="carousel">
         {res.timetables.map((table, index) => {
           return (
-            <div
-              className={index === current ? "table-active" : "table"}
-              key={index}
-            >
-              {index === current && (
-                <div dangerouslySetInnerHTML={{ __html: table }} />
-              )}
+            <div id="calendar" className="fc fc-unthemed fc-ltr">
+              <div
+                className={index === current ? "table-active" : "table"}
+                key={index}
+              >
+                {index === current && (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: table,
+                    }}
+                  />
+                )}
+              </div>
             </div>
           );
         })}
