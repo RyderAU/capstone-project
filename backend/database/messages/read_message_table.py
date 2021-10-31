@@ -87,6 +87,6 @@ def get_course_id_from_course_code(course_code):
         if conn is not None:
             conn.close()
 
-print(get_course_id_from_course_code('COMP4920'))
-# Store message_content, student_id, message_time
-# where course_id and order by message_time
+# usage
+# print(get_course_id_from_course_code('COMP4920'))
+
