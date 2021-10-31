@@ -4,7 +4,6 @@ from database.register_new_user import register_student
 from database.read_db import read_db
 from database.validate_entity_exists import validate_entity_exists
 from database.update_user import update_user_data
-from database.insert_message import insert_message
 from database.grab_course_members import grabCourseMembers
 from database.messages.insert_messages import insert_message
 from database.messages.read_message_table import get_student_id_from_email, get_course_id_from_course_name, get_course_id_from_course_code
