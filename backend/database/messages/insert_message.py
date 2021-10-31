@@ -1,3 +1,30 @@
+#############################################################
+#
+#
+#
+# NOT FINISHED EDITING, PLS IGNORE THIS FILE
+#
+#
+#
+################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #!/usr/bin/python
 ''' Test inserting new message(aka user) into table with python '''
 import psycopg2

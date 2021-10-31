@@ -3,7 +3,7 @@ import psycopg2
 # from .config import config
 import urllib.parse as up
 
-def read_db():
+def read_db(field):
     # Grab data
     select_query = "select * from students"
     registered_user_records = []
@@ -35,7 +35,7 @@ def read_db():
 
     # 3 -> display_name
 
-read_db()
-    # # get certain element only
-    # for i in registered_user_records:
-    #     print(i[field]) # choose which field you wanna get
+
+    # get certain element only
+    for i in registered_user_records:
+        print(i[field]) # choose which field you wanna get
