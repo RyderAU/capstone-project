@@ -240,7 +240,7 @@ class Systems:
         # Grab timetables from database and put them into a list
         timetables = []
         fixed = 'timetable_week_'
-        for i in range(9):
+        for i in range(10):
             var = str(i+1)
             col_name = fixed + var
             table = validate_entity_exists(col_name, 'email', email)
@@ -271,11 +271,7 @@ class Systems:
         zid = validate_entity_exists('student_id', 'email', email)
         course_id = read_course('course_id', 'course_name', course)
 
-        ts = time.time()
-        timestamp = datetime.datetime.fromtimestamp(
-            ts).strftime('%Y-%m-%d %H:%M:%S')
-
-        insert_message(message, timestamp, course_id, zid)
+        insert_message(message, course_id, zid)
 
      def message_list_all(self, token, course):
         # '''

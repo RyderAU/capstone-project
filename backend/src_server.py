@@ -103,7 +103,7 @@ def linking_route():
 
         timetables = userDetails.get("timetables")
         fixed = 'timetable_week_'
-        for i in range(9):
+        for i in range(10):
             var = str(i+1)
             col_name = fixed + var
             update_user_data(col_name, 'email', timetables[i], personal_email)
@@ -142,36 +142,33 @@ def user_profile_setbio_flask():
     '''returns an empty dictionary'''
 
     token = request.get_json()['token']
-    bio = request.get_json()['bio']
-    if bio is None or len(bio) not in range(1, 301):
-        raise InputError('Bio should be between 1 and 300 characters inclusive')
-        
-    try:
-        # Insert into the database
-        email = system.validate_token(token)
-        update_user_data('bio', 'email', bio, email)
-        return dumps({'is_success': True,})
-    except Exception as e:
-        # Error in selenium or error in inserting into database
-        raise e
-
-@APP.route("/dashboard/profile", methods=['POST'])
-def user_profile_setname_flask():
-    '''returns an empty dictionary'''
-
-    token = request.get_json()['token']
-    name = request.get_json()['display_name']
-    if name is None or len(name) not in range(1, 21):
-        raise InputError('Username should be between 1 and 20 characters inclusive')
-      
-    try:
-        # Insert into the database
-        email = system.validate_token(token)
-        update_user_data('display_name', 'email', name, email)
-        return dumps({'is_success': True,})
-    except Exception as e:
-        # Error in selenium or error in inserting into database
-        raise e
+    # Test if the request is to set name or bio
+    json_dic = json.loads(request.get_json())
+    if 'bio' in json_dic:
+        bio = request.get_json()['bio']
+        if bio is None or len(bio) not in range(1, 301):
+            raise InputError('Bio should be between 1 and 300 characters inclusive')
+            
+        try:
+            # Insert into the database
+            email = system.validate_token(token)
+            update_user_data('bio', 'email', bio, email)
+            return dumps({'is_success': True,})
+        except Exception as e:
+            # Error in selenium or error in inserting into database
+            raise e
+    if 'display_name' in json_dic:
+        name = request.get_json()['display_name']
+        if name is None or len(name) not in range(1, 21):
+            raise InputError('Username should be between 1 and 20 characters inclusive')
+        try:
+            # Insert into the database
+            email = system.validate_token(token)
+            update_user_data('display_name', 'email', name, email)
+            return dumps({'is_success': True,})
+        except Exception as e:
+            # Error in selenium or error in inserting into database
+            raise e
     
 
 # #------------------------------------------------------------------------------#
