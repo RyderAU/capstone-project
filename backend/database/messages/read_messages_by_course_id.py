@@ -1,11 +1,10 @@
-# Receive 'email' return 'zid'
+# Get course_id, read all the message list differentiated by course group
 
 ''' Read stored database '''
 import psycopg2
 # from .config import config
 import urllib.parse as up
 
-# Get course_id, read all the message list differentiated by course group
 def read_messages_by_course_id(course_id):
     # Grab data
     select_query = "select message_id, message_content, message_time, student_id from messages" + " where course_id=" + str(course_id) + " order by message_time;"
