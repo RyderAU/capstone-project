@@ -3,7 +3,7 @@ import urllib.parse as up
 
 
 def grabCourseMembers(course):
-    query = "SELECT email, display_name FROM students WHERE course LIKE '%" + course + "%'"
+    query = "SELECT display_name FROM students WHERE course LIKE '%" + course + "%'"
     output = ""
     conn = None
     try:
@@ -27,8 +27,8 @@ def grabCourseMembers(course):
             displayNameList = []
             for element in output: 
                 userDictionary = {}
-                userDictionary["name"] = element[1]
-                userDictionary["email"] = element[0]
+                userDictionary["name"] = element[0]
+                #userDictionary["email"] = element[0]
                 outputList.append(userDictionary)
             return(outputList)
 
