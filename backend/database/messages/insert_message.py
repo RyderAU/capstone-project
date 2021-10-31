@@ -7,6 +7,7 @@ def insert_message(message_content, course_id, student_id):
     select_query = "select max(message_id) from messages;"
     conn = None
     stored_message_id = -1
+    message_id = -1
     try:
         DATABASE_URL = 'postgres://frnkorza:5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg@rosie.db.elephantsql.com/frnkorza'
         url = up.urlparse(DATABASE_URL)
@@ -15,14 +16,18 @@ def insert_message(message_content, course_id, student_id):
             host=url.hostname, port=url.port)
         # create a new cursor
         cur = conn.cursor()
-
         cur.execute(select_query)
         stored_message_id = cur.fetchall()
-        message_id = stored_message_id[0][0]
+        # If database is empty, initiate with message id 0
+        if stored_message_id[0][0] == None:
+            message_id = 0
+        else:
+            message_id = stored_message_id[0][0]
+
         # print(message_id)
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-
+        
 
     sql = """INSERT INTO messages(
                 message_id, message_content, message_time, course_id, student_id)
