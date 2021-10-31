@@ -61,12 +61,18 @@ def get_course_id_from_course_name(course_name):
             conn.close()
 
 
-# Receive 'course_code' return 'course_id'
-def get_course_id_from_course_code(course_code):
+# Get course_id, read all the message list differentiated by course group
+
+''' Read stored database '''
+import psycopg2
+# from .config import config
+import urllib.parse as up
+
+def get_message_list_by_course_id(course_id):
     # Grab data
-    select_query = "select course_id from courses where course_code='" + course_code + "';"
+    select_query = "select message_id, message_content, message_time, student_id from messages" + " where course_id=" + str(course_id) + " order by message_id;"
     conn = None
-    course_id = ''
+    message_info = []
     try:
         DATABASE_URL = 'postgres://frnkorza:5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg@rosie.db.elephantsql.com/frnkorza'
         url = up.urlparse(DATABASE_URL)
@@ -77,8 +83,8 @@ def get_course_id_from_course_code(course_code):
         cur = conn.cursor()
 
         cur.execute(select_query)
-        course_id = cur.fetchall()
-        return(course_id[0][0])
+        message_info = cur.fetchall()
+        return(message_info)
         # close communication with the database
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
@@ -88,5 +94,4 @@ def get_course_id_from_course_code(course_code):
             conn.close()
 
 # usage
-# print(get_course_id_from_course_code('COMP4920'))
-
+# print(get_message_list_by_course_id(1))
