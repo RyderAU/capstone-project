@@ -27,8 +27,7 @@ def grabCourseMembers(course):
             displayNameList = []
             for element in output: 
                 userDictionary = {}
-                userDictionary["name"] = element[1]
-                userDictionary["email"] = element[0]
+                userDictionary["name"] = element[0]
                 outputList.append(userDictionary)
             return(outputList)
 

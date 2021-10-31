@@ -5,6 +5,9 @@ from database.read_db import read_db
 from database.validate_entity_exists import validate_entity_exists
 from database.update_user import update_user_data
 from database.insert_message import insert_message
+from database.grab_course_members import grabCourseMembers
+from database.messages.insert_messages import insert_message
+from database.messages.read_message_table import get_student_id_from_email, get_course_id_from_course_name, get_course_id_from_course_code
 import time
 import datetime
 import argon2
@@ -268,8 +271,8 @@ class Systems:
                 'Message has to be 1 to 500 characters inclusive in length')
 
         email = self.validate_token(token)
-        zid = validate_entity_exists('student_id', 'email', email)
-        course_id = read_course('course_id', 'course_name', course)
+        zid = get_student_id_from_email(email)
+        course_id = get_course_id_from_course_code(course)
 
         insert_message(message, course_id, zid)
 
@@ -290,13 +293,13 @@ class Systems:
         # '''
        
         email = self.validate_token(token)
-        course_id = read_course('course_id', 'course_name', course)
+        course_id = get_course_id_from_course_code(course)
         messages = read_messages_all(course_id)
 
         # Convert the list of tuple returned by database to a list of dictionaries
         num_messages = len(messages)
         altered_message = []
-        zid = validate_entity_exists('student_id', 'email', email)
+        zid = get_student_id_from_email(email)
         if num_messages > 0:
             # check if messages is sent by current user, if yes then set field "current_user" to true otherwise to false
             for x in range(0, num_messages):
@@ -312,23 +315,25 @@ class Systems:
                 altered_message.append(new)
         return altered_message
 
-    # def members_list(self, token, course):
-    #     # '''
-    #     # Return all information of an user
+    def members_list(self, token, course):
+        # '''
+        # Return all information of an user
 
-    #     # Arguments:
-    #     #     token - string
-    #     #     course - course code e.g. COMP3900
+        # Arguments:
+        #     token - string
+        #     course - course code e.g. COMP3900
         
-    #     # Exceptions:
-    #     #   None
+        # Exceptions:
+        #   None
         
-    #     # Return Value:
-    #     #     - A list of members. E.g. 
-    #     # 
+        # Return Value:
+        #     - A list of members. E.g. 
+        # 
        
-    #     email = self.validate_token(token)
-    #     course_id = read_course('course_id', 'course_name', course)
+        email = self.validate_token(token)
+        course_id = get_course_id_from_course_code(course)
+        members = grabCourseMembers(ccourse_id)
+        return members
 
 
 # var =  Systems()
