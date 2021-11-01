@@ -10,6 +10,7 @@ create table Students (
     login_token     varchar(500),
     degree          varchar(70),
     course          varchar(500),
+    bio             varchar(500),
     timetable_week_1    varchar(30000),
     timetable_week_2    varchar(30000),
     timetable_week_3    varchar(30000),

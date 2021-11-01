@@ -55,9 +55,9 @@ def auth_login_route():
 def auth_logout_route():
     ''' Logs user out when given a valid token '''
     token = request.get_json()['token']
-
+    # print('before is_success:', token)
     is_success = system.logout(token)
-
+    # print(token)
 
     return dumps(is_success)
 
@@ -106,8 +106,12 @@ def linking_route():
         for i in range(10):
             var = str(i+1)
             col_name = fixed + var
-            update_user_data(col_name, 'email', timetables[i], personal_email)
-        
+
+            print(col_name)
+            
+            update_user_data(col_name, 'email', timetables[i].replace("%", "%%"), personal_email)
+
+
         # For frontend
         is_success = True
         return dumps({'is_success': is_success,})
