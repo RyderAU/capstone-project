@@ -1,5 +1,6 @@
 import "./TimetableScripts/fullcalendar-3.9.0-min.css";
 import "./Timetable.css";
+import axios from 'axios';
 
 import { useState } from "react";
 
@@ -24,6 +25,23 @@ const Timetable = () => {
     ],
   };
 
+  // fetch(`http://localhost:5050/dashboard/timetable`, {
+  //   'methods': 'GET',
+  //   headers: {
+  //     'Content-Type':'application/json'
+  //   }
+  //  })
+  //  .then(res => {console.log(res)})
+  //  .catch(err => console.log(err))
+  // axios.get('http://localhost:5050/dashboard/timetable').then(res => console.log(res));
+
+  const fetchData = () => {
+    const getTimetable = axios.get('/dashboard/timetable');
+    axios.all([getTimetable]).then(res => console.log(res))
+  };
+
+  fetchData();
+
   const [current, setCurrent] = useState(0);
   const length = res.timetables.length;
 
@@ -34,8 +52,6 @@ const Timetable = () => {
   const prevSlide = () => {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
-
-  console.log(current);
 
   return (
     <div className="timetable-container">
