@@ -1,7 +1,4 @@
-import "./TimetableScripts/myunsw-bootstrap-min.css";
-import "./TimetableScripts/myunsw-custom-min.css";
 import "./TimetableScripts/fullcalendar-3.9.0-min.css";
-import "./TimetableScripts/fullcalendar-3.9.0-print-min.css";
 import "./Timetable.css";
 
 import { useState } from "react";
