@@ -166,8 +166,8 @@ def user_profile_setbio_flask():
     json_dic = json.loads(request.get_json())
     if 'bio' in json_dic:
         bio = request.get_json()['bio']
-        if bio is None or len(bio) not in range(1, 301):
-            raise InputError('Bio should be between 1 and 300 characters inclusive')
+        if bio is None or len(bio) not in range(1, 501):
+            raise InputError('Bio should be between 1 and 500 characters inclusive')
             
         try:
             # Insert into the database
