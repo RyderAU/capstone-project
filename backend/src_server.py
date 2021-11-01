@@ -127,7 +127,7 @@ def linking_route():
 #------------------------------------------------------------------------------#
 
 @APP.route("/dashboard/timetable", methods=['GET'])
-def user_profile_flask():
+def user_timetable_flask():
     '''returns timetables of a user'''
 
     token = request.get_json()['token']
