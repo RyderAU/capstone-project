@@ -45,6 +45,14 @@ const NavBar = () => {
 
   return (
     <div className="nav-container">
+      <button
+        onClick={() => {
+          history.push("/");
+          history.push(`dashboard/${courses[0]}/chat`);
+        }}
+      >
+        home
+      </button>
       <ul>
         <button onClick={() => handleLogout()}>Log Out</button>
       </ul>
@@ -55,6 +63,14 @@ const NavBar = () => {
         }}
       >
         timetable
+      </button>
+      <button
+        onClick={() => {
+          history.push("/");
+          history.push("dashboard/profile");
+        }}
+      >
+        profile
       </button>
     </div>
   );
