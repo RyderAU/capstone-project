@@ -136,7 +136,7 @@ def grabCourseIDs(email, password):
         userDetails['zID'] = email[0:8]
     # Web crawl page and extract courses and degree
         
-    print(userDetails)
+    # print(userDetails)
     
     # Close the web browser
     driver.close()
