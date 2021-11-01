@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { StoreContext } from "../Store";
 import { useHistory, NavLink } from "react-router-dom";
+import home from "../images/homeicon.png";
 import "./NavBar.css";
 
 const NavBar = () => {
@@ -45,17 +46,19 @@ const NavBar = () => {
 
   return (
     <div className="nav-container">
-      <button
+      <img
+        src={home}
+        alt=""
+        style={{ margin: "5px" }}
         onClick={() => {
           history.push("/");
           history.push(`dashboard/${courses[0]}/chat`);
         }}
-      >
-        home
-      </button>
+      />
       <ul>
         <button onClick={() => handleLogout()}>Log Out</button>
       </ul>
+
       <button
         onClick={() => {
           history.push("/");
