@@ -1,0 +1,17 @@
+.profile-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+  height: 90vh;
+  background-color: lightgrey;
+}
+
+.profile-photo {
+  padding: 40px;
+}
+
+.profile-description {
+  padding: 40px;
+  line-height: 3;
+  font-size: 15pt;
+}
