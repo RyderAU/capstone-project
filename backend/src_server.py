@@ -84,6 +84,7 @@ def linking_route():
     email = request.get_json()['email']
     password = request.get_json()['password']
     token = request.get_json()['token']
+    print("frontend token: " + token)
 
     try:
         # Grab user relevant details using selenium library
@@ -124,6 +125,21 @@ def linking_route():
 #------------------------------------------------------------------------------#
 #                              routes: profile                                 #
 #------------------------------------------------------------------------------#
+
+@APP.route("/dashboard/timetable", methods=['GET'])
+def user_profile_flask():
+    '''returns timetables of a user'''
+
+    token = request.get_json()['token']
+    try:
+        # Grab data from the database
+        email = system.validate_token(token)
+        timetables = system.timetables(email)
+        
+        return dumps(timetables)
+    except Exception as e:
+        # Error in selenium or error in inserting into database
+        raise e
 
 @APP.route("/dashboard/profile", methods=['GET'])
 def user_profile_flask():

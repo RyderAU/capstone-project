@@ -214,6 +214,8 @@ class Systems:
             {"session_id": session_id, "email": email}, "thisisakey", algorithm="HS256")
         token = str(token)
         token = token[2:-1]
+
+        print("stored token: " + token)
         # token = jwt.encode({session_id,"email": email}, "thisisakey", algorithm="HS256")
 
         # store into database
@@ -223,24 +225,17 @@ class Systems:
         # return {'is_success': is_success,}
         return {"token": token}
 
-    def profile(self, email):
+    def timetalbes(self, email):
         # '''
-        # Return all information of an user
+        # Return all timetables of an user
 
         # Arguments:
         #     email - string
 
         # Return Value:
-        #     - returns dictionary including fields of username, actual name, zid, degree, courses, biography, timetable
+        #     - returns dictionary including fields of timetable
         # '''
 
-        username = validate_entity_exists('display_name', 'email', email)
-        real_name = validate_entity_exists('name', 'email', email)
-        zid = validate_entity_exists('student_id', 'email', email)
-        degree = validate_entity_exists('degree', 'email', email)
-        bio = validate_entity_exists('bio', 'email', email)
-        courses = validate_entity_exists('course', 'email', email)
-        courses = courses.replace(",", ", ")
         # Grab timetables from database and put them into a list
         timetables = []
         fixed = 'timetable_week_'
@@ -249,7 +244,28 @@ class Systems:
             col_name = fixed + var
             table = validate_entity_exists(col_name, 'email', email)
             timetables.append(table)
-        return {"username": username, "real_name": real_name, "zid": zid, "degree": degree, "bio": bio, "courses": courses, "timetables": timetables}
+        return {"timetables": timetables, }
+    
+    def profile(self, email):
+        # '''
+        # Return all timetables of an user
+
+        # Arguments:
+        #     email - string
+
+        # Return Value:
+        #     - returns dictionary including fields of user info except timetables
+        # '''
+
+        # Grab timetables from database and put them into a list
+        username = validate_entity_exists('display_name', 'email', email)
+        real_name = validate_entity_exists('name', 'email', email)
+        zid = validate_entity_exists('student_id', 'email', email)
+        degree = validate_entity_exists('degree', 'email', email)
+        bio = validate_entity_exists('bio', 'email', email)
+        courses = validate_entity_exists('course', 'email', email)
+        courses = courses.replace(",", ", ")
+        return {"username": username, "real_name": real_name, "zid": zid, "degree": degree, "bio": bio, "courses": courses, }
 
     def message_send(self, token, course, message):
         # '''
