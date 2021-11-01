@@ -55,9 +55,9 @@ def auth_login_route():
 def auth_logout_route():
     ''' Logs user out when given a valid token '''
     token = request.get_json()['token']
-    print('before is_success:', token)
+    # print('before is_success:', token)
     is_success = system.logout(token)
-    print(token)
+    # print(token)
 
     return dumps(is_success)
 
