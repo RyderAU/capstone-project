@@ -23,7 +23,7 @@ def update_user_data(column1, column2, value1, value2):
         cur.execute(query, (column1, value1, column2, value2,))
         # commit the changes to the database
         conn.commit()
-        print('successfully updated')
+        # print('successfully updated')
         # close communication with the database
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
