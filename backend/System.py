@@ -5,8 +5,10 @@ from database.read_db import read_db
 from database.validate_entity_exists import validate_entity_exists
 from database.update_user import update_user_data
 from database.grab_course_members import grabCourseMembers
+
 from database.messages.insert_message import insert_message
 from database.messages.read_message_table import get_student_id_from_email, get_course_id_from_course_name
+
 import time
 import datetime
 import argon2
@@ -271,11 +273,13 @@ class Systems:
 
         email = self.validate_token(token)
         zid = get_student_id_from_email(email)
+
         course_id = get_course_id_from_course_name(course)
 
         insert_message(message, course_id, zid)
 
     def message_list_all(self, token, course):
+
         # '''
         # Return all information of an user
 
@@ -292,7 +296,9 @@ class Systems:
         # '''
        
         email = self.validate_token(token)
+
         course_id = get_course_id_from_course_name(course)
+
         messages = read_messages_all(course_id)
 
         # Convert the list of tuple returned by database to a list of dictionaries
@@ -330,7 +336,9 @@ class Systems:
         # 
        
         email = self.validate_token(token)
+
         course_id = get_course_id_from_course_name(course)
+
         members = grabCourseMembers(ccourse_id)
         return members
 

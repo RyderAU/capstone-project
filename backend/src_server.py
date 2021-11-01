@@ -106,9 +106,11 @@ def linking_route():
         for i in range(10):
             var = str(i+1)
             col_name = fixed + var
+
             print(col_name)
             
             update_user_data(col_name, 'email', timetables[i].replace("%", "%%"), personal_email)
+
 
         # For frontend
         is_success = True
