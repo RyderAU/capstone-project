@@ -5,7 +5,7 @@ import { StoreContext } from '../Store';
 import { ContainerMembers, MembersTitle } from "./ChatCSS";
 import ChatMembersComponent from './ChatMembersComponent';
 
-const Members = (courseid) => {
+const Members = ( {courseid} ) => {
   const [seconds, setSeconds] = useState(0);
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
@@ -17,7 +17,8 @@ const Members = (courseid) => {
   const getMembers = (courseid) => {
     console.log("Loading members...");
 
-    const tokenLocal = localStorage.getItem("token");
+    // const tokenLocal = localStorage.getItem("token");
+    console.log(courseid);
     axios.get(`${url}/channel/members?token=${token}&course_name=${courseid}`)
       .then(r => {
         handleSuccess(r);
@@ -30,7 +31,7 @@ const Members = (courseid) => {
   // Case 1: API returns success
   const handleSuccess = (response) => {
     console.log('Members successfully loaded');
-    console.log(response.data["member_details"]);
+    // console.log(response.data["member_details"]);
     setMembers(response.data["member_details"]);
 
     let members_list = [];

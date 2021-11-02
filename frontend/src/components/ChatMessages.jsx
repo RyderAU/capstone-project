@@ -6,7 +6,7 @@ import ChatMessagesComponent from './ChatMessagesComponent';
 import MessageSend from './MessageSend';
 import { ContainerChat, ChatMessagesList } from "../components/ChatCSS";
 
-const ChatMessages = (courseid) => {
+const ChatMessages = ( {courseid} ) => {
 // const ChatMessages = (messages, courseid) => {
   const [messagesList, setMessagesList] = useState([]);
 
@@ -16,11 +16,14 @@ const ChatMessages = (courseid) => {
   const [token, ] = context.token;
   const [messages, setMessages] = useState([]);
 
+  // console.log(courseid.courseid["courseid"]);
   // Send request to backend to retrieve all messages
   const getMessages = (courseid) => {
     console.log("Loading messages...");
 
     const tokenLocal = localStorage.getItem("token");
+    // console.log("HHHHHHHHHHHHH:" + courseid);
+    console.log(courseid);
     axios.get(`${url}/message/listall?token=${token}&course_name=${courseid}`)
       .then(r => {
         handleSuccess(r);
@@ -39,7 +42,7 @@ const ChatMessages = (courseid) => {
     let messages_list = [];
     for (let i=messages.length; i > 0; i--) {
         const msg_component = messages[i-1];
-        console.log(msg_component);
+        // console.log(msg_component);
         messages_list.push(
           <ChatMessagesComponent key={i} message={msg_component} />
         )
@@ -56,7 +59,7 @@ const ChatMessages = (courseid) => {
   React.useEffect(() => {
     window.setInterval(() => {
       setSeconds(s => s + 1);
-    }, 2000)
+    }, 1000)
   }, []);
 
   React.useEffect(() => {

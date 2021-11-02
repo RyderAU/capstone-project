@@ -7,7 +7,7 @@ import ChatMessages from "./ChatMessages";
 import ChatMembers from './ChatMembers';
 
 
- const Chat = (courseid) => {
+ const Chat = ( {courseid} ) => {
 
   return (
       <ContainerMain aria-label="chat-members-container">

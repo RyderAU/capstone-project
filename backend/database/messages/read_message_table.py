@@ -60,6 +60,7 @@ def get_course_id_from_course_name(course_name):
         if conn is not None:
             conn.close()
 
+# print(get_course_id_from_course_name('COMP4920'))
 
 # Get course_id, read all the message list differentiated by course group
 
