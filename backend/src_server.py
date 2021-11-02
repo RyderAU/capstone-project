@@ -204,7 +204,7 @@ def user_profile_setbio_flask():
 # #------------------------------------------------------------------------------#
 
 # routing path????
-@APP.route("/message_send", methods=['POST'])
+@APP.route("/message/send", methods=['POST'])
 def message_send_route():
     '''Sends a message'''
     token = request.get_json()['token']
@@ -214,7 +214,7 @@ def message_send_route():
     system.message_send(token, course, message)
     return dumps({'is_success': True,})
 
-@APP.route("/message_listall", methods=['GET'])
+@APP.route("/message/listall", methods=['GET'])
 def message_list_all():
     '''Read all messages in the chat'''
     token = request.args.get('token')
@@ -223,7 +223,7 @@ def message_list_all():
     messages = system.message_list_all(token, course)
     return dumps({'course_messages': messages,})
 
-@APP.route("/channel_members", methods=['GET'])
+@APP.route("/channel/members", methods=['GET'])
 def channel_members():
     '''Get the list of members in a course group chat'''
     token = request.args.get('token')
