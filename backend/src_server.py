@@ -84,6 +84,7 @@ def linking_route():
     email = request.get_json()['email']
     password = request.get_json()['password']
     token = request.get_json()['token']
+    print("frontend token: " + token)
 
     try:
         # Grab user relevant details using selenium library
@@ -125,11 +126,34 @@ def linking_route():
 #                              routes: profile                                 #
 #------------------------------------------------------------------------------#
 
+@APP.route("/dashboard/timetable", methods=['GET'])
+def user_timetable_flask():
+    '''returns timetables of a user'''
+
+    token = request.args.get("token")
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    print(token)
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    # json_data = flask.request.json
+    # token = json_data["token"]    
+    # print('yooooooooooooooooooooooooooooooooooooooooooooooooooooooo')
+    # print(token)
+    # print('yooooooooooooooooooooooooooooooooooooooooooooooooooooooo')
+    try:
+        # Grab data from the database
+        email = system.validate_token(token)
+        timetables = system.timetables(email)
+        
+        return dumps(timetables)
+    except Exception as e:
+        # Error in selenium or error in inserting into database
+        raise e
+
 @APP.route("/dashboard/profile", methods=['GET'])
 def user_profile_flask():
     '''returns information of a user'''
 
-    token = request.get_json()['token']
+    token = request.args.get('token')
     try:
         # Grab data from the database
         email = system.validate_token(token)
@@ -150,8 +174,8 @@ def user_profile_setbio_flask():
     json_dic = json.loads(request.get_json())
     if 'bio' in json_dic:
         bio = request.get_json()['bio']
-        if bio is None or len(bio) not in range(1, 301):
-            raise InputError('Bio should be between 1 and 300 characters inclusive')
+        if bio is None or len(bio) not in range(1, 501):
+            raise InputError('Bio should be between 1 and 500 characters inclusive')
             
         try:
             # Insert into the database
@@ -193,8 +217,8 @@ def message_send_route():
 @APP.route("/message_list_all", methods=['GET'])
 def message_list_all():
     '''Read all messages in the chat'''
-    token = request.get_json()['token']
-    course = request.get_json()['course_name']
+    token = request.args.get('token')
+    course = request.args.get('course_name')
 
     messages = system.message_list_all(token, course)
     return dumps(messages)
@@ -202,8 +226,8 @@ def message_list_all():
 @APP.route("/channel_members", methods=['GET'])
 def channel_members():
     '''Get the list of members in a course group chat'''
-    token = request.get_json()['token']
-    course = request.get_json()['course_name']
+    token = request.args.get('token')
+    course = request.args.get('course_name')
 
     members = system.members_list(token, course)
     return dumps(members)
