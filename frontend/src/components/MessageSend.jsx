@@ -9,13 +9,14 @@ import ChatMessagesComponent from './ChatMessagesComponent';
  const MessageSend = (messagesList, setMessagesList, courseid) => {
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
+  const [token, ] = context.token;
   const [message, setMessage] = useState("");
 
   const handleMsgSend = () => {
     console.log("Message sender to send: " + message);
 
     axios.post(`${url}/message/send`, {
-      token: "token",
+      token: token,
       course_name: courseid,
       message: message,
     })

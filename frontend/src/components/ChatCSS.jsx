@@ -129,7 +129,44 @@ Icon.defaultProps = {
 export const ContainerMembers = styled.div`
   width: 25%;
   // height: 500px;
+  height: 84vh;
   display: flex;
   flex-direction: column;
-  background-color: #aaa;
+  background-color: #fff;
+  overflow-y: scroll;
+`;
+
+export const MemberList = styled.div`
+  margin-bottom: 5px;
+  width: 100%;
+  height: 50px;
+  // height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  background-color: #fff;
+  color: black;
+`;
+
+export const Member = styled.div`
+  display: flex;
+  flex-direciton: row;
+  // justify-content: center;
+  align-items: center;
+  height: 30px;
+`;
+
+export const MemberName = styled.div`
+  color: black;
+  font-size: 1em;
+  width: 50px;
+  margin-left: 15px;
+`;
+export const MembersTitle = styled.div`
+  color: black;
+  // text-align: center;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 10px auto;
 `;
