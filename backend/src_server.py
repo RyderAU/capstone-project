@@ -170,34 +170,37 @@ def user_profile_setbio_flask():
     '''returns an empty dictionary'''
 
     token = request.get_json()['token']
+    bio = request.get_json()['bio']
+    print(bio)
+    name = request.get_json()['display_name']
+    print(name)
+    # success = False
     # Test if the request is to set name or bio
-    json_dic = json.loads(request.get_json())
-    if 'bio' in json_dic:
-        bio = request.get_json()['bio']
-        if bio is None or len(bio) not in range(1, 501):
+    if bio is not None:
+        if len(bio) not in range(1, 501):
             raise InputError('Bio should be between 1 and 500 characters inclusive')
             
         try:
             # Insert into the database
             email = system.validate_token(token)
             update_user_data('bio', 'email', bio, email)
-            return dumps({'is_success': True,})
+            # success = True
         except Exception as e:
             # Error in selenium or error in inserting into database
             raise e
-    if 'display_name' in json_dic:
-        name = request.get_json()['display_name']
-        if name is None or len(name) not in range(1, 21):
+    if name is not None:
+        if len(name) not in range(1, 21):
             raise InputError('Username should be between 1 and 20 characters inclusive')
         try:
             # Insert into the database
             email = system.validate_token(token)
             update_user_data('display_name', 'email', name, email)
-            return dumps({'is_success': True,})
+            # success = True
         except Exception as e:
             # Error in selenium or error in inserting into database
             raise e
     
+    return dumps({'is_success': True,})
 
 # #------------------------------------------------------------------------------#
 # #                              routes: message                                 #
