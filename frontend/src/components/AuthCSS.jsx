@@ -1,4 +1,14 @@
 import styled from 'styled-components';
+import logoUNSWImage from "../images/logo.png"
+
+export const LogoUNSW = styled.img`
+  height: 36px;
+  width: 168px;
+`
+LogoUNSW.defaultProps = {
+  src: logoUNSWImage,
+  alt: "UNSW background",
+};
 
 export const Label = styled.label`
   margin: 8px auto;

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import backgroundImage from "../images/illustration.jpeg"
-import logoUNSWImage from "../images/unswlogo.png"
+// import backgroundImage from "../images/illustration.jpeg"
+import backgroundImage from "../images/sunrise.jpeg"
+// import logoUNSWImage from "../images/unswlogo.png"
+import logoUNSWImage from "../images/logo.png"
 
 export const Container = styled.div`
   width: 100vw;

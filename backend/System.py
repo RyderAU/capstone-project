@@ -7,7 +7,7 @@ from database.update_user import update_user_data
 from database.grab_course_members import grabCourseMembers
 
 from database.messages.insert_message import insert_message
-from database.messages.read_message_table import get_student_id_from_email, get_course_id_from_course_name
+from database.messages.read_message_table import get_student_id_from_email, get_course_id_from_course_name, get_message_list_by_course_id
 
 import time
 import datetime
@@ -315,7 +315,7 @@ class Systems:
 
         course_id = get_course_id_from_course_name(course)
 
-        messages = read_messages_all(course_id)
+        messages = get_message_list_by_course_id(course_id)
 
         # Convert the list of tuple returned by database to a list of dictionaries
         num_messages = len(messages)
@@ -325,14 +325,14 @@ class Systems:
             # check if messages is sent by current user, if yes then set field "current_user" to true otherwise to false
             for x in range(0, num_messages):
                 new = {}
-                new['message_content'] = messages[x][0]
-                username = validate_entity_exists('display_name', 'student_id', messages[x][1])
-                new['sender'] = username
-                new['message_time'] = messages[x][2].strftime("%m/%d/%Y, %H:%M:%S")
-                if messages[x][1] == zid:
-                    new['current_user'] = True
+                new['message'] = messages[x][1]
+                username = validate_entity_exists('display_name', 'student_id', messages[x][3])
+                new['name'] = username
+                new['timestamp'] = messages[x][2].strftime("%m/%d/%Y, %H:%M:%S")
+                if messages[x][3] == zid:
+                    new['is_current_user'] = True
                 else:
-                    new['current_user'] = False
+                    new['is_current_user'] = False
                 altered_message.append(new)
         return altered_message
 
@@ -353,9 +353,9 @@ class Systems:
        
         email = self.validate_token(token)
 
-        course_id = get_course_id_from_course_name(course)
+        # course_id = get_course_id_from_course_name(course)
 
-        members = grabCourseMembers(ccourse_id)
+        members = grabCourseMembers(course)
         return members
 
 

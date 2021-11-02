@@ -163,41 +163,44 @@ def user_profile_setbio_flask():
     '''returns an empty dictionary'''
 
     token = request.get_json()['token']
+    bio = request.get_json()['bio']
+    print(bio)
+    name = request.get_json()['display_name']
+    print(name)
+    # success = False
     # Test if the request is to set name or bio
-    json_dic = json.loads(request.get_json())
-    if 'bio' in json_dic:
-        bio = request.get_json()['bio']
-        if bio is None or len(bio) not in range(1, 501):
+    if bio is not None:
+        if len(bio) not in range(1, 501):
             raise InputError('Bio should be between 1 and 500 characters inclusive')
             
         try:
             # Insert into the database
             email = system.validate_token(token)
             update_user_data('bio', 'email', bio, email)
-            return dumps({'is_success': True,})
+            # success = True
         except Exception as e:
             # Error in selenium or error in inserting into database
             raise e
-    if 'display_name' in json_dic:
-        name = request.get_json()['display_name']
-        if name is None or len(name) not in range(1, 21):
+    if name is not None:
+        if len(name) not in range(1, 21):
             raise InputError('Username should be between 1 and 20 characters inclusive')
         try:
             # Insert into the database
             email = system.validate_token(token)
             update_user_data('display_name', 'email', name, email)
-            return dumps({'is_success': True,})
+            # success = True
         except Exception as e:
             # Error in selenium or error in inserting into database
             raise e
     
+    return dumps({'is_success': True,})
 
 # #------------------------------------------------------------------------------#
 # #                              routes: message                                 #
 # #------------------------------------------------------------------------------#
 
 # routing path????
-@APP.route("/message_send", methods=['POST'])
+@APP.route("/message/send", methods=['POST'])
 def message_send_route():
     '''Sends a message'''
     token = request.get_json()['token']
@@ -207,23 +210,23 @@ def message_send_route():
     system.message_send(token, course, message)
     return dumps({'is_success': True,})
 
-@APP.route("/message_list_all", methods=['GET'])
+@APP.route("/message/listall", methods=['GET'])
 def message_list_all():
     '''Read all messages in the chat'''
     token = request.args.get('token')
     course = request.args.get('course_name')
 
     messages = system.message_list_all(token, course)
-    return dumps(messages)
+    return dumps({'course_messages': messages,})
 
-@APP.route("/channel_members", methods=['GET'])
+@APP.route("/channel/members", methods=['GET'])
 def channel_members():
     '''Get the list of members in a course group chat'''
     token = request.args.get('token')
     course = request.args.get('course_name')
 
     members = system.members_list(token, course)
-    return dumps(members)
+    return dumps({'member_details': members,})
 
 
 #------------------------------------------------------------------------------#
