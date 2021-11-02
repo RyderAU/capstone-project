@@ -6,7 +6,7 @@ import { Input, MessageSendWrapper, Icon } from "../components/ChatCSS";
 import ChatMessagesComponent from './ChatMessagesComponent';
 
 
- const MessageSend = (messagesList, setMessagesList, courseid) => {
+ const MessageSend = ( {courseid} ) => {
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
   const [token, ] = context.token;
