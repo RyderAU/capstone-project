@@ -1,14 +1,15 @@
 import "./Feature.css";
 import { useParams } from "react-router";
+import { StoreContext } from '../Store';
+import Chat from "./Chat";
 
 const Feature = ({ selectedCourse }) => {
   const { courseid, feature } = useParams();
-  console.log(`this is the ${feature} feature`);
+  console.log(`this is the ${courseid} ${feature} feature`);
+
   return (
     <div key={selectedCourse} className="course-main">
-      <div>
-        {courseid} {feature}
-      </div>
+        {(feature == "chat") && <Chat courseid={courseid}/> }
     </div>
   );
 };

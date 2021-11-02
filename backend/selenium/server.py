@@ -91,23 +91,168 @@ def linking_route():
         "is_success": True
     })
 
+MESSAGES = [
+            {
+                "timestamp": 500,
+                "message": "1",
+                "name": "Shoan",
+                "is_current_user": True
+            },
+            {
+                "timestamp": 1000,
+                "message": "2",
+                "name": "The World",
+                "is_current_user": False
+            },
+            {
+                "timestamp": 1500,
+                "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+                "name": "Shoan",
+                "is_current_user": True
+            },
+            {
+                "timestamp": 500,
+                "message": "4",
+                "name": "Shoan",
+                "is_current_user": True
+            },
+            {
+                "timestamp": 1000,
+                "message": "5",
+                "name": "The World",
+                "is_current_user": False
+            },
+            {
+                "timestamp": 1500,
+                "message": "6",
+                "name": "Shoan",
+                "is_current_user": True
+            },
+            {
+                "timestamp": 500,
+                "message": "7",
+                "name": "Shoan",
+                "is_current_user": True
+            },
+            {
+                "timestamp": 1000,
+                "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+                "name": "The World",
+                "is_current_user": False
+            },
+            {
+                "timestamp": 1500,
+                "message": "9",
+                "name": "Shoan",
+                "is_current_user": True
+            },
+            {
+                "timestamp": 500,
+                "message": "10",
+                "name": "Shoan",
+                "is_current_user": True
+            },
+            {
+                "timestamp": 1000,
+                "message": "11",
+                "name": "The World",
+                "is_current_user": False
+            },
+            {
+                "timestamp": 1500,
+                "message": "12",
+                "name": "Shoan",
+                "is_current_user": True
+            },
+            {
+                "timestamp": 500,
+                "message": "hello world",
+                "name": "Shoan",
+                "is_current_user": True
+            },
+            {
+                "timestamp": 1000,
+                "message": "how about no",
+                "name": "The World",
+                "is_current_user": False
+            },
+            {
+                "timestamp": 1500,
+                "message": ":(",
+                "name": "Shoan",
+                "is_current_user": True
+            },
+]
 
-# @APP.route("/linking", methods=['POST'])
-# def linking_route():
-#     ''' Authenticates email / password and returns id / token '''
-#     email = request.get_json()['email']
-#     password = request.get_json()['password']
+@APP.route("/message/listall", methods=['GET'])
+def message_list_all_route():
+    ''' Authenticates email / password and returns id / token '''
+    token = request.args.get("token", "null")
+    course_name = request.args.get("course_name", "null")
 
-#     details = grabCourseIDs(email, password)
-#     time.sleep(5) #remove later, just for frontend testing
-#     return dumps({
-#         "courses": details["courses"]
-#     })
+    # details = grabCourseIDs(email, password)
+    print("Inside message listall")
+    print(f'{token} {course_name}')
+    # time.sleep(2) #remove later, just for frontend testing
 
+    global MESSAGES
+    return dumps({
+        "course_messages": MESSAGES
+    })
+
+@APP.route("/message/send", methods=['POST'])
+def message_send_route():
+    ''' Authenticates email / password and returns id / token '''
+    token = request.get_json()['token']
+    message = request.get_json()['message']
+
+    # details = grabCourseIDs(email, password)
+
+    print("Inside message send")
+    print(f'{token} {message}')
+
+    new_message = {
+        "timestamp": 2000,
+        "message": message,
+        "name": "Shoan",
+        "is_current_user": True
+    }
+    global MESSAGES
+    MESSAGES.append(new_message)
+    print(MESSAGES)
+
+    return dumps({
+        "is_success": True
+    })
+
+@APP.route("/channel/members", methods=['GET'])
+def channel_members():
+    ''' Authenticates email / password and returns id / token '''
+    token = request.args.get("token", "null")
+    course_name = request.args.get("course_name", "null")
+
+    # details = grabCourseIDs(email, password)
+    print("Inside channel members")
+    print(f'{token} {course_name}')
+    # time.sleep(2) #remove later, just for frontend testing
+
+    return dumps({
+        "member_details": [
+            {
+                "name": "Bob",
+            },
+            {
+                "name": "Tammy",
+            },
+            {
+                "name": "Timothy",
+            },
+        ]
+    })
 
 #------------------------------------------------------------------------------#
 #                          routes: workspace/reset                             #
 #------------------------------------------------------------------------------#
 
 if __name__ == "__main__":
-    APP.run(port=(3030), debug=False)
+    APP.run(port=(3030), debug=True)
