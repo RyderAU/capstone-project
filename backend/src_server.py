@@ -130,7 +130,15 @@ def linking_route():
 def user_timetable_flask():
     '''returns timetables of a user'''
 
-    token = request.get_json()['token']
+    token = request.args.get("token")
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    print(token)
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    # json_data = flask.request.json
+    # token = json_data["token"]    
+    # print('yooooooooooooooooooooooooooooooooooooooooooooooooooooooo')
+    # print(token)
+    # print('yooooooooooooooooooooooooooooooooooooooooooooooooooooooo')
     try:
         # Grab data from the database
         email = system.validate_token(token)
@@ -145,7 +153,7 @@ def user_timetable_flask():
 def user_profile_flask():
     '''returns information of a user'''
 
-    token = request.get_json()['token']
+    token = request.args.get('token')
     try:
         # Grab data from the database
         email = system.validate_token(token)
@@ -209,8 +217,8 @@ def message_send_route():
 @APP.route("/message_list_all", methods=['GET'])
 def message_list_all():
     '''Read all messages in the chat'''
-    token = request.get_json()['token']
-    course = request.get_json()['course_name']
+    token = request.args.get('token')
+    course = request.args.get('course_name')
 
     messages = system.message_list_all(token, course)
     return dumps(messages)
@@ -218,8 +226,8 @@ def message_list_all():
 @APP.route("/channel_members", methods=['GET'])
 def channel_members():
     '''Get the list of members in a course group chat'''
-    token = request.get_json()['token']
-    course = request.get_json()['course_name']
+    token = request.args.get('token')
+    course = request.args.get('course_name')
 
     members = system.members_list(token, course)
     return dumps(members)

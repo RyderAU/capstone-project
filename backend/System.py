@@ -225,7 +225,7 @@ class Systems:
         # return {'is_success': is_success,}
         return {"token": token}
 
-    def timetalbes(self, email):
+    def timetables(self, email):
         # '''
         # Return all timetables of an user
 
