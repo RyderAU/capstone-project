@@ -37,7 +37,7 @@ def get_student_id_from_email(email):
 # Receive 'course_name' return 'course_id'
 def get_course_id_from_course_name(course_name):
     # Grab data
-    select_query = "select course_id from students where course_name='" + course_name + "';"
+    select_query = "select course_id from courses where course_name='" + course_name + "';"
     conn = None
     course_id = ''
     try:
@@ -84,7 +84,8 @@ def get_message_list_by_course_id(course_id):
 
         cur.execute(select_query)
         message_info = cur.fetchall()
-        return(message_info)
+        print("THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS", list(message_info))
+        return(list(message_info))
         # close communication with the database
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:

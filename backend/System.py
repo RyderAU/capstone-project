@@ -7,7 +7,7 @@ from database.update_user import update_user_data
 from database.grab_course_members import grabCourseMembers
 
 from database.messages.insert_message import insert_message
-from database.messages.read_message_table import get_student_id_from_email, get_course_id_from_course_name
+from database.messages.read_message_table import get_student_id_from_email, get_course_id_from_course_name, get_message_list_by_course_id
 
 import time
 import datetime
@@ -315,7 +315,7 @@ class Systems:
 
         course_id = get_course_id_from_course_name(course)
 
-        messages = read_messages_all(course_id)
+        messages = get_message_list_by_course_id(course_id)
 
         # Convert the list of tuple returned by database to a list of dictionaries
         num_messages = len(messages)
@@ -353,9 +353,9 @@ class Systems:
        
         email = self.validate_token(token)
 
-        course_id = get_course_id_from_course_name(course)
+        # course_id = get_course_id_from_course_name(course)
 
-        members = grabCourseMembers(ccourse_id)
+        members = grabCourseMembers(course)
         return members
 
 
