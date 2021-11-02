@@ -15,6 +15,7 @@ import ChatMessagesComponent from './ChatMessagesComponent';
   const handleMsgSend = () => {
     console.log("Message sender to send: " + message);
 
+    console.log(courseid);
     axios.post(`${url}/message/send`, {
       token: token,
       course_name: courseid,
