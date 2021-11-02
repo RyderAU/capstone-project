@@ -37,7 +37,7 @@ def get_student_id_from_email(email):
 # Receive 'course_name' return 'course_id'
 def get_course_id_from_course_name(course_name):
     # Grab data
-    select_query = "select course_id from students where course_name='" + course_name + "';"
+    select_query = "select course_id from courses where course_name='" + course_name + "';"
     conn = None
     course_id = ''
     try:
@@ -60,6 +60,7 @@ def get_course_id_from_course_name(course_name):
         if conn is not None:
             conn.close()
 
+# print(get_course_id_from_course_name('COMP4920'))
 
 # Get course_id, read all the message list differentiated by course group
 
