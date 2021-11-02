@@ -17,10 +17,7 @@ const Members = (courseid) => {
   const getMembers = (courseid) => {
     console.log("Loading members...");
 
-    axios.get(`${url}/channel/members`, {
-      token: token,
-      course_name: courseid,
-    })
+    axios.get(`${url}/channel/members?token=${token}&course_name=${courseid}`)
       .then(r => {
         handleSuccess(r);
       })
@@ -38,7 +35,7 @@ const Members = (courseid) => {
     let members_list = [];
     for (let i=members.length; i > 0; i--) {
         const mem_component = members[i-1];
-        console.log(mem_component);
+        // console.log(mem_component);
         members_list.push(
           <ChatMembersComponent member={mem_component} />
         )

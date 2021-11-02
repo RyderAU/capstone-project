@@ -20,10 +20,7 @@ const ChatMessages = (courseid) => {
   const getMessages = (courseid) => {
     console.log("Loading messages...");
 
-    axios.get(`${url}/message/listall`, {
-      token: token,
-      course_name: courseid,
-    })
+    axios.get(`${url}/message/listall?token=${token}&course_name=${courseid}`)
       .then(r => {
         handleSuccess(r);
       })
