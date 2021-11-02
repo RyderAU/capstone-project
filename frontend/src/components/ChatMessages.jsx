@@ -59,7 +59,7 @@ const ChatMessages = ( {courseid} ) => {
   React.useEffect(() => {
     window.setInterval(() => {
       setSeconds(s => s + 1);
-    }, 1000)
+    }, 5000)
   }, []);
 
   React.useEffect(() => {
