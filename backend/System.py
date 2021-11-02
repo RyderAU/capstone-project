@@ -330,9 +330,9 @@ class Systems:
                 new['name'] = username
                 new['timestamp'] = messages[x][2].strftime("%m/%d/%Y, %H:%M:%S")
                 if messages[x][1] == zid:
-                    new['Is_current_user'] = True
+                    new['is_current_user'] = True
                 else:
-                    new['Is_current_user'] = False
+                    new['is_current_user'] = False
                 altered_message.append(new)
         return altered_message
 
