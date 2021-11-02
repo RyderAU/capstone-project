@@ -52,6 +52,7 @@ import { LoginForm, Title, Label, Input, Button,
 
     // Stores token
     setToken(response.data["token"]);
+    localStorage.setItem("token", response.data["token"]);
     // Resets all text fields
     resetFields();
     history.push(`/dashboard/${courses[0]}/chat`);

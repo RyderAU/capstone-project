@@ -3,7 +3,7 @@ import { StoreContext } from '../Store';
 import { useHistory } from 'react-router-dom'
 // import components
 import { Container, LandingContainer, Title, Label, Input, Button,
-  ButtonSecondary, BigTitle } from "../components/AuthCSS";
+  ButtonSecondary, BigTitle, LogoUNSW } from "../components/AuthCSS";
 
 /**
  * Landing page
@@ -30,9 +30,10 @@ const Landing = () => {
   return (
       <div>
       <Container>
-        {/* <BigTitle> Tired of the slow, pre-historic UNSW portal? Find all your needs in one place. </BigTitle> */}
+        <BigTitle> Tired of the clutter? Find all your needs in one place. </BigTitle>
         <LandingContainer>
           <Title>ourUNSW</Title>
+          {/* <LogoUNSW /> */}
 
           <Button onClick={() => handleLogin()} type="submit" id ="login-redirect"
             aria-label="login-button-redirect">
