@@ -17,6 +17,7 @@ const Members = (courseid) => {
   const getMembers = (courseid) => {
     console.log("Loading members...");
 
+    const tokenLocal = localStorage.getItem("token");
     axios.get(`${url}/channel/members?token=${token}&course_name=${courseid}`)
       .then(r => {
         handleSuccess(r);

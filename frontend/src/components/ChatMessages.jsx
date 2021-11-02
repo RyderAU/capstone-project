@@ -20,6 +20,7 @@ const ChatMessages = (courseid) => {
   const getMessages = (courseid) => {
     console.log("Loading messages...");
 
+    const tokenLocal = localStorage.getItem("token");
     axios.get(`${url}/message/listall?token=${token}&course_name=${courseid}`)
       .then(r => {
         handleSuccess(r);
