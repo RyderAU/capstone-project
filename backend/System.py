@@ -325,11 +325,11 @@ class Systems:
             # check if messages is sent by current user, if yes then set field "current_user" to true otherwise to false
             for x in range(0, num_messages):
                 new = {}
-                new['message'] = messages[x][0]
-                username = validate_entity_exists('display_name', 'student_id', messages[x][1])
+                new['message'] = messages[x][1]
+                username = validate_entity_exists('display_name', 'student_id', messages[x][3])
                 new['name'] = username
                 new['timestamp'] = messages[x][2].strftime("%m/%d/%Y, %H:%M:%S")
-                if messages[x][1] == zid:
+                if messages[x][3] == zid:
                     new['is_current_user'] = True
                 else:
                     new['is_current_user'] = False
