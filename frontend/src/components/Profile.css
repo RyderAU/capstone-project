@@ -3,7 +3,6 @@
   justify-content: space-around;
   margin: 10px;
   height: 90vh;
-  background-color: lightgrey;
 }
 
 .profile-photo {
@@ -11,7 +10,22 @@
 }
 
 .profile-description {
-  padding: 40px;
-  line-height: 3;
+  padding: 20px;
+  margin: 20px;
+  line-height: 2;
   font-size: 15pt;
+  background-color: lightpink;
+  border-radius: 15px;
+}
+
+.title {
+  font-size: 20pt;
+}
+
+.field-entry {
+  font-size: 15pt;
+}
+
+.save-changes-button {
+  border: 1px solid black;
 }

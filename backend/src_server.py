@@ -131,14 +131,7 @@ def user_timetable_flask():
     '''returns timetables of a user'''
 
     token = request.args.get("token")
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    print(token)
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    # json_data = flask.request.json
-    # token = json_data["token"]    
-    # print('yooooooooooooooooooooooooooooooooooooooooooooooooooooooo')
-    # print(token)
-    # print('yooooooooooooooooooooooooooooooooooooooooooooooooooooooo')
+    
     try:
         # Grab data from the database
         email = system.validate_token(token)
