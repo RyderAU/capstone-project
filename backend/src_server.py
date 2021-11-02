@@ -55,9 +55,9 @@ def auth_login_route():
 def auth_logout_route():
     ''' Logs user out when given a valid token '''
     token = request.get_json()['token']
-
+    # print('before is_success:', token)
     is_success = system.logout(token)
-
+    # print(token)
 
     return dumps(is_success)
 
@@ -99,9 +99,19 @@ def linking_route():
         update_user_data('degree', 'email', userDetails.get("degree"), personal_email)
         update_user_data('name', 'email', userDetails.get("name"), personal_email)
         update_user_data('course', 'email', db_courses, personal_email)
-
         update_user_data('token', 'email', '', personal_email)
-        
+
+        timetables = userDetails.get("timetables")
+        fixed = 'timetable_week_'
+        for i in range(10):
+            var = str(i+1)
+            col_name = fixed + var
+
+            print(col_name)
+            
+            update_user_data(col_name, 'email', timetables[i].replace("%", "%%"), personal_email)
+
+
         # For frontend
         is_success = True
         return dumps({'is_success': is_success,})
@@ -112,13 +122,99 @@ def linking_route():
 
 
 #------------------------------------------------------------------------------#
+#                              routes: profile                                 #
+#------------------------------------------------------------------------------#
+
+@APP.route("/dashboard/profile", methods=['GET'])
+def user_profile_flask():
+    '''returns information of a user'''
+
+    token = request.get_json()['token']
+    try:
+        # Grab data from the database
+        email = system.validate_token(token)
+        info = system.profile(email)
+        
+        return dumps(info)
+    except Exception as e:
+        # Error in selenium or error in inserting into database
+        raise e
+
+
+@APP.route("/dashboard/profile", methods=['POST'])
+def user_profile_setbio_flask():
+    '''returns an empty dictionary'''
+
+    token = request.get_json()['token']
+    # Test if the request is to set name or bio
+    json_dic = json.loads(request.get_json())
+    if 'bio' in json_dic:
+        bio = request.get_json()['bio']
+        if bio is None or len(bio) not in range(1, 301):
+            raise InputError('Bio should be between 1 and 300 characters inclusive')
+            
+        try:
+            # Insert into the database
+            email = system.validate_token(token)
+            update_user_data('bio', 'email', bio, email)
+            return dumps({'is_success': True,})
+        except Exception as e:
+            # Error in selenium or error in inserting into database
+            raise e
+    if 'display_name' in json_dic:
+        name = request.get_json()['display_name']
+        if name is None or len(name) not in range(1, 21):
+            raise InputError('Username should be between 1 and 20 characters inclusive')
+        try:
+            # Insert into the database
+            email = system.validate_token(token)
+            update_user_data('display_name', 'email', name, email)
+            return dumps({'is_success': True,})
+        except Exception as e:
+            # Error in selenium or error in inserting into database
+            raise e
+    
+
+# #------------------------------------------------------------------------------#
+# #                              routes: message                                 #
+# #------------------------------------------------------------------------------#
+
+# routing path????
+@APP.route("/message_send", methods=['POST'])
+def message_send_route():
+    '''Sends a message'''
+    token = request.get_json()['token']
+    course = request.get_json()['course_name']
+    message = request.get_json()['message']
+
+    system.message_send(token, course, message)
+    return dumps({'is_success': True,})
+
+@APP.route("/message_list_all", methods=['GET'])
+def message_list_all():
+    '''Read all messages in the chat'''
+    token = request.get_json()['token']
+    course = request.get_json()['course_name']
+
+    messages = system.message_list_all(token, course)
+    return dumps(messages)
+
+@APP.route("/channel_members", methods=['GET'])
+def channel_members():
+    '''Get the list of members in a course group chat'''
+    token = request.get_json()['token']
+    course = request.get_json()['course_name']
+
+    members = system.members_list(token, course)
+    return dumps(members)
+
+
+#------------------------------------------------------------------------------#
 #                          routes: workspace/reset                             #
 #------------------------------------------------------------------------------#
 
 if __name__ == "__main__":
     APP.run(port=(3030), debug=True)
-
-
 
 #------------------------------------------------------------------------------#
 #                              routes: channel                                 #
@@ -228,95 +324,6 @@ if __name__ == "__main__":
 
 #     channel_id = channels_create(token, name, int(is_public))
 #     return dumps(channel_id)
-
-
-# #------------------------------------------------------------------------------#
-# #                              routes: message                                 #
-# #------------------------------------------------------------------------------#
-
-# @APP.route("/message/send", methods=['POST'])
-# def message_send_route():
-#     '''Sends a message'''
-#     token = request.get_json()['token']
-#     channel_id = request.get_json()['channel_id']
-#     message = request.get_json()['message']
-
-#     message_id = message_send(token, int(channel_id), message)
-#     return dumps(message_id)
-
-
-# @APP.route("/message/sendlater", methods=['POST'])
-# def message_sendlater_route():
-#     '''Sends a message after a buffer time'''
-#     token = request.get_json()['token']
-#     channel_id = request.get_json()['channel_id']
-#     message = request.get_json()['message']
-#     time_sent = request.get_json()['time_sent']
-
-#     message_id = message_sendlater(token, int(channel_id), message, int(time_sent))
-#     return dumps(message_id)
-
-
-# @APP.route("/message/react", methods=['POST'])
-# def message_react_route():
-#     '''Reacts to a message'''
-#     token = request.get_json()['token']
-#     message_id = request.get_json()['message_id']
-#     react_id = request.get_json()['react_id']
-
-#     empty_dict = message_react(token, int(message_id), int(react_id))
-#     return dumps(empty_dict)
-
-
-# @APP.route("/message/unreact", methods=['POST'])
-# def message_unreact_route():
-#     '''unreacts to a message'''
-#     token = request.get_json()['token']
-#     message_id = request.get_json()['message_id']
-#     react_id = request.get_json()['react_id']
-
-#     empty_dict = message_unreact(token, int(message_id), int(react_id))
-#     return dumps(empty_dict)
-
-
-# @APP.route("/message/pin", methods=['POST'])
-# def message_pin_route():
-#     '''Pins to a message'''
-#     token = request.get_json()['token']
-#     message_id = request.get_json()['message_id']
-
-#     empty_dict = message_pin(token, int(message_id))
-#     return dumps(empty_dict)
-
-
-# @APP.route("/message/unpin", methods=['POST'])
-# def message_unpin_route():
-#     '''Unpins to a message'''
-#     token = request.get_json()['token']
-#     message_id = request.get_json()['message_id']
-
-#     empty_dict = message_unpin(token, int(message_id))
-#     return dumps(empty_dict)
-
-# @APP.route("/message/remove", methods=['DELETE'])
-# def message_remove_route():
-#     '''Removes a message'''
-#     token = request.get_json()['token']
-#     message_id = request.get_json()['message_id']
-
-#     empty_dict = message_remove(token, int(message_id))
-#     return dumps(empty_dict)
-
-
-# @APP.route("/message/edit", methods=['PUT'])
-# def message_edit_route():
-#     '''Edits a message'''
-#     token = request.get_json()['token']
-#     message_id = request.get_json()['message_id']
-#     message = request.get_json()['message']
-
-#     empty_dict = message_edit(token, int(message_id), message)
-#     return dumps(empty_dict)
 
 # #------------------------------------------------------------------------------#
 # #                               routes: user                                   #
