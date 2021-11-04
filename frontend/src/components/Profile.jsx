@@ -9,6 +9,7 @@ const Profile = () => {
 const context = React.useContext(StoreContext);
 const [url, ] = context.url;
 const [token, ] = context.token;
+console.log('token from own profile is ' + token);
 const [details, setDetails] = useState({});
 
 const [displayName, setDisplayName] = context.displayName;
