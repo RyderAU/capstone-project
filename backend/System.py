@@ -5,6 +5,7 @@ from database.read_db import read_db
 from database.validate_entity_exists import validate_entity_exists
 from database.update_user import update_user_data
 from database.grab_course_members import grabCourseMembers
+from database.read_students import read_students_data
 
 from database.messages.insert_message import insert_message
 from database.messages.read_message_table import get_student_id_from_email, get_course_id_from_course_name, get_message_list_by_course_id
@@ -256,16 +257,19 @@ class Systems:
         # Return Value:
         #     - returns dictionary including fields of user info except timetables
         # '''
+        
 
-        # Grab timetables from database and put them into a list
-        username = validate_entity_exists('display_name', 'email', email)
-        real_name = validate_entity_exists('name', 'email', email)
-        zid = validate_entity_exists('student_id', 'email', email)
-        degree = validate_entity_exists('degree', 'email', email)
-        bio = validate_entity_exists('bio', 'email', email)
-        courses = validate_entity_exists('course', 'email', email)
+        # Grab info from database
+        result = read_students_data('email', email)
+        zid = result[0][1]
+        real_name = result[0][2]
+        username = result[0][3]
+        degree = result[0][4]
+        courses = result[0][5]
+        bio = result[0][6]
+        timetable_publicity = result[0][7]
         courses = courses.replace(",", ", ")
-        return {"username": username, "real_name": real_name, "zid": zid, "degree": degree, "bio": bio, "courses": courses, }
+        return {"username": username, "real_name": real_name, "zid": zid, "degree": degree, "bio": bio, "courses": courses, "timetable_publicity": timetable_publicity, }
 
     def message_send(self, token, course, message):
         # '''
@@ -322,7 +326,7 @@ class Systems:
         altered_message = []
         zid = get_student_id_from_email(email)
         if num_messages > 0:
-            # check if messages is sent by current user, if yes then set field "current_user" to true otherwise to false
+            # check if messages are sent by current user, if yes then set field "current_user" to true otherwise to false
             for x in range(0, num_messages):
                 new = {}
                 new['message'] = messages[x][1]
@@ -358,6 +362,22 @@ class Systems:
         members = grabCourseMembers(course)
         return members
 
+    def search(self, username):
+        result = read_students_data('display_name', username)
+
+        # Convert the list of tuple returned by database to a list of dictionaries
+        num_users = len(result)
+        users_list = []
+        if num_users > 0:
+            # check if messages are sent by current user, if yes then set field "current_user" to true otherwise to false
+            for x in range(0, num_users):
+                new = {}
+                new['email'] = result[x][0]
+                new['name'] = result[x][2]
+                new['display_name'] = result[x][3]
+                users_list.append(new)
+        return users_list
+        
 
 # var =  Systems()
 

@@ -85,7 +85,6 @@ def get_message_list_by_course_id(course_id):
 
         cur.execute(select_query)
         message_info = cur.fetchall()
-        print("THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS", list(message_info))
         return(list(message_info))
         # close communication with the database
         cur.close()

@@ -166,6 +166,7 @@ def user_profile_setbio_flask():
     bio = request.get_json()['bio']
     print(bio)
     name = request.get_json()['display_name']
+    timetable_publicity = request.get_json()['timetable_publicity']
     print(name)
     # success = False
     # Test if the request is to set name or bio
@@ -192,14 +193,40 @@ def user_profile_setbio_flask():
         except Exception as e:
             # Error in selenium or error in inserting into database
             raise e
-    
+    if timetable_publicity is not None:
+        try:
+            # Insert into the database
+            email = system.validate_token(token)
+            update_user_data('timetable_publicity', 'email', timetable_publicity, email)
+            # success = True
+        except Exception as e:
+            # Error in selenium or error in inserting into database
+            raise e
     return dumps({'is_success': True,})
+
+@APP.route("/user/profile/uploadphoto", methods=['POST'])
+def user_profile_uploadphoto_route():
+    '''Upload Photo'''
+    token = request.get_json()['token']
+    img_url = request.get_json()['img_url']
+    x_start = int(request.get_json()['x_start'])
+    y_start = int(request.get_json()['y_start'])
+    x_end = int(request.get_json()['x_end'])
+    y_end = int(request.get_json()['y_end'])
+
+    empty_dict = user_profile_uploadphoto(token, img_url, x_start, y_start, x_end, y_end)
+    return dumps(empty_dict)
+
+@APP.route("/imgurl/<image_name>")
+def dynamic_route(image_name):
+    '''Dynamic route'''
+    file_path = 'static'
+    return send_from_directory(file_path, f"{image_name}", mimetype="image/jpg")
 
 # #------------------------------------------------------------------------------#
 # #                              routes: message                                 #
 # #------------------------------------------------------------------------------#
 
-# routing path????
 @APP.route("/message/send", methods=['POST'])
 def message_send_route():
     '''Sends a message'''
@@ -227,6 +254,39 @@ def channel_members():
 
     members = system.members_list(token, course)
     return dumps({'member_details': members,})
+
+
+# #------------------------------------------------------------------------------#
+# #                     routes: search and view others' profile                  #
+# #------------------------------------------------------------------------------#
+
+@APP.route("/search", methods=['GET'])
+def search_route():
+    ''' Searches for users by username '''
+    display_name = request.args.get('display_name')
+
+    user_list = system.search(display_name)
+    return dumps({'result': user_list,})
+
+@APP.route("/profile", methods=['GET'])
+def other_users_profile():
+    '''returns information of other users'''
+
+    email = request.args.get('email')
+    try:
+        # Grab data from the database
+        info = system.profile(email)
+        
+        return dumps(info)
+    except Exception as e:
+        # Error in selenium or error in inserting into database
+        raise e
+
+# #------------------------------------------------------------------------------#
+# #                     routes: course outline and mark calculation              #
+# #------------------------------------------------------------------------------#
+
+
 
 
 #------------------------------------------------------------------------------#
@@ -400,37 +460,6 @@ if __name__ == "__main__":
 
 #     users = users_all(token)
 #     return dumps(users)
-
-
-# @APP.route("/search", methods=['GET'])
-# def search_route():
-#     ''' Searches for messages in user's channels'''
-#     token = request.args.get('token')
-#     query_str = request.args.get('query_str')
-
-#     messages = search(token, query_str)
-#     return dumps(messages)
-
-# @APP.route("/user/profile/uploadphoto", methods=['POST'])
-# def user_profile_uploadphoto_route():
-#     '''Upload Photo'''
-#     token = request.get_json()['token']
-#     img_url = request.get_json()['img_url']
-#     x_start = int(request.get_json()['x_start'])
-#     y_start = int(request.get_json()['y_start'])
-#     x_end = int(request.get_json()['x_end'])
-#     y_end = int(request.get_json()['y_end'])
-
-#     empty_dict = user_profile_uploadphoto(token, img_url, x_start, y_start, x_end, y_end)
-#     return dumps(empty_dict)
-
-# @APP.route("/imgurl/<image_name>")
-# def dynamic_route(image_name):
-#     '''Dynamic route'''
-#     file_path = 'static'
-#     return send_from_directory(file_path, f"{image_name}", mimetype="image/jpg")
-
-
 
 # @APP.route("/admin/userpermission/change", methods=['POST'])
 # def admin_user_permission_change_route():
