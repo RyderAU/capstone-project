@@ -59,7 +59,7 @@ const uploadImage = async (e) => {
     // console.log(e.target.files);
     const file = e.target.files[0];
     const base64 = await convertBase64(file)
-    // console.log(base64);
+    console.log("Following is base64: ", base64);
     setProfilePic(base64)
 };
 
@@ -82,7 +82,6 @@ return (
     {/* assuming that ryder will implement edit button here */}
     <img src={profilePic} height="200px"/>
     <img src={defprofile} alt="default user image" />
-    i am profile pic
     <input
         type="file"
         onChange={(e) => {
