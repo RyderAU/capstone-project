@@ -13,6 +13,7 @@ const [details, setDetails] = useState({});
 
 const [displayName, setDisplayName] = context.displayName;
 const [bio, setBio] = useState("");
+const [profilePic, setProfilePic] = useState({});
 
 React.useEffect(() => {
 // get profile info
@@ -54,10 +55,54 @@ console.log(`new bio value is ${e.target.value}`)
 setBio(e.target.value);
 }
 
+
+const handleProfilePhotoChange = (e) => {
+    // console.log(e)
+    // console.log(e.target.files)
+    
+    // console.log(`profile pic updated ${e.target.files[0]}`)
+    // let file = e.target.files[0]
+    // if (file) {
+    //     const reader = new FileReader();
+    //     reader.onload = handleReaderLoaded.bind(this)
+    //     reader.readAsBinaryString(file)
+    // }
+    // setProfilePic(e.target.value);
+}
+
+const uploadImage = (e) => {
+    // console.log(e.target.files);
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    console.log(base64);
+};
+
+const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+            resolve(fileReader.result);
+        };
+        fileReader.onerror((error) => {
+            reject(error);
+        })
+    })
+}
+
 return (
 <div className="profile-container">
 <div className="profile-photo">
-<img src={defprofile} alt="default user image" />
+    {/* assuming that ryder will implement edit button here */}
+    <img src={profilePic} alt="user set profile image"/>
+    <img src={defprofile} alt="default user image" />
+    i am profile pic
+    <input
+        type="file"
+        onChange={(e) => {
+            uploadImage(e);
+        }}
+    />
 </div>
 <div className="profile-description">
 <div className="title">Name: <div className="field-entry">{details.real_name}</div></div>
