@@ -59,13 +59,13 @@ const uploadImage = async (e) => {
     console.log(e)
     const file = e.target.files[0];
     const file_type = String(file["type"])
-    console.log(file_type)
+    // console.log(file_type)
     if  (!file_type.includes("image")) {
         alert("You can only upload jpeg/png/jpg.")
     }
     else {
         const base64 = await convertBase64(file)
-        console.log("Following is base64: ", base64);
+        // console.log("Following is base64: ", base64);
         // for backend ppl, store this base64 variable to the db as a string.
         setProfilePic(base64)
     }
