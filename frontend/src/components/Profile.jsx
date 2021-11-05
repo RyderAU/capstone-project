@@ -13,7 +13,7 @@ const [details, setDetails] = useState({});
 
 const [displayName, setDisplayName] = context.displayName;
 const [bio, setBio] = useState("");
-const [profilePic, setProfilePic] = useState({});
+const [profilePic, setProfilePic] = useState("");
 
 React.useEffect(() => {
 // get profile info
@@ -55,26 +55,12 @@ console.log(`new bio value is ${e.target.value}`)
 setBio(e.target.value);
 }
 
-
-const handleProfilePhotoChange = (e) => {
-    // console.log(e)
-    // console.log(e.target.files)
-    
-    // console.log(`profile pic updated ${e.target.files[0]}`)
-    // let file = e.target.files[0]
-    // if (file) {
-    //     const reader = new FileReader();
-    //     reader.onload = handleReaderLoaded.bind(this)
-    //     reader.readAsBinaryString(file)
-    // }
-    // setProfilePic(e.target.value);
-}
-
-const uploadImage = (e) => {
+const uploadImage = async (e) => {
     // console.log(e.target.files);
     const file = e.target.files[0];
-    const base64 = await convertBase64(file);
-    console.log(base64);
+    const base64 = await convertBase64(file)
+    // console.log(base64);
+    setProfilePic(base64)
 };
 
 const convertBase64 = (file) => {
@@ -84,9 +70,9 @@ const convertBase64 = (file) => {
         fileReader.onload = () => {
             resolve(fileReader.result);
         };
-        fileReader.onerror((error) => {
+        fileReader.onerror = (error) => {
             reject(error);
-        })
+        };
     })
 }
 
@@ -94,7 +80,7 @@ return (
 <div className="profile-container">
 <div className="profile-photo">
     {/* assuming that ryder will implement edit button here */}
-    <img src={profilePic} alt="user set profile image"/>
+    <img src={profilePic} height="200px"/>
     <img src={defprofile} alt="default user image" />
     i am profile pic
     <input
