@@ -56,10 +56,10 @@ setBio(e.target.value);
 }
 
 const uploadImage = async (e) => {
-    // console.log(e.target.files);
     const file = e.target.files[0];
     const base64 = await convertBase64(file)
     console.log("Following is base64: ", base64);
+    // for backend ppl, store this base64 variable to the db as a string.
     setProfilePic(base64)
 };
 
@@ -79,9 +79,8 @@ const convertBase64 = (file) => {
 return (
 <div className="profile-container">
 <div className="profile-photo">
-    {/* assuming that ryder will implement edit button here */}
-    <img src={profilePic} height="200px"/>
-    <img src={defprofile} alt="default user image" />
+    {/* assuming that ryder will implement a beautiful edit button here */}
+    <img src={profilePic ? profilePic : defprofile} alt="user profile image" />
     <input
         type="file"
         onChange={(e) => {
