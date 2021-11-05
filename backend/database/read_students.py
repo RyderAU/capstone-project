@@ -7,7 +7,7 @@ Return all information (except for password and login token) for user(s) satisfy
 Return None when no matched user can be found
 '''
 def read_students_data(column1, value):
-    query = "SELECT email, student_id, name, display_name, degree, course, bio, profile_publicity FROM students WHERE " + column1 + "='" + value +"'"
+    query = "SELECT email, student_id, name, display_name, degree, course, bio FROM students WHERE " + column1 + "='" + value +"'"
     conn = None
     user_info = []
     try:

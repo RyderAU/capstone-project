@@ -276,7 +276,12 @@ def other_users_profile():
     try:
         # Grab data from the database
         info = system.profile(email)
-        
+        publicity = validate_entity_exists('timetable_publicity', 'email', email)
+        if publicity == 1:
+            timetables = system.timetables(email)
+            info['timetables'] = timetables
+        else:
+            info['timetables'] = None
         return dumps(info)
     except Exception as e:
         # Error in selenium or error in inserting into database
