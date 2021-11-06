@@ -197,6 +197,8 @@ def user_profile_setbio_flask():
         try:
             # Insert into the database
             email = system.validate_token(token)
+            if timetable_publicity != 1 or timetable_publicity != 0:
+                raise InputError('Timetable publicity should be 1 or 0')
             update_user_data('timetable_publicity', 'email', timetable_publicity, email)
             # success = True
         except Exception as e:
@@ -204,24 +206,25 @@ def user_profile_setbio_flask():
             raise e
     return dumps({'is_success': True,})
 
-@APP.route("/user/profile/uploadphoto", methods=['POST'])
-def user_profile_uploadphoto_route():
-    '''Upload Photo'''
-    token = request.get_json()['token']
-    img_url = request.get_json()['img_url']
-    x_start = int(request.get_json()['x_start'])
-    y_start = int(request.get_json()['y_start'])
-    x_end = int(request.get_json()['x_end'])
-    y_end = int(request.get_json()['y_end'])
+# TODO
+# @APP.route("/user/profile/uploadphoto", methods=['POST'])
+# def user_profile_uploadphoto_route():
+#     '''Upload Photo'''
+#     token = request.get_json()['token']
+#     img_url = request.get_json()['img_url']
+#     x_start = int(request.get_json()['x_start'])
+#     y_start = int(request.get_json()['y_start'])
+#     x_end = int(request.get_json()['x_end'])
+#     y_end = int(request.get_json()['y_end'])
 
-    empty_dict = user_profile_uploadphoto(token, img_url, x_start, y_start, x_end, y_end)
-    return dumps(empty_dict)
+#     empty_dict = user_profile_uploadphoto(token, img_url, x_start, y_start, x_end, y_end)
+#     return dumps(empty_dict)
 
-@APP.route("/imgurl/<image_name>")
-def dynamic_route(image_name):
-    '''Dynamic route'''
-    file_path = 'static'
-    return send_from_directory(file_path, f"{image_name}", mimetype="image/jpg")
+# @APP.route("/imgurl/<image_name>")
+# def dynamic_route(image_name):
+#     '''Dynamic route'''
+#     file_path = 'static'
+#     return send_from_directory(file_path, f"{image_name}", mimetype="image/jpg")
 
 # #------------------------------------------------------------------------------#
 # #                              routes: message                                 #
@@ -281,7 +284,7 @@ def other_users_profile():
             timetables = system.timetables(email)
             info['timetables'] = timetables
         else:
-            info['timetables'] = None
+            info['timetables'] = []
         return dumps(info)
     except Exception as e:
         # Error in selenium or error in inserting into database
