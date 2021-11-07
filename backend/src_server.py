@@ -164,11 +164,14 @@ def user_profile_setbio_flask():
 
     token = request.get_json()['token']
     bio = request.get_json()['bio']
-    print(bio)
+    # print(bio)
     name = request.get_json()['display_name']
     timetable_publicity = request.get_json()['timetable_publicity']
-    # avatar = request.get_json()['avatar']
-    print(name)
+    avatar = request.get_json()['avatar']
+
+    # print("INSIDE HERE")
+    # print(avatar)
+    # print(name)
     # success = False
     # Test if the request is to set name or bio
     if bio is not None:
@@ -205,16 +208,19 @@ def user_profile_setbio_flask():
         except Exception as e:
             # Error in selenium or error in inserting into database
             raise e
-    # if avatar is not None:
-    #     try:
-    #         # Insert into the database
-    #         email = system.validate_token(token)
-    #         update_user_data('avatar', 'email', avatar, email)
-    #         # success = True
-    #     except Exception as e:
-    #         # Error in selenium or error in inserting into database
-    #         raise e
-    return dumps({'bio': bio, 'display_name': name, 'timetable_publicity': timetable_publicity, })
+    if avatar is not None:
+        try:
+            # Insert into the database
+            email = system.validate_token(token)
+            update_user_data('avatar', 'email', avatar, email)
+            # success = True
+        except Exception as e:
+            # Error in selenium or error in inserting into database
+            raise e
+    return dumps({'bio': bio, \
+        'display_name': name, \
+        'timetable_publicity': timetable_publicity, \
+        'avatar': avatar, })
 
 # @APP.route("/avatar", methods=['POST'])
 # def user_profile_uploadphoto_route():
