@@ -204,7 +204,7 @@ def user_profile_setbio_flask():
         except Exception as e:
             # Error in selenium or error in inserting into database
             raise e
-    return dumps({'is_success': True,})
+    return dumps({'bio': bio, 'display_name': name, 'timetable_publicity': timetable_publicity, })
 
 # TODO
 # @APP.route("/user/profile/uploadphoto", methods=['POST'])
