@@ -14,6 +14,7 @@ const [details, setDetails] = useState({});
 
 const [displayName, setDisplayName] = context.displayName;
 const [bio, setBio] = useState("");
+const [profilePic, setProfilePic] = useState("");
 
 React.useEffect(() => {
 // get profile info
@@ -55,10 +56,46 @@ console.log(`new bio value is ${e.target.value}`)
 setBio(e.target.value);
 }
 
+const uploadImage = async (e) => {
+    console.log(e)
+    const file = e.target.files[0];
+    const file_type = String(file["type"])
+    // console.log(file_type)
+    if  (!file_type.includes("image")) {
+        alert("You can only upload jpeg/png/jpg.")
+    }
+    else {
+        const base64 = await convertBase64(file)
+        // console.log("Following is base64: ", base64);
+        // for backend ppl, store this base64 variable to the db as a string.
+        setProfilePic(base64)
+    }
+};
+
+const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+            resolve(fileReader.result);
+        };
+        fileReader.onerror = (error) => {
+            reject(error);
+        };
+    })
+}
+
 return (
 <div className="profile-container">
 <div className="profile-photo">
-<img src={defprofile} alt="default user image" />
+    {/* assuming that ryder will implement a beautiful edit button here */}
+    <img src={profilePic ? profilePic : defprofile} alt="user profile image" />
+    <input
+        type="file"
+        onChange={(e) => {
+            uploadImage(e);
+        }}
+    />
 </div>
 <div className="profile-description">
 <div className="title">Name: <div className="field-entry">{details.real_name}</div></div>
