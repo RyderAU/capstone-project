@@ -8,15 +8,18 @@ const OtherProfile = () => {
     const [url, ] = context.url;
     const [token, ] = context.token;
     console.log(token);
+    console.log(url);
+    // dummy
+    const email = "shoan@mail.com";
     // get selected user's details
     React.useEffect(() => {
-        axios.get(`${url}/dashboard/profile?token=${token}`)
+        axios.get(`${url}profile?email=${email}`)
         .then(res => handleSuccess(res))
         .catch(err => console.log(err));
     }, []);
         
     const handleSuccess = (res) => {
-        console.log(res.data)
+        console.log(res)
     }
     
     return (
