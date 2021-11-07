@@ -9,12 +9,15 @@ const Profile = () => {
   const context = React.useContext(StoreContext);
   const [url] = context.url;
   const [token] = context.token;
-  console.log("token from own profile is " + token);
   const [details, setDetails] = useState({});
 
   const [displayName, setDisplayName] = context.displayName;
   const [bio, setBio] = useState("");
   const [profilePic, setProfilePic] = useState("");
+  const [timetablePublicity, setTimetablePublicity] = context.timetablePublicity;
+  const [checked, setChecked] = useState(false);
+
+  console.log('timetable publicity is ' + timetablePublicity);
 
   React.useEffect(() => {
     // get profile info
@@ -29,19 +32,23 @@ const Profile = () => {
     setDetails(res.data);
     setDisplayName(res.data.username);
     setBio(res.data.bio);
+    timetablePublicity ? setChecked(true) : setChecked(false);
   };
 
   const saveChanges = () => {
     console.log(`display name is ${displayName}`);
     console.log(`bio name is ${bio}`);
+    console.log(`checked is ${checked}`);
+    checked ? setTimetablePublicity(1) : setTimetablePublicity(0);
     axios
       .post(`${url}/dashboard/profile`, {
         token: token,
         display_name: displayName,
         bio: bio,
+        timetable_publicity: timetablePublicity,
       })
       .then((r) => {
-        console.log(`response is ${r}`);
+        console.log(`success`);
       })
       .catch((err) => {
         console.log(err);
@@ -57,6 +64,10 @@ const Profile = () => {
     console.log(`new bio value is ${e.target.value}`);
     setBio(e.target.value);
   };
+
+  const handlePublicityChange = () => {
+    setChecked(!checked);
+  }
 
   const uploadImage = async (e) => {
     console.log(e);
@@ -139,6 +150,9 @@ const Profile = () => {
               {bio}
             </textarea>
           </div>
+        </div>
+        <div className="title">
+          Timetable display settings: <input type="checkbox" defaultChecked={timetablePublicity ? true : false} onChange={handlePublicityChange}/>
         </div>
         <button className="save-changes-button" onClick={saveChanges}>
           save changes

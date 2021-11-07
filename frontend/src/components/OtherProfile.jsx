@@ -21,6 +21,8 @@ const OtherProfile = () => {
         console.log(res.data);
         setDetails(res.data);
     }
+
+    console.log(details.timetables);
     
     return (
         <div>
@@ -29,7 +31,7 @@ const OtherProfile = () => {
             <div>Name: {details.real_name}</div>
             <div>Degree: {details.degree}</div>
             <div>Bio: {details.bio}</div>
-            <div>Timetable (if not hidden): {details.timetables.length}</div>
+            <div>Timetable (if not hidden): </div>
         </div>
     );
 };

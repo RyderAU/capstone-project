@@ -197,7 +197,7 @@ def user_profile_setbio_flask():
         try:
             # Insert into the database
             email = system.validate_token(token)
-            if timetable_publicity != 1 or timetable_publicity != 0:
+            if timetable_publicity != 1 and timetable_publicity != 0:
                 raise InputError('Timetable publicity should be 1 or 0')
             update_user_data('timetable_publicity', 'email', timetable_publicity, email)
             # success = True
