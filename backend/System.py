@@ -267,8 +267,13 @@ class Systems:
         degree = result[0][4]
         courses = result[0][5]
         bio = result[0][6]
+        # Timetables are default to private
+        if result[0][7] is None:
+            timetable_publicity = 0
+        else:
+            timetable_publicity = result[0][7]
         courses = courses.replace(",", ", ")
-        return {"username": username, "real_name": real_name, "zid": zid, "degree": degree, "bio": bio, "courses": courses, }
+        return {"username": username, "real_name": real_name, "zid": zid, "degree": degree, "bio": bio, "courses": courses, "timetable_publicity": timetable_publicity, }
 
     def message_send(self, token, course, message):
         # '''
