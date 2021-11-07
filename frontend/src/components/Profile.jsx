@@ -28,10 +28,15 @@ const Profile = () => {
   }, []);
 
   const handleSuccess = (res) => {
+    // console.log("I AM HANDLESUCCESS")
     console.log(res.data);
     setDetails(res.data);
     setDisplayName(res.data.username);
     setBio(res.data.bio);
+    if (res.data.avatar) {
+      setProfilePic(res.data.avatar)
+    }
+   
     timetablePublicity ? setChecked(true) : setChecked(false);
   };
 
@@ -39,6 +44,7 @@ const Profile = () => {
     console.log(`display name is ${displayName}`);
     console.log(`bio name is ${bio}`);
     console.log(`checked is ${checked}`);
+    console.log(`base64 byte is ${profilePic}`)
     checked ? setTimetablePublicity(1) : setTimetablePublicity(0);
     axios
       .post(`${url}/dashboard/profile`, {
@@ -46,6 +52,7 @@ const Profile = () => {
         display_name: displayName,
         bio: bio,
         timetable_publicity: timetablePublicity,
+        avatar: profilePic,
       })
       .then((r) => {
         console.log(`success`);
