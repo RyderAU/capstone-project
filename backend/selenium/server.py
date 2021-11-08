@@ -1,7 +1,7 @@
 '''
 Description: All the routes for the server are contained here
 
-Created by: Sandeep Das (Tutorial: H15A by Hoang Pham)
+Created by: Haesandeep Dashim (Tutorial: H15A by Hoang Pham)
 Created: 2020-03-27
 Last Modified: 2020-03-31
 '''
@@ -303,6 +303,76 @@ def channel_members():
             },
         ]
     })
+
+
+
+
+@APP.route("/markcalc", methods=['GET'])
+def mark_composition_route():
+    '''  '''
+    token = request.args.get("token", "null")
+    course_name = request.args.get("course_name", "null")
+    print(f'{token} {course_name}')
+    return dumps({
+        "assessments" : [
+            {
+                "task": "Seminar Participation",
+                "weighting": 10,
+                "hurdle": 0,
+                "hurdle_mark": 0,
+            },
+            { 
+                "task": "Lecture summaries",
+                # due: "Weeks 3, 7",
+                "weighting": "10",
+                "hurdle": 0,
+                "hurdle_mark": 0,
+                # my_mark: "4"
+            },
+            { 
+                "task": "Movie Review",
+                # due: "Week 5",
+                "weighting": "20",
+                "hurdle": 0,
+                "hurdle_mark": 0,
+                # my_mark: "19"
+            }
+        ]
+    })
+
+@APP.route("/retrievemarks", methods=['GET'])
+def retrieve_marks_route():
+    '''  '''
+    token = request.args.get("token", "null")
+    course_name = request.args.get("course_name", "null")
+    print(f'{token} {course_name}')
+    return dumps({
+        # "assessments" : [
+        #     {
+        #         "task": "Seminar Participation",
+        #         "weighting": 10,
+        #         "hurdle": 0,
+        #         "hurdle_mark": 0,
+        #     },
+        #     { 
+        #         "task": "Lecture summaries",
+        #         # due: "Weeks 3, 7",
+        #         "weighting": "10",
+        #         "hurdle": 0,
+        #         "hurdle_mark": 0,
+        #         # my_mark: "4"
+        #     },
+        #     { 
+        #         "task": "Movie Review",
+        #         # due: "Week 5",
+        #         "weighting": "20",
+        #         "hurdle": 0,
+        #         "hurdle_mark": 0,
+        #         # my_mark: "19"
+        #     }
+        # ]
+    })
+
 
 #------------------------------------------------------------------------------#
 #                          routes: workspace/reset                             #

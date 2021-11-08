@@ -1,179 +1,61 @@
 import "./MarkCalculator.css";
 import { useParams } from "react-router";
-
+import axios from "axios";
 import React from "react";
-// import ReactDOM from "react-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Input from "@material-ui/core/Input";
-import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
-// Icons
-import EditIcon from "@material-ui/icons/EditOutlined";
-import DoneIcon from "@material-ui/icons/DoneAllTwoTone";
-import RevertIcon from "@material-ui/icons/NotInterestedOutlined";
+import { StoreContext } from "../Store";
+import { useState } from "react";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    marginTop: theme.spacing(3),
-    overflowX: "auto"
-  },
-  table: {
-    minWidth: 650
-  },
-  selectTableCell: {
-    width: 60
-  },
-  tableCell: {
-    width: 130,
-    height: 40
-  },
-  input: {
-    width: 130,
-    height: 40
-  }
-}));
+// import { makeStyles } from "@material-ui/core/styles";
+// import Table from "@material-ui/core/Table";
+// import TableBody from "@material-ui/core/TableBody";
+// import TableCell from "@material-ui/core/TableCell";
+// import TableHead from "@material-ui/core/TableHead";
+// import TableRow from "@material-ui/core/TableRow";
+// import Input from "@material-ui/core/Input";
+// import Paper from "@material-ui/core/Paper";
+// import IconButton from "@material-ui/core/IconButton";
+// // Icons
+// import EditIcon from "@material-ui/icons/EditOutlined";
+// import DoneIcon from "@material-ui/icons/DoneAllTwoTone";
+// import RevertIcon from "@material-ui/icons/NotInterestedOutlined";
 
-const createData = (name, calories, fat, carbs, protein) => ({
-  id: name.replace(" ", "_"),
-  name,
-  calories,
-  fat,
-  carbs,
-  protein,
-  isEditMode: false
-});
 
-const CustomTableCell = ({ row, name, onChange }) => {
-  const classes = useStyles();
-  const { isEditMode } = row;
-  return (
-    <TableCell align="left" className={classes.tableCell}>
-      {isEditMode ? (
-        <Input
-          value={row[name]}
-          name={name}
-          onChange={e => onChange(e, row)}
-          className={classes.input}
-        />
-      ) : (
-        row[name]
-      )}
-    </TableCell>
-  );
-};
-
-// function App() {
+// Dynamically creating the table based on the JSON data we receive from the backend.
 
 const MarkCalculator = () => {
   const { courseid } = useParams();
-  // Dummy data
-  const [rows, setRows] = React.useState([
-    createData("Seminar Participation", "Weeks 1-5, 7-10", "10%", "5"),
-    createData("Lecture summaries", "Weeks 3, 7", "10%", "4"),
-    createData("Movie Review", "Week 5", "20%", "19")
-  ]);
-  const [previous, setPrevious] = React.useState({});
-  const classes = useStyles();
+  const context = React.useContext(StoreContext);
+  const [url] = context.url;
+  const [token] = context.token;
+  const [marktable, setMarktable] = useState([]);
+  
+  React.useEffect(() => {
+    axios
+      .get(`${url}/markcalc?token=${token}`)
+      .then((res) => handleSuccess(res))
+      .catch((err) => console.log(err));
+  }, []);
 
-  const onToggleEditMode = id => {
-    setRows(state => {
-      return rows.map(row => {
-        if (row.id === id) {
-          return { ...row, isEditMode: !row.isEditMode };
-        }
-        return row;
-      });
-    });
-  };
-
-  const onChange = (e, row) => {
-    if (!previous[row.id]) {
-      setPrevious(state => ({ ...state, [row.id]: row }));
-    }
-    const value = e.target.value;
-    const name = e.target.name;
-    const { id } = row;
-    const newRows = rows.map(row => {
-      if (row.id === id) {
-        return { ...row, [name]: value };
-      }
-      return row;
-    });
-    setRows(newRows);
-  };
-
-  const onRevert = id => {
-    const newRows = rows.map(row => {
-      if (row.id === id) {
-        return previous[id] ? previous[id] : row;
-      }
-      return row;
-    });
-    setRows(newRows);
-    setPrevious(state => {
-      delete state[id];
-      return state;
-    });
-    onToggleEditMode(id);
-  };
+  const handleSuccess = (res) => {
+    // console.log(res.data.assessments);
+    setMarktable(res.data.assessments)
+  }
 
   return (
     <div className="course-main">mark calculator for {courseid}
-    <Paper className={classes.root}>
-      <Table className={classes.table} aria-label="caption table">
-        <caption>A barbone structure table example with a caption</caption>
-        <TableHead>
-          <TableRow>
-            <TableCell align="left" />
-            <TableCell align="left">Item</TableCell>
-            <TableCell align="left">Due</TableCell>
-            <TableCell align="left">Marks</TableCell>
-            <TableCell align="left">My mark</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.id}>
-              <TableCell className={classes.selectTableCell}>
-                {row.isEditMode ? (
-                  <>
-                    <IconButton
-                      aria-label="done"
-                      onClick={() => onToggleEditMode(row.id)}
-                    >
-                      <DoneIcon />
-                    </IconButton>
-                    <IconButton
-                      aria-label="revert"
-                      onClick={() => onRevert(row.id)}
-                    >
-                      <RevertIcon />
-                    </IconButton>
-                  </>
-                ) : (
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => onToggleEditMode(row.id)}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                )}
-              </TableCell>
-              <CustomTableCell {...{ row, name: "name", onChange }} />
-              <CustomTableCell {...{ row, name: "calories", onChange }} />
-              <CustomTableCell {...{ row, name: "fat", onChange }} />
-              <CustomTableCell {...{ row, name: "carbs", onChange }} />
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
+    <div>
+      <table>
+        {marktable.map(assessment => (
+          <tr>
+            <td>{assessment.task}</td>
+            <td>{assessment.weighting}</td>
+            <td>{assessment.hurdle}</td>
+            <td>{assessment.hurdle_mark}</td>
+          </tr>
+        ))}  
+      </table>
+    </div>
+
   </div> );
 };
 
