@@ -317,26 +317,32 @@ def mark_composition_route():
         "assessments" : [
             {
                 "task": "Seminar Participation",
+                "deadline": "Weeks 1-5, 7-10",
                 "weighting": 10,
                 "hurdle": 0,
                 "hurdle_mark": 0,
             },
             { 
                 "task": "Lecture summaries",
-                # due: "Weeks 3, 7",
-                "weighting": "10",
+                "deadline": "Weeks 3, 7",
+                "weighting": 10,
                 "hurdle": 0,
                 "hurdle_mark": 0,
-                # my_mark: "4"
             },
             { 
                 "task": "Movie Review",
-                # due: "Week 5",
-                "weighting": "20",
+                "deadline": "Week 5",
+                "weighting": 20,
                 "hurdle": 0,
                 "hurdle_mark": 0,
-                # my_mark: "19"
-            }
+            },
+            { 
+                "task": "Company Case Study",
+                "deadline": "Week 10",
+                "weighting": 40,
+                "hurdle": 1,
+                "hurdle_mark": 40,
+            },
         ]
     })
 
