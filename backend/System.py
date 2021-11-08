@@ -267,7 +267,10 @@ class Systems:
         degree = result[0][4]
         courses = result[0][5]
         bio = result[0][6]
-        timetable_publicity = result[0][7]
+        if result[0][7] is None:
+            timetable_publicity = 0
+        else:
+            timetable_publicity = result[0][7]
         avatar = bytes(result[0][8])
         courses = courses.replace(",", ", ")
        
