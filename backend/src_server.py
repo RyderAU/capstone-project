@@ -301,7 +301,7 @@ def other_users_profile():
 
 @APP.route("/markcalc", methods=['GET'])
 def other_users_profile():
-    '''returns assessment components of a particular course'''
+    '''returns assessment components of a particular course, and marks for all assessments of a particular course for the current user'''
 
     token = request.args.get('token')
     course_name = request.args.get('course_name')
@@ -309,28 +309,13 @@ def other_users_profile():
         # Grab data from the database
         email = system.validate_token(token)
         assessments = system.assessment_mark(course_name)
-
-        return dumps({'assessments': assessments, })
-    except Exception as e:
-        # Error in selenium or error in inserting into database
-        raise e
-
-@APP.route("/retrievemarks", methods=['GET'])
-def other_users_profile():
-    '''returns marks for all assessments of a particular course for the current user'''
-
-    token = request.args.get('token')
-    course_name = request.args.get('course_name')
-    try:
-        # Grab data from the database
-        email = system.validate_token(token)
         marks = system.marks(email, course_name)
-        return dumps({'marks': marks, })
+        return dumps({'assessments': assessments, 'marks': marks, })
     except Exception as e:
         # Error in selenium or error in inserting into database
         raise e
 
-@APP.route("/savemarks", methods=['POST'])
+@APP.route("/markcalc", methods=['POST'])
 def other_users_profile():
     '''returns marks for all assessments of a particular course for the current user'''
 
