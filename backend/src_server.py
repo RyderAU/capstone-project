@@ -4,6 +4,8 @@ Description: All the routes for the server are contained here
 Created by: Helena Ling and Sandeep Das
 '''
 import sys
+
+from backend.database.read_courses import read_courses_data
 print(sys.path)
 from json import dumps
 from flask import Flask, request, send_from_directory
@@ -55,9 +57,7 @@ def auth_login_route():
 def auth_logout_route():
     ''' Logs user out when given a valid token '''
     token = request.get_json()['token']
-    # print('before is_success:', token)
     is_success = system.logout(token)
-    # print(token)
 
     return dumps(is_success)
 
@@ -84,7 +84,6 @@ def linking_route():
     email = request.get_json()['email']
     password = request.get_json()['password']
     token = request.get_json()['token']
-    print("frontend token: " + token)
 
     try:
         # Grab user relevant details using selenium library
@@ -107,8 +106,6 @@ def linking_route():
         for i in range(10):
             var = str(i+1)
             col_name = fixed + var
-
-            print(col_name)
             
             update_user_data(col_name, 'email', timetables[i].replace("%", "%%"), personal_email)
 
@@ -164,13 +161,10 @@ def user_profile_setbio_flask():
 
     token = request.get_json()['token']
     bio = request.get_json()['bio']
-    print(bio)
     name = request.get_json()['display_name']
     timetable_publicity = request.get_json()['timetable_publicity']
-    # avatar = request.get_json()['avatar']
-    print(name)
-    # success = False
-    # Test if the request is to set name or bio
+    avatar = request.get_json()['avatar']
+
     if bio is not None:
         if len(bio) not in range(1, 501):
             raise InputError('Bio should be between 1 and 500 characters inclusive')
@@ -198,42 +192,26 @@ def user_profile_setbio_flask():
         try:
             # Insert into the database
             email = system.validate_token(token)
-            if timetable_publicity != 1 or timetable_publicity != 0:
+            if timetable_publicity != 1 and timetable_publicity != 0:
                 raise InputError('Timetable publicity should be 1 or 0')
             update_user_data('timetable_publicity', 'email', timetable_publicity, email)
             # success = True
         except Exception as e:
             # Error in selenium or error in inserting into database
             raise e
-    # if avatar is not None:
-    #     try:
-    #         # Insert into the database
-    #         email = system.validate_token(token)
-    #         update_user_data('avatar', 'email', avatar, email)
-    #         # success = True
-    #     except Exception as e:
-    #         # Error in selenium or error in inserting into database
-    #         raise e
-    return dumps({'bio': bio, 'display_name': name, 'timetable_publicity': timetable_publicity, })
-
-# @APP.route("/avatar", methods=['POST'])
-# def user_profile_uploadphoto_route():
-#     '''Upload Photo'''
-#     token = request.get_json()['token']
-#     img_url = request.get_json()['img_url']
-#     x_start = int(request.get_json()['x_start'])
-#     y_start = int(request.get_json()['y_start'])
-#     x_end = int(request.get_json()['x_end'])
-#     y_end = int(request.get_json()['y_end'])
-
-#     empty_dict = user_profile_uploadphoto(token, img_url, x_start, y_start, x_end, y_end)
-#     return dumps(empty_dict)
-
-# @APP.route("/imgurl/<image_name>")
-# def dynamic_route(image_name):
-#     '''Dynamic route'''
-#     file_path = 'static'
-#     return send_from_directory(file_path, f"{image_name}", mimetype="image/jpg")
+    if avatar is not None:
+        try:
+            # Insert into the database
+            email = system.validate_token(token)
+            update_user_data('avatar', 'email', avatar, email)
+            # success = True
+        except Exception as e:
+            # Error in selenium or error in inserting into database
+            raise e
+    return dumps({'bio': bio, \
+        'display_name': name, \
+        'timetable_publicity': timetable_publicity, \
+        'avatar': avatar, })
 
 # #------------------------------------------------------------------------------#
 # #                              routes: message                                 #
@@ -265,7 +243,7 @@ def channel_members():
     course = request.args.get('course_name')
 
     members = system.members_list(token, course)
-    return dumps({'member_details': members,})
+    return dumps({'member_details': members, })
 
 
 # #------------------------------------------------------------------------------#
@@ -288,7 +266,7 @@ def other_users_profile():
     try:
         # Grab data from the database
         info = system.profile(email)
-        publicity = validate_entity_exists('timetable_publicity', 'email', email)
+        publicity = info.get("timetable_publicity")
         if publicity == 1:
             timetables = system.timetables(email)
             info['timetables'] = timetables
@@ -304,7 +282,74 @@ def other_users_profile():
 # #------------------------------------------------------------------------------#
 
 
+@APP.route("/outline", methods=['GET'])
+def other_users_profile():
+    '''returns course outline for a particular course'''
 
+    token = request.args.get('token')
+    course_name = request.args.get('course_name')
+    try:
+        # Grab data from the database
+        email = system.validate_token(token)
+        result = read_courses_data('course_name', course_name)
+        # Open up file to read data
+        path = result[0][2]
+        return dumps(path)
+    except Exception as e:
+        # Error in selenium or error in inserting into database
+        raise e
+
+@APP.route("/markcalc", methods=['GET'])
+def other_users_profile():
+    '''returns assessment components of a particular course'''
+
+    token = request.args.get('token')
+    course_name = request.args.get('course_name')
+    try:
+        # Grab data from the database
+        email = system.validate_token(token)
+        assessments = system.assessment_mark(course_name)
+
+        return dumps({'assessments': assessments, })
+    except Exception as e:
+        # Error in selenium or error in inserting into database
+        raise e
+
+@APP.route("/retrievemarks", methods=['GET'])
+def other_users_profile():
+    '''returns marks for all assessments of a particular course for the current user'''
+
+    token = request.args.get('token')
+    course_name = request.args.get('course_name')
+    try:
+        # Grab data from the database
+        email = system.validate_token(token)
+        marks = system.marks(email, course_name)
+        return dumps({'marks': marks, })
+    except Exception as e:
+        # Error in selenium or error in inserting into database
+        raise e
+
+@APP.route("/savemarks", methods=['POST'])
+def other_users_profile():
+    '''returns marks for all assessments of a particular course for the current user'''
+
+    token = request.get_json()['token']
+    course = request.get_json()['course']
+    tasks = request.get_json()['tasks']
+    marks = request.get_json()['marks']
+
+    try:
+        # Insert into the database
+        email = system.validate_token(token)
+        system.updatemarks(email, course, tasks, marks)
+
+        # For frontend
+        is_success = True
+        return dumps({'is_success': is_success,})
+    except Exception as e:
+        # Error in selenium or error in inserting into database
+        raise e
 
 #------------------------------------------------------------------------------#
 #                          routes: workspace/reset                             #
@@ -312,159 +357,6 @@ def other_users_profile():
 
 if __name__ == "__main__":
     APP.run(port=(3030), debug=True)
-
-#------------------------------------------------------------------------------#
-#                              routes: channel                                 #
-#------------------------------------------------------------------------------#
-
-# @APP.route("/channel/invite", methods=['POST'])
-# def channel_invite_route():
-#     ''' Invites a user to join a channel '''
-#     token = request.get_json()['token']
-#     channel_id = request.get_json()['channel_id']
-#     u_id = request.get_json()['u_id']
-
-#     empty_dict = channel_invite(token, int(channel_id), int(u_id))
-#     return dumps(empty_dict)
-
-
-# @APP.route("/channel/details", methods=['GET'])
-# def channel_details_route():
-#     ''' Provide basic details about the channel '''
-#     token = request.args.get('token')
-#     channel_id = request.args.get('channel_id')
-
-#     name_owner_all = channel_details(token, int(channel_id))
-#     return dumps(name_owner_all)
-
-
-# @APP.route("/channel/messages", methods=['GET'])
-# def channel_messages_route():
-#     ''' Returns up to 50 messages '''
-#     token = request.args.get('token')
-#     channel_id = request.args.get('channel_id')
-#     start = request.args.get('start')
-
-#     messages_start_end = channel_messages(token, int(channel_id), int(start))
-#     return dumps(messages_start_end)
-
-
-# @APP.route("/channel/leave", methods=['POST'])
-# def channel_leave_route():
-#     ''' User leaves channel  '''
-#     token = request.get_json()['token']
-#     channel_id = request.get_json()['channel_id']
-
-#     empty_dict = channel_leave(token, int(channel_id))
-#     return dumps(empty_dict)
-
-
-# @APP.route("/channel/join", methods=['POST'])
-# def channel_join_route():
-#     ''' User joins channel  '''
-#     token = request.get_json()['token']
-#     channel_id = request.get_json()['channel_id']
-
-#     empty_dict = channel_join(token, int(channel_id))
-#     return dumps(empty_dict)
-
-
-# @APP.route("/channel/addowner", methods=['POST'])
-# def channel_addowner_route():
-#     ''' User is added as an owner of the channel  '''
-#     token = request.get_json()['token']
-#     channel_id = request.get_json()['channel_id']
-#     u_id = request.get_json()['u_id']
-
-#     empty_dict = channel_addowner(token, int(channel_id), int(u_id))
-#     return dumps(empty_dict)
-
-
-# @APP.route("/channel/removeowner", methods=['POST'])
-# def channel_removeowner_route():
-#     ''' User is removed as an owner of the channel  '''
-#     token = request.get_json()['token']
-#     channel_id = request.get_json()['channel_id']
-#     u_id = request.get_json()['u_id']
-
-#     empty_dict = channel_removeowner(token, int(channel_id), int(u_id))
-#     return dumps(empty_dict)
-
-# #------------------------------------------------------------------------------#
-# #                              routes: channels                                #
-# #------------------------------------------------------------------------------#
-
-# @APP.route("/channels/list", methods=['GET'])
-# def channels_list_route():
-#     ''' Lists channel info that user is a part of  '''
-#     token = request.args.get('token')
-
-#     channels = channels_list(token)
-#     return dumps(channels)
-
-
-# @APP.route("/channels/listall", methods=['GET'])
-# def channels_listall_route():
-#     ''' Lists all channel info'''
-#     token = request.args.get('token')
-
-#     channels = channels_listall(token)
-#     return dumps(channels)
-
-
-# @APP.route("/channels/create", methods=['POST'])
-# def channels_create_route():
-#     '''Creates a new channel'''
-#     token = request.get_json()['token']
-#     name = request.get_json()['name']
-#     is_public = request.get_json()['is_public']
-
-#     channel_id = channels_create(token, name, int(is_public))
-#     return dumps(channel_id)
-
-# #------------------------------------------------------------------------------#
-# #                               routes: user                                   #
-# #------------------------------------------------------------------------------#
-
-# @APP.route("/user/profile", methods=['GET'])
-# def user_profile_route():
-#     '''Returns user info'''
-#     token = request.args.get('token')
-#     u_id = request.args.get('u_id')
-
-#     user = user_profile(token, int(u_id))
-#     return dumps(user)
-
-
-# @APP.route("/user/profile/setname", methods=['PUT'])
-# def user_profile_setname_route():
-#     '''Update user's first and last name'''
-#     token = request.get_json()['token']
-#     name_first = request.get_json()['name_first']
-#     name_last = request.get_json()['name_last']
-
-#     empty_dict = user_profile_setname(token, name_first, name_last)
-#     return dumps(empty_dict)
-
-
-# @APP.route("/user/profile/setemail", methods=['PUT'])
-# def user_profile_setemail_route():
-#     '''Update user's email address'''
-#     token = request.get_json()['token']
-#     email = request.get_json()['email']
-
-#     empty_dict = user_profile_setemail(token, email)
-#     return dumps(empty_dict)
-
-
-# @APP.route("/user/profile/sethandle", methods=['PUT'])
-# def user_profile_sethandle_route():
-#     '''Update user's handle_str'''
-#     token = request.get_json()['token']
-#     handle_str = request.get_json()['handle_str']
-
-#     empty_dict = user_profile_sethandle(token, handle_str)
-#     return dumps(empty_dict)
 
 # #------------------------------------------------------------------------------#
 # #                               routes: other                                  #

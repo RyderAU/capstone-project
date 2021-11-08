@@ -3,13 +3,9 @@ import psycopg2
 import sys
 import urllib.parse as up
 
-def update_user_data(column1, column2, value1, value2):
-    column_1 = column1
-    column_2 = column2
+def update_task_data(column1, value1, column2, value2, column3, value3, column4, value4):
     
-    query = "UPDATE students SET %s='%s' WHERE %s='%s';" % (column_1, value1, column_2, value2)
-    # print(query)
-
+    query = "UPDATE task_mark SET %s='%s' WHERE %s='%s' AND %s='%s' AND %s='%s';" % (column1, value1, column2, value2, column3, value3, column4, value4)
     conn = None
     try:
         # read database configuration
@@ -20,7 +16,7 @@ def update_user_data(column1, column2, value1, value2):
             host=url.hostname, port=url.port)
         # create a new cursor
         cur = conn.cursor()
-        cur.execute(query, (column1, value1, column2, value2,))
+        cur.execute(query, (column1, value1, column2, value2, column3, value3))
         # commit the changes to the database
         conn.commit()
         # print('successfully updated')

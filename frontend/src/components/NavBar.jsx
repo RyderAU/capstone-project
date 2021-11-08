@@ -75,6 +75,14 @@ const NavBar = () => {
       >
         profile
       </button>
+      <button
+        onClick={() => {
+          history.push("/");
+          history.push("dashboard/other-profile");
+        }}
+      >
+        other profile (test)
+      </button>
     </div>
   );
 };

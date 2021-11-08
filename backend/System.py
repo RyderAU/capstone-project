@@ -6,7 +6,10 @@ from database.validate_entity_exists import validate_entity_exists
 from database.update_user import update_user_data
 from database.grab_course_members import grabCourseMembers
 from database.read_students import read_students_data
-
+from database.read_task import read_task_data
+from database.read_task_mark import read_task_mark_data
+from database.update_task_mark import update_task_data
+from database.insert_new_mark import insert_mark
 from database.messages.insert_message import insert_message
 from database.messages.read_message_table import get_student_id_from_email, get_course_id_from_course_name, get_message_list_by_course_id
 
@@ -267,13 +270,17 @@ class Systems:
         degree = result[0][4]
         courses = result[0][5]
         bio = result[0][6]
-        # Timetables are default to private
         if result[0][7] is None:
             timetable_publicity = 0
         else:
             timetable_publicity = result[0][7]
+        avatar = bytes(result[0][8])
         courses = courses.replace(",", ", ")
-        return {"username": username, "real_name": real_name, "zid": zid, "degree": degree, "bio": bio, "courses": courses, "timetable_publicity": timetable_publicity, }
+       
+        return {"username": username, "real_name": real_name, \
+            "zid": zid, "degree": degree, \
+            "bio": bio, "courses": courses, \
+            "timetable_publicity": timetable_publicity, "avatar": avatar.decode("utf-8"), }
 
     def message_send(self, token, course, message):
         # '''
@@ -382,6 +389,60 @@ class Systems:
                 users_list.append(new)
         return users_list
         
+    def assessment_mark(self, course_name):
+        course_id = get_course_id_from_course_name(course_name)
+        result = read_task_data('course_id', course_id)
+        num_assessments = len(result)
+        assessments = []
+        if num_assessments > 0:
+            # put assessment info into a list of dictionary, each dictionary represents info of a particular assessment
+            for x in range(0, num_assessments):
+                new = {}
+                new['name'] = result[x][1]
+                new['weighting'] = result[x][2]
+                new['hurdle'] = result[x][3]
+                new['hurdle_mark'] = result[x][4]
+                assessments.append(new)
+        return assessments
+
+    def marks(self, email, course_name):
+        result = read_students_data('email', email)
+        zid = result[0][1]
+        course_id = get_course_id_from_course_name(course_name)
+        mark_result = read_task_mark_data('student_id', zid, 'course_id', course_id, '1', 1)
+        num_assessments = len(mark_result)
+        assessments = []
+        if num_assessments > 0:
+            # put assessment info into a list of dictionary, each dictionary represents info of a particular assessment
+            for x in range(0, num_assessments):
+                new = {}
+                new['mark'] = result[x][1]
+                task = result[x][2]
+                task_data = read_task_data('task_id', task)
+                task_name = task_data[0][1]
+                new['task'] = task_name
+                assessments.append(new)
+        return assessments
+    
+    def updatemarks(self, email, course_name, tasks, marks):
+        result = read_students_data('email', email)
+        zid = result[0][1]
+        course_id = get_course_id_from_course_name(course_name)
+        task_list = tasks.split(", ")
+        mark_list = marks.split(", ")
+        
+        num_assessments = len(task_list)
+        num_marks = len(mark_list)
+        if num_assessments != num_marks:
+            raise InputError('Number of assessments and marks do not match!')
+        for x in range(0, num_assessments):
+            task_info = read_task_data('task', task_list[x])
+            task_id = task_info[0][0]
+            task_mark_info = read_task_mark_data('student_id', zid, 'course_id', course_id, 'task_id', task_id)
+            if len(task_mark_info) == 0:
+                insert_mark(mark_list[x], task_id, zid, course_id)
+            else:
+                update_task_data('mark', mark_list[x], 'task_id', task_id, 'student_id', zid, 'course_id', course_id)
 
 # var =  Systems()
 
