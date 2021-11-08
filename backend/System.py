@@ -274,6 +274,13 @@ class Systems:
             timetable_publicity = result[0][7]
         courses = courses.replace(",", ", ")
         return {"username": username, "real_name": real_name, "zid": zid, "degree": degree, "bio": bio, "courses": courses, "timetable_publicity": timetable_publicity, }
+        avatar = bytes(result[0][7])
+        courses = courses.replace(",", ", ")
+       
+        return {"username": username, "real_name": real_name, \
+            "zid": zid, "degree": degree, \
+            "bio": bio, "courses": courses, \
+            "avatar": avatar.decode("utf-8"), }
 
     def message_send(self, token, course, message):
         # '''

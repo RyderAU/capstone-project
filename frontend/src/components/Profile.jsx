@@ -25,6 +25,7 @@ const Profile = () => {
   }, []);
 
   const handleSuccess = (res) => {
+    // console.log("I AM HANDLESUCCESS")
     console.log(res.data);
     setDetails(res.data);
     setDisplayName(res.data.username);
@@ -33,12 +34,16 @@ const Profile = () => {
   };
 
   const saveChanges = () => {
+    if (res.data.avatar) {
+      setProfilePic(res.data.avatar)
+    }
     axios
       .post(`${url}/dashboard/profile`, {
         token: token,
         display_name: displayName,
         bio: bio,
         timetable_publicity: timetablePublicity,
+        avatar: profilePic,
       })
       .then((r) => {
         console.log(`success`);
