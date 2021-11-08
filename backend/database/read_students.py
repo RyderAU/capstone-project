@@ -7,7 +7,7 @@ Return all information (except for password and login token) for user(s) satisfy
 Return None when no matched user can be found
 '''
 def read_students_data(column1, value):
-    select_query = "SELECT email, student_id, name, display_name, degree, course, bio FROM students WHERE " + column1 + "='" + value +"'"
+    select_query = "SELECT email, student_id, name, display_name, degree, course, bio, timetable_publicity, avatar FROM students WHERE " + column1 + "='" + value +"'"
     conn = None
     user_info = []
     try:
@@ -30,4 +30,4 @@ def read_students_data(column1, value):
         if conn is not None:
             conn.close()
 
-# print(read_students_data('email', 'helena1@m.mail'))
+# print(read_students_data('email', 'haesun@mail.com')) # This should retrieve avatar byte
