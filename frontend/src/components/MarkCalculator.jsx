@@ -26,16 +26,19 @@ const MarkCalculator = () => {
   const [url] = context.url;
   const [token] = context.token;
   const [marktable, setMarktable] = useState([]);
+  // const [iseditmode, setEditmode] = useState(false);
+  const [yourmark, setYourmark] = useState("Enter your mark")
 
-  const onToggleEditMode = id => {
-    setMarktable(state => {
-      return marktable.map(assessment => {
-        if (assessment.id === id) {
-          return { ...assessment, isEditMode: !assessment.isEditMode };
-        }
-        return assessment;
-      });
-    });
+  const onToggleEditMode = () => {
+    console.log("You clicked edit")
+    // setMarktable(state => {
+    //   return marktable.map(assessment => {
+    //     if (assessment.id === id) {
+    //       return { ...assessment, isEditMode: !assessment.isEditMode };
+    //     }
+    //     return assessment;
+    //   });
+    // });
   };
 
   const onChange = (e, assessment) => {
@@ -52,19 +55,21 @@ const MarkCalculator = () => {
 
   const handleSuccess = (res) => {
     setMarktable(res.data.assessments)
+    
   }
 
+  const {isEditMode} = true;
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell> Task </TableCell>
-            <TableCell align="right"> Due </TableCell>
-            <TableCell align="right"> Weighting</TableCell>
-            <TableCell align="right"> Hurdle </TableCell>
-            <TableCell align="right"> Hurdle mark </TableCell>
-            <TableCell align="right"> My mark </TableCell>
+            <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}}> Task </TableCell>
+            <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="right"> Due </TableCell>
+            <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="right"> Weighting</TableCell>
+            <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="right"> Hurdle </TableCell>
+            <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="right"> Hurdle mark </TableCell>
+            <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="right"> My mark </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -78,10 +83,18 @@ const MarkCalculator = () => {
               </TableCell>
                 <TableCell align="right">{assessment.deadline}</TableCell>
                 <TableCell align="right">{assessment.weighting}%</TableCell>
-                <TableCell align="right">{assessment.hurdle}</TableCell>
+                <TableCell align="right">{assessment.hurdle ? "Yes" : "No"}</TableCell>
                 <TableCell align="right">{assessment.hurdle ? String(assessment.hurdle_mark) + "%" : "N/A"}</TableCell>
                 <TableCell align="right">
-                  <input type="text" value="Add your mark" />
+                  <form>
+                    <input type="text" 
+                      value="Add your mark" 
+                      
+                    />
+                    <IconButton>
+                    <EditIcon onClick={() => onToggleEditMode()}/>
+                  </IconButton>
+                  </form>
                 </TableCell>
             </TableRow>
           ))}
@@ -89,7 +102,6 @@ const MarkCalculator = () => {
         </Table>
     </TableContainer>
   );
-  // </div> );
 };
 
 export default MarkCalculator;
