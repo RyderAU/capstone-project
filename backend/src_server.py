@@ -308,9 +308,8 @@ def other_users_profile():
     try:
         # Grab data from the database
         email = system.validate_token(token)
-        assessments = system.assessment_mark(course_name)
-        marks = system.marks(email, course_name)
-        return dumps({'assessments': assessments, 'marks': marks, })
+        assessments = system.assessment_mark(email, course_name)
+        return dumps({'assessments': assessments, })
     except Exception as e:
         # Error in selenium or error in inserting into database
         raise e
