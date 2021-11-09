@@ -329,7 +329,7 @@ def mark_composition_route():
                 "hurdle": 0,
                 "hurdle_mark": 0,
                 "deadline": "Weeks 3, 7",
-                "my_mark": 0,
+                "my_mark": 9,
             },
             { 
                 "task": "Movie Review",

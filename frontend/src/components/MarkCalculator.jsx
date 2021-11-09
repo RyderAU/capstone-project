@@ -26,29 +26,12 @@ const MarkCalculator = () => {
   const [token] = context.token;
   const [marktable, setMarktable] = useState([]);
 
-  const [displayMyMark, setDisplayMyMark] = useState("");
-
   const [allTasks, setAllTasks] = useState("");
   const [allMarks, setAllMarks] = useState("");
+  // const [myMark, setMyMark] = useState({});
 
   const [loading, setLoading] = React.useState(false);
   
-  function handleMarkSubmit() {
-    setLoading(true);
-    alert("You clicked edit")
-    axios.post(`${url}/markcalc`, {
-      token: token,
-      tasks: allTasks,
-      marks: allMarks,
-    })
-      .then(r => {
-        handleSuccess(r);
-      })
-      .catch(err => {
-        handleError(err);
-      });
-    setLoading(false);
-  }
 
   React.useEffect(() => {
     axios
@@ -59,9 +42,53 @@ const MarkCalculator = () => {
 
   const handleSuccess = (res) => {
     setMarktable(res.data.assessments)
-    
+    // setMyMark(res.data.)
   }
 
+
+  const handleMarkInput = (task, mark) => {
+    setAllTasks(task)
+    setAllMarks(mark)
+    // console.log(marktable)
+    // let allTasksString = ""
+    // let allMymarkString = ""
+    // for (let i = 0; i < marktable.length; i++) {
+    //   // console.log(marktable[i]["task"]);
+    //   // console.log(marktable[i]["my_mark"]);
+    //   allTasksString += marktable[i]["task"]
+    //   allMymarkString += marktable[i]["my_mark"]
+    //   if (!(i == (marktable.length - 1))) {
+    //     allTasksString += ", "
+    //     allMymarkString += ", "
+    //   }
+    // }
+    // console.log(allTasksString)
+    // console.log(allMymarkString)
+
+    // setAllTasks(allTasksString)
+    // setAllMarks(allMymarkString)
+  }
+
+  const handleMarkSubmit = () => {
+    setLoading(true);
+    // alert("You clicked edit")
+    console.log(allTasks)
+    console.log(allMarks)
+    axios.post(`${url}/markcalc`, {
+      token: token,
+      course_name: courseid,
+      tasks: allTasks,
+      marks: allMarks,
+    })
+      .then(r => {
+        console.log(r)
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    setLoading(false);
+  }  
+  
   const {isEditMode} = true;
   return (
     <TableContainer component={Paper}>
@@ -92,9 +119,9 @@ const MarkCalculator = () => {
                 <TableCell align="right">
                   <form>
                     <Input type="text" 
-                      value={displayMyMark}
-                      placeholder="Add your mark"
-                      onChange={(e) => setDisplayMyMark(e.target.value)}
+                      // value={displayMyMark}
+                      placeholder={assessment.my_mark}
+                      onChange={(e) => handleMarkInput(assessment.task, e.target.value)}
                       style={{marginRight:"5px"}}
                     />
                     <LoadingButton
@@ -115,6 +142,9 @@ const MarkCalculator = () => {
                 </TableCell>
             </TableRow>
           ))}
+          <TableRow>
+            <TableCell>My Total</TableCell>
+          </TableRow>
         </TableBody>
         </Table>
     </TableContainer>
