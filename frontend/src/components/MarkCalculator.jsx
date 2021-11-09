@@ -139,7 +139,7 @@ const MarkCalculator = () => {
             <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="center"> Weighting</TableCell>
             <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="center"> Hurdle </TableCell>
             <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="center"> Hurdle mark </TableCell>
-            <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="center"> My mark </TableCell>
+            <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="center"> My mark (%)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
