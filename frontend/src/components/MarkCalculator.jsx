@@ -19,13 +19,17 @@ import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';
 import CheckIcon from '@mui/icons-material/Check';
 
-// Alert dialogue
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+// // Alert dialogue
+// import Dialog from '@mui/material/Dialog';
+// import DialogActions from '@mui/material/DialogActions';
+// import DialogContent from '@mui/material/DialogContent';
+// import DialogContentText from '@mui/material/DialogContentText';
+// import DialogTitle from '@mui/material/DialogTitle';
 import Alert from '@mui/material/Alert';
+// import Slide from '@mui/material/Slide';
+// import { ClassNames } from "@emotion/react";
+
+
 // Dynamically creating the table based on the JSON data we receive from the backend.
 const MarkCalculator = () => {
   const { courseid } = useParams();
@@ -41,11 +45,15 @@ const MarkCalculator = () => {
 
   const [loading, setLoading] = React.useState(false);
   
-  const [open, setOpen] = React.useState(false);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const [open, setOpen] = React.useState(false);
+  
+  // const Transition = React.forwardRef(function Transition(props, ref) {
+  //   return <Slide direction="up" ref={ref} {...props} />;
+  // });
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+  
 
   React.useEffect(() => {
     axios
@@ -96,7 +104,7 @@ const MarkCalculator = () => {
   const handleMarkSubmit = () => {
     setLoading(true);
     // alert("Your mark has been updated.")
-    setOpen(true);
+    // setOpen(true);
     console.log(task)
     console.log(mark)
     axios.post(`${url}/markcalc`, {
@@ -112,17 +120,15 @@ const MarkCalculator = () => {
         console.log(err);
       });
     
-    setLoading(false);
+    setTimeout(()=>{setLoading(false);}, 2000)
   }  
-  
+  // const classes = useStyles();
   return (
-    // <div>{
-    //   loading ? 
+    <div>
+      { loading ? <Alert severity="success" color="info" style={{fontSize:"20pt", backgroundColor:"pink"}}>We've updated your mark!</Alert>
+        : <div/>}
+      
 
-    //     <Alert severity="success" color="info" variant="filled">We've updated your mark!</Alert>
-        
-    //   : <div/>
-    //   }
     <TableContainer component={Paper}>
       
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -152,48 +158,29 @@ const MarkCalculator = () => {
                 <TableCell align="center">{assessment.hurdle ? String(assessment.hurdle_mark) + "%" : "N/A"}</TableCell>
                 <TableCell align="center">
   
-                    <Input type="text"
-                      className="inputinput"
-                      // value={myMark}
-                      placeholder={assessment.my_mark}
-                      onChange={(e) => handleMarkInput(assessment.task, e.target.value)}
-                      style={{width:"60px"}}
-                    />
-                    <LoadingButton
-                      color="secondary"
-                      style={{marginLeft:"15px"}}
-                      loading={loading}
-                      loadingPosition="start"
-                      startIcon={
-                        <CheckIcon 
-                          onClick={() => handleMarkSubmit()
-                        }
-                          type="submit"/>
+                  <Input type="text"
+                    className="inputinput"
+                    // value={myMark}
+                    placeholder={assessment.my_mark}
+                    onChange={(e) => handleMarkInput(assessment.task, e.target.value)}
+                    style={{width:"60px"}}
+                  />
+                  <LoadingButton
+                    color="secondary"
+                    style={{marginLeft:"15px"}}
+                    loading={loading}
+                    loadingPosition="start"
+                    startIcon={
+                      <CheckIcon 
+                        onClick={() => handleMarkSubmit()
                       }
-                      variant="contained"
-                    >
-                      Save
-                    </LoadingButton>
-                    <Dialog
-                      open={open}
-                      // onClose={handleClose}
-                      aria-labelledby="alert-dialog-title"
-                      aria-describedby="alert-dialog-description"
-                    >
-                      <DialogTitle id="alert-dialog-title">
-                        {"Yay!"}
-                      </DialogTitle>
-                      <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                          Your mark has been updated.
-                        </DialogContentText>
-                      </DialogContent>
-                      <DialogActions>
-                        <Button onClick={handleClose} >
-                          Okay
-                        </Button>
-                      </DialogActions>
-                    </Dialog>
+                        type="submit"/>
+                    }
+                    variant="contained"
+                  >
+                    Save
+                  </LoadingButton>
+                    
                     
                 </TableCell>
             </TableRow>
@@ -211,7 +198,8 @@ const MarkCalculator = () => {
         </TableBody>
         </Table>
     </TableContainer>
-    // </div>
+    
+    </div>
   );
 };
 
