@@ -294,7 +294,7 @@ def other_users_profile():
     try:
         # Grab data from the database
         info = system.profile(email)
-        publicity = validate_entity_exists('timetable_publicity', 'email', email)
+        publicity = info.get("timetable_publicity")
         if publicity == 1:
             timetables = system.timetables(email)
             info['timetables'] = timetables
