@@ -321,7 +321,7 @@ def mark_composition_route():
                 "hurdle": 0,
                 "hurdle_mark": 0,
                 "deadline": "Weeks 1-5, 7-10",
-                "my_mark": 0,
+                "my_mark": 8,
             },
             { 
                 "task": "Lecture summaries",
@@ -337,15 +337,15 @@ def mark_composition_route():
                 "hurdle": 0,
                 "hurdle_mark": 0,
                 "deadline": "Week 5",
-                "my_mark": 0,
+                "my_mark": 14,
             },
             { 
                 "task": "Company Case Study",
                 "weighting": 40,
                 "hurdle": 1,
-                "hurdle_mark": 40,
+                "hurdle_mark": 20,
                 "deadline": "Week 10",
-                "my_mark": 0,
+                "my_mark": 35,
             },
         ]
     })
