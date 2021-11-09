@@ -25,18 +25,30 @@ const MarkCalculator = () => {
   const [url] = context.url;
   const [token] = context.token;
   const [marktable, setMarktable] = useState([]);
-  
+
+  const [displayMyMark, setDisplayMyMark] = useState("");
+
+  const [allTasks, setAllTasks] = useState("");
+  const [allMarks, setAllMarks] = useState("");
+
   const [loading, setLoading] = React.useState(false);
   
   function handleMarkSubmit() {
     setLoading(true);
     alert("You clicked edit")
+    axios.post(`${url}/markcalc`, {
+      token: token,
+      tasks: allTasks,
+      marks: allMarks,
+    })
+      .then(r => {
+        handleSuccess(r);
+      })
+      .catch(err => {
+        handleError(err);
+      });
     setLoading(false);
   }
-
-  const handleChange = (e) => {
-    console.log(e.target.value)
-  };
 
   React.useEffect(() => {
     axios
@@ -79,20 +91,21 @@ const MarkCalculator = () => {
                 <TableCell align="right">{assessment.hurdle ? String(assessment.hurdle_mark) + "%" : "N/A"}</TableCell>
                 <TableCell align="right">
                   <form>
-                    <input type="text" 
+                    <Input type="text" 
+                      value={displayMyMark}
                       placeholder="Add your mark"
-                      onChange={handleChange}
+                      onChange={(e) => setDisplayMyMark(e.target.value)}
                       style={{marginRight:"5px"}}
                     />
                     <LoadingButton
                       color="secondary"
-                      onClick={handleMarkSubmit}
+                      
                       loading={loading}
                       loadingPosition="start"
                       startIcon={
-                        // <IconButton color="success">
-                          <SaveIcon />
-                        // </IconButton>
+                        <SaveIcon 
+                          onClick={() => handleMarkSubmit()}
+                          type="submit"/>
                       }
                       variant="contained"
                     >

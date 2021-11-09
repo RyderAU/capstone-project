@@ -317,68 +317,53 @@ def mark_composition_route():
         "assessments" : [
             {
                 "task": "Seminar Participation",
-                "deadline": "Weeks 1-5, 7-10",
                 "weighting": 10,
                 "hurdle": 0,
                 "hurdle_mark": 0,
+                "deadline": "Weeks 1-5, 7-10",
+                "my_mark": 0,
             },
             { 
                 "task": "Lecture summaries",
-                "deadline": "Weeks 3, 7",
                 "weighting": 10,
                 "hurdle": 0,
                 "hurdle_mark": 0,
+                "deadline": "Weeks 3, 7",
+                "my_mark": 0,
             },
             { 
                 "task": "Movie Review",
-                "deadline": "Week 5",
                 "weighting": 20,
                 "hurdle": 0,
                 "hurdle_mark": 0,
+                "deadline": "Week 5",
+                "my_mark": 0,
             },
             { 
                 "task": "Company Case Study",
-                "deadline": "Week 10",
                 "weighting": 40,
                 "hurdle": 1,
                 "hurdle_mark": 40,
+                "deadline": "Week 10",
+                "my_mark": 0,
             },
         ]
     })
 
-@APP.route("/retrievemarks", methods=['GET'])
-def retrieve_marks_route():
-    '''  '''
-    token = request.args.get("token", "null")
-    course_name = request.args.get("course_name", "null")
-    print(f'{token} {course_name}')
-    return dumps({
-        # "assessments" : [
-        #     {
-        #         "task": "Seminar Participation",
-        #         "weighting": 10,
-        #         "hurdle": 0,
-        #         "hurdle_mark": 0,
-        #     },
-        #     { 
-        #         "task": "Lecture summaries",
-        #         # due: "Weeks 3, 7",
-        #         "weighting": "10",
-        #         "hurdle": 0,
-        #         "hurdle_mark": 0,
-        #         # my_mark: "4"
-        #     },
-        #     { 
-        #         "task": "Movie Review",
-        #         # due: "Week 5",
-        #         "weighting": "20",
-        #         "hurdle": 0,
-        #         "hurdle_mark": 0,
-        #         # my_mark: "19"
-        #     }
-        # ]
-    })
 
+@APP.route("/markcalc", methods=['POST'])
+def markcalc_post_route():
+    ''' '''
+    token = request.get_json()["token"]
+    course_name = request.get_json()["course_name"]
+    tasks = request.get_json()["tasks"]
+    marks = request.get_json()["marks"]
+    
+    print(f'{token} {course_name} {tasks} {marks}')
+
+    return dumps({
+        "is_success": True
+    })
 
 #------------------------------------------------------------------------------#
 #                          routes: workspace/reset                             #
