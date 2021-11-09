@@ -11,7 +11,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Input from "@material-ui/core/Input";
+// import Input from "@material-ui/core/Input";
 import Paper from "@material-ui/core/Paper";
 
 // Icons
@@ -139,7 +139,7 @@ const MarkCalculator = () => {
             <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="center"> Weighting</TableCell>
             <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="center"> Hurdle </TableCell>
             <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="center"> Hurdle mark </TableCell>
-            <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="center"> My mark </TableCell>
+            <TableCell style={{fontWeight: 'bold', backgroundColor:'pink'}} align="center"> My mark (%)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -158,12 +158,11 @@ const MarkCalculator = () => {
                 <TableCell align="center">{assessment.hurdle ? String(assessment.hurdle_mark) + "%" : "N/A"}</TableCell>
                 <TableCell align="center">
   
-                  <Input type="text"
-                    className="inputinput"
-                    // value={myMark}
+                  <input type="text"
+                    className="markInput"
                     placeholder={assessment.my_mark}
                     onChange={(e) => handleMarkInput(assessment.task, e.target.value)}
-                    style={{width:"60px"}}
+                    style={{width:"65px"}}
                   />
                   <LoadingButton
                     color="secondary"
@@ -180,8 +179,6 @@ const MarkCalculator = () => {
                   >
                     Save
                   </LoadingButton>
-                    
-                    
                 </TableCell>
             </TableRow>
           ))}
