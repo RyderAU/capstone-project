@@ -5,7 +5,6 @@ import React from "react";
 import { StoreContext } from "../Store";
 import { useState } from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -16,9 +15,9 @@ import Input from "@material-ui/core/Input";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 // Icons
-import EditIcon from "@material-ui/icons/EditOutlined";
-import DoneIcon from "@material-ui/icons/DoneAllTwoTone";
-import RevertIcon from "@material-ui/icons/NotInterestedOutlined";
+import LoadingButton from '@mui/lab/LoadingButton';
+import SaveIcon from '@mui/icons-material/Save';
+
 // Dynamically creating the table based on the JSON data we receive from the backend.
 const MarkCalculator = () => {
   const { courseid } = useParams();
@@ -26,25 +25,18 @@ const MarkCalculator = () => {
   const [url] = context.url;
   const [token] = context.token;
   const [marktable, setMarktable] = useState([]);
-  // const [iseditmode, setEditmode] = useState(false);
-  const [yourmark, setYourmark] = useState("Enter your mark")
+  
+  const [loading, setLoading] = React.useState(false);
+  
+  function handleMarkSubmit() {
+    setLoading(true);
+    alert("You clicked edit")
+    setLoading(false);
+  }
 
-  const onToggleEditMode = () => {
-    console.log("You clicked edit")
-    // setMarktable(state => {
-    //   return marktable.map(assessment => {
-    //     if (assessment.id === id) {
-    //       return { ...assessment, isEditMode: !assessment.isEditMode };
-    //     }
-    //     return assessment;
-    //   });
-    // });
+  const handleChange = (e) => {
+    console.log(e.target.value)
   };
-
-  const onChange = (e, assessment) => {
-
-  };
-
 
   React.useEffect(() => {
     axios
@@ -88,12 +80,24 @@ const MarkCalculator = () => {
                 <TableCell align="right">
                   <form>
                     <input type="text" 
-                      value="Add your mark" 
-                      
+                      placeholder="Add your mark"
+                      onChange={handleChange}
+                      style={{marginRight:"5px"}}
                     />
-                    <IconButton>
-                    <EditIcon onClick={() => onToggleEditMode()}/>
-                  </IconButton>
+                    <LoadingButton
+                      color="secondary"
+                      onClick={handleMarkSubmit}
+                      loading={loading}
+                      loadingPosition="start"
+                      startIcon={
+                        // <IconButton color="success">
+                          <SaveIcon />
+                        // </IconButton>
+                      }
+                      variant="contained"
+                    >
+                      Save
+                    </LoadingButton>
                   </form>
                 </TableCell>
             </TableRow>
