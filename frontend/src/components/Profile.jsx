@@ -28,7 +28,6 @@ const Profile = () => {
   }, []);
 
   const handleSuccess = (res) => {
-    // console.log("I AM HANDLESUCCESS")
     console.log(res.data);
     setDetails(res.data);
     setDisplayName(res.data.username);
