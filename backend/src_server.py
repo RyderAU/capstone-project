@@ -223,6 +223,7 @@ def message_send_route():
     '''Sends a message'''
     token = request.get_json()['token']
     course = request.get_json()['course_name']
+    
     message = request.get_json()['message']
 
     system.message_send(token, course, message)
@@ -306,6 +307,7 @@ def markcalc():
 
     token = request.args.get('token')
     course_name = request.args.get('course_name')
+    print("MARC CALCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC ",course_name)
     try:
         # Grab data from the database
         email = system.validate_token(token)

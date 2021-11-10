@@ -12,9 +12,15 @@ def update_user_data(column1, column2, value1, value2):
     conn = None
     try:
         # read database configuration
-        conn = psycopg2.connect(database='ourUNSW', 
-        user='postgres', password='sudo-sandeep-reply', 
-        host='35.188.192.239', port='5432')
+
+        # old db
+        conn = psycopg2.connect(database='frnkorza', 
+        user='frnkorza', password='5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg', 
+        host='rosie.db.elephantsql.com', port='5432')
+        
+        # conn = psycopg2.connect(database='ourUNSW', 
+        # user='postgres', password='sudo-sandeep-reply', 
+        # host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
         cur.execute(query, (column1, value1, column2, value2,))

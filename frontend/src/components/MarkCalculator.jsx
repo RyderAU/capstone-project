@@ -19,16 +19,7 @@ import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';
 import CheckIcon from '@mui/icons-material/Check';
 
-// // Alert dialogue
-// import Dialog from '@mui/material/Dialog';
-// import DialogActions from '@mui/material/DialogActions';
-// import DialogContent from '@mui/material/DialogContent';
-// import DialogContentText from '@mui/material/DialogContentText';
-// import DialogTitle from '@mui/material/DialogTitle';
 import Alert from '@mui/material/Alert';
-// import Slide from '@mui/material/Slide';
-// import { ClassNames } from "@emotion/react";
-
 
 // Dynamically creating the table based on the JSON data we receive from the backend.
 const MarkCalculator = () => {
@@ -40,39 +31,29 @@ const MarkCalculator = () => {
 
   const [task, setTask] = useState("");
   const [mark, setMark] = useState("");
-  // const [myMark, setMyMark] = useState([]);
+
   const [totalMark, setTotalMark] = useState(0);
 
   const [loading, setLoading] = React.useState(false);
   
-  // const [open, setOpen] = React.useState(false);
-  
-  // const Transition = React.forwardRef(function Transition(props, ref) {
-  //   return <Slide direction="up" ref={ref} {...props} />;
-  // });
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-  
-
   React.useEffect(() => {
+    console.log(courseid)
+    console.log(token)
     axios
-      .get(`${url}/markcalc?token=${token}`)
+      .get(`${url}/markcalc?token=${token}&course_name=${courseid}`)
       .then((res) => handleSuccess(res))
       .catch((err) => console.log(err));
   }, []);
 
   const handleSuccess = (res) => {
+    console.log(res)
     setMarktable(res.data.assessments)
     let total = 0
     let arr = res.data.assessments
     arr.forEach((e, i, a) => {
-      // console.log("my mark: ", e["my_mark"])
-      // console.log(i)
-      // console.log(a)
-      total += e["my_mark"]
+      total += parseInt(e["my_mark"])
     })
-    // console.log("my total mark ", total)
+    
     setTotalMark(total)
   }
 
@@ -122,13 +103,12 @@ const MarkCalculator = () => {
     
     setTimeout(()=>{setLoading(false);}, 2000)
   }  
-  // const classes = useStyles();
+
   return (
     <div>
       { loading ? <Alert severity="success" color="info" style={{fontSize:"20pt", backgroundColor:"pink"}}>We've updated your mark!</Alert>
         : <div/>}
       
-
     <TableContainer component={Paper}>
       
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -146,11 +126,11 @@ const MarkCalculator = () => {
           {marktable.map(assessment => (
 
             <TableRow
-              key={assessment.task}
+              key={assessment.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {assessment.task}
+                {assessment.name}
               </TableCell>
                 <TableCell align="center">{assessment.deadline}</TableCell>
                 <TableCell align="center">{assessment.weighting}%</TableCell>

@@ -11,9 +11,14 @@ def get_student_id_from_email(email):
     conn = None
     student_id = ''
     try:
-        conn = psycopg2.connect(database='ourUNSW', 
-        user='postgres', password='sudo-sandeep-reply', 
-        host='35.188.192.239', port='5432')
+        # old db
+        conn = psycopg2.connect(database='frnkorza', 
+        user='frnkorza', password='5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg', 
+        host='rosie.db.elephantsql.com', port='5432')
+
+        # conn = psycopg2.connect(database='ourUNSW', 
+        # user='postgres', password='sudo-sandeep-reply', 
+        # host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 
@@ -35,13 +40,20 @@ def get_student_id_from_email(email):
 # Receive 'course_name' return 'course_id'
 def get_course_id_from_course_name(course_name):
     # Grab data
+    # print(course_name)
     select_query = "select course_id from courses where course_name='" + course_name + "';"
+    # print(select_query)
     conn = None
     course_id = ''
     try:
-        conn = psycopg2.connect(database='ourUNSW', 
-        user='postgres', password='sudo-sandeep-reply', 
-        host='35.188.192.239', port='5432')
+        # old db
+        conn = psycopg2.connect(database='frnkorza', 
+        user='frnkorza', password='5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg', 
+        host='rosie.db.elephantsql.com', port='5432')
+
+        # conn = psycopg2.connect(database='ourUNSW', 
+        # user='postgres', password='sudo-sandeep-reply', 
+        # host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 
@@ -55,7 +67,7 @@ def get_course_id_from_course_name(course_name):
     finally:
         if conn is not None:
             conn.close()
-
+    # print(select_query)
 # print(get_course_id_from_course_name('COMP4920'))
 
 # Get course_id, read all the message list differentiated by course group
@@ -71,9 +83,13 @@ def get_message_list_by_course_id(course_id):
     conn = None
     message_info = []
     try:
-        conn = psycopg2.connect(database='ourUNSW', 
-        user='postgres', password='sudo-sandeep-reply', 
-        host='35.188.192.239', port='5432')
+        # old db
+        conn = psycopg2.connect(database='frnkorza', 
+        user='frnkorza', password='5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg', 
+        host='rosie.db.elephantsql.com', port='5432')
+        # conn = psycopg2.connect(database='ourUNSW', 
+        # user='postgres', password='sudo-sandeep-reply', 
+        # host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 

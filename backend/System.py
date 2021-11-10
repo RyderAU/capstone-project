@@ -403,10 +403,12 @@ class Systems:
                 task_name = result[x][1]
                 new['deadline'] = result[x][2]
                 new['name'] = task_name
-                new['weighting'] = result[x][3]
+
+                new['weighting'] = str(result[x][3])
+
                 new['hurdle'] = result[x][4]
-                new['hurdle_mark'] = result[x][5]
-                task_relevant_info = read_task_data('task_name', task_name)
+                new['hurdle_mark'] = str(result[x][5])
+                task_relevant_info = read_task_data('task', task_name)
                 task_id = task_relevant_info[0][0]
                 mark_result = read_task_mark_data('student_id', zid, 'course_id', course_id, 'task_id', task_id)
                 # If the student hasn't saved their mark for this assessment
