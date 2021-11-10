@@ -33,12 +33,15 @@ const Search = ( {courseid} ) => {
     console.log(response.data.result);
     const members = response.data.result;
 
-    let members_list = [];
+    let members_list = [
+      <SearchTitle>Search Result</SearchTitle>
+    ];
     for (let i=members.length; i > 0; i--) {
         const mem_component = members[i-1];
         // console.log(mem_component.email);
         members_list.push(
           <SearchComponent
+            key={i}
             email={mem_component.email}
             display_name={mem_component.display_name}
             name={mem_component.name} />
@@ -65,7 +68,8 @@ const Search = ( {courseid} ) => {
                 placeholder="Enter name"
                 aria-label="search-input"
                 className="search-input"
-                onChange={(e) => setQuery(e.target.value)}/>
+                onChange={(e) => setQuery(e.target.value)}
+                onClick ={(e) => console.log("nooooooo")}/>
             {/* <SearchComponent
                 aria-label="search-container"
                 className="search-container">
@@ -73,12 +77,9 @@ const Search = ( {courseid} ) => {
             </SearchComponent> */}
             <SearchResultContainer
                 aria-label="search-container"
-                className="search-container">
-                {/* {queryList} */}
-                <SearchComponent>
-
-                  {queryList}
-                </SearchComponent>
+                className="search-container"
+                onClick ={(e) => console.log("byeeeeeeeeee")} >
+                {queryList}
             </SearchResultContainer>
             <SearchIcon />
         </InputContainer>

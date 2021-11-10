@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import searchIconImg from "../images/search.png"
 
-const inputFocus = false;
-
 export const InputContainer = styled.div`
   position:relative;
   padding: 0 0 0 20px;
@@ -11,7 +9,10 @@ export const InputContainer = styled.div`
   // direction: rtl;
   width: 180px;
   .search-input:focus + .search-container {
-    display: flex;
+    // left: 25px;
+    visibility: visible;
+    // display: flex;
+    // z-index: 0;
   }
 `;
 
@@ -44,27 +45,57 @@ SearchIcon.defaultProps = {
 export const SearchTitle = styled.div`
   width: 100%;
   color: #333;
+  text-align: center;
+  padding: 7px 0;
+  font-size: 0.8em;
+  background-color: #bcbcbc;
+  // margin: 2px 0 0 2px;
 `;
 export const SearchResultContainer = styled.div`
   width: 175px;
-  height: 50px;
+  // height: 50px;
   position: absolute;
   left: 25px;
-  background: #ddd;
+  background: #dedede;
   border-radius: 10px;
-  display: none;
+  // display: hidden;
+  visibility: hidden;
+  // z-index: -1;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const SearchComponentMain = styled.div`
   width: 100%;
   height: 50px;
   display: flex;
+  padding: 3px 0;
   flex-direction: row;
+  // background: #fff;
+  & .avatar {
+    // margin: auto;
+    // margin-right: 8px;
+    margin: 8px 8px 0 0;
+  }
+  &:hover {
+    background-color: #fff;
+    cursor: pointer;
+  }
+  justify-content: center;
 `;
 
 export const SearchComponentText = styled.div`
   width: 100px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+`;
+export const SearchComponentTextDisplayName = styled.div`
+  color: black;
+  font-size: 0.8em;
 `;
 
+export const SearchComponentTextName = styled.div`
+  color: #bcbcbc;
+  font-size: 0.6em;
+`;
