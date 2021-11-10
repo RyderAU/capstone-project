@@ -1,18 +1,20 @@
 import psycopg2
-import urllib.parse as up
 
+ 
 
 def grabCourseMembers(course):
     query = "SELECT display_name FROM students WHERE course LIKE '%" + course + "%'"
     output = ""
     conn = None
     try:
+        # old db
+        conn = psycopg2.connect(database='frnkorza', 
+        user='frnkorza', password='5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg', 
+        host='rosie.db.elephantsql.com', port='5432')
 
-        DATABASE_URL = 'postgres://frnkorza:5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg@rosie.db.elephantsql.com/frnkorza'
-        url = up.urlparse(DATABASE_URL)
-        conn = psycopg2.connect(database=url.path[1:], 
-            user=url.username, password=url.password, 
-            host=url.hostname, port=url.port)
+        # conn = psycopg2.connect(database='ourUNSW', 
+        # user='postgres', password='sudo-sandeep-reply', 
+        # host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 

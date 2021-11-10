@@ -1,6 +1,6 @@
 import psycopg2
-# from .config import config
-import urllib.parse as up
+
+ 
 
 '''
 Return the first element when the value meets the given column under the specified field.
@@ -11,20 +11,25 @@ def validate_entity_exists(column1, column2, value):
     output = ""
     conn = None
     try:
-        # # read database configuration
-        # params = config()
-        # # connect to the PostgreSQL database
-        # conn = psycopg2.connect(**params)
-        DATABASE_URL = 'postgres://frnkorza:5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg@rosie.db.elephantsql.com/frnkorza'
-        url = up.urlparse(DATABASE_URL)
-        conn = psycopg2.connect(database=url.path[1:], 
-            user=url.username, password=url.password, 
-            host=url.hostname, port=url.port)
+        # read database configuration
+
+        # connect to the PostgreSQL database
+        
+        # old db
+        conn = psycopg2.connect(database='frnkorza', 
+        user='frnkorza', password='5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg', 
+        host='rosie.db.elephantsql.com', port='5432')
+
+        # conn = psycopg2.connect(database='ourUNSW', 
+        # user='postgres', password='sudo-sandeep-reply', 
+        # host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 
         cur.execute(query)
         output = cur.fetchall()
+        # close communication with the database
+        cur.close()
 
         '''
         output format is [('...', '...',)]. So to only get the first outcome, do [0][0].
@@ -39,16 +44,15 @@ def validate_entity_exists(column1, column2, value):
         else:
             return(output[0][0])
 
-        # close communication with the database
-        cur.close()
+        
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:
             conn.close()
 
-# print(validate_entity_exists('hashed_pwd', 'email', "pfizer@gmail.com")) # this one exists in db
-# print(validate_entity_exists('*', 'email', 'pfizer2@gmail.com')) # this one is unique email
+print(validate_entity_exists('display_name', 'email', 'haesun@mail.com'))
+
 """
 e.g. 
 SELECT hashed_pwd FROM students

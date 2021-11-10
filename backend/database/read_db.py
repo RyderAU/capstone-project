@@ -1,7 +1,7 @@
 ''' Read stored database '''
 import psycopg2
-# from .config import config
-import urllib.parse as up
+
+ 
 
 def read_db(field):
     # Grab data
@@ -10,15 +10,17 @@ def read_db(field):
 
     conn = None
     try:
-        # # read database configuration
-        # params = config()
-        # # connect to the PostgreSQL database
-        # conn = psycopg2.connect(**params)
-        DATABASE_URL = 'postgres://frnkorza:5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg@rosie.db.elephantsql.com/frnkorza'
-        url = up.urlparse(DATABASE_URL)
-        conn = psycopg2.connect(database=url.path[1:], 
-            user=url.username, password=url.password, 
-            host=url.hostname, port=url.port)
+        # read database configuration
+        # connect to the PostgreSQL database
+        
+        # old db
+        conn = psycopg2.connect(database='frnkorza', 
+        user='frnkorza', password='5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg', 
+        host='rosie.db.elephantsql.com', port='5432')
+
+        # conn = psycopg2.connect(database='ourUNSW', 
+        # user='postgres', password='sudo-sandeep-reply', 
+        # host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 
