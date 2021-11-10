@@ -59,9 +59,22 @@ const MarkCalculator = () => {
   }
 
   const handleMarkInput = (task, mark) => {
-    console.log(task)
-    setTask(task)
-    setMark(mark)
+    
+    
+    try {
+      parseFloat(mark)
+      setTask(task)
+      setMark(mark)
+    }
+    catch (err) {
+      alert("Please enter integer or decimal")
+    }
+
+    console.log(task, mark)
+    console.log(typeof mark)
+
+    // else {}
+    
     // setMyMark
     // console.log(marktable)
     // let allTasksString = ""
