@@ -2,6 +2,7 @@ import "./Feature.css";
 import { useParams } from "react-router";
 import { StoreContext } from '../Store';
 import Chat from "./Chat";
+import CourseOutline from "./CourseOutline";
 import MarkCalculator from "./MarkCalculator";
 
 const Feature = ({ selectedCourse }) => {
@@ -11,6 +12,7 @@ const Feature = ({ selectedCourse }) => {
   return (
     <div key={selectedCourse} className="course-main">
         {(feature == "chat") && <Chat courseid={courseid}/> }
+        {(feature == "course-outline") && <CourseOutline courseid={courseid}/> }
         {(feature == "mark-calculation") && <MarkCalculator courseid={courseid}/>}
     </div>
   );

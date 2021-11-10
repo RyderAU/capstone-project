@@ -304,7 +304,54 @@ def channel_members():
         ]
     })
 
+USERS = [
+    {
+        "email": "sandeep@mail.com",
+        "name": "Sandeep Das",
+        "display_name": "NeverReplies"
+    },
+    {
+        "email": "shoan@mail.com",
+        "name": "Shoan Desire",
+        "display_name": "Desai-rable xoxo"
+    },
+    {
+        "email": "sandeep@mail.com",
+        "name": "Sandeep Das",
+        "display_name": "NeverReplies"
+    },
+    {
+        "email": "shoan@mail.com",
+        "name": "Shoan Desire",
+        "display_name": "Desai-rable xoxo"
+    },
+    {
+        "email": "sandeep@mail.com",
+        "name": "Sandeep Das",
+        "display_name": "NeverReplies"
+    },
+    {
+        "email": "shoan@mail.com",
+        "name": "Shoan Desire",
+        "display_name": "Desai-rable xoxo"
+    },
+]
 
+@APP.route("/search", methods=['GET'])
+def search_route():
+    ''' Authenticates email / password and returns id / token '''
+    token = request.args.get("token", "null")
+    display_name = request.args.get("display_name", "null")
+
+    # details = grabCourseIDs(email, password)
+    print("Inside search")
+    print(f'{token} {display_name}')
+    # time.sleep(2) #remove later, just for frontend testing
+
+    global USERS
+    return dumps({
+        "result": USERS
+    })
 
 
 @APP.route("/markcalc", methods=['GET'])

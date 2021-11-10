@@ -56,6 +56,13 @@ const ChatMessages = ( {courseid} ) => {
     console.log(error);
   };
 
+  // let interval = 5000;
+  // if (seconds == 0) {
+  //   interval = 1000;
+  // };
+  // if (seconds == 1) {
+  //   interval = 5000;
+  // };
   React.useEffect(() => {
     window.setInterval(() => {
       setSeconds(s => s + 1);
@@ -64,7 +71,13 @@ const ChatMessages = ( {courseid} ) => {
 
   React.useEffect(() => {
     getMessages(courseid);
+    console.log("RUN MESSAGE");
   }, [seconds]);
+
+  React.useEffect(() => {
+    console.log("RUN MESSAGE FAST");
+    getMessages(courseid);
+  }, []);
 
   return (
     <ContainerChat aria-label="chat-container">
