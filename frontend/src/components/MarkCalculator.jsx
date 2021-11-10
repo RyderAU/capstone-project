@@ -59,41 +59,21 @@ const MarkCalculator = () => {
   }
 
   const handleMarkInput = (task, mark) => {
-    
-    
-    try {
-      parseFloat(mark)
+    console.log(task, mark)
+    if (mark === "") {
+      mark = 0
+    }
+
+    mark = parseFloat(mark)
+
+    if (isNaN(mark)) {
+      // setMark("")
+      alert("Please enter integer or decimal")
+    }
+    else {
       setTask(task)
       setMark(mark)
     }
-    catch (err) {
-      alert("Please enter integer or decimal")
-    }
-
-    console.log(task, mark)
-    console.log(typeof mark)
-
-    // else {}
-    
-    // setMyMark
-    // console.log(marktable)
-    // let allTasksString = ""
-    // let allMymarkString = ""
-    // for (let i = 0; i < marktable.length; i++) {
-    //   console.log(marktable[i]["task"]);
-    //   console.log(marktable[i]["my_mark"]);
-    //   allTasksString += marktable[i]["task"]
-    //   allMymarkString += marktable[i]["my_mark"]
-    //   if (!(i == (marktable.length - 1))) {
-    //     allTasksString += ", "
-    //     allMymarkString += ", "
-    //   }
-    // }
-    // console.log(allTasksString)
-    // console.log(allMymarkString)
-
-    // setAllTasks(allTasksString)
-    // setAllMarks(allMymarkString)
   }
 
   const handleMarkSubmit = () => {
@@ -157,6 +137,7 @@ const MarkCalculator = () => {
                   <input type="text"
                     className="markInput"
                     placeholder={assessment.my_mark}
+                    // value={mark}
                     onChange={(e) => handleMarkInput(assessment.name, e.target.value)}
                     style={{width:"65px"}}
                   />
