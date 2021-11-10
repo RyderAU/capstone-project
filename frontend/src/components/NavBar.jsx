@@ -4,6 +4,7 @@ import { StoreContext } from "../Store";
 import { useHistory, NavLink } from "react-router-dom";
 import home from "../images/homeicon.png";
 import "./NavBar.css";
+import Search from "./Search";
 
 const NavBar = () => {
   const history = useHistory();
@@ -58,6 +59,8 @@ const NavBar = () => {
       <ul>
         <button onClick={() => handleLogout()}>Log Out</button>
       </ul>
+
+      <Search />
 
       <button
         onClick={() => {

@@ -12,6 +12,7 @@ const Members = ( {courseid} ) => {
   const [token, ] = context.token;
   const [members, setMembers] = useState([]);
   const [membersList, setMembersList] = useState([]);
+  const [interval, setInterval] = useState(0);
 
   // Send request to backend to retrieve all members
   const getMembers = (courseid) => {
@@ -52,15 +53,40 @@ const Members = ( {courseid} ) => {
     console.log(error);
   };
 
+  // let interval = 10000;
+  // if (seconds == 0) {
+  //   interval = 1000;
+  // };
+  // if (seconds == 1) {
+  //   interval = 10000;
+  // }
+
+
+
+  // React.useEffect(() => {
+  //   window.setInterval(() => {
+  //     if (seconds < 2) {
+  //       console.log(seconds);
+  //       setSeconds(seconds + 1);
+  //     };
+  //   }, 1000)
+  // }, []);
+
   React.useEffect(() => {
     window.setInterval(() => {
       setSeconds(s => s + 1);
-    }, 3000)
+    }, 10000)
   }, []);
 
   React.useEffect(() => {
     getMembers(courseid);
+    console.log("RUN MEMBERS");
   }, [seconds]);
+
+  // React.useEffect(() => {
+  //   getMembers(courseid);
+  //   console.log("RUN MEMBERS FAST");
+  // }, []);
   
   return (
     <ContainerMembers aria-label="member-container">
