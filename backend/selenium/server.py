@@ -1,7 +1,7 @@
 '''
 Description: All the routes for the server are contained here
 
-Created by: Sandeep Das (Tutorial: H15A by Hoang Pham)
+Created by: Haesandeep Dashim (Tutorial: H15A by Hoang Pham)
 Created: 2020-03-27
 Last Modified: 2020-03-31
 '''
@@ -302,6 +302,67 @@ def channel_members():
                 "name": "Timothy",
             },
         ]
+    })
+
+
+
+
+@APP.route("/markcalc", methods=['GET'])
+def mark_composition_route():
+    '''  '''
+    token = request.args.get("token", "null")
+    course_name = request.args.get("course_name", "null")
+    print(f'{token} {course_name}')
+    return dumps({
+        "assessments" : [
+            {
+                "task": "Seminar Participation",
+                "weighting": 10,
+                "hurdle": 0,
+                "hurdle_mark": 0,
+                "deadline": "Weeks 1-5, 7-10",
+                "my_mark": 8,
+            },
+            { 
+                "task": "Lecture summaries",
+                "weighting": 10,
+                "hurdle": 0,
+                "hurdle_mark": 0,
+                "deadline": "Weeks 3, 7",
+                "my_mark": 9,
+            },
+            { 
+                "task": "Movie Review",
+                "weighting": 20,
+                "hurdle": 0,
+                "hurdle_mark": 0,
+                "deadline": "Week 5",
+                "my_mark": 14,
+            },
+            { 
+                "task": "Company Case Study",
+                "weighting": 40,
+                "hurdle": 1,
+                "hurdle_mark": 20,
+                "deadline": "Week 10",
+                "my_mark": 35,
+            },
+        ]
+    })
+
+
+@APP.route("/markcalc", methods=['POST'])
+def markcalc_post_route():
+    ''' '''
+    token = request.get_json()["token"]
+    course_name = request.get_json()["course_name"]
+    tasks = request.get_json()["tasks"]
+    marks = request.get_json()["marks"]
+    
+    print(f'{token} {course_name} {tasks} {marks}')
+
+    return dumps({
+        "is_success": True
     })
 
 #------------------------------------------------------------------------------#
