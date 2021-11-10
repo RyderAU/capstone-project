@@ -5,9 +5,13 @@ from database.read_db import read_db
 from database.validate_entity_exists import validate_entity_exists
 from database.update_user import update_user_data
 from database.grab_course_members import grabCourseMembers
-
+from database.read_students import read_students_data
+from database.read_task import read_task_data
+from database.read_task_mark import read_task_mark_data
+from database.update_task_mark import update_task_data
+from database.insert_new_mark import insert_mark
 from database.messages.insert_message import insert_message
-from database.messages.read_message_table import get_student_id_from_email, get_course_id_from_course_name
+from database.messages.read_message_table import get_student_id_from_email, get_course_id_from_course_name, get_message_list_by_course_id
 
 import time
 import datetime
@@ -214,6 +218,8 @@ class Systems:
             {"session_id": session_id, "email": email}, "thisisakey", algorithm="HS256")
         token = str(token)
         token = token[2:-1]
+
+        print("stored token: " + token)
         # token = jwt.encode({session_id,"email": email}, "thisisakey", algorithm="HS256")
 
         # store into database
@@ -223,24 +229,17 @@ class Systems:
         # return {'is_success': is_success,}
         return {"token": token}
 
-    def profile(self, email):
+    def timetables(self, email):
         # '''
-        # Return all information of an user
+        # Return all timetables of an user
 
         # Arguments:
         #     email - string
 
         # Return Value:
-        #     - returns dictionary including fields of username, actual name, zid, degree, courses, biography, timetable
+        #     - returns dictionary including fields of timetable
         # '''
 
-        username = validate_entity_exists('display_name', 'email', email)
-        real_name = validate_entity_exists('name', 'email', email)
-        zid = validate_entity_exists('student_id', 'email', email)
-        degree = validate_entity_exists('degree', 'email', email)
-        bio = validate_entity_exists('bio', 'email', email)
-        courses = validate_entity_exists('course', 'email', email)
-        courses = courses.replace(",", ", ")
         # Grab timetables from database and put them into a list
         timetables = []
         fixed = 'timetable_week_'
@@ -249,7 +248,39 @@ class Systems:
             col_name = fixed + var
             table = validate_entity_exists(col_name, 'email', email)
             timetables.append(table)
-        return {"username": username, "real_name": real_name, "zid": zid, "degree": degree, "bio": bio, "courses": courses, "timetables": timetables}
+        return {"timetables": timetables, }
+    
+    def profile(self, email):
+        # '''
+        # Return all timetables of an user
+
+        # Arguments:
+        #     email - string
+
+        # Return Value:
+        #     - returns dictionary including fields of user info except timetables
+        # '''
+        
+
+        # Grab info from database
+        result = read_students_data('email', email)
+        zid = result[0][1]
+        real_name = result[0][2]
+        username = result[0][3]
+        degree = result[0][4]
+        courses = result[0][5]
+        bio = result[0][6]
+        if result[0][7] is None:
+            timetable_publicity = 0
+        else:
+            timetable_publicity = result[0][7]
+        avatar = bytes(result[0][8])
+        courses = courses.replace(",", ", ")
+       
+        return {"username": username, "real_name": real_name, \
+            "zid": zid, "degree": degree, \
+            "bio": bio, "courses": courses, \
+            "timetable_publicity": timetable_publicity, "avatar": avatar.decode("utf-8"), }
 
     def message_send(self, token, course, message):
         # '''
@@ -299,24 +330,24 @@ class Systems:
 
         course_id = get_course_id_from_course_name(course)
 
-        messages = read_messages_all(course_id)
+        messages = get_message_list_by_course_id(course_id)
 
         # Convert the list of tuple returned by database to a list of dictionaries
         num_messages = len(messages)
         altered_message = []
         zid = get_student_id_from_email(email)
         if num_messages > 0:
-            # check if messages is sent by current user, if yes then set field "current_user" to true otherwise to false
+            # check if messages are sent by current user, if yes then set field "current_user" to true otherwise to false
             for x in range(0, num_messages):
                 new = {}
-                new['message_content'] = messages[x][0]
-                username = validate_entity_exists('display_name', 'student_id', messages[x][1])
-                new['sender'] = username
-                new['message_time'] = messages[x][2].strftime("%m/%d/%Y, %H:%M:%S")
-                if messages[x][1] == zid:
-                    new['current_user'] = True
+                new['message'] = messages[x][1]
+                username = validate_entity_exists('display_name', 'student_id', messages[x][3])
+                new['name'] = username
+                new['timestamp'] = messages[x][2].strftime("%m/%d/%Y, %H:%M:%S")
+                if messages[x][3] == zid:
+                    new['is_current_user'] = True
                 else:
-                    new['current_user'] = False
+                    new['is_current_user'] = False
                 altered_message.append(new)
         return altered_message
 
@@ -337,11 +368,74 @@ class Systems:
        
         email = self.validate_token(token)
 
-        course_id = get_course_id_from_course_name(course)
+        # course_id = get_course_id_from_course_name(course)
 
-        members = grabCourseMembers(ccourse_id)
+        members = grabCourseMembers(course)
         return members
 
+    def search(self, username):
+        result = read_students_data('display_name', username)
+
+        # Convert the list of tuple returned by database to a list of dictionaries
+        num_users = len(result)
+        users_list = []
+        if num_users > 0:
+            # check if messages are sent by current user, if yes then set field "current_user" to true otherwise to false
+            for x in range(0, num_users):
+                new = {}
+                new['email'] = result[x][0]
+                new['name'] = result[x][2]
+                new['display_name'] = result[x][3]
+                users_list.append(new)
+        return users_list
+        
+    def assessment_mark(self, email, course_name):
+        result = read_students_data('email', email)
+        zid = result[0][1]
+        course_id = get_course_id_from_course_name(course_name)
+        result = read_task_data('course_id', course_id)
+        num_assessments = len(result)
+        assessments = []
+        if num_assessments > 0:
+            # put assessment info into a list of dictionary, each dictionary represents info of a particular assessment
+            for x in range(0, num_assessments):
+                new = {}
+                task_name = result[x][1]
+                new['deadline'] = result[x][2]
+                new['name'] = task_name
+                new['weighting'] = result[x][3]
+                new['hurdle'] = result[x][4]
+                new['hurdle_mark'] = result[x][5]
+                task_relevant_info = read_task_data('task_name', task_name)
+                task_id = task_relevant_info[0][0]
+                mark_result = read_task_mark_data('student_id', zid, 'course_id', course_id, 'task_id', task_id)
+                # If the student hasn't saved their mark for this assessment
+                if len(mark_result) == 0:
+                    new['my_mark'] = 0
+                else:
+                    new['my_mark'] = mark_result[0][1]
+                assessments.append(new)
+        return assessments
+    
+    def updatemarks(self, email, course_name, tasks, marks):
+        result = read_students_data('email', email)
+        zid = result[0][1]
+        course_id = get_course_id_from_course_name(course_name)
+        task_list = tasks.split(", ")
+        mark_list = marks.split(", ")
+        
+        num_assessments = len(task_list)
+        num_marks = len(mark_list)
+        if num_assessments != num_marks:
+            raise InputError('Number of assessments and marks do not match!')
+        for x in range(0, num_assessments):
+            task_info = read_task_data('task', task_list[x])
+            task_id = task_info[0][0]
+            task_mark_info = read_task_mark_data('student_id', zid, 'course_id', course_id, 'task_id', task_id)
+            if len(task_mark_info) == 0:
+                insert_mark(mark_list[x], task_id, zid, course_id)
+            else:
+                update_task_data('mark', mark_list[x], 'task_id', task_id, 'student_id', zid, 'course_id', course_id)
 
 # var =  Systems()
 
