@@ -427,17 +427,23 @@ class Systems:
         mark_list = marks.split(", ")
         
         num_assessments = len(task_list)
+        print('HAHAHHAHHAHAHAHAHAHHAA', num_assessments)
         num_marks = len(mark_list)
+        print('AKKAKAKAKAKAKAKAKAKKAKA', num_marks)
         if num_assessments != num_marks:
             raise InputError('Number of assessments and marks do not match!')
-        for x in range(0, num_assessments):
-            task_info = read_task_data('task', task_list[x])
-            task_id = task_info[0][0]
-            task_mark_info = read_task_mark_data('student_id', zid, 'course_id', course_id, 'task_id', task_id)
-            if len(task_mark_info) == 0:
-                insert_mark(mark_list[x], task_id, zid, course_id)
-            else:
-                update_task_data('mark', mark_list[x], 'task_id', task_id, 'student_id', zid, 'course_id', course_id)
+        if tasks != "":
+            for x in range(0, num_assessments):
+                task_info = read_task_data('task', task_list[x])
+                task_id = task_info[0][0]
+                task_mark_info = read_task_mark_data('student_id', zid, 'course_id', course_id, 'task_id', task_id)
+                if len(task_mark_info) == 0:
+                    # print("###########################################################")
+        
+                    insert_mark(mark_list[x], task_id, zid, course_id)
+                else:
+                    # print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+                    update_task_data('mark', mark_list[x], 'task_id', task_id, 'student_id', zid, 'course_id', course_id)
 
 # var =  Systems()
 
