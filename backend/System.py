@@ -435,8 +435,11 @@ class Systems:
             task_id = task_info[0][0]
             task_mark_info = read_task_mark_data('student_id', zid, 'course_id', course_id, 'task_id', task_id)
             if len(task_mark_info) == 0:
+                # print("###########################################################")
+    
                 insert_mark(mark_list[x], task_id, zid, course_id)
             else:
+                # print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
                 update_task_data('mark', mark_list[x], 'task_id', task_id, 'student_id', zid, 'course_id', course_id)
 
 # var =  Systems()
