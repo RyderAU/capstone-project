@@ -2,8 +2,8 @@
 
 ''' Read stored database '''
 import psycopg2
-# from .config import config
-import urllib.parse as up
+
+from .config import config_db 
 
 def get_student_id_from_email(email):
     # Grab data
@@ -11,11 +11,10 @@ def get_student_id_from_email(email):
     conn = None
     student_id = ''
     try:
-        DATABASE_URL = 'postgres://frnkorza:5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg@rosie.db.elephantsql.com/frnkorza'
-        url = up.urlparse(DATABASE_URL)
-        conn = psycopg2.connect(database=url.path[1:], 
-            user=url.username, password=url.password, 
-            host=url.hostname, port=url.port)
+        database, username, password, hostname, port = config_db()
+        conn = psycopg2.connect(database=database, 
+            user=username, password=password, 
+            host=hostname, port=port)
         # create a new cursor
         cur = conn.cursor()
 
@@ -41,11 +40,10 @@ def get_course_id_from_course_name(course_name):
     conn = None
     course_id = ''
     try:
-        DATABASE_URL = 'postgres://frnkorza:5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg@rosie.db.elephantsql.com/frnkorza'
-        url = up.urlparse(DATABASE_URL)
-        conn = psycopg2.connect(database=url.path[1:], 
-            user=url.username, password=url.password, 
-            host=url.hostname, port=url.port)
+        database, username, password, hostname, port = config_db()
+        conn = psycopg2.connect(database=database, 
+            user=username, password=password, 
+            host=hostname, port=port)
         # create a new cursor
         cur = conn.cursor()
 
@@ -66,8 +64,8 @@ def get_course_id_from_course_name(course_name):
 
 ''' Read stored database '''
 import psycopg2
-# from .config import config
-import urllib.parse as up
+
+from .config import config_db 
 
 def get_message_list_by_course_id(course_id):
     # Grab data
@@ -75,11 +73,10 @@ def get_message_list_by_course_id(course_id):
     conn = None
     message_info = []
     try:
-        DATABASE_URL = 'postgres://frnkorza:5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg@rosie.db.elephantsql.com/frnkorza'
-        url = up.urlparse(DATABASE_URL)
-        conn = psycopg2.connect(database=url.path[1:], 
-            user=url.username, password=url.password, 
-            host=url.hostname, port=url.port)
+        database, username, password, hostname, port = config_db()
+        conn = psycopg2.connect(database=database, 
+            user=username, password=password, 
+            host=hostname, port=port)
         # create a new cursor
         cur = conn.cursor()
 

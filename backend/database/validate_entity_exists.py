@@ -1,6 +1,6 @@
 import psycopg2
-# from .config import config
-import urllib.parse as up
+
+from .config import config_db 
 
 '''
 Return the first element when the value meets the given column under the specified field.
@@ -11,15 +11,13 @@ def validate_entity_exists(column1, column2, value):
     output = ""
     conn = None
     try:
-        # # read database configuration
-        # params = config()
-        # # connect to the PostgreSQL database
-        # conn = psycopg2.connect(**params)
-        DATABASE_URL = 'postgres://frnkorza:5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg@rosie.db.elephantsql.com/frnkorza'
-        url = up.urlparse(DATABASE_URL)
-        conn = psycopg2.connect(database=url.path[1:], 
-            user=url.username, password=url.password, 
-            host=url.hostname, port=url.port)
+        # read database configuration
+
+        # connect to the PostgreSQL database
+        database, username, password, hostname, port = config_db()
+        conn = psycopg2.connect(database=database, 
+            user=username, password=password, 
+            host=hostname, port=port)
         # create a new cursor
         cur = conn.cursor()
 
