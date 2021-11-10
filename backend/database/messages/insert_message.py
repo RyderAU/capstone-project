@@ -1,7 +1,7 @@
 #!/usr/bin/python
 ''' Test inserting new message(aka user) into table with python '''
 import psycopg2
-from config import config_db 
+ 
 
 def insert_message(message_content, course_id, student_id):
     select_query = "select max(message_id) from messages;"
@@ -9,10 +9,9 @@ def insert_message(message_content, course_id, student_id):
     stored_message_id = -1
     message_id = -1
     try:
-        database, username, password, hostname, port = config_db()
-        conn = psycopg2.connect(database=database, 
-            user=username, password=password, 
-            host=hostname, port=port)
+        conn = psycopg2.connect(database='ourUNSW', 
+        user='postgres', password='sudo-sandeep-reply', 
+        host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
         cur.execute(select_query)

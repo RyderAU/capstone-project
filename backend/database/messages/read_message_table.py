@@ -3,7 +3,7 @@
 ''' Read stored database '''
 import psycopg2
 
-from config import config_db 
+ 
 
 def get_student_id_from_email(email):
     # Grab data
@@ -11,10 +11,9 @@ def get_student_id_from_email(email):
     conn = None
     student_id = ''
     try:
-        database, username, password, hostname, port = config_db()
-        conn = psycopg2.connect(database=database, 
-            user=username, password=password, 
-            host=hostname, port=port)
+        conn = psycopg2.connect(database='ourUNSW', 
+        user='postgres', password='sudo-sandeep-reply', 
+        host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 
@@ -40,10 +39,9 @@ def get_course_id_from_course_name(course_name):
     conn = None
     course_id = ''
     try:
-        database, username, password, hostname, port = config_db()
-        conn = psycopg2.connect(database=database, 
-            user=username, password=password, 
-            host=hostname, port=port)
+        conn = psycopg2.connect(database='ourUNSW', 
+        user='postgres', password='sudo-sandeep-reply', 
+        host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 
@@ -65,7 +63,7 @@ def get_course_id_from_course_name(course_name):
 ''' Read stored database '''
 import psycopg2
 
-from config import config_db 
+ 
 
 def get_message_list_by_course_id(course_id):
     # Grab data
@@ -73,10 +71,9 @@ def get_message_list_by_course_id(course_id):
     conn = None
     message_info = []
     try:
-        database, username, password, hostname, port = config_db()
-        conn = psycopg2.connect(database=database, 
-            user=username, password=password, 
-            host=hostname, port=port)
+        conn = psycopg2.connect(database='ourUNSW', 
+        user='postgres', password='sudo-sandeep-reply', 
+        host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 

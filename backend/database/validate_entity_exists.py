@@ -1,6 +1,6 @@
 import psycopg2
 
-from config import config_db 
+ 
 
 '''
 Return the first element when the value meets the given column under the specified field.
@@ -14,10 +14,9 @@ def validate_entity_exists(column1, column2, value):
         # read database configuration
 
         # connect to the PostgreSQL database
-        database, username, password, hostname, port = config_db()
-        conn = psycopg2.connect(database=database, 
-            user=username, password=password, 
-            host=hostname, port=port)
+        conn = psycopg2.connect(database='ourUNSW', 
+        user='postgres', password='sudo-sandeep-reply', 
+        host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 

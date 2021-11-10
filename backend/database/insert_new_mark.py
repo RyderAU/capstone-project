@@ -1,7 +1,7 @@
 #!/usr/bin/python
 ''' Test inserting new mark for a student in a particular task into table with python '''
 import psycopg2
-from config import config_db
+
 
 def insert_mark(mark, task_id, student_id, course_id):
     select_query = "select max(task_mark_id) from task_mark;"
@@ -9,7 +9,8 @@ def insert_mark(mark, task_id, student_id, course_id):
     stored_mark_id = -1
     mark_id = -1
     try:
-        database, username, password, hostname, port = config_db()
+        database, username, password, port = config.config_db()
+        
         conn = psycopg2.connect(database=database, 
             user=username, password=password, 
             host=hostname, port=port)

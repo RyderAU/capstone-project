@@ -55,7 +55,7 @@ const Members = ( {courseid} ) => {
   React.useEffect(() => {
     window.setInterval(() => {
       setSeconds(s => s + 1);
-    }, 60000)
+    }, 1500)
   }, []);
 
   React.useEffect(() => {

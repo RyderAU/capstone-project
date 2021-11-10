@@ -1,16 +1,15 @@
 import psycopg2
 
-from config import config_db 
+ 
 
 def grabCourseMembers(course):
     query = "SELECT display_name FROM students WHERE course LIKE '%" + course + "%'"
     output = ""
     conn = None
     try:
-        database, username, password, hostname, port = config_db()
-        conn = psycopg2.connect(database=database, 
-            user=username, password=password, 
-            host=hostname, port=port)
+        conn = psycopg2.connect(database='ourUNSW', 
+        user='postgres', password='sudo-sandeep-reply', 
+        host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 

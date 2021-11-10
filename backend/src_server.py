@@ -5,11 +5,12 @@ Created by: Helena Ling and Sandeep Das
 '''
 import sys
 
-from backend.database.read_courses import read_courses_data
+from database.read_courses import read_courses_data
 print(sys.path)
 from json import dumps
 from flask import Flask, request, send_from_directory
 from flask_cors import CORS
+
 from database.register_new_user import register_student
 from database.read_db import read_db
 from database.validate_entity_exists import validate_entity_exists
@@ -99,7 +100,7 @@ def linking_route():
         update_user_data('degree', 'email', userDetails.get("degree"), personal_email)
         update_user_data('name', 'email', userDetails.get("name"), personal_email)
         update_user_data('course', 'email', db_courses, personal_email)
-        update_user_data('token', 'email', '', personal_email)
+        update_user_data('login_token', 'email', '', personal_email)
 
         timetables = userDetails.get("timetables")
         fixed = 'timetable_week_'
@@ -283,7 +284,7 @@ def other_users_profile():
 
 
 @APP.route("/outline", methods=['GET'])
-def other_users_profile():
+def outline():
     '''returns course outline for a particular course'''
 
     token = request.args.get('token')
@@ -300,7 +301,7 @@ def other_users_profile():
         raise e
 
 @APP.route("/markcalc", methods=['GET'])
-def other_users_profile():
+def markcalc():
     '''returns assessment components of a particular course, and marks for all assessments of a particular course for the current user'''
 
     token = request.args.get('token')
@@ -315,7 +316,7 @@ def other_users_profile():
         raise e
 
 @APP.route("/markcalc", methods=['POST'])
-def other_users_profile():
+def update_mark():
     '''returns marks for all assessments of a particular course for the current user'''
 
     token = request.get_json()['token']

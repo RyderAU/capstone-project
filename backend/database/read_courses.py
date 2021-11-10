@@ -1,18 +1,15 @@
 ''' Read all data for courses satisfying particular criteria '''
 import psycopg2
 
-from config import config_db 
-
 def read_courses_data(column, value):
     # Grab data
     select_query = "SELECT * FROM courses WHERE " + column + "='" + value +"';"
     conn = None
     course_info = []
     try:
-        database, username, password, hostname, port = config_db()
-        conn = psycopg2.connect(database=database, 
-            user=username, password=password, 
-            host=hostname, port=port)
+        conn = psycopg2.connect(database='ourUNSW', 
+            user='postgres', password='sudo-sandeep-reply', 
+            host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 

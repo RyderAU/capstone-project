@@ -1,9 +1,8 @@
 def config_db():
-
     database='ourUNSW'
-    user='postgres'
+    username='postgres'
     password='sudo-sandeep-reply'
-    host='35.188.192.239'
+    hostname='35.188.192.239'
     port='5432'
 
-    return database, user, password, host, port
+    return database, username, password, hostname, port

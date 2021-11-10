@@ -1,0 +1,102 @@
+1636534505957	geckodriver	INFO	Listening on 127.0.0.1:41149
+1636534506537	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "51001" "-no-remote" "-profile" "/tmp/rust_mozprofilelKU1fc"
+1636534509823	Marionette	INFO	Marionette enabled
+
+(firefox:33322): GLib-GIO-CRITICAL **: 03:55:10.010: g_dbus_proxy_new: assertion 'G_IS_DBUS_CONNECTION (connection)' failed
+
+(firefox:33322): GLib-GIO-CRITICAL **: 03:55:10.010: g_dbus_proxy_new: assertion 'G_IS_DBUS_CONNECTION (connection)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilelKU1fc/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51001/devtools/browser/63a4f78f-d2de-4f2e-8412-be3b5545771b
+1636534521386	Marionette	INFO	Listening on port 38141
+1636534521501	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1636534537418	Marionette	INFO	Stopped listening on port 38141
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1636534539533	geckodriver::marionette	ERROR	Failed to close browser connection: Socket not connected (os error 107)
+1636534546331	geckodriver	INFO	Listening on 127.0.0.1:39391
+1636534546338	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "54293" "-no-remote" "-profile" "/tmp/rust_mozprofileIpCO5q"
+1636534547297	Marionette	INFO	Marionette enabled
+
+(firefox:33641): GLib-GIO-CRITICAL **: 03:55:47.387: g_dbus_proxy_new: assertion 'G_IS_DBUS_CONNECTION (connection)' failed
+
+(firefox:33641): GLib-GIO-CRITICAL **: 03:55:47.387: g_dbus_proxy_new: assertion 'G_IS_DBUS_CONNECTION (connection)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileIpCO5q/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:54293/devtools/browser/9c4097eb-9ddd-4ac8-a09e-eb126864051e
+1636534550387	Marionette	INFO	Listening on port 38995
+1636534550518	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1636534562268	Marionette	INFO	Stopped listening on port 38995
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1636534565687	geckodriver::marionette	ERROR	Failed to close browser connection: Socket not connected (os error 107)
+1636534595009	geckodriver	INFO	Listening on 127.0.0.1:53141
+1636534595016	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "49793" "-no-remote" "-profile" "/tmp/rust_mozprofileTQKplm"
+1636534596181	Marionette	INFO	Marionette enabled
+
+(firefox:33996): GLib-GIO-CRITICAL **: 03:56:36.459: g_dbus_proxy_new: assertion 'G_IS_DBUS_CONNECTION (connection)' failed
+
+(firefox:33996): GLib-GIO-CRITICAL **: 03:56:36.459: g_dbus_proxy_new: assertion 'G_IS_DBUS_CONNECTION (connection)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileTQKplm/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49793/devtools/browser/539b9f5c-4f49-4959-9a3f-8c303bd16a22
+1636534600618	Marionette	INFO	Listening on port 40513
+1636534600740	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1636534611329	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://my.unsw.edu.au/portal/faces/oracle/webcenter/portalapp/pages/view1.jspx?_afrLoop=32646869011809420&_afrWindowMode=0&_adf.ctrl-state=11lx1nxdx7_4, line 2: SyntaxError: expected expression, got '<'
+JavaScript error: https://my.unsw.edu.au/scripts-portal/bootstrap.min.js, line 6: TypeError: $ is not a function
+JavaScript error: https://my.unsw.edu.au/scripts-portal/bootstrap-affix.js, line 71: TypeError: $ is undefined
+1636534614015	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://my.unsw.edu.au/scripts-portal/bootstrap.min.js, line 6: TypeError: $ is not a function
+JavaScript error: https://my.unsw.edu.au/scripts-portal/bootstrap-affix.js, line 71: TypeError: $ is undefined
+1636534633871	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:238:19
+TimedPromise@chrome://remote/content/marionette/sync.js:223:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1636534640142	Marionette	INFO	Stopped listening on port 40513
+1636534759364	geckodriver	INFO	Listening on 127.0.0.1:37461
+1636534759859	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "54345" "-no-remote" "-profile" "/tmp/rust_mozprofileVjkeAq"
+1636534760881	Marionette	INFO	Marionette enabled
+
+(firefox:34560): GLib-GIO-CRITICAL **: 03:59:20.969: g_dbus_proxy_new: assertion 'G_IS_DBUS_CONNECTION (connection)' failed
+
+(firefox:34560): GLib-GIO-CRITICAL **: 03:59:20.969: g_dbus_proxy_new: assertion 'G_IS_DBUS_CONNECTION (connection)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileVjkeAq/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:54345/devtools/browser/2dd3abe9-22a3-40da-9d99-f39674d8313d
+1636534763959	Marionette	INFO	Listening on port 32909
+1636534764043	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1636534776154	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://my.unsw.edu.au/portal/faces/oracle/webcenter/portalapp/pages/view1.jspx?_afrLoop=32655701736341952&_afrWindowMode=0&_adf.ctrl-state=jr217fj2b_4, line 2: SyntaxError: expected expression, got '<'
+JavaScript error: https://my.unsw.edu.au/scripts-portal/bootstrap.min.js, line 6: TypeError: $ is not a function
+JavaScript error: https://my.unsw.edu.au/scripts-portal/bootstrap-affix.js, line 71: TypeError: $ is undefined
+1636534778787	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://my.unsw.edu.au/scripts-portal/bootstrap.min.js, line 6: TypeError: $ is not a function
+JavaScript error: https://my.unsw.edu.au/scripts-portal/bootstrap-affix.js, line 71: TypeError: $ is undefined
+1636534799825	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:238:19
+TimedPromise@chrome://remote/content/marionette/sync.js:223:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1636534806047	Marionette	INFO	Stopped listening on port 32909
+1636535065521	geckodriver	INFO	Listening on 127.0.0.1:39627
+1636535065540	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "39209" "-no-remote" "-profile" "/tmp/rust_mozprofileYBkO5T"
+1636535067046	Marionette	INFO	Marionette enabled
+
+(firefox:35208): GLib-GIO-CRITICAL **: 04:04:27.152: g_dbus_proxy_new: assertion 'G_IS_DBUS_CONNECTION (connection)' failed
+
+(firefox:35208): GLib-GIO-CRITICAL **: 04:04:27.152: g_dbus_proxy_new: assertion 'G_IS_DBUS_CONNECTION (connection)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileYBkO5T/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:39209/devtools/browser/d5633248-3d82-4bae-b99e-cb3aa1d147c9
+1636535070449	Marionette	INFO	Listening on port 40095
+1636535070540	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1636535082250	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://my.unsw.edu.au/portal/faces/oracle/webcenter/portalapp/pages/view1.jspx?_afrLoop=32656007836488962&_afrWindowMode=0&_adf.ctrl-state=ct7us4x8p_4, line 2: SyntaxError: expected expression, got '<'
+JavaScript error: https://my.unsw.edu.au/scripts-portal/bootstrap.min.js, line 6: TypeError: $ is not a function
+JavaScript error: https://my.unsw.edu.au/scripts-portal/bootstrap-affix.js, line 71: TypeError: $ is undefined
+1636535084793	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://my.unsw.edu.au/scripts-portal/bootstrap.min.js, line 6: TypeError: $ is not a function
+JavaScript error: https://my.unsw.edu.au/scripts-portal/bootstrap-affix.js, line 71: TypeError: $ is undefined
+1636535106389	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:238:19
+TimedPromise@chrome://remote/content/marionette/sync.js:223:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1636535112669	Marionette	INFO	Stopped listening on port 40095
