@@ -1,6 +1,6 @@
 import psycopg2
 
-from .config import config_db 
+from config import config_db 
 
 '''
 Return all information (except for password and login token) for user(s) satisfying certain criteria

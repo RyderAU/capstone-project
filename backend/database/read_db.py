@@ -1,7 +1,7 @@
 ''' Read stored database '''
 import psycopg2
 
-from .config import config_db 
+from config import config_db 
 
 def read_db(field):
     # Grab data
@@ -10,10 +10,8 @@ def read_db(field):
 
     conn = None
     try:
-        # # read database configuration
-        # params = config()
-        # # connect to the PostgreSQL database
-        # conn = psycopg2.connect(**params)
+        # read database configuration
+        # connect to the PostgreSQL database
         database, username, password, hostname, port = config_db()
         conn = psycopg2.connect(database=database, 
             user=username, password=password, 

@@ -3,7 +3,7 @@
 ''' Read stored database '''
 import psycopg2
 
-from .config import config_db 
+from config import config_db 
 
 def get_student_id_from_email(email):
     # Grab data
@@ -65,7 +65,7 @@ def get_course_id_from_course_name(course_name):
 ''' Read stored database '''
 import psycopg2
 
-from .config import config_db 
+from config import config_db 
 
 def get_message_list_by_course_id(course_id):
     # Grab data

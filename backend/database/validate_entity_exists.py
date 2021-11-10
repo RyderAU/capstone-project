@@ -1,6 +1,6 @@
 import psycopg2
 
-from .config import config_db 
+from config import config_db 
 
 '''
 Return the first element when the value meets the given column under the specified field.
@@ -23,6 +23,8 @@ def validate_entity_exists(column1, column2, value):
 
         cur.execute(query)
         output = cur.fetchall()
+        # close communication with the database
+        cur.close()
 
         '''
         output format is [('...', '...',)]. So to only get the first outcome, do [0][0].
@@ -37,16 +39,15 @@ def validate_entity_exists(column1, column2, value):
         else:
             return(output[0][0])
 
-        # close communication with the database
-        cur.close()
+        
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:
             conn.close()
 
-# print(validate_entity_exists('hashed_pwd', 'email', "pfizer@gmail.com")) # this one exists in db
-# print(validate_entity_exists('*', 'email', 'pfizer2@gmail.com')) # this one is unique email
+print(validate_entity_exists('display_name', 'email', 'haesun@mail.com'))
+
 """
 e.g. 
 SELECT hashed_pwd FROM students

@@ -1,7 +1,7 @@
 ''' Read all data for assessments satisfying particular criteria '''
 import psycopg2
 
-from .config import config_db 
+from config import config_db 
 
 def read_task_mark_data(column, value, column2, value2, column3, value3):
     # Grab data
@@ -18,13 +18,14 @@ def read_task_mark_data(column, value, column2, value2, column3, value3):
 
         cur.execute(select_query)
         mark_info = cur.fetchall()
-        return(list(mark_info))
         # close communication with the database
         cur.close()
+        return(list(mark_info))
+        
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:
             conn.close()
 
-# print(read_task_mark_data('course_id', '1', 'task_id', '1', 'student_id', '1'))
+print(read_task_mark_data('course_id', '1', 'task_id', '1', 'student_id', '1'))

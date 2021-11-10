@@ -1,7 +1,7 @@
 ''' Read all data for courses satisfying particular criteria '''
 import psycopg2
 
-from .config import config_db 
+from config import config_db 
 
 def read_courses_data(column, value):
     # Grab data

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 ''' Test inserting new message(aka user) into table with python '''
 import psycopg2
-from .config import config_db 
+from config import config_db 
 
 def insert_message(message_content, course_id, student_id):
     select_query = "select max(message_id) from messages;"

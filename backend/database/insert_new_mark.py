@@ -1,10 +1,9 @@
 #!/usr/bin/python
 ''' Test inserting new mark for a student in a particular task into table with python '''
 import psycopg2
-from .config import config_db
+from config import config_db
 
 def insert_mark(mark, task_id, student_id, course_id):
-
     select_query = "select max(task_mark_id) from task_mark;"
     conn = None
     stored_mark_id = -1

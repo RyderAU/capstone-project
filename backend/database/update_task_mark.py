@@ -1,7 +1,7 @@
 import psycopg2
 
 import sys
-from .config import config_db 
+from config import config_db 
 
 def update_task_data(column1, value1, column2, value2, column3, value3, column4, value4):
     

@@ -1,6 +1,6 @@
 import psycopg2
 
-from .config import config_db 
+from config import config_db 
 
 def grabCourseMembers(course):
     query = "SELECT display_name FROM students WHERE course LIKE '%" + course + "%'"
