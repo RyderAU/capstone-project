@@ -323,9 +323,12 @@ def update_mark():
 
     token = request.get_json()['token']
     course = request.get_json()['course']
+
+    # print("@@@@@@@@@@@@@@@@@@@@@@@",request.get_json())
+
     tasks = request.get_json()['tasks']
     marks = request.get_json()['marks']
-
+    
     try:
         # Insert into the database
         email = system.validate_token(token)

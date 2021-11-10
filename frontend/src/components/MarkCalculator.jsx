@@ -51,14 +51,15 @@ const MarkCalculator = () => {
     let total = 0
     let arr = res.data.assessments
     arr.forEach((e, i, a) => {
-      total += parseInt(e["my_mark"])
+      total += parseFloat(e["my_mark"])
+
     })
-    
+    console.log(total)
     setTotalMark(total)
   }
 
   const handleMarkInput = (task, mark) => {
-
+    console.log(task)
     setTask(task)
     setMark(mark)
     // setMyMark
@@ -83,14 +84,16 @@ const MarkCalculator = () => {
   }
 
   const handleMarkSubmit = () => {
-    setLoading(true);
-    // alert("Your mark has been updated.")
+    // setLoading(true);
+    
+    alert("Your mark has been updated.")
+    
     // setOpen(true);
     console.log(task)
     console.log(mark)
     axios.post(`${url}/markcalc`, {
       token: token,
-      course_name: courseid,
+      course: courseid,
       tasks: task,
       marks: mark,
     })
@@ -101,7 +104,7 @@ const MarkCalculator = () => {
         console.log(err);
       });
     
-    setTimeout(()=>{setLoading(false);}, 2000)
+    // setTimeout(()=>{setLoading(false);}, 2000)
   }  
 
   return (
@@ -141,10 +144,11 @@ const MarkCalculator = () => {
                   <input type="text"
                     className="markInput"
                     placeholder={assessment.my_mark}
-                    onChange={(e) => handleMarkInput(assessment.task, e.target.value)}
+                    onChange={(e) => handleMarkInput(assessment.name, e.target.value)}
                     style={{width:"65px"}}
                   />
-                  <LoadingButton
+                  <CheckIcon onClick={() => handleMarkSubmit()} type="submit"/>
+                  {/* <LoadingButton
                     color="secondary"
                     style={{marginLeft:"15px"}}
                     loading={loading}
@@ -158,7 +162,7 @@ const MarkCalculator = () => {
                     variant="contained"
                   >
                     Save
-                  </LoadingButton>
+                  </LoadingButton> */}
                 </TableCell>
             </TableRow>
           ))}
@@ -169,7 +173,7 @@ const MarkCalculator = () => {
             <TableCell align="right"></TableCell>
             <TableCell align="right"></TableCell>
             <TableCell align="center">
-              {totalMark}%
+              {totalMark} %
             </TableCell>
           </TableRow>
         </TableBody>
