@@ -1,7 +1,7 @@
 import psycopg2
-# from .config import config
+
 import sys
-import urllib.parse as up
+from config import config_db 
 
 def update_task_data(column1, value1, column2, value2, column3, value3, column4, value4):
     
@@ -9,11 +9,10 @@ def update_task_data(column1, value1, column2, value2, column3, value3, column4,
     conn = None
     try:
         # read database configuration
-        DATABASE_URL = 'postgres://frnkorza:5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg@rosie.db.elephantsql.com/frnkorza'
-        url = up.urlparse(DATABASE_URL)
-        conn = psycopg2.connect(database=url.path[1:], 
-            user=url.username, password=url.password, 
-            host=url.hostname, port=url.port)
+        database, username, password, hostname, port = config_db()
+        conn = psycopg2.connect(database=database, 
+            user=username, password=password, 
+            host=hostname, port=port)
         # create a new cursor
         cur = conn.cursor()
         cur.execute(query, (column1, value1, column2, value2, column3, value3))

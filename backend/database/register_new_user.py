@@ -1,8 +1,8 @@
 #!/usr/bin/python
 ''' Test inserting new student(aka user) into table with python '''
 import psycopg2
-# from .config import config
-import urllib.parse as up
+
+from config import config_db 
 
 
 def register_student(student_id, name, email, display_name, hashed_pwd, login_token, degree, course):
@@ -13,14 +13,11 @@ def register_student(student_id, name, email, display_name, hashed_pwd, login_to
     conn = None
     try:
         # read database configuration
-        # params = config()
         # connect to the PostgreSQL database
-        # conn = psycopg2.connect(**params)
-        DATABASE_URL = 'postgres://frnkorza:5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg@rosie.db.elephantsql.com/frnkorza'
-        url = up.urlparse(DATABASE_URL)
-        conn = psycopg2.connect(database=url.path[1:], 
-            user=url.username, password=url.password, 
-            host=url.hostname, port=url.port)
+        database, username, password, hostname, port = config_db()
+        conn = psycopg2.connect(database=database, 
+            user=username, password=password, 
+            host=hostname, port=port)
         # create a new cursor
         cur = conn.cursor()
         # execute the INSERT statement
@@ -37,12 +34,4 @@ def register_student(student_id, name, email, display_name, hashed_pwd, login_to
 
 if __name__ == '__main__':
     # Register one student (Dummy data)
-    register_student(
-        'z5555551', 
-        'Sleepless Pfizer', 
-        'pfizer@gmail.com', 
-        'nicknamegoeshere', 
-        'f3e5ba88661b3b5f4ae8182d8ccded09da63ef8a5e96013525ea79f082948302',
-        '',
-        '',
-        '')
+    register_student('z5253655', 'HAHA', 'ha@m.com', 'haha', '7878', '88', 'pikapika', 'comp sci')
