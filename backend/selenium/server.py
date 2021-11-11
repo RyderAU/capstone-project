@@ -363,7 +363,7 @@ def mark_composition_route():
     return dumps({
         "assessments" : [
             {
-                "task": "Seminar Participation",
+                "name": "Seminar Participation",
                 "weighting": 10,
                 "hurdle": 0,
                 "hurdle_mark": 0,
@@ -371,7 +371,7 @@ def mark_composition_route():
                 "my_mark": 8,
             },
             { 
-                "task": "Lecture summaries",
+                "name": "Lecture summaries",
                 "weighting": 10,
                 "hurdle": 0,
                 "hurdle_mark": 0,
@@ -379,7 +379,7 @@ def mark_composition_route():
                 "my_mark": 9,
             },
             { 
-                "task": "Movie Review",
+                "name": "Movie Review",
                 "weighting": 20,
                 "hurdle": 0,
                 "hurdle_mark": 0,
@@ -387,7 +387,7 @@ def mark_composition_route():
                 "my_mark": 14,
             },
             { 
-                "task": "Company Case Study",
+                "name": "Company Case Study",
                 "weighting": 40,
                 "hurdle": 1,
                 "hurdle_mark": 20,
@@ -402,7 +402,7 @@ def mark_composition_route():
 def markcalc_post_route():
     ''' '''
     token = request.get_json()["token"]
-    course_name = request.get_json()["course_name"]
+    course_name = request.get_json()["course"]
     tasks = request.get_json()["tasks"]
     marks = request.get_json()["marks"]
     

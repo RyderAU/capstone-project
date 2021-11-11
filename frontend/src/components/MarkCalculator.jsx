@@ -11,15 +11,10 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-// import Input from "@material-ui/core/Input";
 import Paper from "@material-ui/core/Paper";
 
 // Icons
-import Button from '@mui/material/Button';
-import LoadingButton from '@mui/lab/LoadingButton';
 import CheckIcon from '@mui/icons-material/Check';
-
-import Alert from '@mui/material/Alert';
 
 // Dynamically creating the table based on the JSON data we receive from the backend.
 const MarkCalculator = () => {
@@ -33,8 +28,6 @@ const MarkCalculator = () => {
   const [mark, setMark] = useState("");
 
   const [totalMark, setTotalMark] = useState(0);
-
-  const [loading, setLoading] = React.useState(false);
   
   React.useEffect(() => {
     console.log(courseid)
@@ -59,8 +52,6 @@ const MarkCalculator = () => {
   }
 
   const handleMarkInput = (task, mark) => {
-    
-    
     try {
       parseFloat(mark)
       setTask(task)
@@ -72,59 +63,37 @@ const MarkCalculator = () => {
 
     console.log(task, mark)
     console.log(typeof mark)
-
-    // else {}
-    
-    // setMyMark
-    // console.log(marktable)
-    // let allTasksString = ""
-    // let allMymarkString = ""
-    // for (let i = 0; i < marktable.length; i++) {
-    //   console.log(marktable[i]["task"]);
-    //   console.log(marktable[i]["my_mark"]);
-    //   allTasksString += marktable[i]["task"]
-    //   allMymarkString += marktable[i]["my_mark"]
-    //   if (!(i == (marktable.length - 1))) {
-    //     allTasksString += ", "
-    //     allMymarkString += ", "
-    //   }
-    // }
-    // console.log(allTasksString)
-    // console.log(allMymarkString)
-
-    // setAllTasks(allTasksString)
-    // setAllMarks(allMymarkString)
   }
 
-  const handleMarkSubmit = () => {
-    // setLoading(true);
-    
-    alert("Your mark has been updated.")
-    
-    // setOpen(true);
-    console.log(task)
-    console.log(mark)
-    axios.post(`${url}/markcalc`, {
-      token: token,
-      course: courseid,
-      tasks: task,
-      marks: mark,
-    })
-      .then(r => {
-        console.log(r)
+  const handleMarkSubmit = (mark) => {
+    console.log(mark.mark)
+    const float_mark = parseFloat(mark.mark)
+    console.log(float_mark)
+    if (isNaN(float_mark)) {
+      alert("Please enter integer or decimal.")
+    }
+    else {
+      console.log(task)
+      console.log(float_mark)
+      axios.post(`${url}/markcalc`, {
+        token: token,
+        course: courseid,
+        tasks: task,
+        marks: float_mark,
       })
-      .catch(err => {
-        console.log(err);
-      });
+        .then(r => {
+          console.log(r)
+          alert("Your mark has been updated.")
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
     
-    // setTimeout(()=>{setLoading(false);}, 2000)
   }  
 
   return (
     <div>
-      { loading ? <Alert severity="success" color="info" style={{fontSize:"20pt", backgroundColor:"pink"}}>We've updated your mark!</Alert>
-        : <div/>}
-      
     <TableContainer component={Paper}>
       
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -160,22 +129,7 @@ const MarkCalculator = () => {
                     onChange={(e) => handleMarkInput(assessment.name, e.target.value)}
                     style={{width:"65px"}}
                   />
-                  <CheckIcon onClick={() => handleMarkSubmit()} type="submit"/>
-                  {/* <LoadingButton
-                    color="secondary"
-                    style={{marginLeft:"15px"}}
-                    loading={loading}
-                    loadingPosition="start"
-                    startIcon={
-                      <CheckIcon 
-                        onClick={() => handleMarkSubmit()
-                      }
-                        type="submit"/>
-                    }
-                    variant="contained"
-                  >
-                    Save
-                  </LoadingButton> */}
+                  <CheckIcon onClick={() => handleMarkSubmit({mark})} type="submit"/>
                 </TableCell>
             </TableRow>
           ))}
