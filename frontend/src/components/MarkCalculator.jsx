@@ -57,33 +57,43 @@ const MarkCalculator = () => {
  
  const handleMarkSubmit = (mark) => {
   //  console.log(parseFloat(mark.mark))
+  const string_mark = mark.mark
+  const string_array = string_mark.split("")
+  // console.log(string_array)
+  let invalid = false
+  string_array.forEach(word => {
+    // console.log(word)
+    // console.log(parseFloat(word))
+    if (isNaN(parseFloat(word))) {
+      invalid = true
+      return false;
+    }
+  })
+  if (invalid) {
+    alert("Please enter integer or decimal.")
+  }
+  else {
+  // update database
+  axios.post(`${url}/markcalc`, {
+    token: token,
+    course: courseid,
+    tasks: task,
+    marks: mark.mark,
+  })
+    .then(r => {
+    //  console.log(r)
+      alert("Your mark has been updated.")
+      //  update the frontend too
+      axios
+        .get(`${url}/markcalc?token=${token}&course_name=${courseid}`)
+        .then((res) => handleSuccess(res))
+        .catch((err) => console.log(err));
 
-   if (isNaN(parseFloat(mark.mark))) {
-     alert("Please enter integer or decimal.")
-   }
-   else {
-    // update database
-    axios.post(`${url}/markcalc`, {
-      token: token,
-      course: courseid,
-      tasks: task,
-      marks: mark.mark,
     })
-      .then(r => {
-      //  console.log(r)
-        alert("Your mark has been updated.")
-        //  update the frontend too
-        axios
-          .get(`${url}/markcalc?token=${token}&course_name=${courseid}`)
-          .then((res) => handleSuccess(res))
-          .catch((err) => console.log(err));
-
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    .catch(err => {
+      console.log(err);
+    });
    }
-  
  } 
  
  return (
