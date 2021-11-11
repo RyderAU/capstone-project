@@ -56,6 +56,8 @@ const MarkCalculator = () => {
  }
  
  const handleMarkSubmit = (mark) => {
+  //  console.log(parseFloat(mark.mark))
+
    if (isNaN(parseFloat(mark.mark))) {
      alert("Please enter integer or decimal.")
    }
@@ -120,7 +122,7 @@ const MarkCalculator = () => {
                    onChange={(e) => handleMarkInput(assessment.name, e.target.value)}
                    style={{width:"65px"}}
                  />
-                 <CheckIcon onClick={() => handleMarkSubmit({mark})} type="submit"/>
+                 <CheckIcon className="checkbutton" onClick={() => handleMarkSubmit({mark})} type="submit"/>
                </TableCell>
            </TableRow>
          ))}
