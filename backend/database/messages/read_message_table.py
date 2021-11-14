@@ -12,9 +12,9 @@ def get_student_id_from_email(email):
     student_id = ''
     try:
         # old db
-        conn = psycopg2.connect(database='frnkorza', 
-        user='frnkorza', password='5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg', 
-        host='rosie.db.elephantsql.com', port='5432')
+        conn = psycopg2.connect(database='ourunsw', 
+        user='postgres', password='secret', 
+        host='localhost')
 
         # conn = psycopg2.connect(database='ourUNSW', 
         # user='postgres', password='sudo-sandeep-reply', 
@@ -47,9 +47,9 @@ def get_course_id_from_course_name(course_name):
     course_id = ''
     try:
         # old db
-        conn = psycopg2.connect(database='frnkorza', 
-        user='frnkorza', password='5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg', 
-        host='rosie.db.elephantsql.com', port='5432')
+        conn = psycopg2.connect(database='ourunsw', 
+        user='postgres', password='secret', 
+        host='localhost')
 
         # conn = psycopg2.connect(database='ourUNSW', 
         # user='postgres', password='sudo-sandeep-reply', 
@@ -84,9 +84,9 @@ def get_message_list_by_course_id(course_id):
     message_info = []
     try:
         # old db
-        conn = psycopg2.connect(database='frnkorza', 
-        user='frnkorza', password='5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg', 
-        host='rosie.db.elephantsql.com', port='5432')
+        conn = psycopg2.connect(database='ourunsw', 
+        user='postgres', password='secret', 
+        host='localhost')
         # conn = psycopg2.connect(database='ourUNSW', 
         # user='postgres', password='sudo-sandeep-reply', 
         # host='35.188.192.239', port='5432')

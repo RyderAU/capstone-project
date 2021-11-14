@@ -12,9 +12,9 @@ def read_task_data(column, value):
     task_info = []
     try:
         # old db
-        conn = psycopg2.connect(database='frnkorza', 
-        user='frnkorza', password='5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg', 
-        host='rosie.db.elephantsql.com', port='5432')
+        conn = psycopg2.connect(database='ourunsw', 
+        user='postgres', password='secret', 
+        host='localhost')
         # conn = psycopg2.connect(database='ourUNSW', 
         # user='postgres', password='sudo-sandeep-reply', 
         # host='35.188.192.239', port='5432')

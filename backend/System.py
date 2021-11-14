@@ -274,13 +274,16 @@ class Systems:
             timetable_publicity = 0
         else:
             timetable_publicity = result[0][7]
-        avatar = bytes(result[0][8])
+        if result[0][8] is None:
+            avatar = None
+        else: 
+            avatar = bytes(result[0][8]).decode("utf-8")
         courses = courses.replace(",", ", ")
        
         return {"username": username, "real_name": real_name, \
             "zid": zid, "degree": degree, \
             "bio": bio, "courses": courses, \
-            "timetable_publicity": timetable_publicity, "avatar": avatar.decode("utf-8"), }
+            "timetable_publicity": timetable_publicity, "avatar": avatar, }
 
     def message_send(self, token, course, message):
         # '''

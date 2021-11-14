@@ -9,9 +9,9 @@ def insert_mark(mark, task_id, student_id, course_id):
     stored_mark_id = -1
     mark_id = -1
     try:
-        conn = psycopg2.connect(database='frnkorza', 
-        user='frnkorza', password='5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg', 
-        host='rosie.db.elephantsql.com', port='5432')
+        conn = psycopg2.connect(database='ourunsw', 
+        user='postgres', password='secret', 
+        host='localhost')
         
         # create a new cursor
         cur = conn.cursor()

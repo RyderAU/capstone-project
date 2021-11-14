@@ -16,9 +16,9 @@ def register_student(student_id, name, email, display_name, hashed_pwd, login_to
         # connect to the PostgreSQL database
 
         # old db
-        conn = psycopg2.connect(database='frnkorza', 
-        user='frnkorza', password='5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg', 
-        host='rosie.db.elephantsql.com', port='5432')
+        conn = psycopg2.connect(database='ourunsw', 
+        user='postgres', password='secret', 
+        host='localhost')
         
         # conn = psycopg2.connect(database='ourUNSW', 
         # user='postgres', password='sudo-sandeep-reply', 
