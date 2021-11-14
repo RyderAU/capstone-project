@@ -14,10 +14,7 @@ const Profile = () => {
   const [displayName, setDisplayName] = context.displayName;
   const [bio, setBio] = useState("");
   const [profilePic, setProfilePic] = useState("");
-  const [timetablePublicity, setTimetablePublicity] = context.timetablePublicity;
-  const [checked, setChecked] = useState(false);
-
-  console.log('timetable publicity is ' + timetablePublicity);
+  const [timetablePublicity, setTimetablePublicity] = useState(0);
 
   React.useEffect(() => {
     // get profile info
@@ -32,19 +29,13 @@ const Profile = () => {
     setDetails(res.data);
     setDisplayName(res.data.username);
     setBio(res.data.bio);
-    if (res.data.avatar) {
-      setProfilePic(res.data.avatar)
-    }
-   
-    timetablePublicity ? setChecked(true) : setChecked(false);
+    setTimetablePublicity(res.data.timetable_publicity);
   };
 
   const saveChanges = () => {
-    console.log(`display name is ${displayName}`);
-    console.log(`bio name is ${bio}`);
-    console.log(`checked is ${checked}`);
-    console.log(`base64 byte is ${profilePic}`)
-    checked ? setTimetablePublicity(1) : setTimetablePublicity(0);
+    if (res.data.avatar) {
+      setProfilePic(res.data.avatar)
+    }
     axios
       .post(`${url}/dashboard/profile`, {
         token: token,
@@ -62,17 +53,19 @@ const Profile = () => {
   };
 
   const handleDisplayChange = (e) => {
-    console.log(`new display value is ${e.target.value}`);
     setDisplayName(e.target.value);
   };
 
   const handleBioChange = (e) => {
-    console.log(`new bio value is ${e.target.value}`);
     setBio(e.target.value);
   };
 
   const handlePublicityChange = () => {
-    setChecked(!checked);
+    if (timetablePublicity == 0) {
+      setTimetablePublicity(1);
+    } else {
+      setTimetablePublicity(0);
+    }
   }
 
   const uploadImage = async (e) => {
@@ -158,7 +151,7 @@ const Profile = () => {
           </div>
         </div>
         <div className="title">
-          Timetable display settings: <input type="checkbox" defaultChecked={timetablePublicity ? true : false} onChange={handlePublicityChange}/>
+          Timetable display settings: {timetablePublicity ? 'public' : 'private'} <button onClick={handlePublicityChange}>Change</button>
         </div>
         <button className="save-changes-button" onClick={saveChanges}>
           save changes
