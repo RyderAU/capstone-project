@@ -98,5 +98,5 @@ CREATE TABLE Task_Mark(
     task_id integer,
     student_id varchar(10),
     course_id integer
-)
+);
 
