@@ -43,7 +43,7 @@ CREATE TABLE Courses (
     primary key (course_id)
 );
 
-INSERT INTO courses(course_id, course_name, course_outline_path)
+INSERT INTO courses(course_id, course_name)
 VALUES (1,  'COMP4920'),
        (2,  'COMP3900'),
        (3,  'COMP3311'),
@@ -64,7 +64,7 @@ CREATE TABLE Task (
 );
 
 INSERT INTO Task(task_id, task, deadline, weighting, hurdle, hurdle_mark, course_id)
-VALUES (1,'Seminar Participation', 'Weeks 1-5,7-10', 10, 0, ‘-1, 1),
+VALUES (1,'Seminar Participation', 'Weeks 1-5,7-10', 10, 0, -1, 1),
 	   (2,'Lecture Summaries', 'Week 3, 4, 7, 8' ,10, 0, -1, 1),
 	   (3,'Movie Review', 'Week 5', 20, 0, -1, 1),
 	   (4,'Student Seminar', 'Week 7-10', 20, 0, -1, 1),
