@@ -86,7 +86,7 @@ class Systems:
             - returns True
         '''
         email = self.validate_token(token)
-        update_user_data('login_token', '', 'email', email)
+        update_user_data('login_token', 'email', '', email)
 
         is_success = True
         return {'is_success': is_success, }

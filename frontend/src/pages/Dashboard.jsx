@@ -8,24 +8,22 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 function Dashboard() {
   return (
     <div>
-      <BrowserRouter>
-        <NavBar />
-        <Switch>
-          <Route exact path="/dashboard/timetable">
-            <Timetable />
-          </Route>
-          <Route exact path="/dashboard/profile">
-            <Profile />
-          </Route>
-          {/* might need to change this later */}
-          <Route exact path="/dashboard/other-profile">
-            <OtherProfile />
-          </Route>
-          <Route path="/dashboard">
-            <CourseBar />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <NavBar />
+      <Switch>
+        <Route exact path="/dashboard/timetable">
+          <Timetable />
+        </Route>
+        <Route exact path="/dashboard/profile">
+          <Profile />
+        </Route>
+        {/* might need to change this later */}
+        <Route exact path="/dashboard/other-profile">
+          <OtherProfile />
+        </Route>
+        <Route path="/dashboard">
+          <CourseBar />
+        </Route>
+      </Switch>
     </div>
   );
 }
