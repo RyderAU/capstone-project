@@ -30,12 +30,12 @@ const Profile = () => {
     setDisplayName(res.data.username);
     setBio(res.data.bio);
     setTimetablePublicity(res.data.timetable_publicity);
-  };
-
-  const saveChanges = () => {
     if (res.data.avatar) {
       setProfilePic(res.data.avatar)
     }
+  };
+
+  const saveChanges = () => {
     axios
       .post(`${url}/dashboard/profile`, {
         token: token,
