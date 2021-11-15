@@ -99,11 +99,13 @@ const Profile = () => {
   return (
     <div className="profile-container">
       <div className="profile-photo">
-        {/* assuming that ryder will implement a beautiful edit button here */}
-        <img
-          src={profilePic ? profilePic : defprofile}
-          alt="user profile image"
-        />
+        <div className="frame">
+          <img
+            className="profile-img"
+            src={profilePic ? profilePic : defprofile}
+            alt="user profile image"
+          />
+        </div>
         <input
           type="file"
           onChange={(e) => {
