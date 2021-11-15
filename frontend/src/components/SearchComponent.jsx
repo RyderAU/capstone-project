@@ -28,7 +28,7 @@ import { SearchComponentMain, SearchComponentText,
     // console.log(box);
     box.style.display = "none";
 
-    history.push(`/dashboard/${display_name}`);
+    history.push(`/dashboard/${members.display_name}`);
     // axios.get(`${url}/dashboard/${members.display_name}`)
     // .then(r => {
     //   handleSuccess(r);
