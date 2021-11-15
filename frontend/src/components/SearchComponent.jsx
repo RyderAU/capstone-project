@@ -1,5 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 // // import components
+import { StoreContext } from '../Store';
 import { SearchComponentMain, SearchComponentText,
   SearchComponentTextName, SearchComponentTextDisplayName } from "../components/SearchCSS";
 
@@ -12,22 +14,40 @@ import { SearchComponentMain, SearchComponentText,
  * @returns 
  */
  const SearchComponent = (members) => {
+  const context = React.useContext(StoreContext);
+  const [url, ] = context.url;
 
-  const handleProfile = (event) => {
-    event.stopPropagation();
+  const handleProfile = () => {
+    // event.stopPropagation();
     console.log("Sending to target profile page")
-    console.log(members.email);
+    console.log(members.display_name);
+
+    const box = document.getElementById("search-container");
+    // console.log(box);
+    box.style.display = "none";
+
+    axios.get(`${url}/dashboard/${members.display_name}`)
+    .then(r => {
+      handleSuccess(r);
+    })
+    .catch(err => {
+      handleError(err);
+    });
   };
 
-  window.onclick = e => {
-    console.log(e.target);  // to get the element
-    console.log(e.target.tagName);  // to get the element tag name alone
-  }
+  const handleSuccess = (res) => {
+    console.log(res);
+  };
+
+  const handleError = (error) => {
+    console.log(error);
+  };
+
 
   return (
     <SearchComponentMain
       aria-label="user-query-component"
-      onClick={(e) => {e.stopPropagation(); console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")}}>
+      onClick={() => {handleProfile()}}>
           <svg height="30" width="30" className="avatar">
             <circle cx="15" cy="15" r="15" stroke="black" stroke-width="0" fill="grey" />
           </svg>

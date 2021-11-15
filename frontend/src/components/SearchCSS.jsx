@@ -8,12 +8,13 @@ export const InputContainer = styled.div`
   // background:#ddd;
   // direction: rtl;
   width: 180px;
-  .search-input:focus + .search-container {
-    // left: 25px;
-    visibility: visible;
-    // display: flex;
-    // z-index: 0;
-  }
+  // .search-input:not(:focus) + .search-container {
+  //   // left: 25px;
+  //   display: none;
+  //   // visibility: hidden;
+  //   // display: flex;
+  //   // z-index: 0;
+  // }
 `;
 
 export const Input = styled.input`
@@ -59,7 +60,7 @@ export const SearchResultContainer = styled.div`
   background: #dedede;
   border-radius: 10px;
   // display: hidden;
-  visibility: hidden;
+  // visibility: hidden;
   // z-index: -1;
   display: flex;
   flex-direction: column;
