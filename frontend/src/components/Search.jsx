@@ -77,7 +77,9 @@ const Search = ( {courseid} ) => {
     console.log(e.target);  // to get the element
     console.log(e.target.tagName);  // to get the element tag name alone
     const input = document.getElementById("search-input");
-    input.value="";
+    if (input != null) {
+      input.value="";
+    }
   }
 
 
