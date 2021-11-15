@@ -1,7 +1,5 @@
 ''' Read all data for courses satisfying particular criteria '''
 import psycopg2
-# from .config import config
-import urllib.parse as up
 
 def read_courses_data(column, value):
     # Grab data
@@ -9,11 +7,14 @@ def read_courses_data(column, value):
     conn = None
     course_info = []
     try:
-        DATABASE_URL = 'postgres://frnkorza:5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg@rosie.db.elephantsql.com/frnkorza'
-        url = up.urlparse(DATABASE_URL)
-        conn = psycopg2.connect(database=url.path[1:], 
-            user=url.username, password=url.password, 
-            host=url.hostname, port=url.port)
+        # old db
+        conn = psycopg2.connect(database='ourunsw', 
+        user='postgres', password='secret', 
+        host='localhost')
+        
+        # conn = psycopg2.connect(database='ourUNSW', 
+        #     user='postgres', password='sudo-sandeep-reply', 
+        #     host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 

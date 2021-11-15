@@ -1,22 +1,18 @@
 #!/usr/bin/python
 ''' Test inserting new mark for a student in a particular task into table with python '''
 import psycopg2
-# from .config import config
-import urllib.parse as up
 
 
 def insert_mark(mark, task_id, student_id, course_id):
-
     select_query = "select max(task_mark_id) from task_mark;"
     conn = None
     stored_mark_id = -1
     mark_id = -1
     try:
-        DATABASE_URL = 'postgres://frnkorza:5n3CB1-5ZcZwHt2y781wKZfhaEFdfjlg@rosie.db.elephantsql.com/frnkorza'
-        url = up.urlparse(DATABASE_URL)
-        conn = psycopg2.connect(database=url.path[1:], 
-            user=url.username, password=url.password, 
-            host=url.hostname, port=url.port)
+        conn = psycopg2.connect(database='ourunsw', 
+        user='postgres', password='secret', 
+        host='localhost')
+        
         # create a new cursor
         cur = conn.cursor()
         cur.execute(select_query)

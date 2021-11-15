@@ -16,7 +16,6 @@ export default ({ children }) => {
     "COMP3331",
   ]);
   const [token, setToken] = React.useState("");
-  const [timetablePublicity, setTimetablePublicity] = React.useState(0);
 
   const store = {
     displayName: [displayName, setDisplayName],
@@ -28,7 +27,6 @@ export default ({ children }) => {
     url: [url, setUrl],
     courses: [courses, setCourses],
     token: [token, setToken],
-    timetablePublicity: [timetablePublicity, setTimetablePublicity],
   };
 
   return (

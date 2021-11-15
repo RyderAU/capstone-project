@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { StoreContext } from "../Store";
-import { useHistory, NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import home from "../images/homeicon.png";
 import "./NavBar.css";
 import Search from "./Search";
@@ -9,7 +9,7 @@ import Search from "./Search";
 const NavBar = () => {
   const history = useHistory();
   const context = React.useContext(StoreContext);
-  const [url] = context.url;
+  const [url, ] = context.url;
   const [courses] = context.courses;
   const [token, setToken] = context.token;
 
@@ -35,8 +35,9 @@ const NavBar = () => {
     console.log(response);
 
     // Resets token
+    
     setToken("");
-    history.push(`/`);
+    history.push("/");
   };
 
   // Case 2: API returns error
