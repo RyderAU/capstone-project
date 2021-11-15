@@ -5,14 +5,15 @@ import React from "react";
 import axios from "axios";
 import { StoreContext } from "../Store";
 import { useState } from "react";
+import { useParams } from "react-router";
 
 const OtherProfile = () => {
   const context = React.useContext(StoreContext);
   const [url] = context.url;
   const [details, setDetails] = useState({});
   const [timetables, setTimetables] = React.useState([]);
-  // dummy
-  const email = "shoan@mail.com";
+  const { email } = useParams();
+  
   // get selected user's details
   React.useEffect(() => {
     axios
