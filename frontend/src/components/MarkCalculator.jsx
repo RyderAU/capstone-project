@@ -42,9 +42,8 @@ const MarkCalculator = () => {
    setMarktable(res.data.assessments)
    let total = 0
    let arr = res.data.assessments
-   arr.forEach((e, i, a) => {
+   arr.forEach((e) => {
      total += parseFloat(e["my_mark"])
- 
    })
    console.log(total)
    setTotalMark(total)
@@ -56,15 +55,13 @@ const MarkCalculator = () => {
  }
  
  const handleMarkSubmit = (mark) => {
-  //  console.log(parseFloat(mark.mark))
+
   const string_mark = mark.mark
   const string_array = string_mark.split("")
-  // console.log(string_array)
+
   let invalid = false
-  string_array.forEach(word => {
-    // console.log(word)
-    // console.log(parseFloat(word))
-    if (isNaN(parseFloat(word))) {
+   string_array.forEach(word => {
+    if (word !== '.' && isNaN(parseFloat(word))) {
       invalid = true
       return false;
     }
@@ -156,4 +153,3 @@ const MarkCalculator = () => {
  
 export default MarkCalculator;
  
-
