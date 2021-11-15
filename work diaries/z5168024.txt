@@ -69,3 +69,26 @@ Week 7:
 - Ryder had a blocker to obtain styles for timetables. Told him how to extract the styles in a meeting
 - Wrote Helena a SQL function to grab list of members in a course
 
+Week 8:
+
+- Linking components with team
+- Demo for Sprint 2
+- Retrspective B
+- Assigning issues/subtasks to team members
+- Delegation of report work
+- Design of new tables and updating of DB interface
+- Creation of new tables
+
+Week 9:
+
+- Migrated DB to Google Cloud for more connections
+- Google Cloud has too much latency so migrated to AWS DB
+- AWS was also slow. Free user has limitations
+- Decided on local DB for quick app response times
+- Created steps with Ryder, Haesun, Helena for local DB setup
+
+Week 10:
+
+- Meeting to link components and discuss remaining things todo with team
+- Completed my delegated part for the report which involving selenium explantation and setup instructions
+- Communicated with Joseph on certian concerns about myUNSW changing in holidays and affecting our linking process
