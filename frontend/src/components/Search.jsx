@@ -33,9 +33,12 @@ const Search = ( {courseid} ) => {
     console.log(response.data.result);
     const members = response.data.result;
 
-    let members_list = [
-      <SearchTitle>Search Result</SearchTitle>
-    ];
+    let members_list = [];
+    if (members.length > 0) {
+      members_list.push(
+        <SearchTitle>Search Result</SearchTitle>
+      )
+    };
     for (let i=members.length; i > 0; i--) {
         const mem_component = members[i-1];
         // console.log(mem_component.email);
@@ -62,14 +65,31 @@ const Search = ( {courseid} ) => {
     console.log("SEARCH MEMBERS");
   }, [query]);
 
+  const handleInputClick = () => {
+    console.log("Input clicked");
+
+    const box = document.getElementById("search-container");
+    // console.log(box);
+    box.style.display = "flex";
+  };
+
+  window.onclick = e => {
+    console.log(e.target);  // to get the element
+    console.log(e.target.tagName);  // to get the element tag name alone
+    const input = document.getElementById("search-input");
+    input.value="";
+  }
+
+
     return (
         <InputContainer aria-label="input-container">
             <Input
                 placeholder="Enter name"
                 aria-label="search-input"
                 className="search-input"
+                id="search-input"
                 onChange={(e) => setQuery(e.target.value)}
-                onClick ={(e) => console.log("nooooooo")}/>
+                onClick ={() => handleInputClick()}/>
             {/* <SearchComponent
                 aria-label="search-container"
                 className="search-container">
@@ -78,6 +98,7 @@ const Search = ( {courseid} ) => {
             <SearchResultContainer
                 aria-label="search-container"
                 className="search-container"
+                id="search-container"
                 onClick ={(e) => console.log("byeeeeeeeeee")} >
                 {queryList}
             </SearchResultContainer>
