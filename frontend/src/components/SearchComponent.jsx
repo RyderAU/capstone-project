@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 // // import components
+import { useHistory } from 'react-router-dom'
 import { StoreContext } from '../Store';
 import { SearchComponentMain, SearchComponentText,
   SearchComponentTextName, SearchComponentTextDisplayName } from "../components/SearchCSS";
@@ -14,6 +15,7 @@ import { SearchComponentMain, SearchComponentText,
  * @returns 
  */
  const SearchComponent = (members) => {
+  const history = useHistory();
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
 
@@ -26,22 +28,23 @@ import { SearchComponentMain, SearchComponentText,
     // console.log(box);
     box.style.display = "none";
 
-    axios.get(`${url}/dashboard/${members.display_name}`)
-    .then(r => {
-      handleSuccess(r);
-    })
-    .catch(err => {
-      handleError(err);
-    });
+    history.push(`/dashboard/${display_name}`);
+    // axios.get(`${url}/dashboard/${members.display_name}`)
+    // .then(r => {
+    //   handleSuccess(r);
+    // })
+    // .catch(err => {
+    //   handleError(err);
+    // });
   };
 
-  const handleSuccess = (res) => {
-    console.log(res);
-  };
+  // const handleSuccess = (res) => {
+  //   console.log(res);
+  // };
 
-  const handleError = (error) => {
-    console.log(error);
-  };
+  // const handleError = (error) => {
+  //   console.log(error);
+  // };
 
 
   return (
