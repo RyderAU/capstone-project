@@ -18,6 +18,15 @@ export const Label = styled.label`
   color: #fff;
 `;
 
+export const LabelSmall = styled.label`
+  margin: 8px auto;
+  // font-weight: bold;
+  font-size: 0.7em;
+  width: 250px;
+  color: #fff;
+  // margin-left: 8px;
+`;
+
 export const Title = styled.label`
   font-family: 'Luna';
   font-size: 36px;
@@ -88,7 +97,7 @@ export const SignUpForm = styled.div`
   margin: 75px auto;
   background-color: #0086E8;
   width: 350px;
-  height: 650px;
+  height: 720px;
   border-radius: 15px;
 `;
 

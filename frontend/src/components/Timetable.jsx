@@ -9,7 +9,8 @@ const Timetable = () => {
 
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
-  const [token, ] = context.token;
+  // const [token, ] = context.token;
+  const token = localStorage.getItem("token");
 
   const [timetables, setTimetables] = React.useState([]);
 

@@ -8,7 +8,8 @@ import { useState } from "react";
 const Profile = () => {
   const context = React.useContext(StoreContext);
   const [url] = context.url;
-  const [token] = context.token;
+  // const [token] = context.token;
+  const token = localStorage.getItem("token");
   const [details, setDetails] = useState({});
 
   const [displayName, setDisplayName] = context.displayName;

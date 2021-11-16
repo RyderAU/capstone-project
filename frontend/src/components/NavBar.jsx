@@ -13,7 +13,8 @@ const NavBar = () => {
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
   const [courses] = context.courses;
-  const [token, setToken] = context.token;
+  // const [token, setToken] = context.token;
+  const token = localStorage.getItem("token");
 
   // Send request to backend, if request successful move to Landing page
   const handleLogout = () => {
@@ -38,7 +39,8 @@ const NavBar = () => {
 
     // Resets token
     
-    setToken("");
+    // setToken("");
+    localStorage.setItem("token", "");
     history.push("/");
   };
 
