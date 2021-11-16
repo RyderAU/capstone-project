@@ -9,7 +9,7 @@ const Members = ( {courseid} ) => {
   const [seconds, setSeconds] = useState(0);
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
-  const [token, ] = context.token;
+  // const [token, ] = context.token;
   const [members, setMembers] = useState([]);
   const [membersList, setMembersList] = useState([]);
   const [interval, setInterval] = useState(0);
@@ -20,6 +20,7 @@ const Members = ( {courseid} ) => {
 
     // const tokenLocal = localStorage.getItem("token");
     console.log(courseid);
+    const token = localStorage.getItem("token");
     axios.get(`${url}/channel/members?token=${token}&course_name=${courseid}`)
       .then(r => {
         handleSuccess(r);

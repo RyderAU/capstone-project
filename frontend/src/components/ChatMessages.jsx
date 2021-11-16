@@ -13,7 +13,7 @@ const ChatMessages = ( {courseid} ) => {
   const [seconds, setSeconds] = useState(0);
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
-  const [token, ] = context.token;
+  // const [token, ] = context.token;
   const [messages, setMessages] = useState([]);
 
   // console.log(courseid.courseid["courseid"]);
@@ -21,7 +21,7 @@ const ChatMessages = ( {courseid} ) => {
   const getMessages = (courseid) => {
     console.log("Loading messages...");
 
-    const tokenLocal = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     // console.log("HHHHHHHHHHHHH:" + courseid);
     console.log(courseid);
     axios.get(`${url}/message/listall?token=${token}&course_name=${courseid}`)

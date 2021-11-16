@@ -21,7 +21,8 @@ const MarkCalculator = () => {
  const { courseid } = useParams();
  const context = React.useContext(StoreContext);
  const [url] = context.url;
- const [token] = context.token;
+//  const [token] = context.token;
+ const token = localStorage.getItem("token");
  const [marktable, setMarktable] = useState([]);
  
  const [task, setTask] = useState("");
