@@ -29,6 +29,7 @@ import { SearchComponentMain, SearchComponentText,
     box.style.display = "none";
 
     history.push(`/dashboard/${members.email}`);
+    window.location.reload(false);
     // axios.get(`${url}/dashboard/${members.display_name}`)
     // .then(r => {
     //   handleSuccess(r);

@@ -58,9 +58,11 @@ import { LoginForm, Title, Label, Input, Button,
 
     if (response.data["token"] == "") {
       history.push(`/linking`);
-    };
+    } else {
+      history.push(`/dashboard/${response.data["courses"].courses[0]}/chat`);
+    }
 
-    history.push(`/dashboard/${courses[0]}/chat`);
+    
   };
   
   // Case 2: API returns error

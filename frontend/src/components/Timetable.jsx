@@ -41,7 +41,7 @@ const Timetable = () => {
         <button onClick={prevSlide}>&lt;</button>
         <button onClick={nextSlide}>&gt;</button>
       </div>
-      <div className="week-counter">week {current + 1}</div>
+      <div className="week-counter">Week {current + 1}</div>
       <div className="carousel">
         {timetables.map((table, index) => {
           return (

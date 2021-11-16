@@ -1,3 +1,23 @@
+.details {
+    display: flex;
+    margin: 30px;
+}
+
+.details-item {
+    margin-right: 20px;
+}
+
+.details-title {
+    margin-bottom: 5px;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.details-description {
+    font-size: 12pt;
+    font-weight: lighter;
+}
+
 .timetable-hidden {
     visibility: hidden;
 }

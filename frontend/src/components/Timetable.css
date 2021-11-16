@@ -8,5 +8,8 @@
 
 .week-counter {
   width: 100%;
+  font-size: 20pt;
   margin: auto;
+  margin-bottom: 10px;
+  text-align: center;
 }
