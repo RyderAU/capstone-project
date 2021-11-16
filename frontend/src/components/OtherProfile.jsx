@@ -15,7 +15,6 @@ const OtherProfile = () => {
   const [timetables, setTimetables] = React.useState([]);
   const { email } = useParams();
   const [profilePic, setProfilePic] = useState("");
-  
   // get selected user's details
   React.useEffect(() => {
     axios
@@ -50,26 +49,32 @@ const OtherProfile = () => {
 
   return (
     <div>
-      <div className="frame">
-        <img
-          className="profile-img"
-          src={profilePic ? profilePic : defprofile}
-          alt="user profile image"
-        />
+      <div className="details">
+        <div className="details-item">
+          <div className="frame">
+            <img
+              className="profile-img"
+              src={profilePic ? profilePic : defprofile}
+              alt="user profile image"
+            />
+          </div>
+        </div>
+        <div className="details-item">
+          <div className="details-title">Display name: <div className="details-description">{details.username}</div></div>
+          <div className="details-title">Name: <div className="details-description">{details.real_name}</div></div>
+          <div className="details-title">Degree: <div className="details-description">{details.degree}</div></div>
+          <div className="details-title">Bio: <div className="details-description">{details.bio}</div></div>
+        </div>
       </div>
-      <div>Display name: {details.username}</div>
-      <div>Name: {details.real_name}</div>
-      <div>Degree: {details.degree}</div>
-      <div>Bio: {details.bio}</div>
+      
 			{/* if timetable is hidden, hide the element */}
       <div className={!details.timetable_publicity ? "timetable-hidden" : "timetable-outer"}>
-        Timetable:
         <div className="timetable-container">
           <div className="button-container">
             <button onClick={prevSlide}>&lt;</button>
             <button onClick={nextSlide}>&gt;</button>
           </div>
-          <div className="week-counter">week {current + 1}</div>
+          <div className="week-counter">Week {current + 1}</div>
           <div className="carousel">
             {timetables.map((table, index) => {
               return (

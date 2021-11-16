@@ -154,7 +154,7 @@ const Profile = () => {
           </div>
         </div>
         <div className="title">
-          Timetable display settings: {timetablePublicity ? 'public' : 'private'} <button onClick={handlePublicityChange}>Change</button>
+          Timetable display settings: <button onClick={handlePublicityChange}>Change</button> <div className="field-entry">{timetablePublicity ? 'public' : 'private'}</div>
         </div>
         <button className="save-changes-button" onClick={saveChanges}>
           save changes
