@@ -84,18 +84,20 @@ const SignUp = () => {
         <Title>SIGN UP</Title>
 
         <Label>Display Name
-          <LabelSmall>1 to 20 characters</LabelSmall>
         </Label>
+        <LabelSmall>1 to 20 characters</LabelSmall>
         <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)}
           type="text" placeholder="Enter your display name" id="signup-display-name" required />
 
         <Label>Email</Label>
+        <LabelSmall>e.g. email@something.com</LabelSmall>
         <Input value={emailInput} onChange={(e) => setEmail(e.target.value)}
           type="email" placeholder="Enter your email" id="signup-email" required />
 
         <Label>Password
-          <LabelSmall>More than 5 characters</LabelSmall>
         </Label>
+        {/* <LabelSmall></LabelSmall> */}
+        <LabelSmall>More than 5 characters, at least ONE digit, ONE uppercase, ONE lowercase character</LabelSmall>
         <Input value={passwordInput} onChange={(e) => setPassword(e.target.value)}
           type="password" placeholder="Enter your password" id="signup-password" required />
 

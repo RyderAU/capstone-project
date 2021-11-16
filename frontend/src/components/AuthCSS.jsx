@@ -24,7 +24,7 @@ export const LabelSmall = styled.label`
   font-size: 0.7em;
   width: 250px;
   color: #fff;
-  margin-left: 8px;
+  // margin-left: 8px;
 `;
 
 export const Title = styled.label`
@@ -97,7 +97,7 @@ export const SignUpForm = styled.div`
   margin: 75px auto;
   background-color: #0086E8;
   width: 350px;
-  height: 650px;
+  height: 720px;
   border-radius: 15px;
 `;
 
