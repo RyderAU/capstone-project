@@ -80,6 +80,7 @@ const Search = ( {courseid} ) => {
     const input = document.getElementById("search-input");
     if (input != null) {
       input.value="";
+      setQuery("");
     }
   }
 
