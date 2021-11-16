@@ -5,6 +5,20 @@ import { Message, MessageSelf, Name, Text, TextSelf } from "../components/ChatCS
 
  const ChatMessagesComponent = (message) => {
   let msg = message["message"];
+  
+  // let spaceCounter = 0;
+  // let msgList = msg["message"];
+  // for (let i = 0; i < msgList.length; i++) {
+  //   if (msg["message"][i] == " ") {
+  //     spaceCounter = 0;
+  //   }
+
+  //   spaceCounter++;
+  //   if (spaceCounter) {
+  //     spaceCounter++;
+  //   }
+  // };
+
 
   return (
     <div aria-label="message-container">
