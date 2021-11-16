@@ -3,7 +3,7 @@ import axios from 'axios';
 import { StoreContext } from '../Store';
 import { useHistory } from 'react-router-dom'
 // import components
-import { SignUpForm, Title, Label, Input, Button,
+import { SignUpForm, Title, Label, LabelSmall, Input, Button,
   ErrorWarning, 
   ButtonSecondary} from "../components/AuthCSS";;
 
@@ -83,7 +83,9 @@ const SignUp = () => {
       <SignUpForm>
         <Title>SIGN UP</Title>
 
-        <Label>Display Name</Label>
+        <Label>Display Name
+          <LabelSmall>1 to 20 characters</LabelSmall>
+        </Label>
         <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)}
           type="text" placeholder="Enter your display name" id="signup-display-name" required />
 
@@ -91,7 +93,9 @@ const SignUp = () => {
         <Input value={emailInput} onChange={(e) => setEmail(e.target.value)}
           type="email" placeholder="Enter your email" id="signup-email" required />
 
-        <Label>Password</Label>
+        <Label>Password
+          <LabelSmall>More than 5 characters</LabelSmall>
+        </Label>
         <Input value={passwordInput} onChange={(e) => setPassword(e.target.value)}
           type="password" placeholder="Enter your password" id="signup-password" required />
 
