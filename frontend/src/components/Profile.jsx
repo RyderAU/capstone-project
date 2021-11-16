@@ -8,7 +8,8 @@ import { useState } from "react";
 const Profile = () => {
   const context = React.useContext(StoreContext);
   const [url] = context.url;
-  const [token] = context.token;
+  // const [token] = context.token;
+  const token = localStorage.getItem("token");
   const [details, setDetails] = useState({});
 
   const [displayName, setDisplayName] = context.displayName;
@@ -99,11 +100,13 @@ const Profile = () => {
   return (
     <div className="profile-container">
       <div className="profile-photo">
-        {/* assuming that ryder will implement a beautiful edit button here */}
-        <img
-          src={profilePic ? profilePic : defprofile}
-          alt="user profile image"
-        />
+        <div className="frame">
+          <img
+            className="profile-img"
+            src={profilePic ? profilePic : defprofile}
+            alt="user profile image"
+          />
+        </div>
         <input
           type="file"
           onChange={(e) => {

@@ -86,7 +86,7 @@ class Systems:
             - returns True
         '''
         email = self.validate_token(token)
-        update_user_data('login_token', 'email', '', email)
+        update_user_data('login_token', '', 'email', email)
 
         is_success = True
         return {'is_success': is_success, }
@@ -144,20 +144,25 @@ class Systems:
         correct_pwd = validate_entity_exists('hashed_pwd', 'email', email)
         ph = PasswordHasher()
         try:
-            ph.verify(correct_pwd, password)
-            # generate token
-            session_id = self.new_session_id()
-            token = jwt.encode(
-                {"session_id": session_id, "email": email}, "thisisakey", algorithm="HS256")
-            token = str(token)
-            token = token[2:-1]
-            # update database that user has logged in
-            update_user_data('login_token', 'email', token, email)
+            result = read_students_data('email', email)
+            if result[0][1] is None:
+                token = ""
+                courses = []
+            else:
+                ph.verify(correct_pwd, password)
+                # generate token
+                session_id = self.new_session_id()
+                token = jwt.encode(
+                    {"session_id": session_id, "email": email}, "thisisakey", algorithm="HS256")
+                token = str(token)
+                token = token[2:-1]
+                # update database that user has logged in
+                update_user_data('login_token', 'email', token, email)
 
-            # grab courses from database and return to front end
-            db_courses = validate_entity_exists('course', 'email', email)
-            courses = {}
-            courses["courses"] = db_courses.split(",")
+                # grab courses from database and return to front end
+                db_courses = validate_entity_exists('course', 'email', email)
+                courses = {}
+                courses["courses"] = db_courses.split(",")
 
             return {"token": token, "courses": courses, }
         except argon2.exceptions.VerifyMismatchError:
@@ -276,8 +281,8 @@ class Systems:
             timetable_publicity = result[0][7]
         if result[0][8] is None:
             avatar = None
-        else: 
-            avatar = bytes(result[0][8]).decode("utf-8")
+        else:
+            avatar = bytes(result[0][8].decode("utf-8"))
         courses = courses.replace(",", ", ")
        
         return {"username": username, "real_name": real_name, \
@@ -301,6 +306,7 @@ class Systems:
         # Return Value:
         #     - Don't return
         # '''
+        print()
         if len(message) not in range(1, 501):
             raise InputError(
                 'Message has to be 1 to 500 characters inclusive in length')
@@ -408,8 +414,8 @@ class Systems:
                 new['name'] = task_name
                 new['weighting'] = str(result[x][3])
                 new['hurdle'] = result[x][4]
-                new['hurdle_mark'] = str(result[x][5])
-                task_relevant_info = read_task_data('task', task_name)
+                new['hurdle_mark'] = result[x][5]
+                task_relevant_info = read_task_data('task_name', task_name)
                 task_id = task_relevant_info[0][0]
                 mark_result = read_task_mark_data('student_id', zid, 'course_id', course_id, 'task_id', task_id)
                 # If the student hasn't saved their mark for this assessment

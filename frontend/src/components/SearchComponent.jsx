@@ -22,13 +22,13 @@ import { SearchComponentMain, SearchComponentText,
   const handleProfile = () => {
     // event.stopPropagation();
     console.log("Sending to target profile page")
-    console.log(members.display_name);
+    console.log(members);
 
     const box = document.getElementById("search-container");
     // console.log(box);
     box.style.display = "none";
 
-    history.push(`/dashboard/${members.display_name}`);
+    history.push(`/dashboard/${members.email}`);
     // axios.get(`${url}/dashboard/${members.display_name}`)
     // .then(r => {
     //   handleSuccess(r);

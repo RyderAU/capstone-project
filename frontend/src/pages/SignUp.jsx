@@ -3,7 +3,7 @@ import axios from 'axios';
 import { StoreContext } from '../Store';
 import { useHistory } from 'react-router-dom'
 // import components
-import { SignUpForm, Title, Label, Input, Button,
+import { SignUpForm, Title, Label, LabelSmall, Input, Button,
   ErrorWarning, 
   ButtonSecondary} from "../components/AuthCSS";;
 
@@ -16,7 +16,7 @@ const SignUp = () => {
   const [emailInput, setEmail] = context.email;
   const [passwordInput, setPassword] = context.password;
   const [passwordConfirmInput, setPasswordConfirm] = context.passwordConfirm;
-  const [, setToken] = context.token;
+  // const [, setToken] = context.token;
 
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("Erorr: Input invalid");
@@ -45,7 +45,8 @@ const SignUp = () => {
     console.log('SignUp Success');
     console.log(response);
     // Sets the token to be used for linking
-    setToken(response.data["token"]);
+    // setToken(response.data["token"]);
+    localStorage.setItem("token", response.data["token"]);
     resetFields();
     
     // Move to next page
@@ -82,15 +83,21 @@ const SignUp = () => {
       <SignUpForm>
         <Title>SIGN UP</Title>
 
-        <Label>Display Name</Label>
+        <Label>Display Name
+        </Label>
+        <LabelSmall>1 to 20 characters</LabelSmall>
         <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)}
           type="text" placeholder="Enter your display name" id="signup-display-name" required />
 
         <Label>Email</Label>
+        <LabelSmall>e.g. email@something.com</LabelSmall>
         <Input value={emailInput} onChange={(e) => setEmail(e.target.value)}
           type="email" placeholder="Enter your email" id="signup-email" required />
 
-        <Label>Password</Label>
+        <Label>Password
+        </Label>
+        {/* <LabelSmall></LabelSmall> */}
+        <LabelSmall>More than 5 characters, at least ONE digit, ONE uppercase, ONE lowercase character</LabelSmall>
         <Input value={passwordInput} onChange={(e) => setPassword(e.target.value)}
           type="password" placeholder="Enter your password" id="signup-password" required />
 

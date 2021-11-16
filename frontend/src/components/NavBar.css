@@ -1,6 +1,41 @@
 .nav-container {
   background: #6cbcf6;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   height: 50px;
+}
+
+.nav-item {
+  display: flex;
+}
+
+.item-right {
+  justify-content: flex-end;
+}
+
+.home-button {
+  margin: 5px;
+  cursor: pointer;
+}
+
+.logout-button {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: lightyellow;
+}
+
+.timetable-button {
+  margin: 5px;
+  cursor: pointer;
+}
+
+.profile-button {
+  margin: 5px;
+  cursor: pointer;
 }

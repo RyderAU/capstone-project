@@ -8,7 +8,8 @@ import SearchComponent from './SearchComponent';
 const Search = ( {courseid} ) => {
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
-  const [token, ] = context.token;
+  // const [token, ] = context.token;
+  const token = localStorage.getItem("token");
   const [query, setQuery] = useState("");
   const [queryList, setQueryList] = useState([]);
 
@@ -77,7 +78,10 @@ const Search = ( {courseid} ) => {
     console.log(e.target);  // to get the element
     console.log(e.target.tagName);  // to get the element tag name alone
     const input = document.getElementById("search-input");
-    input.value="";
+    if (input != null) {
+      input.value="";
+      setQuery("");
+    }
   }
 
 
