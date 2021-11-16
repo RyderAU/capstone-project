@@ -86,7 +86,7 @@ class Systems:
             - returns True
         '''
         email = self.validate_token(token)
-        update_user_data('login_token', '', 'email', email)
+        update_user_data('login_token', 'email', '', email)
 
         is_success = True
         return {'is_success': is_success, }
@@ -145,7 +145,7 @@ class Systems:
         ph = PasswordHasher()
         try:
             result = read_students_data('email', email)
-            if result[0][1] is None:
+            if result[0][1] == '':
                 token = ""
                 courses = []
             else:

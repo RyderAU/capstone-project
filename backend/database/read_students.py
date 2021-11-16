@@ -34,4 +34,4 @@ def read_students_data(column1, value):
         if conn is not None:
             conn.close()
 
-# print(read_students_data('email', 'haesun@mail.com')) # This should retrieve avatar byte
+# print(read_students_data('email', 'helena@mail.com')) # This should retrieve avatar byte
