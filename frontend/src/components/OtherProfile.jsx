@@ -50,11 +50,13 @@ const OtherProfile = () => {
 
   return (
     <div>
-      <div>Profile picture</div>
-      <img
-        src={profilePic ? profilePic : defprofile}
-        alt="user profile image"
-      />
+      <div className="frame">
+        <img
+          className="profile-img"
+          src={profilePic ? profilePic : defprofile}
+          alt="user profile image"
+        />
+      </div>
       <div>Display name: {details.username}</div>
       <div>Name: {details.real_name}</div>
       <div>Degree: {details.degree}</div>
