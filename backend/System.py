@@ -412,7 +412,7 @@ class Systems:
                 task_name = result[x][1]
                 new['deadline'] = result[x][2]
                 new['name'] = task_name
-                new['weighting'] = result[x][3]
+                new['weighting'] = str(result[x][3])
                 new['hurdle'] = result[x][4]
                 new['hurdle_mark'] = result[x][5]
                 task_relevant_info = read_task_data('task_name', task_name)
@@ -426,25 +426,24 @@ class Systems:
                 assessments.append(new)
         return assessments
     
-    def updatemarks(self, email, course_name, tasks, marks):
+    def updatemarks(self, email, course_name, task, mark):
+        # validate user input
+        try:
+            float(mark)
+        except ValueError:
+            raise InputError("Mark should be integer or decimal")
+
         result = read_students_data('email', email)
         zid = result[0][1]
         course_id = get_course_id_from_course_name(course_name)
-        task_list = tasks.split(", ")
-        mark_list = marks.split(", ")
-        
-        num_assessments = len(task_list)
-        num_marks = len(mark_list)
-        if num_assessments != num_marks:
-            raise InputError('Number of assessments and marks do not match!')
-        for x in range(0, num_assessments):
-            task_info = read_task_data('task', task_list[x])
+        if task != "":
+            task_info = read_task_data('task', task)
             task_id = task_info[0][0]
             task_mark_info = read_task_mark_data('student_id', zid, 'course_id', course_id, 'task_id', task_id)
             if len(task_mark_info) == 0:
-                insert_mark(mark_list[x], task_id, zid, course_id)
+                insert_mark(mark, task_id, zid, course_id)
             else:
-                update_task_data('mark', mark_list[x], 'task_id', task_id, 'student_id', zid, 'course_id', course_id)
+                update_task_data('mark', mark, 'task_id', task_id, 'student_id', zid, 'course_id', course_id)
 
 # var =  Systems()
 

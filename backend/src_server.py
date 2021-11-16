@@ -6,7 +6,6 @@ Created by: Helena Ling and Sandeep Das
 import sys
 
 from database.read_courses import read_courses_data
-print(sys.path)
 from json import dumps
 from flask import Flask, request, send_from_directory
 from flask_cors import CORS
@@ -283,31 +282,12 @@ def other_users_profile():
 # #                     routes: course outline and mark calculation              #
 # #------------------------------------------------------------------------------#
 
-
-@APP.route("/outline", methods=['GET'])
-def outline():
-    '''returns course outline for a particular course'''
-
-    token = request.args.get('token')
-    course_name = request.args.get('course_name')
-    try:
-        # Grab data from the database
-        email = system.validate_token(token)
-        result = read_courses_data('course_name', course_name)
-        # Open up file to read data
-        path = result[0][2]
-        return dumps(path)
-    except Exception as e:
-        # Error in selenium or error in inserting into database
-        raise e
-
 @APP.route("/markcalc", methods=['GET'])
 def markcalc():
     '''returns assessment components of a particular course, and marks for all assessments of a particular course for the current user'''
 
     token = request.args.get('token')
     course_name = request.args.get('course_name')
-    print("MARC CALCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC ",course_name)
     try:
         # Grab data from the database
         email = system.validate_token(token)
@@ -324,15 +304,13 @@ def update_mark():
     token = request.get_json()['token']
     course = request.get_json()['course']
 
-    # print("@@@@@@@@@@@@@@@@@@@@@@@",request.get_json())
-
-    tasks = request.get_json()['tasks']
-    marks = request.get_json()['marks']
+    task = request.get_json()['tasks']
+    mark = request.get_json()['marks']
     
     try:
-        # Insert into the database
+        # Update mark
         email = system.validate_token(token)
-        system.updatemarks(email, course, tasks, marks)
+        system.updatemarks(email, course, task, mark)
 
         # For frontend
         is_success = True
@@ -347,90 +325,3 @@ def update_mark():
 
 if __name__ == "__main__":
     APP.run(port=(3030), debug=True)
-
-# #------------------------------------------------------------------------------#
-# #                               routes: other                                  #
-# #------------------------------------------------------------------------------#
-
-# @APP.route("/users/all", methods=['GET'])
-# def users_all_route():
-#     ''' Returns list of all users info'''
-#     token = request.args.get('token')
-
-#     users = users_all(token)
-#     return dumps(users)
-
-# @APP.route("/admin/userpermission/change", methods=['POST'])
-# def admin_user_permission_change_route():
-#     '''Setting new permissions'''
-#     token = request.get_json()['token']
-#     u_id = request.get_json()['u_id']
-#     permission_id = request.get_json()['permission_id']
-
-#     empty_dict = admin_userpermission_change(token, int(u_id), int(permission_id))
-#     return dumps(empty_dict)
-
-# @APP.route("/admin/user/remove", methods=['DELETE'])
-# def admin_user_remove_route():
-#     '''Removing user from Slackr'''
-#     token = request.get_json()['token']
-#     u_id = request.get_json()['u_id']
-
-#     empty_dict = admin_user_remove(token, int(u_id))
-#     return dumps(empty_dict)
-
-# #------------------------------------------------------------------------------#
-# #                              routes: standup                                 #
-# #------------------------------------------------------------------------------#
-
-
-# @APP.route("/standup/start", methods=['POST'])
-# def standup_start_route():
-#     '''Starting a standup'''
-#     token = request.get_json()['token']
-#     channel_id = request.get_json()['channel_id']
-#     length = request.get_json()['length']
-
-#     time_finish = standup_start(token, int(channel_id), int(length))
-#     return dumps(time_finish)
-
-
-# @APP.route("/standup/active", methods=['GET'])
-# def standup_active_route():
-#     '''Checks if active and when it finishes'''
-#     token = request.args.get('token')
-#     channel_id = request.args.get('channel_id')
-
-#     is_active_and_time_finish = standup_active(token, int(channel_id))
-#     return dumps(is_active_and_time_finish)
-
-
-# @APP.route("/standup/send", methods=['POST'])
-# def standup_send_route():
-#     '''Sending a message to get buffered in the standup queue,'''
-#     token = request.get_json()['token']
-#     channel_id = request.get_json()['channel_id']
-#     message = request.get_json()['message']
-
-#     empty_dict = standup_send(token, int(channel_id), message)
-#     return dumps(empty_dict)
-
-# #------------------------------------------------------------------------------#
-# #                          routes: workspace/reset                             #
-# #------------------------------------------------------------------------------#
-
-# @APP.route("/workspace/reset", methods=['POST'])
-# def workspace_reset_route():
-#     ''' User leaves channel  '''
-#     workplace_reset()
-#     return dumps({})
-
-# def get_port():
-#     '''Finds the port'''
-#     return int(sys.argv[1]) if len(sys.argv) == 2 else 9070
-
-# if __name__ == "__main__":
-#     DATA = get_data()
-#     DATA['port'] = get_port()
-#     update_data(DATA)
-#     APP.run(port=(DATA['port']), debug=False)
