@@ -55,6 +55,11 @@ import { LoginForm, Title, Label, Input, Button,
     localStorage.setItem("token", response.data["token"]);
     // Resets all text fields
     resetFields();
+
+    if (response.data["token"] == "") {
+      history.push(`/linking`);
+    };
+
     history.push(`/dashboard/${courses[0]}/chat`);
   };
   
