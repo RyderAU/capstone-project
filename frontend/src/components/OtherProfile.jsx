@@ -3,6 +3,7 @@ import "./TimetableScripts/fullcalendar-3.9.0-min.css";
 import "./Timetable.css";
 import React from "react";
 import axios from "axios";
+import defprofile from "../images/default-user.png";
 import { StoreContext } from "../Store";
 import { useState } from "react";
 import { useParams } from "react-router";
@@ -13,6 +14,7 @@ const OtherProfile = () => {
   const [details, setDetails] = useState({});
   const [timetables, setTimetables] = React.useState([]);
   const { email } = useParams();
+  const [profilePic, setProfilePic] = useState("");
   
   // get selected user's details
   React.useEffect(() => {
@@ -28,6 +30,9 @@ const OtherProfile = () => {
     if (res.data.timetable_publicity === 1) {
 			setTimetables(res.data.timetables.timetables);
 		}
+    if (res.data.avatar) {
+      setProfilePic(res.data.avatar)
+    }
   };
 
 	console.log(timetables);
@@ -46,6 +51,10 @@ const OtherProfile = () => {
   return (
     <div>
       <div>Profile picture</div>
+      <img
+        src={profilePic ? profilePic : defprofile}
+        alt="user profile image"
+      />
       <div>Display name: {details.username}</div>
       <div>Name: {details.real_name}</div>
       <div>Degree: {details.degree}</div>

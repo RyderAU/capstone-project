@@ -41,7 +41,7 @@ def grabCourseIDs(email, password):
     PATH = "./geckodriver"
     #PATH = "./chromedriver"
     settings = Options()
-    settings.headless = False # Change to False for testing purposes
+    settings.headless = True # Change to False for testing purposes
     driver = webdriver.Firefox(executable_path=PATH, options=settings)
     #driver = webdriver.Chrome(executable_path=PATH, options=settings)
 
