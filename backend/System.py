@@ -86,7 +86,7 @@ class Systems:
             - returns True
         '''
         email = self.validate_token(token)
-        update_user_data('login_token', 'email', '', email)
+        update_user_data('login_token', '', 'email', email)
 
         is_success = True
         return {'is_success': is_success, }
@@ -144,20 +144,25 @@ class Systems:
         correct_pwd = validate_entity_exists('hashed_pwd', 'email', email)
         ph = PasswordHasher()
         try:
-            ph.verify(correct_pwd, password)
-            # generate token
-            session_id = self.new_session_id()
-            token = jwt.encode(
-                {"session_id": session_id, "email": email}, "thisisakey", algorithm="HS256")
-            token = str(token)
-            token = token[2:-1]
-            # update database that user has logged in
-            update_user_data('login_token', 'email', token, email)
+            result = read_students_data('email', email)
+            if result[0][1] is None:
+                token = ""
+                courses = []
+            else:
+                ph.verify(correct_pwd, password)
+                # generate token
+                session_id = self.new_session_id()
+                token = jwt.encode(
+                    {"session_id": session_id, "email": email}, "thisisakey", algorithm="HS256")
+                token = str(token)
+                token = token[2:-1]
+                # update database that user has logged in
+                update_user_data('login_token', 'email', token, email)
 
-            # grab courses from database and return to front end
-            db_courses = validate_entity_exists('course', 'email', email)
-            courses = {}
-            courses["courses"] = db_courses.split(",")
+                # grab courses from database and return to front end
+                db_courses = validate_entity_exists('course', 'email', email)
+                courses = {}
+                courses["courses"] = db_courses.split(",")
 
             return {"token": token, "courses": courses, }
         except argon2.exceptions.VerifyMismatchError:
@@ -274,16 +279,13 @@ class Systems:
             timetable_publicity = 0
         else:
             timetable_publicity = result[0][7]
-        if result[0][8] is None:
-            avatar = None
-        else: 
-            avatar = bytes(result[0][8]).decode("utf-8")
+        avatar = bytes(result[0][8])
         courses = courses.replace(",", ", ")
        
         return {"username": username, "real_name": real_name, \
             "zid": zid, "degree": degree, \
             "bio": bio, "courses": courses, \
-            "timetable_publicity": timetable_publicity, "avatar": avatar, }
+            "timetable_publicity": timetable_publicity, "avatar": avatar.decode("utf-8"), }
 
     def message_send(self, token, course, message):
         # '''
@@ -301,6 +303,7 @@ class Systems:
         # Return Value:
         #     - Don't return
         # '''
+        print()
         if len(message) not in range(1, 501):
             raise InputError(
                 'Message has to be 1 to 500 characters inclusive in length')
@@ -406,12 +409,10 @@ class Systems:
                 task_name = result[x][1]
                 new['deadline'] = result[x][2]
                 new['name'] = task_name
-
-                new['weighting'] = str(result[x][3])
-
+                new['weighting'] = result[x][3]
                 new['hurdle'] = result[x][4]
-                new['hurdle_mark'] = str(result[x][5])
-                task_relevant_info = read_task_data('task', task_name)
+                new['hurdle_mark'] = result[x][5]
+                task_relevant_info = read_task_data('task_name', task_name)
                 task_id = task_relevant_info[0][0]
                 mark_result = read_task_mark_data('student_id', zid, 'course_id', course_id, 'task_id', task_id)
                 # If the student hasn't saved their mark for this assessment
@@ -430,23 +431,17 @@ class Systems:
         mark_list = marks.split(", ")
         
         num_assessments = len(task_list)
-        print('HAHAHHAHHAHAHAHAHAHHAA', num_assessments)
         num_marks = len(mark_list)
-        print('AKKAKAKAKAKAKAKAKAKKAKA', num_marks)
         if num_assessments != num_marks:
             raise InputError('Number of assessments and marks do not match!')
-        if tasks != "":
-            for x in range(0, num_assessments):
-                task_info = read_task_data('task', task_list[x])
-                task_id = task_info[0][0]
-                task_mark_info = read_task_mark_data('student_id', zid, 'course_id', course_id, 'task_id', task_id)
-                if len(task_mark_info) == 0:
-                    # print("###########################################################")
-        
-                    insert_mark(mark_list[x], task_id, zid, course_id)
-                else:
-                    # print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-                    update_task_data('mark', mark_list[x], 'task_id', task_id, 'student_id', zid, 'course_id', course_id)
+        for x in range(0, num_assessments):
+            task_info = read_task_data('task', task_list[x])
+            task_id = task_info[0][0]
+            task_mark_info = read_task_mark_data('student_id', zid, 'course_id', course_id, 'task_id', task_id)
+            if len(task_mark_info) == 0:
+                insert_mark(mark_list[x], task_id, zid, course_id)
+            else:
+                update_task_data('mark', mark_list[x], 'task_id', task_id, 'student_id', zid, 'course_id', course_id)
 
 # var =  Systems()
 
