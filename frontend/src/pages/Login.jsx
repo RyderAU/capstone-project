@@ -17,7 +17,7 @@ import { LoginForm, Title, Label, Input, Button,
   const [emailInput, setEmail] = context.email;
   const [passwordInput, setPassword] = context.password;
   const [courses, setCourses] = context.courses;
-  const [, setToken] = context.token;
+  // const [, setToken] = context.token;
 
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("Erorr: Input invalid");
@@ -51,7 +51,7 @@ import { LoginForm, Title, Label, Input, Button,
     setCourses(response.data["courses"].courses);
 
     // Stores token
-    setToken(response.data["token"]);
+    // setToken(response.data["token"]);
     localStorage.setItem("token", response.data["token"]);
     // Resets all text fields
     resetFields();

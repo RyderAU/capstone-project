@@ -16,7 +16,7 @@ const SignUp = () => {
   const [emailInput, setEmail] = context.email;
   const [passwordInput, setPassword] = context.password;
   const [passwordConfirmInput, setPasswordConfirm] = context.passwordConfirm;
-  const [, setToken] = context.token;
+  // const [, setToken] = context.token;
 
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("Erorr: Input invalid");
@@ -45,7 +45,8 @@ const SignUp = () => {
     console.log('SignUp Success');
     console.log(response);
     // Sets the token to be used for linking
-    setToken(response.data["token"]);
+    // setToken(response.data["token"]);
+    localStorage.setItem("token", response.data["token"]);
     resetFields();
     
     // Move to next page

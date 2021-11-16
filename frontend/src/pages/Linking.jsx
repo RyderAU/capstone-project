@@ -22,7 +22,9 @@ const Linking = () => {
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [token, ] = context.token;
+  // const [token, ] = context.token;
+  const token = localStorage.getItem("token");
+  
 
   // API request
   const handleLinking = () => {

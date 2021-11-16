@@ -8,7 +8,8 @@ import SearchComponent from './SearchComponent';
 const Search = ( {courseid} ) => {
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
-  const [token, ] = context.token;
+  // const [token, ] = context.token;
+  const token = localStorage.getItem("token");
   const [query, setQuery] = useState("");
   const [queryList, setQueryList] = useState([]);
 
