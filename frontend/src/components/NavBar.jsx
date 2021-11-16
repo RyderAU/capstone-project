@@ -19,11 +19,13 @@ const NavBar = () => {
   const handleHome = (res) => {
     axios
       .get(`${url}/dashboard/profile?token=${token}`)
-      .then((res) => console.log(res))
+      .then((res) => {
+        history.push("/");
+        history.push(`dashboard/${res.data.courses.split(', ')[0]}/chat`);
+      })
       .catch((err) => console.log(err));
 
-    history.push("/");
-    history.push(`dashboard/${res.data.courses.split(', ')[0]}/chat`);
+    
   };
 
   // Send request to backend, if request successful move to Landing page
@@ -67,7 +69,7 @@ const NavBar = () => {
           src={home}
           alt=""
           className="home-button"
-          onClick={() => () => handleHome()}
+          onClick={() => handleHome()}
         />
         <div className="logout-button" onClick={() => handleLogout()}>Log Out</div>
       </div>
