@@ -19,7 +19,7 @@ const NavBar = () => {
   const handleHome = (res) => {
     axios
       .get(`${url}/dashboard/profile?token=${token}`)
-      .then((res) => handleHomeSuccess(res))
+      .then((res) => console.log(res))
       .catch((err) => console.log(err));
 
     history.push("/");
@@ -67,7 +67,7 @@ const NavBar = () => {
           src={home}
           alt=""
           className="home-button"
-          onClick={() => {() => handleHome()}}
+          onClick={() => () => handleHome()}
         />
         <div className="logout-button" onClick={() => handleLogout()}>Log Out</div>
       </div>
