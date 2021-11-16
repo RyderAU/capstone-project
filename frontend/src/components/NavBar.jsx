@@ -64,26 +64,31 @@ const NavBar = () => {
         />
         <div className="logout-button" onClick={() => handleLogout()}>Log Out</div>
       </div>
-      <div className="nav-item item-right">
+      <div className="nav-item">
         <Search />
-        <img
-          src={timetable}
-          alt=""
-          className="timetable-button"
-          onClick={() => {
-            history.push("/");
-            history.push("dashboard/timetable");
-          }}
-        />
-        <img
-          src={user}
-          alt=""
-          className="profile-button"
-          onClick={() => {
-            history.push("/");
-            history.push("dashboard/profile");
-          }}
-        />
+        <div className="icon-frame">
+          <img
+            src={timetable}
+            alt=""
+            className="timetable-button"
+            onClick={() => {
+              history.push("/");
+              history.push("dashboard/timetable");
+            }}
+          />
+        </div>
+        
+        <div className="icon-frame">
+          <img
+            src={user}
+            alt=""
+            className="profile-button"
+            onClick={() => {
+              history.push("/");
+              history.push("dashboard/profile");
+            }}
+          />
+        </div>
       </div>
     </div>
   );
