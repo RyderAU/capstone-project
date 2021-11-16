@@ -3,6 +3,8 @@ import axios from "axios";
 import { StoreContext } from "../Store";
 import { useHistory } from "react-router-dom";
 import home from "../images/homeicon.png";
+import timetable from "../images/schedule.png";
+import user from "../images/default-user.png";
 import "./NavBar.css";
 import Search from "./Search";
 
@@ -48,37 +50,39 @@ const NavBar = () => {
 
   return (
     <div className="nav-container">
-      <img
-        src={home}
-        alt=""
-        style={{ margin: "5px" }}
-        onClick={() => {
-          history.push("/");
-          history.push(`dashboard/${courses[0]}/chat`);
-        }}
-      />
-      <ul>
-        <button onClick={() => handleLogout()}>Log Out</button>
-      </ul>
-
-      <Search />
-
-      <button
-        onClick={() => {
-          history.push("/");
-          history.push("dashboard/timetable");
-        }}
-      >
-        timetable
-      </button>
-      <button
-        onClick={() => {
-          history.push("/");
-          history.push("dashboard/profile");
-        }}
-      >
-        profile
-      </button>
+      <div className="nav-item">
+        <img
+          src={home}
+          alt=""
+          className="home-button"
+          onClick={() => {
+            history.push("/");
+            history.push(`dashboard/${courses[0]}/chat`);
+          }}
+        />
+        <div className="logout-button" onClick={() => handleLogout()}>Log Out</div>
+      </div>
+      <div className="nav-item item-right">
+        <Search />
+        <img
+          src={timetable}
+          alt=""
+          className="timetable-button"
+          onClick={() => {
+            history.push("/");
+            history.push("dashboard/timetable");
+          }}
+        />
+        <img
+          src={user}
+          alt=""
+          className="profile-button"
+          onClick={() => {
+            history.push("/");
+            history.push("dashboard/profile");
+          }}
+        />
+      </div>
     </div>
   );
 };
