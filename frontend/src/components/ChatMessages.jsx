@@ -19,11 +19,11 @@ const ChatMessages = ( {courseid} ) => {
   // console.log(courseid.courseid["courseid"]);
   // Send request to backend to retrieve all messages
   const getMessages = (courseid) => {
-    console.log("Loading messages...");
+    // console.log("Loading messages...");
 
     const token = localStorage.getItem("token");
     // console.log("HHHHHHHHHHHHH:" + courseid);
-    console.log(courseid);
+    // console.log(courseid);
     axios.get(`${url}/message/listall?token=${token}&course_name=${courseid}`)
       .then(r => {
         handleSuccess(r);
@@ -35,8 +35,8 @@ const ChatMessages = ( {courseid} ) => {
 
   // Case 1: API returns success
   const handleSuccess = (response) => {
-    console.log('Messages successfully loaded');
-    console.log(response.data["course_messages"]);
+    // console.log('Messages successfully loaded');
+    // console.log(response.data["course_messages"]);
     setMessages(response.data["course_messages"]);
 
     let messages_list = [];
@@ -52,7 +52,7 @@ const ChatMessages = ( {courseid} ) => {
   
   // Case 2: API returns error
   const handleError = (error) => {
-    console.log('Message Error');
+    // console.log('Message Error');
     console.log(error);
   };
 
@@ -71,11 +71,11 @@ const ChatMessages = ( {courseid} ) => {
 
   React.useEffect(() => {
     getMessages(courseid);
-    console.log("RUN MESSAGE");
+    // console.log("RUN MESSAGE");
   }, [seconds]);
 
   React.useEffect(() => {
-    console.log("RUN MESSAGE FAST");
+    // console.log("RUN MESSAGE FAST");
     getMessages(courseid);
   }, []);
 

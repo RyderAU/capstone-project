@@ -16,10 +16,10 @@ const Members = ( {courseid} ) => {
 
   // Send request to backend to retrieve all members
   const getMembers = (courseid) => {
-    console.log("Loading members...");
+    // console.log("Loading members...");
 
     // const tokenLocal = localStorage.getItem("token");
-    console.log(courseid);
+    // console.log(courseid);
     const token = localStorage.getItem("token");
     axios.get(`${url}/channel/members?token=${token}&course_name=${courseid}`)
       .then(r => {
@@ -32,7 +32,7 @@ const Members = ( {courseid} ) => {
 
   // Case 1: API returns success
   const handleSuccess = (response) => {
-    console.log('Members successfully loaded');
+    // console.log('Members successfully loaded');
     // console.log(response.data["member_details"]);
     setMembers(response.data["member_details"]);
 
@@ -50,8 +50,8 @@ const Members = ( {courseid} ) => {
   
   // Case 2: API returns error
   const handleError = (error) => {
-    console.log('Message Error');
-    console.log(error);
+    // console.log('Message Error');
+    // console.log(error);
   };
 
   // let interval = 10000;
@@ -81,7 +81,7 @@ const Members = ( {courseid} ) => {
 
   React.useEffect(() => {
     getMembers(courseid);
-    console.log("RUN MEMBERS");
+    // console.log("RUN MEMBERS");
   }, [seconds]);
 
   // React.useEffect(() => {
