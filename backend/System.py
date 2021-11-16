@@ -282,7 +282,7 @@ class Systems:
         if result[0][8] is None:
             avatar = None
         else:
-            avatar = bytes(result[0][8].decode("utf-8"))
+            avatar = bytes(result[0][8]).decode("utf-8")
         courses = courses.replace(",", ", ")
        
         return {"username": username, "real_name": real_name, \
@@ -415,7 +415,7 @@ class Systems:
                 new['weighting'] = str(result[x][3])
                 new['hurdle'] = result[x][4]
                 new['hurdle_mark'] = result[x][5]
-                task_relevant_info = read_task_data('task_name', task_name)
+                task_relevant_info = read_task_data('task', task_name)
                 task_id = task_relevant_info[0][0]
                 mark_result = read_task_mark_data('student_id', zid, 'course_id', course_id, 'task_id', task_id)
                 # If the student hasn't saved their mark for this assessment
@@ -428,11 +428,6 @@ class Systems:
     
     def updatemarks(self, email, course_name, task, mark):
         # validate user input
-        try:
-            float(mark)
-        except ValueError:
-            raise InputError("Mark should be integer or decimal")
-
         result = read_students_data('email', email)
         zid = result[0][1]
         course_id = get_course_id_from_course_name(course_name)
