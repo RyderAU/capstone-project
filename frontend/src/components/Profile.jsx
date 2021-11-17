@@ -5,10 +5,13 @@ import axios from "axios";
 import { StoreContext } from "../Store";
 import { useState } from "react";
 
+// Update profile feature, the user can change their display name, picture, 
+// bio and timetable publicity setting.
+
 const Profile = () => {
   const context = React.useContext(StoreContext);
   const [url] = context.url;
-  // const [token] = context.token;
+
   const token = localStorage.getItem("token");
   const [details, setDetails] = useState({});
 
@@ -78,7 +81,6 @@ const Profile = () => {
       alert("You can only upload jpeg/png/jpg.");
     } else {
       const base64 = await convertBase64(file);
-      // console.log("Following is base64: ", base64);
       // for backend ppl, store this base64 variable to the db as a string.
       setProfilePic(base64);
     }

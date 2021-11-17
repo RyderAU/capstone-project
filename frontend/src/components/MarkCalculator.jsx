@@ -12,16 +12,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
- 
-// Icons
+
 import CheckIcon from '@mui/icons-material/Check';
  
 // Dynamically creating the table based on the JSON data we receive from the backend.
+
 const MarkCalculator = () => {
  const { courseid } = useParams();
  const context = React.useContext(StoreContext);
  const [url] = context.url;
-//  const [token] = context.token;
+
  const token = localStorage.getItem("token");
  const [marktable, setMarktable] = useState([]);
  
@@ -79,7 +79,7 @@ const MarkCalculator = () => {
     marks: mark.mark,
   })
     .then(r => {
-    //  console.log(r)
+
       alert("Your mark has been updated.")
       //  update the frontend too
       axios

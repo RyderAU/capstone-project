@@ -1,5 +1,4 @@
 -- Database of ourUNSW app
--- Table of data about Students
 
 create table Students (
    email           varchar(100) NOT NULL,
