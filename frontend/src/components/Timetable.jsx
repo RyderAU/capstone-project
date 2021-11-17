@@ -16,7 +16,7 @@ const Timetable = () => {
   const [timetables, setTimetables] = React.useState([]);
 
   React.useEffect(() => {
-    // Retrieve scraped timetable
+    // Retrieve timetable from user profile
     axios.get(`${url}/dashboard/timetable?token=${token}`)
     .then(res => handleSuccess(res))
     .catch(err => console.log(err));
