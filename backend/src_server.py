@@ -71,8 +71,6 @@ def auth_register_route():
 
     email_and_token = system.register(displayName, password, passwordConfirm, email)
 
-    #email_and_token = {'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uX2lkIjoiNTcwMmM0ODUtYTk4MS1mMDVjLTUzYWItOGM1YjNkZGM1NWEzIiwiZW1haWwiOiJoaW5hdGFAbWFpbC5jb20ifQ.OlQSohVVHrPfdDLFTO3B6umSnEf9AjDO119S2QLVqEA'}
-
     return dumps(email_and_token)
 
 #------------------------------------------------------------------------------#
@@ -130,7 +128,7 @@ def user_timetable_flask():
     token = request.args.get("token")
     
     try:
-        # Grab data from the database
+        # Grab timetable data from the database
         email = system.validate_token(token)
         timetables = system.timetables(email)
         
@@ -145,7 +143,7 @@ def user_profile_flask():
 
     token = request.args.get('token')
     try:
-        # Grab data from the database
+        # Grab profile data from the database
         email = system.validate_token(token)
         info = system.profile(email)
         
@@ -157,7 +155,7 @@ def user_profile_flask():
 
 @APP.route("/dashboard/profile", methods=['POST'])
 def user_profile_setbio_flask():
-    '''returns an empty dictionary'''
+    '''update user's own profile'''
 
     token = request.get_json()['token']
     bio = request.get_json()['bio']
@@ -165,6 +163,7 @@ def user_profile_setbio_flask():
     timetable_publicity = request.get_json()['timetable_publicity']
     avatar = request.get_json()['avatar']
 
+    # Update bio
     if bio is not None:
         if len(bio) not in range(1, 501):
             raise InputError('Bio should be between 1 and 500 characters inclusive')
@@ -173,10 +172,10 @@ def user_profile_setbio_flask():
             # Insert into the database
             email = system.validate_token(token)
             update_user_data('bio', 'email', bio, email)
-            # success = True
         except Exception as e:
             # Error in selenium or error in inserting into database
             raise e
+    # Update username
     if name is not None:
         if len(name) not in range(1, 21):
             raise InputError('Username should be between 1 and 20 characters inclusive')
@@ -188,6 +187,7 @@ def user_profile_setbio_flask():
         except Exception as e:
             # Error in selenium or error in inserting into database
             raise e
+    # Update timetable publicity, note that default is private
     if timetable_publicity is not None:
         try:
             # Insert into the database
@@ -199,6 +199,7 @@ def user_profile_setbio_flask():
         except Exception as e:
             # Error in selenium or error in inserting into database
             raise e
+    # Update avatar
     if avatar is not None:
         try:
             # Insert into the database

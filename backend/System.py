@@ -28,24 +28,6 @@ import jwt
 
 
 class Systems:
-    # def __init__(self):
-
-    # '''
-    # Login Services - Given a registered users' email and password and returns a new `token` for that session.
-
-    # Arguments:
-    #     email (string) - a string that connects a user to a messaging network
-    #     password (string) - a string of characters that grants access to a permitted user
-
-    # Exceptions:
-    #     InputError  - occurs when email entered is not a valid email
-    #                 - email entered does not belong to a user
-    #                 - password is not correct
-
-    # Return Value:
-    #     - returns login token
-    #     - returns email of the user
-    # '''
 
     # helper functions for register
     @classmethod
@@ -132,6 +114,22 @@ class Systems:
 
     # Logs an user in
     def auth_login(self, email, password):
+        # Login Services - Given a registered users' email and password and returns a new `token` for that session.
+
+        # Arguments:
+        #     email (string) - a string that connects a user to a messaging network
+        #     password (string) - a string of characters that grants access to a permitted user
+
+        # Exceptions:
+        #     InputError  - occurs when email entered is not a valid email
+        #                 - email entered does not belong to a user
+        #                 - password is not correct
+
+        # Return Value:
+        #     - returns login token
+        #     - returns email of the user
+        # '''
+
         # check if email is in the correct format
         if not re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", email):
             raise InputError('Email not in correct format')
@@ -173,7 +171,7 @@ class Systems:
         # Creates a new account for a user and returns a token.
 
         # Arguments:
-        #     username, password, email - strings
+        #     username, password, email, confirmation of password - strings
 
         # Exceptions:
         #     InputError - Occurs when:
@@ -306,7 +304,6 @@ class Systems:
         # Return Value:
         #     - Don't return
         # '''
-        print()
         if len(message) not in range(1, 501):
             raise InputError(
                 'Message has to be 1 to 500 characters inclusive in length')
@@ -372,7 +369,7 @@ class Systems:
         #   None
         
         # Return Value:
-        #     - A list of members. E.g. 
+        #     - A list of members showing their usernames
         # 
        
         email = self.validate_token(token)
@@ -439,20 +436,3 @@ class Systems:
                 insert_mark(mark, task_id, zid, course_id)
             else:
                 update_task_data('mark', mark, 'task_id', task_id, 'student_id', zid, 'course_id', course_id)
-
-# var =  Systems()
-
-# For future unit test
-# print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com'))  # First user registeration - (PASS)
-# print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email@mail.com')) # Duplicate check (User already exists) - (PASS)
-# print(var.register('new_pika', '123123aA!2', '123123aA!3', 'email2@mail.com')) # wrong password re-enter - (PASS)
-# print(var.register('new_pika', '123123aA!2', '123123aA!2', 'email2@mail.com2')) # email wrong format check - (PASS)
-# print(var.register('new_pika', '123123a!2', '123123a!2', 'email2@mail.com')) # password wrong format check - (PASS)
-# print(var.register('pikachu', '123123aA!2', '123123aA!2', 'email3@mail.com')) # same username but different email check, registration should be successful - (PASS)
-
-
-# register(username, password, reentered_password, email)
-
-# currently register func works, 
-
-# need to test login/logout and all the src_server.py
