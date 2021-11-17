@@ -5,6 +5,7 @@ import Chat from "./Chat";
 import CourseOutline from "./CourseOutline";
 import MarkCalculator from "./MarkCalculator";
 
+// Three tabs on the left hand panel; chat, course outline, mark calculator
 const Feature = ({ selectedCourse }) => {
   const { courseid, feature } = useParams();
   console.log(`this is the ${courseid} ${feature} feature`);

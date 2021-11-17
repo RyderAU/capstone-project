@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-// // import components
-import { StoreContext } from '../Store';
+import React from 'react';
 import { ContainerMain } from "../components/ChatCSS";
 import ChatMessages from "./ChatMessages";
 import ChatMembers from './ChatMembers';
 
-
+ // Chat functionality has the chat and the messages to the right
  const Chat = ( {courseid} ) => {
 
   return (

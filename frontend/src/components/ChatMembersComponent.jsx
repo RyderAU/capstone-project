@@ -1,11 +1,8 @@
 import React from 'react';
-// // import components
 import { MemberList, Member, MemberName } from "../components/ChatCSS";
 
 
  const ChatMembersComponent = (member) => {
-//   let msg = message["message"];
-  // console.log(member["member"]["name"]);
 
   return (
       <MemberList>

@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-// // import components
-import { StoreContext } from '../Store';
 import { Container } from "../components/CourseOutlineCSS";
-// import SinglePage from "./components/pdf/SinglePage";
 import COMP2511 from "../Outlines/COMP2511.pdf"
 import COMP3121 from "../Outlines/COMP3121.pdf"
 import COMP3311 from "../Outlines/COMP3311.pdf"
@@ -16,7 +12,8 @@ import COMP9444 from "../Outlines/COMP9444.pdf"
 import FINS2624 from "../Outlines/FINS2624.pdf"
 import TABL3757 from "../Outlines/TABL3757.pdf"
 
-
+// Pre-loaded pdfs
+// Our tutor Joseph allowed us to do this
 const CourseOutline = ( {courseid} ) => {
   console.log(courseid)
   let file;
@@ -55,16 +52,11 @@ const CourseOutline = ( {courseid} ) => {
       file = TABL3757
       break;
     default:
-      // code block
   }
-
 
   return (
     <Container>
-      {/* <iframe src={COMP3900} className="viewer"/> */}
       <iframe src={file} className="viewer" frameborder="0"/>
-      {/* <h4>Single Page</h4>
-      <SinglePage pdf={COMP3900} /> */}
     </Container>
   );
 };

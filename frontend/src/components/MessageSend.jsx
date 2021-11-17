@@ -3,9 +3,8 @@ import axios from 'axios';
 // // import components
 import { StoreContext } from '../Store';
 import { Input, MessageSendWrapper, Icon } from "../components/ChatCSS";
-import ChatMessagesComponent from './ChatMessagesComponent';
 
-
+ // sending a message to the chat
  const MessageSend = ( {courseid} ) => {
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
@@ -15,8 +14,6 @@ import ChatMessagesComponent from './ChatMessagesComponent';
 
   const handleMsgSend = () => {
     console.log("Message sender to send: " + message);
-
-    console.log(courseid);
     axios.post(`${url}/message/send`, {
       token: token,
       course_name: courseid,
@@ -33,13 +30,6 @@ import ChatMessagesComponent from './ChatMessagesComponent';
   // Case 1: API returns success
   const handleSuccess = (response) => {
     console.log('Message sent success');
-
-    // // Sending the message on the frontend
-    // messages.push(
-    //   <ChatMessagesComponent message={message} />
-    // )
-    // Don't need to manually put the frontend component in,
-    // Messages/listall is called very few seconds
     setMessage("");
   };
   
@@ -53,36 +43,12 @@ import ChatMessagesComponent from './ChatMessagesComponent';
     handleMsgSend();
   };
 
-  // Can't get enter to work
-  // React.useEffect(() => {
-  //   const listener = event => {
-  //     if (event.code === "Enter" || event.code === "NumpadEnter") {
-  //       console.log("Enter key was pressed. ");
-  //       event.preventDefault();
-  //       console.log(message)
-  //       // executeMsgSendEnter();
-  //       // handleMsgSend();
-  //       // {() => handleMsgSend()}
-  //     }
-  //   };
-  //   document.addEventListener("keydown", listener);
-  //   return () => {
-  //     document.removeEventListener("keydown", listener);
-  //   };
-  // }, []);
-
 
   return (
       <MessageSendWrapper>
-        {/* <MessageSendContainer>
-            
-        </MessageSendContainer> */}
-        {/* <div> */}
         <Input value={message} onChange={(e) => setMessage(e.target.value)}
           type="text" placeholder="Type a message..." id="message-input" required />
         <Icon onClick={() => handleMsgSend()} />
-        {/* </div> */}
-
       </MessageSendWrapper>
   );
 }

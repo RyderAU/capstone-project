@@ -20,33 +20,15 @@ import { SearchComponentMain, SearchComponentText,
   const [url, ] = context.url;
 
   const handleProfile = () => {
-    // event.stopPropagation();
     console.log("Sending to target profile page")
     console.log(members);
 
     const box = document.getElementById("search-container");
-    // console.log(box);
     box.style.display = "none";
 
     history.push(`/dashboard/${members.email}`);
     window.location.reload(false);
-    // axios.get(`${url}/dashboard/${members.display_name}`)
-    // .then(r => {
-    //   handleSuccess(r);
-    // })
-    // .catch(err => {
-    //   handleError(err);
-    // });
   };
-
-  // const handleSuccess = (res) => {
-  //   console.log(res);
-  // };
-
-  // const handleError = (error) => {
-  //   console.log(error);
-  // };
-
 
   return (
     <SearchComponentMain

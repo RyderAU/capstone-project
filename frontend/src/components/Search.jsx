@@ -16,9 +16,7 @@ const Search = ( {courseid} ) => {
   // Send request to backend to retrieve all members
   const getMembers = (courseid) => {
     console.log("Loading search result...");
-
     // const tokenLocal = localStorage.getItem("token");
-    // console.log(courseid);
     axios.get(`${url}/search?token=${token}&display_name=${query}`)
       .then(r => {
         handleSuccess(r);
@@ -42,7 +40,6 @@ const Search = ( {courseid} ) => {
     };
     for (let i=members.length; i > 0; i--) {
         const mem_component = members[i-1];
-        // console.log(mem_component.email);
         members_list.push(
           <SearchComponent
             key={i}
@@ -53,7 +50,6 @@ const Search = ( {courseid} ) => {
     }
     setQueryList(members_list);
   };
-  // };
   
   // Case 2: API returns error
   const handleError = (error) => {
@@ -68,22 +64,20 @@ const Search = ( {courseid} ) => {
 
   const handleInputClick = () => {
     console.log("Input clicked");
-
     const box = document.getElementById("search-container");
-    // console.log(box);
     box.style.display = "flex";
   };
 
   window.onclick = e => {
     console.log(e.target);  // to get the element
     console.log(e.target.tagName);  // to get the element tag name alone
+    // To make input box text become empty so search box disappears
     const input = document.getElementById("search-input");
     if (input != null) {
       input.value="";
       setQuery("");
     }
   }
-
 
     return (
         <InputContainer aria-label="input-container">
@@ -94,11 +88,6 @@ const Search = ( {courseid} ) => {
                 id="search-input"
                 onChange={(e) => setQuery(e.target.value)}
                 onClick ={() => handleInputClick()}/>
-            {/* <SearchComponent
-                aria-label="search-container"
-                className="search-container">
-                {queryList}
-            </SearchComponent> */}
             <SearchResultContainer
                 aria-label="search-container"
                 className="search-container"
