@@ -45,3 +45,23 @@ Suggested the group to open PR and have at least one person's code review approv
 Suggested the group to have naming convention when creating new branch (having 'name/branch_name') so that we can communicate better and to identify easier
 
 Week 6
+
+DB Migration and help other teammates setting their DB
+
+Week 7
+
+Backend and database implementation and wrote unit test
+
+Week 8
+
+Implemented frontend and backend profile image uploading feature
+Base64 byte conversion
+
+Week 9
+
+Implemented mark calculation feature, handled edge case and user fault tolerance (case where input is invalid)
+
+Week 10
+
+Demo practice and final check, fixing some minor bugs and commented/cleaned the code
+Worked on report
