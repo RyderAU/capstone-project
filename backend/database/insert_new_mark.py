@@ -45,7 +45,7 @@ def insert_mark(mark, task_id, student_id, course_id):
         if conn is not None:
             conn.close()
     
-
+# TESTING
 # if __name__ == '__main__':
 #     # Register one student (Dummy data)
 #     insert_mark(
