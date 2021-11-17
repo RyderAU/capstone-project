@@ -1,8 +1,6 @@
 ''' Read all data for assessments satisfying particular criteria '''
 import psycopg2
 
- 
-
 def read_task_data(column, value):
     # Grab data
     print("READ TASK DATAAAAAAAAA ", column, value)
