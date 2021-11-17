@@ -1,5 +1,6 @@
 -- Database of ourUNSW app
 
+-- Table for Students. Contains students related field and data.
 create table Students (
    email           varchar(100) NOT NULL,
    student_id      varchar(10),
@@ -25,7 +26,7 @@ create table Students (
    primary key (email)
 );
 
-
+-- Contains Message (chat) related info
 create table Messages (
 	message_id          integer,
 	message_content		varchar(500),
@@ -35,13 +36,14 @@ create table Messages (
 	primary key (message_id)
 );
 
-
+-- Contains courses info and associated details
 CREATE TABLE Courses (
     course_id integer,
     course_name varchar(255),
     primary key (course_id)
 );
 
+-- Pre-assigning course PK to the courses
 INSERT INTO courses(course_id, course_name)
 VALUES (1,  'COMP4920'),
        (2,  'COMP3900'),
@@ -52,6 +54,7 @@ VALUES (1,  'COMP4920'),
        (7,  'COMP2511'),
        (8,  'FINS2624');
 
+-- Task table and the associated information
 CREATE TABLE Task (
     task_id integer PRIMARY KEY,
     task varchar(100),
@@ -62,6 +65,7 @@ CREATE TABLE Task (
     course_id integer
 );
 
+-- Preloading the component mark (task) data
 INSERT INTO Task(task_id, task, deadline, weighting, hurdle, hurdle_mark, course_id)
 VALUES (1,'Seminar Participation', 'Weeks 1-5,7-10', 10, 0, -1, 1),
 	   (2,'Lecture Summaries', 'Week 3, 4, 7, 8' ,10, 0, -1, 1),
@@ -104,7 +108,7 @@ VALUES (1,'Seminar Participation', 'Weeks 1-5,7-10', 10, 0, -1, 1),
    (39,'Final Exam',  'Exam Period', 50, 0, -1, 8);
 
 
-
+-- Table for task mark
 CREATE TABLE Task_Mark(
     task_mark_id integer PRIMARY KEY,
     mark varchar(10),
