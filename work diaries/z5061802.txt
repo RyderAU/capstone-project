@@ -1,0 +1,85 @@
+Week 1-2
+Created meeting minutes template from which we copy from
+
+26/09/2021
+We spent 4 hours refining our user stories, additionally we completed our storyboard through the use of figma. It was a collaborative effort over those 4 hours. 
+
+
+29/09/2021
+Week3
+Screenshot
+Make sprints 2-3 week sprints
+
+First sprint needs some frontend
+
+Auth stuff, login and main dashboard
+
+Working dashboard for one of the features 
+
+We restructured our figma design. We had a discussion on how to structure the left hand panel and we all decided upon a new cleaner design which was proposed by Helena and Ryder. 
+We had a discussion about where to include the timetable tab. Shoan and I wanted it on the left hand panel initially, but Helena and Ryder made a convincing argument that it would be better to have the main interface have all the group chat related features, while the individual user features be grouped at the top, hence we placed the timetable icon next to the user settings icon. 
+
+We assigned user story points, went over the proposal. 
+READ MINUTES AND ADD TO HERE
+
+
+
+
+Sunday
+Went over proposal
+Did project objectives and novel functionalities and compared against timeweave, myUNSW websites like course outlines, handbook
+Created react app for frontend
+
+Week 4
+Wednesday
+DId stand up
+Accordining to the table, I implemented my required parts. 
+Trying to understand Haesun’s database system. 
+
+Friday
+Did frontend for login, signup, landing
+Planning to do API part as well
+Did frontend for Linking page partially
+Spent a while fixing bugs with CSS involving images
+Saturday:
+Spent a long time fixing bugs with regards to using react context
+Working on using axios to send requests
+Linking frontend to backend, Linking page sends a request for the selenium function to run. The backend runs the selenium function and returns the courses. 
+
+Week 5
+Sunday
+I realise for projects going on
+We need an interface so frontend and backend can work independently
+Backend needs stubs functions at the least giving back dummy data so frontend can have something to work off
+
+Spent ages adding new fonts
+Spent a while fixing all routes, logout, login, signup, linking
+Frontend is now complete, including all error handling
+
+
+Tuesday
+Debugging
+Conencting the frontend to the back
+Demo working
+
+Wednesday:
+Demo
+Issue with change from day before being removed fixed
+Made minutes tracking Joseph’s feedback
+
+Week 6
+- Messages
+- Figuring out how to split messages from user and from other users
+- CSS being very hard to deal with 
+
+Week 7
+- continuning to deal with messages
+- updating the interface
+- creating stub server.py so frontend can work independently
+
+Week 8 and 9
+- Starting work on search
+- deal with css bugs where onfire events don't occur when display: hidden
+
+Week 10
+- finishing search on frontend and linking with Ryder's frontend functionality which shows other user's profiles

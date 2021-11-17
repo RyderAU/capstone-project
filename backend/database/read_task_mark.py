@@ -1,8 +1,6 @@
 ''' Read all data for assessments satisfying particular criteria '''
 import psycopg2
 
- 
-
 def read_task_mark_data(column, value, column2, value2, column3, value3):
     # Grab data
     select_query = "SELECT * FROM task_mark WHERE " + column + "='" + str(value) + "' AND " \
@@ -29,4 +27,5 @@ def read_task_mark_data(column, value, column2, value2, column3, value3):
         if conn is not None:
             conn.close()
 
-print(read_task_mark_data('course_id', '1', 'task_id', '1', 'student_id', '1'))
+# TESTING
+# print(read_task_mark_data('course_id', '1', 'task_id', '1', 'student_id', '1'))

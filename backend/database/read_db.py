@@ -1,8 +1,6 @@
 ''' Read stored database '''
 import psycopg2
 
- 
-
 def read_db(field):
     # Grab data
     select_query = "select * from students"
@@ -31,8 +29,6 @@ def read_db(field):
     finally:
         if conn is not None:
             conn.close()
-
-    # 3 -> display_name
 
 
     # get certain element only

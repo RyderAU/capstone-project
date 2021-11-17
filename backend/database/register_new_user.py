@@ -2,9 +2,6 @@
 ''' Test inserting new student(aka user) into table with python '''
 import psycopg2
 
- 
-
-
 def register_student(student_id, name, email, display_name, hashed_pwd, login_token, degree, course):
 
     sql = """INSERT INTO Students(

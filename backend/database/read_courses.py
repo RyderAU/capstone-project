@@ -27,5 +27,5 @@ def read_courses_data(column, value):
     finally:
         if conn is not None:
             conn.close()
-
+# TESTING
 # print(read_courses_data('course_name', 'COMP3900'))

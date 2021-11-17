@@ -45,7 +45,8 @@ def validate_entity_exists(column1, column2, value):
         if conn is not None:
             conn.close()
 
-print(validate_entity_exists('display_name', 'email', 'haesun@mail.com'))
+# TESTING
+# print(validate_entity_exists('display_name', 'email', 'haesun@mail.com'))
 
 """
 USAGE EXAMPLE
