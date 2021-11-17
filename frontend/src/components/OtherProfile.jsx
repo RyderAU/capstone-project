@@ -8,6 +8,8 @@ import { StoreContext } from "../Store";
 import { useState } from "react";
 import { useParams } from "react-router";
 
+// Profile page which appears when searching for another user
+
 const OtherProfile = () => {
   const context = React.useContext(StoreContext);
   const [url] = context.url;
@@ -15,6 +17,7 @@ const OtherProfile = () => {
   const [timetables, setTimetables] = React.useState([]);
   const { email } = useParams();
   const [profilePic, setProfilePic] = useState("");
+
   // get selected user's details
   React.useEffect(() => {
     axios

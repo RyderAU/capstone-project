@@ -8,15 +8,17 @@ import user from "../images/default-user.png";
 import "./NavBar.css";
 import Search from "./Search";
 
+// Main navbar, displaying home butotn, logout button, search bar, timetable and profile button
+
 const NavBar = () => {
   const history = useHistory();
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
-  // const [token, setToken] = context.token;
   const token = localStorage.getItem("token");
 
 
-  const handleHome = (res) => {
+  const handleHome = () => {
+    // Retrieve user's current courses
     axios
       .get(`${url}/dashboard/profile?token=${token}`)
       .then((res) => {
@@ -50,8 +52,6 @@ const NavBar = () => {
     console.log(response);
 
     // Resets token
-    
-    // setToken("");
     localStorage.setItem("token", "");
     history.push("/");
   };

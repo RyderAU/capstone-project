@@ -2,6 +2,8 @@ import "./SideBar.css";
 import { NavLink, useRouteMatch, BrowserRouter, Route } from "react-router-dom";
 import Feature from "./Feature";
 
+// Left hand side tabs displaying the three features: chat, course outline and mark calculator
+
 function SideBar({ selectedCourse }) {
   const { url, path } = useRouteMatch();
   return (

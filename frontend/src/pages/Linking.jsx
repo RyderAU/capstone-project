@@ -1,14 +1,12 @@
 import { useHistory } from 'react-router-dom'
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React, { useState } from 'react';
 import axios from 'axios';
 import { StoreContext } from '../Store';
 import Spinner from 'react-spinner-material';
+
 // import components
 import { Container, Background, SignInBox, LogoUNSW, SignInTitle, Input,
   Button, SpinnerContainer, LoadingWarning } from "../components/LinkingCSS";
-
-
 
 const Linking = () => {
   const history = useHistory();
@@ -16,13 +14,11 @@ const Linking = () => {
   const [emailInput, setEmailInput] = context.emailUNSW;
   const [passwordInput, setPasswordInput] = context.passwordUNSW;
   const [url, ] = context.url;
-  // const [, setCourses] = context.courses;
 
   const [signInText, setSignInText] = React.useState("Sign in");
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  // const [token, ] = context.token;
   const token = localStorage.getItem("token");
   
 
@@ -54,13 +50,9 @@ const Linking = () => {
     setSignInText("Sign in");
     console.log(response);
     resetFields();
-    // const courses = response.data["courses"];
-    // console.log(courses);
-    // setCourses(courses);
   
     // Move to next page
     history.push(`/login`);
-    // history.push(`/dashboard/${courses[0]}/chat`);
   };
 
   // Case 2: API returns error
@@ -73,7 +65,6 @@ const Linking = () => {
 
     // Print error message
     console.log(error);
-    // setErrorMsg(error);
     setErrorMsg("Error: Incorrect details! Please try again!");
     setIsError(true);
   };
@@ -82,7 +73,6 @@ const Linking = () => {
     setEmailInput("");
     setPasswordInput("");
   };
-
 
   return (
         <Container> 

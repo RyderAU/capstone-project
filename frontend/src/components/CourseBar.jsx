@@ -1,18 +1,18 @@
 import "./CourseBar.css";
 import { BrowserRouter, NavLink, Route, useRouteMatch } from "react-router-dom";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
 import { StoreContext } from "../Store";
 import SideBar from "./SideBar";
+
+// Bar below navbar which displays user's current courses as tabs
 
 function CourseBar() {
 
   const context = React.useContext(StoreContext);
   const [newurl] = context.url;
   const token = localStorage.getItem("token");
-
-  
 
   const { url, path } = useRouteMatch();
 

@@ -5,16 +5,18 @@ import axios from 'axios';
 import { StoreContext } from '../Store';
 import { useState } from "react";
 
+// User's timetable
+
 const Timetable = () => {
 
   const context = React.useContext(StoreContext);
   const [url, ] = context.url;
-  // const [token, ] = context.token;
   const token = localStorage.getItem("token");
 
   const [timetables, setTimetables] = React.useState([]);
 
   React.useEffect(() => {
+    // Retrieve timetable from user profile
     axios.get(`${url}/dashboard/timetable?token=${token}`)
     .then(res => handleSuccess(res))
     .catch(err => console.log(err));

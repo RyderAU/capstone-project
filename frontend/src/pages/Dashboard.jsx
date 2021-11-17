@@ -9,6 +9,7 @@ function Dashboard() {
   return (
     <div>
       <NavBar />
+      {/* Routes for subpages within app */}
       <Switch>
         <Route exact path="/dashboard/timetable">
           <Timetable />

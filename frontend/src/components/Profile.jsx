@@ -76,12 +76,11 @@ const Profile = () => {
     console.log(e);
     const file = e.target.files[0];
     const file_type = String(file["type"]);
-    // console.log(file_type)
     if (!file_type.includes("image")) {
       alert("You can only upload jpeg/png/jpg.");
     } else {
       const base64 = await convertBase64(file);
-      // for backend ppl, store this base64 variable to the db as a string.
+      // Store this base64 variable to the db as a string.
       setProfilePic(base64);
     }
   };
