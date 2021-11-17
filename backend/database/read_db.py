@@ -30,7 +30,7 @@ def read_db(field):
         if conn is not None:
             conn.close()
 
-    # TESTING
+
     # get certain element only
     for i in registered_user_records:
         print(i[field]) # choose which field you wanna get
