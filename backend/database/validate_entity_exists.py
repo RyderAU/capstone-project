@@ -1,7 +1,5 @@
 import psycopg2
 
- 
-
 '''
 Return the first element when the value meets the given column under the specified field.
 Can be used for overlap check and get hashed password for the corresponding email account.
@@ -15,14 +13,11 @@ def validate_entity_exists(column1, column2, value):
 
         # connect to the PostgreSQL database
         
-        # old db
+        # local db
         conn = psycopg2.connect(database='ourunsw', 
         user='postgres', password='secret', 
         host='localhost')
 
-        # conn = psycopg2.connect(database='ourUNSW', 
-        # user='postgres', password='sudo-sandeep-reply', 
-        # host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 
@@ -33,12 +28,11 @@ def validate_entity_exists(column1, column2, value):
 
         '''
         output format is [('...', '...',)]. So to only get the first outcome, do [0][0].
-        I reckon it's fair to assume that returning one element atmost is enough 
+        We assume that returning one element atmost is enough 
         since the purpose of this function is to check data existency/returning hashed password, 
         which we only care about boolean value when it comes to existency check,
         and always there's one hashed password when it comes to auth login.
         '''
-        # print('output:\n', output[0][0])
         if len(output) == 0:
             return None
         else:
@@ -54,7 +48,8 @@ def validate_entity_exists(column1, column2, value):
 print(validate_entity_exists('display_name', 'email', 'haesun@mail.com'))
 
 """
-e.g. 
+USAGE EXAMPLE
+
 SELECT hashed_pwd FROM students
 WHERE email='pfizer@gmail.com';
 """

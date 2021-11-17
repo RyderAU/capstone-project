@@ -10,15 +10,11 @@ def read_task_mark_data(column, value, column2, value2, column3, value3):
     conn = None
     mark_info = []
     try:
-        # old db
+        # local db
         conn = psycopg2.connect(database='ourunsw', 
         user='postgres', password='secret', 
         host='localhost')
         
-        # conn = psycopg2.connect(database='ourUNSW', 
-        # user='postgres', password='sudo-sandeep-reply', 
-        # host='35.188.192.239', port='5432')
-        # create a new cursor
         cur = conn.cursor()
 
         cur.execute(select_query)

@@ -7,22 +7,21 @@ def read_courses_data(column, value):
     conn = None
     course_info = []
     try:
-        # old db
+        # local database
         conn = psycopg2.connect(database='ourunsw', 
         user='postgres', password='secret', 
         host='localhost')
         
-        # conn = psycopg2.connect(database='ourUNSW', 
-        #     user='postgres', password='sudo-sandeep-reply', 
-        #     host='35.188.192.239', port='5432')
-        # create a new cursor
         cur = conn.cursor()
 
         cur.execute(select_query)
         course_info = cur.fetchall()
-        return(list(course_info))
+
         # close communication with the database
         cur.close()
+
+        return(list(course_info))
+        
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:

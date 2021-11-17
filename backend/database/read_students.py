@@ -12,22 +12,19 @@ def read_students_data(column1, value):
     user_info = []
     try:
 
-        # old db
+       # local database
         conn = psycopg2.connect(database='ourunsw', 
         user='postgres', password='secret', 
         host='localhost')
         
-        # conn = psycopg2.connect(database='ourUNSW', 
-        # user='postgres', password='sudo-sandeep-reply', 
-        # host='35.188.192.239', port='5432')
-        # create a new cursor
         cur = conn.cursor()
 
         cur.execute(select_query)
         user_info = cur.fetchall()
-        return(list(user_info))
         # close communication with the database
         cur.close()
+        return(list(user_info))
+        
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:

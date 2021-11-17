@@ -13,14 +13,11 @@ def read_db(field):
         # read database configuration
         # connect to the PostgreSQL database
         
-        # old db
+        # local database
         conn = psycopg2.connect(database='ourunsw', 
         user='postgres', password='secret', 
         host='localhost')
 
-        # conn = psycopg2.connect(database='ourUNSW', 
-        # user='postgres', password='sudo-sandeep-reply', 
-        # host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
 

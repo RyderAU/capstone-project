@@ -15,14 +15,11 @@ def register_student(student_id, name, email, display_name, hashed_pwd, login_to
         # read database configuration
         # connect to the PostgreSQL database
 
-        # old db
+        # local db
         conn = psycopg2.connect(database='ourunsw', 
         user='postgres', password='secret', 
         host='localhost')
         
-        # conn = psycopg2.connect(database='ourUNSW', 
-        # user='postgres', password='sudo-sandeep-reply', 
-        # host='35.188.192.239', port='5432')
         # create a new cursor
         cur = conn.cursor()
         # execute the INSERT statement
@@ -38,5 +35,5 @@ def register_student(student_id, name, email, display_name, hashed_pwd, login_to
             conn.close()
 
 if __name__ == '__main__':
-    # Register one student (Dummy data)
-    register_student('z5253655', 'HAHA', 'ha@m.com', 'haha', '7878', '88', 'pikapika', 'comp sci')
+    # Register one student (Dummy data) for testing
+    # register_student('z5253655', 'HAHA', 'ha@m.com', 'haha', '7878', '88', 'pikapika', 'comp sci')

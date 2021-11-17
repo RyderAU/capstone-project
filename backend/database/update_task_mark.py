@@ -9,20 +9,16 @@ def update_task_data(column1, value1, column2, value2, column3, value3, column4,
     conn = None
     try:
         # read database configuration
-        # old db
+        # local db
         conn = psycopg2.connect(database='ourunsw', 
         user='postgres', password='secret', 
         host='localhost')
         
-        # conn = psycopg2.connect(database='ourUNSW', 
-        # user='postgres', password='sudo-sandeep-reply', 
-        # host='35.188.192.239', port='5432')
-        # create a new cursor
         cur = conn.cursor()
         cur.execute(query, (column1, value1, column2, value2, column3, value3))
         # commit the changes to the database
         conn.commit()
-        # print('successfully updated')
+        
         # close communication with the database
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:

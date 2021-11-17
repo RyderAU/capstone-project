@@ -11,22 +11,20 @@ def read_task_data(column, value):
     conn = None
     task_info = []
     try:
-        # old db
+        # local db
         conn = psycopg2.connect(database='ourunsw', 
         user='postgres', password='secret', 
         host='localhost')
-        # conn = psycopg2.connect(database='ourUNSW', 
-        # user='postgres', password='sudo-sandeep-reply', 
-        # host='35.188.192.239', port='5432')
-        # create a new cursor
+        
         cur = conn.cursor()
 
         cur.execute(select_query)
         task_info = cur.fetchall()
+        # close communication with the database
         cur.close()
         print(list(task_info))
         return(list(task_info))
-        # close communication with the database
+        
         
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
