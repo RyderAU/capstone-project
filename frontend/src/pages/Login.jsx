@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { StoreContext } from '../Store';
 import { useHistory } from 'react-router-dom'
+
 // import components
 import { LoginForm, Title, Label, Input, Button,
   ButtonSecondary, ErrorWarning } from "../components/AuthCSS";
@@ -17,7 +18,6 @@ import { LoginForm, Title, Label, Input, Button,
   const [emailInput, setEmail] = context.email;
   const [passwordInput, setPassword] = context.password;
   const [courses, setCourses] = context.courses;
-  // const [, setToken] = context.token;
 
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("Erorr: Input invalid");
@@ -51,7 +51,6 @@ import { LoginForm, Title, Label, Input, Button,
     setCourses(response.data["courses"].courses);
 
     // Stores token
-    // setToken(response.data["token"]);
     localStorage.setItem("token", response.data["token"]);
     // Resets all text fields
     resetFields();
@@ -61,8 +60,6 @@ import { LoginForm, Title, Label, Input, Button,
     } else {
       history.push(`/dashboard/${response.data["courses"].courses[0]}/chat`);
     }
-
-    
   };
   
   // Case 2: API returns error
@@ -73,7 +70,6 @@ import { LoginForm, Title, Label, Input, Button,
     
     // Print error message
     console.log(error);
-    // setErrorMsg(error);
     setErrorMsg("Error: Incorrect details! Please try again!");
     setIsError(true);
   };
@@ -83,7 +79,6 @@ import { LoginForm, Title, Label, Input, Button,
     setPassword("");
   };
 
-
   // SignUp button redirections to /signup
   const handleSignUp = () => {
     console.log("Sign Up Button Clicked");
@@ -92,35 +87,34 @@ import { LoginForm, Title, Label, Input, Button,
 
   return (
       <div>
-     
-      <LoginForm>
-        <Title>LOGIN</Title>
-        <Label>Email</Label>
-        <Input value={emailInput} onChange={(e) => setEmail(e.target.value)}
-          type="email" placeholder="Enter email" id="login-email" required />
+        <LoginForm>
+          <Title>LOGIN</Title>
+          <Label>Email</Label>
+          <Input value={emailInput} onChange={(e) => setEmail(e.target.value)}
+            type="email" placeholder="Enter email" id="login-email" required />
 
-        <Label>Password</Label>
-        <Input value={passwordInput} onChange={(e) => setPassword(e.target.value)}
-          type="password" placeholder="Enter password" id="login-password" required />
+          <Label>Password</Label>
+          <Input value={passwordInput} onChange={(e) => setPassword(e.target.value)}
+            type="password" placeholder="Enter password" id="login-password" required />
 
-        <Button onClick={() => handleLogin("Login button clicked")} type="submit" id ="login-submit"
-          aria-label="login-button-from-login">
-          Login
-        </Button> 
+          <Button onClick={() => handleLogin("Login button clicked")} type="submit" id ="login-submit"
+            aria-label="login-button-from-login">
+            Login
+          </Button> 
 
-        <ButtonSecondary onClick={() => handleSignUp()}
-          type="submit" id ="signup-login-redirect"
-          aria-label="signup-button-from-login">
-          Sign Up
-        </ButtonSecondary>
+          <ButtonSecondary onClick={() => handleSignUp()}
+            type="submit" id ="signup-login-redirect"
+            aria-label="signup-button-from-login">
+            Sign Up
+          </ButtonSecondary>
 
-        {
-          isError && 
-          <ErrorWarning display= "hidden">
-            {errorMsg}
-          </ErrorWarning>
-        }
-      </LoginForm>
+          {
+            isError && 
+            <ErrorWarning display= "hidden">
+              {errorMsg}
+            </ErrorWarning>
+          }
+        </LoginForm>
       </div>
   );
 }

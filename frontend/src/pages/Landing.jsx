@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { StoreContext } from '../Store';
-import { useHistory } from 'react-router-dom'
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 // import components
 import { Container, LandingContainer, Title, Label, Input, Button,
   ButtonSecondary, BigTitle, LogoUNSW } from "../components/AuthCSS";
@@ -12,8 +11,6 @@ import { Container, LandingContainer, Title, Label, Input, Button,
 const Landing = () => {
 
   const history = useHistory();
-  const context = React.useContext(StoreContext);
-  const [url, ] = context.url;
 
   // Login button redirects to /login
   const handleLogin = () => {
@@ -47,8 +44,7 @@ const Landing = () => {
           </ButtonSecondary>
         </LandingContainer>
       </Container>
-     
-      </div>
+    </div>
   );
 }
 
