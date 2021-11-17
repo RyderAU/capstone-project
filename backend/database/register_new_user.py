@@ -34,6 +34,6 @@ def register_student(student_id, name, email, display_name, hashed_pwd, login_to
         if conn is not None:
             conn.close()
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # Register one student (Dummy data) for testing
     # register_student('z5253655', 'HAHA', 'ha@m.com', 'haha', '7878', '88', 'pikapika', 'comp sci')
