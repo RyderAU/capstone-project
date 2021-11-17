@@ -1,8 +1,8 @@
 import React from 'react';
-// // import components
 import { Message, MessageSelf, Name, Text, TextSelf } from "../components/ChatCSS";
 
-
+ // Actual message component
+ // Accounts for msg being sent by current user, or another user
  const ChatMessagesComponent = (message) => {
   let msg = message["message"];
 
