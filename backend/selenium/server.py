@@ -1,10 +1,10 @@
 '''
+This file is used for testing
+
 Description: All the routes for the server are contained here
 
-Created by: Haesandeep Dashim (Tutorial: H15A by Hoang Pham)
-Created: 2020-03-27
-Last Modified: 2020-03-31
-'''
+Created by: Haesandeep Dashim (Sandeep & Haesun)
+'''c
 import sys
 from json import dumps
 import time
