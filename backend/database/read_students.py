@@ -1,7 +1,6 @@
 import psycopg2
 
  
-
 '''
 Return all information (except for password and login token) for user(s) satisfying certain criteria
 Return None when no matched user can be found
@@ -31,4 +30,5 @@ def read_students_data(column1, value):
         if conn is not None:
             conn.close()
 
+# TESTING
 # print(read_students_data('email', 'helena@mail.com')) # This should retrieve avatar byte
