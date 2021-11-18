@@ -92,3 +92,7 @@ Week 10:
 - Meeting to link components and discuss remaining things todo with team
 - Completed my delegated part for the report which involving selenium explantation and setup instructions
 - Communicated with Joseph on certian concerns about myUNSW changing in holidays and affecting our linking process
+- Final Demo preperation meeting + slides
+- Final Demo
+- Created a backup sql file which can be used to preload 2 testing accounts if linking does not work after term ends
+
