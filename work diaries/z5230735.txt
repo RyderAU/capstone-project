@@ -121,3 +121,28 @@ N/A
 - what is planned for the next period (e.g., next week)
 
 Work on second sprint.
+
+
+Week 6
+
+Worked on second sprint. I worked on displaying the timetables in the timetable page and the frontend for the profile page (i.e. updating user details).
+
+
+Week 7
+
+Continued to work on second sprint.
+
+
+Week 8
+
+Completed second sprint and conducted tutorial demonstration. Tasked with creating profile for searched users.
+
+
+Week 9
+
+Completed basic functionality for creating profile for searched users with dummy data.
+
+
+Week 10
+
+Linked other user profile with search functionality, so when a user searches for another user in the search bar and clicks on their name, they are taken to the appropriate page. Also finalised the styling for my respective parts. Worked on third-party functionalities part of the report.
